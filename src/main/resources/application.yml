@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Bookcentric
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/bookcentric
+    username: root
+    password: root   
+  profiles:
+    active:
+    - dev

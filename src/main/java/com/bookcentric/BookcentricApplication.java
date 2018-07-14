@@ -1,4 +1,4 @@
-package com.bookcentric.app;
+package com.bookcentric;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
