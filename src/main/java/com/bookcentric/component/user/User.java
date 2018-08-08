@@ -21,8 +21,7 @@ public class User {
 	
 	@Id @GeneratedValue
 	private Integer id;
-	private String firstName;
-	private String lastName;
+	private String name;
 	private Instant dateOfBirth;
 	private String address;
 	private Integer phone;

@@ -17,17 +17,17 @@ public class UserController {
 	@GetMapping("/user/registration")
 	public ModelAndView viewRegistration(Model model) {
 		ModelAndView regView = new ModelAndView("user-registration");
-		
+
 		model.addAttribute("pageTitle", "Registration page");
+		model.addAttribute("user", new User());
 		
 		return regView;
 	}
 	
 	@PostMapping(value="/user/add")
-	public void addUser(@RequestBody User user) {
-
-		System.out.println(user.getFirstName());
-		System.out.println(user.getLastName());
+	public String addUser(User user) {
+		System.out.println(user);
 		userService.add(user);
+		return "redirect:/user/registration";
 	}
 }
