@@ -1,6 +1,7 @@
 package com.bookcentric.component.user;
 
 import java.time.Instant;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +23,7 @@ public class User {
 	@Id @GeneratedValue
 	private Integer id;
 	private String name;
-	private Instant dateOfBirth;
+	private String dateOfBirth;
 	private String address;
 	private Integer phone;
 	private String email;

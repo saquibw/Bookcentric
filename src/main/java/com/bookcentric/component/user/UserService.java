@@ -1,15 +1,9 @@
 package com.bookcentric.component.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
-@Service
-public class UserService {
-	
-	@Autowired
-	private UserRepository userRepository;
-	
-	public void add(User user) {
-		userRepository.save(user);
-	}
+public interface UserService {
+	public ModelAndView viewRegistration(Model model);
+	public void add(User user);
 }

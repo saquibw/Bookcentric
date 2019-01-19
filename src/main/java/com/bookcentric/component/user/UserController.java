@@ -16,18 +16,13 @@ public class UserController {
 	
 	@GetMapping("/user/registration")
 	public ModelAndView viewRegistration(Model model) {
-		ModelAndView regView = new ModelAndView("user-registration");
-
-		model.addAttribute("pageTitle", "Registration page");
-		model.addAttribute("user", new User());
-		
-		return regView;
+		return userService.viewRegistration(model);		
 	}
 	
 	@PostMapping(value="/user/add")
 	public String addUser(User user) {
-		System.out.println(user);
 		userService.add(user);
-		return "redirect:/user/registration";
+		
+		return "redirect:/user/registration"; 
 	}
 }

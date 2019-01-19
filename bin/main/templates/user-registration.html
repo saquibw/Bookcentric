@@ -54,12 +54,10 @@
 
             <div class="form-group">
             <label>Subscription</label>
-            <select class="form-control">
-                <option>Package 1</option>
-                <option>Package 2</option>
-                <option>Package 3</option>
-                <option>Package 4</option>
-                <option>Package 5</option>
+            <select class="form-control" th:field=*{subscription}>
+                <option th:each="subscription : ${subscriptionList}" 
+                th:value="${subscription.id}" 
+                th:text="${subscription.category.name}">
             </select>
             </div>
 

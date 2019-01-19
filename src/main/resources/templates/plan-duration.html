@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+  
+  <body>
+    <header th:insert="fragments/body :: header"></header>
+
+    <!-- Main body -->
+    <div class="container-fluid">
+    
+      <div class="row justify-content-md-center top-space">
+
+          <div class="col-md-5 card">
+            <div class="card-body">
+            <h1>User registration</h1>
+            
+            <!-- Form -->
+            <form action="#" th:action="@{/planDuration/add}" th:object="${planDuration}" method="post">
+
+            <div class="form-group">
+                <label>Plan name</label>
+                <input type="text" class="form-control" placeholder="Enter plan name" th:field="*{name}">
+            </div>
+
+            <div class="form-group">
+                <label>Duration (in days)</label>
+                <input type="date" class="form-control" placeholder="Duration in days" th:field="*{durationInDays}">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </div>
+        
+        <div class="card-body">
+        
+        <table>
+        	<thead>
+        		<tr>
+        			<td>Plan name</td>
+        			<td>Plan duration (in days)</td>
+        		</tr>
+        	</thead>
+        </table>
+        
+        </div>
+
+        </div>
+
+
+      </div><!--/row -->
+    </div><!--/container-->
+</body>
+</html>
