@@ -1,0 +1,40 @@
+.mb-30 {
+    margin-bottom: 30px !important;
+}
+
+.mb-60 {
+    margin-bottom: 60px !important;
+}
+.ml-13 {
+    margin-left: 13px !important;
+}
+.quote-size {
+    font-size: 5em;
+    margin-bottom: 0 !important;
+    font-family: 'Chloe', sans-serif;
+    letter-spacing: 5px;
+}
+.section-icon {
+    color: gold;
+}
+
+.text-constant {
+    font-size: 9em;
+    color: #CD4E4E;
+    margin-bottom: 0;
+}
+
+.about__text {
+    font-size: 40px;
+    text-align: justify;
+}
+
+.icon-title a{
+    color: #000 !important;
+    font-size: 35px;
+}
+
+.icon-title a:hover{
+    color: #777 !important;
+    text-decoration: none;
+}
