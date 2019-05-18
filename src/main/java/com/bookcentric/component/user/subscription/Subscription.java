@@ -17,11 +17,9 @@ import lombok.Data;
 @Data
 @Table(name="subscription")
 public class Subscription {
+	
 	@Id @GeneratedValue
 	private Integer id;
-	private Integer brrowLimitEachTime;
-	private Integer borrowLimitPerMonth;
-	private Integer subscriptionDuration;
 	private Integer securityAmount;
 	private Integer price;
 	private Boolean cancellationPolicy;

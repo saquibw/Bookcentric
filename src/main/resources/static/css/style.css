@@ -231,6 +231,7 @@ html, body{
 }
 .page{
     overflow: hidden;
+    font-size: 1rem;
 }
 
 .body-masked{

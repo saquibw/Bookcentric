@@ -1,4 +1,4 @@
-package com.bookcentric.component.user.category;
+package com.bookcentric.component.user.paymentmode;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,13 +7,13 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-@Entity
 @Data
-@Table(name="category")
-public class Category {
+@Entity
+@Table(name="paymentMode")
+public class PaymentMode {
+	
 	@Id @GeneratedValue
 	private Integer id;
 	private String name;
-	private String description;
-	private Boolean underAge;
+
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>BookCentric &mdash; Home</title>
         <meta name="description" content="">
@@ -32,42 +32,9 @@
         
         <!-- Page Wrap -->
         <div class="page" id="top">
-            <!-- Logo -->
-            <div class="fm-logo-wrap local-scroll">
-                <a href="index.html" class="logo"><img src="images/logo.png"  alt="logo" /></a>
-            </div>
-            <!-- End Logo -->
-            
-            <!-- Menu Button -->
-            <a href="#" class="fm-button"><span></span>Menu</a>
-            <!-- End Menu Button -->
-            
-            <!-- Menu Overlay -->
-            <div class="fm-wrapper" id="fullscreen-menu">
-                <div class="fm-wrapper-sub">
-                    <div class="fm-wrapper-sub-sub">
-                        
-                        <ul class="fm-menu-links local-scroll">
-                            <li><a href="index.html" class="active">Home</a></li>
-                            <li><a href="treasury.html">Treasury</a></li>
-                            <li><a href="events.html">Events</a></li>
-                            <li><a href="thoughts_musings.html">Thoughts & Musings</a></li>
-                            <li><a href="dashboard.html">Member Dashboard</a></li>
-                        </ul>
-                        
-                        <!-- Social Links -->
-                        <div class="fm-social-links">
-                            <a href="https://www.facebook.com/bookcentric/" target="_blank"><i class="fa fa-facebook"></i></a>
-                            <a href="https://twitter.com/bookcentricbd" target="_blank"><i class="fa fa-twitter"></i></a>
-                            <a href="#" target="_blank"><i class="fa fa-youtube"></i></a>
-                            <a href="https://www.instagram.com/mashooexplores/" target="_blank"><i class="fa fa-instagram"></i></a>
-                        </div>
-                        <!-- End Social Links -->
-                    </div>
-                </div>
-            </div>
-            <!-- End Menu Overlay  -->
-
+        
+            <div th:insert="fragments/body :: logo"></div>
+            <div th:insert="fragments/body :: menue"></div>
             
             <!-- Home Section -->
             <section class="home-section bg-dark bg-dark-alfa-30 parallax-2" data-background="images/books/land-cover.png" id="home">

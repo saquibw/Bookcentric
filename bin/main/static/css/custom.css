@@ -5,3 +5,7 @@
 .square-input {
     border-radius: 0;
 }
+
+#navigation-bar {
+	height: 100px !important;
+}
