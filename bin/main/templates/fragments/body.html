@@ -27,6 +27,7 @@
                         <ul class="fm-menu-links local-scroll">
                             <li><a href="/home" class="active">Home</a></li>
                             <li><a href="/user/registration">Registration</a></li>
+                            <li><a href="/management">Manaagement</a></li>
                             <!-- <li><a href="treasury.html">Treasury</a></li>
                             <li><a href="events.html">Events</a></li>
                             <li><a href="thoughts_musings.html">Thoughts & Musings</a></li>
@@ -46,6 +47,20 @@
             </div>
             <!-- End Menu Overlay  -->
     </div>
+    
+    <div th:fragment="management-navbar" class="management-navbar">
+					<ul>
+						<li class="nav-dropdown">
+							<a href="javascript:void(0)" class="dropbtn">User</a>
+							<div class="dropdown-content">
+								<a href="/management/user">User Management</a>
+								<a href="/management/user/history">User History</a>
+							</div>
+						</li>
+						<li><a href="#">Book</a></li>
+						<li><a href="#">Subscription</a></li>
+					</ul>
+				</div>
     
     
      <div th:fragment="js-container">

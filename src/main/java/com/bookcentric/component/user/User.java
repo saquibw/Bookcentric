@@ -2,6 +2,7 @@ package com.bookcentric.component.user;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,10 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.bookcentric.component.books.Books;
 import com.bookcentric.component.user.parent.Parent;
 import com.bookcentric.component.user.subscription.Subscription;
 
@@ -49,4 +53,8 @@ public class User {
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) @JoinColumn(name="parentId", referencedColumnName = "id", nullable=true)
 	private Parent parent;
+	
+	@ManyToMany
+	@JoinTable(name = "reading_queue", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "bookId"))
+	private List<Books> readingQueue;
 }

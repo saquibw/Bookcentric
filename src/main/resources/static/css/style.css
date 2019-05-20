@@ -230,7 +230,7 @@ html, body{
     -webkit-font-smoothing: antialiased;
 }
 .page{
-    overflow: hidden;
+    /* overflow: hidden; */
     font-size: 1rem;
 }
 

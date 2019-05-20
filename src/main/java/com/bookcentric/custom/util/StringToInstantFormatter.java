@@ -1,4 +1,4 @@
-package com.bookcentric.custom.converter;
+package com.bookcentric.custom.util;
 
 import java.text.ParseException;
 import java.time.Instant;

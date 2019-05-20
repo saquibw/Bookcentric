@@ -28,6 +28,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
 	runtime('org.springframework.boot:spring-boot-devtools')
 	compile 'mysql:mysql-connector-java'
 	compileOnly('org.projectlombok:lombok')

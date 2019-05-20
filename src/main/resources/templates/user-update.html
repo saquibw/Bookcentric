@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<!-- Main body -->
+		<div class="container-fluid">
+
+			<div class="row justify-content-md-center top-space">
+
+				<div th:insert="fragments/body :: management-navbar"></div>
+
+				<div class="col-md-8 card management-card">
+					<div class="card-body">
+						<h1>Edit user</h1>
+
+						<form th:action="@{/user/update}" th:object="${user}"
+							method="post" autocomplete="off">
+
+							<div class="form-group col hidden">
+								<label>Id*</label> <input type="text"
+									class="form-control" th:field="*{id}" required>
+							</div>
+
+							<div th:insert="fragments/user-form :: user-form"></div>
+
+							<label>Parent/gurdian's information</label>
+
+							<div th:insert="fragments/user-form :: parent-form"></div>
+
+							<button type="submit" class="btn btn-primary">Update</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<section th:insert="fragments/body :: js-container"></section>
+
+	<script>
+		$(document).ready(function() {
+			$("#parentInfo").removeClass("hidden");
+			$("#membershipId").parent().removeClass("hidden")
+		});
+	</script>
+
+</body>
+
+
+
+</html>

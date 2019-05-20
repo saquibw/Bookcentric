@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<div class="container-fluid">
+			<div class="row justify-content-md-center top-space">
+			
+				<div th:insert="fragments/body :: management-navbar"></div>
+				
+				<div class="col-md-8 card management-card">
+					<div class="card-body">
+						<h1>User Management</h1>
+						
+						<table class="table">
+							<thead>
+								<tr>
+									<th class="hidden">Id</th>
+									<th>Membership id</th>
+									<th>First name</th>
+									<th>Last name</th>
+									<th>Phone</th>
+									<th>Status</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="user : ${userList}">
+									<td class="hidden" th:text="${user.id}"></td>
+									<td th:text="${user.membershipId}"></td>
+									<td th:text="${user.firstName}"></td>
+									<td th:text="${user.lastName}"></td>
+									<td th:text="${user.phone}"></td>
+									<td th:text="${user.status}"></td>
+									<td><a class="btn btn-primary btn-sm" th:href="@{'/user/get/' + ${user.id}}">Edit</a></td>
+									<td>
+										<a class="btn btn-primary btn-sm update-status" href="#" th:if="${user.status} == 'Active'">Deactivate</a>
+										<a class="btn btn-primary btn-sm update-status" href="#" th:unless="${user.status} == 'Active'">Activate</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+	<section th:insert="fragments/body :: js-container"></section>
+	
+	<script>
+	$(document).ready(function() {
+		$(".update-status").click(function(e) {
+			e.preventDefault();
+			var currentRow = $(this).closest('tr');
+			var id = currentRow.find("td:eq(0)").text();
+			var status = "";
+			var button = $(this);
+			var buttonText = button.text();
+			var statusCol = currentRow.find("td:eq(5)");
+			
+			if(buttonText == "Deactivate") {
+				status = "Inactive";
+			} else if (buttonText == "Activate") {
+				status = "Active";
+			}
+			
+			var request = $.ajax({
+				type: "POST",
+				url: "/user/updatestatus",
+				dataType: 'JSON',
+				data: {
+					"status": status,
+					"id": id
+				}
+			});
+			
+			request.done(function(response){
+				if(response.success) {
+					statusCol.text(status);
+					if(buttonText == "Deactivate") {
+						button.text("Activate");
+					} else if (buttonText == "Activate") {
+						button.text("Deactivate");
+					}
+				}
+			});
+			
+		});
+	});
+	</script>
+</body>
+
+</html>
