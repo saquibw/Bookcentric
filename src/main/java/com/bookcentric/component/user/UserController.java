@@ -71,7 +71,7 @@ public class UserController {
 	@GetMapping("/user/get/{id}")
 	public ModelAndView getUser(@PathVariable("id") int id, Model model) {
 		ModelAndView editView = new ModelAndView("user-update");
-		Optional<User> u = userService.get(id);
+		Optional<User> u = userService.getBy(id);
 		User user = u.get();
 		
 		if(user.getParent() == null) {

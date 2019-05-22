@@ -37,7 +37,7 @@
 									<td th:text="${user.lastName}"></td>
 									<td th:text="${user.phone}"></td>
 									<td th:text="${user.status}"></td>
-									<td><a class="btn btn-primary btn-sm" th:href="@{'/user/get/history/' + ${user.id}}">View history</a></td>
+									<td><a class="btn btn-primary btn-sm" th:href="@{'/user/history/' + ${user.id}}">View history</a></td>
 								</tr>
 							</tbody>
 						</table>

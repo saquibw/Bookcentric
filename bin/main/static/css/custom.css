@@ -71,3 +71,19 @@
 .management-card {
 	position: absolute !important;
 }
+
+.position-absolute {
+	position: absolute !important;
+}
+
+.right-ten-pix {
+	right: 10px !important;
+}
+
+.top-hundred-pix {
+	top: 100px !important;
+}
+
+.full-width {
+	width: 100%;
+}

@@ -14,10 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.bookcentric.component.books.Books;
+import com.bookcentric.component.user.history.UserHistory;
 import com.bookcentric.component.user.parent.Parent;
 import com.bookcentric.component.user.subscription.Subscription;
 
@@ -57,4 +59,7 @@ public class User {
 	@ManyToMany
 	@JoinTable(name = "reading_queue", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "bookId"))
 	private List<Books> readingQueue;
+	
+	@OneToMany(mappedBy="user")
+	private List<UserHistory> userHistory;
 }

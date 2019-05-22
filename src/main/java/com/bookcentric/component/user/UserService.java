@@ -8,7 +8,7 @@ public interface UserService {
 	
 	public List<User> getAll();
 	
-	public Optional<User> get(Integer id);
+	public Optional<User> getBy(Integer id);
 	
 	public boolean updateStatus(Integer id, String status);
 }

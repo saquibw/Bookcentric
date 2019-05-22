@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<div class="container-fluid">
+			<div class="row justify-content-md-center top-space">
+
+				<div th:insert="fragments/body :: management-navbar"></div>
+
+				<div class="col-md-10 card management-card">
+					<div class="card-body">
+
+						<div class="left full-width">
+							<div class="left">
+								<h1>User Details History</h1>
+							</div>
+							<div class="left position-absolute right-ten-pix">
+								<label
+									th:text="${user.firstName} + ' ' + ${user.middleName} + ' ' + ${user.lastName}"></label>
+								<label th:text="${user.membershipId}" class="position-absolute"></label>
+								<label th:text="${user.id}" class="hidden userId"></label>
+							</div>
+						</div>
+
+						<div class="full-width">
+							<div class="col-md-4 left">
+
+								<table class="table readingQueue">
+									<thead>
+										<tr>
+											<th>Book name</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="book : ${user.readingQueue}">
+											<td class="hidden" th:text="${book.id}"></td>
+											<td th:text="${book.name}"></td>
+											<td><input type="checkbox"></td>
+
+											<!-- <td><a class="btn btn-primary btn-sm" th:href="@{'/user/get/history/' + ${user.id}}">View history</a></td> -->
+										</tr>
+									</tbody>
+								</table>
+								<button class="btn btn-primary" id="issueButton">Issue</button>
+							</div>
+
+							<div class="col-md-8 left">
+								<table class="table">
+									<thead>
+										<tr>
+											<th class="hidden"></th>
+											<th>Book name</th>
+											<th>Issue date</th>
+											<th>Due date</th>
+											<th>Return date</th>
+											<th></th>
+											<th></th>
+											<th></th>
+										</tr>
+
+									</thead>
+
+									<tbody>
+
+										<tr th:each="history : ${user.userHistory}">
+											<td class="hidden" th:text="${history.id}"></td>
+											<td th:text="${history.book.name}"></td>
+											<td th:text="${history.issueDate}"></td>
+											<td th:text="${history.dueDate}"></td>
+											<td th:text="${history.returnDate}"></td>
+											<td></td>
+											<td></td>
+											<td></td>
+
+											<!-- <td><a class="btn btn-primary btn-sm" th:href="@{'/user/get/history/' + ${user.id}}">View history</a></td> -->
+										</tr>
+
+									</tbody>
+
+								</table>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<section th:insert="fragments/body :: js-container"></section>
+
+	<script th:inline="javascript">
+	$(document).ready(function() {
+		
+		$("#issueButton").click(function() {
+			var bookList = [];
+			var userId = $(".userId").text();
+			console.log(userId);
+			$(".readingQueue > tbody > tr").each(function(index, row) {
+				var checkBox = $(row).find("input");
+				if(checkBox.prop('checked')) {
+					var id = $(row).find("td:eq(0)").text();
+					bookList.push(id);
+				}
+			});
+			
+			if(bookList.length > 0) {
+				
+				var request = $.ajax({
+					type: "POST",
+					url: "/user/history/issue",
+					dataType: 'JSON',
+					data: {
+						"bookList": JSON.stringify(bookList),
+						"userId": userId
+					}
+				});
+				
+				request.done(function(response){
+					if(response.success) {
+						location.reload();
+						}
+					});
+				
+			} else {
+				alert("Please select atleast one book.");
+			}
+			
+		});
+	})
+	
+	
+	</script>
+
+</body>
+
+</html>
