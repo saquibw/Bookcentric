@@ -12,5 +12,10 @@ public class BookServiceImpl implements BookService {
 	public Books getBy(Integer id) {
 		return repository.getOne(id);
 	}
+	
+	@Override
+	public void add(Books book) {
+		repository.save(book);
+	}
 
 }

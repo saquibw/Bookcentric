@@ -1,4 +1,4 @@
-package com.bookcentric.component.publisher;
+package com.bookcentric.component.books.publisher;
 
 import java.util.List;
 

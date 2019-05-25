@@ -87,3 +87,8 @@
 .full-width {
 	width: 100%;
 }
+
+.table-caption {
+	caption-side: top !important;
+	text-align: center !important;
+}

@@ -4,6 +4,7 @@
 
 <body>
 
+<!-- User registration form -->
 	<div th:fragment="user-form">
 
 		<div class="row">
@@ -107,8 +108,7 @@
 
 	</div>
 
-	<hr>
-
+	<!-- User parent registration form -->
 	<div th:fragment="parent-form" id="parentInfo" class="hidden">
 		<div class="row">
 			<div class="form-group col">
@@ -147,6 +147,70 @@
 			</div>
 
 		</div>
+	</div>
+	
+	<!-- Book entry form -->
+	<div th:fragment="book-form">
+		<div class="row">
+			<div class="form-group col">
+				<label>Book name*</label> <input type="text" class="form-control"
+					th:field="*{name}">
+			</div>
+
+			<div class="form-group col">
+				<label>Book code*</label> <input type="text" class="form-control"
+					th:field="*{code}">
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="form-group col">
+				<label>Author*</label> 
+				<select class="form-control" th:field=*{author} required>
+					<option th:each="author : ${authorList}"
+						th:value="${author.id}"
+						th:text="${author.name}">
+				</select>
+			</div>
+		
+			<div class="form-group col">
+				<label>Publisher*</label> 
+				<select class="form-control" th:field=*{publisher} required>
+					<option th:each="publisher : ${publisherList}"
+						th:value="${publisher.id}"
+						th:text="${publisher.name}">
+				</select>
+			</div>
+		</div>
+		
+		<div class="row">			
+			<div class="form-group col">
+				<label>No of pages</label> <input type="text" class="form-control"
+					th:field="*{noOfPages}">
+			</div>
+			
+			<div class="form-group col">
+				<label>Publisher year</label> <input type="text" class="form-control"
+					th:field="*{year}">
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="form-group col">
+				<label>Genre*</label> 
+				<select class="form-control" th:field=*{genre} required multiple>
+					<option th:each="genre : ${genreList}"
+						th:value="${genre.id}"
+						th:text="${genre.name}">
+				</select>
+			</div>
+		
+			<div class="form-group col">
+				<label>Blurb</label> <textarea class="form-control"
+					th:field="*{blurb}"></textarea>
+			</div>
+		</div>
+	
 	</div>
 
 

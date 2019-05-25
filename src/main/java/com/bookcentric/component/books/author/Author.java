@@ -1,4 +1,4 @@
-package com.bookcentric.component.author;
+package com.bookcentric.component.books.author;
 
 import java.util.List;
 

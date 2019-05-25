@@ -8,8 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.bookcentric.component.author.Author;
-import com.bookcentric.component.publisher.Publisher;
+import com.bookcentric.component.books.author.Author;
+import com.bookcentric.component.books.genre.Genre;
+import com.bookcentric.component.books.publisher.Publisher;
 
 import lombok.Data;
 
@@ -23,12 +24,17 @@ public class Books {
 	private String name;
 	private String year;
 	private Integer noOfPages;
+	private String code;
+	private String blurb;
 	
 	@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="authorId")
 	private Author author;
 	
 	@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="publisherId")
 	private Publisher publisher;
+	
+	@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="genreId")
+	private Genre genre;
 	
 	
 }

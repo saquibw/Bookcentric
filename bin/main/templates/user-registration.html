@@ -21,13 +21,13 @@
 						<form th:action="@{/user/add}" th:object="${user}" method="post"
 							autocomplete="off">
 
-							<div th:insert="fragments/user-form :: user-form"></div>
+							<div th:insert="fragments/forms :: user-form"></div>
 
 							<input type="checkbox" id="isMinor"><label>If under 18 years
 								of age, please click here and provide parent/gurdian's
 								information</label>
 								
-								<div th:insert="fragments/user-form :: parent-form"></div>
+								<div th:insert="fragments/forms :: parent-form"></div>
 
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</form>

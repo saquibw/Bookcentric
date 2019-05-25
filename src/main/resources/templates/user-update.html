@@ -27,11 +27,11 @@
 									class="form-control" th:field="*{id}" required>
 							</div>
 
-							<div th:insert="fragments/user-form :: user-form"></div>
+							<div th:insert="fragments/forms :: user-form"></div>
 
 							<label>Parent/gurdian's information</label>
 
-							<div th:insert="fragments/user-form :: parent-form"></div>
+							<div th:insert="fragments/forms :: parent-form"></div>
 
 							<button type="submit" class="btn btn-primary">Update</button>
 						</form>

@@ -1,8 +1,17 @@
 package com.bookcentric.component.user.history;
 
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +23,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bookcentric.component.books.BookService;
 import com.bookcentric.component.books.Books;
 import com.bookcentric.component.user.User;
+import com.bookcentric.component.user.UserDTO;
 import com.bookcentric.component.user.UserService;
 import com.bookcentric.custom.util.Response;
+import com.mysql.jdbc.StringUtils;
 
 @Controller
 public class UserHistoryController {
@@ -32,7 +43,17 @@ public class UserHistoryController {
 		
 		User user = userService.getBy(id).get();
 		
-		model.addObject("user", user);
+		ModelMapper mapper = new ModelMapper();
+		UserDTO userDto = mapper.map(user, UserDTO.class);
+		/*DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(Locale.US).withZone(ZoneId.systemDefault());
+		userDto.getUserHistory().forEach(u -> {
+			if(u.getIssueDate() != null) {
+				u.setIssueDate(formatter.format(u.getIssueDate());
+			}
+			
+		});*/
+		
+		model.addObject("user", userDto);
 		
 		return model;
 	}
@@ -43,6 +64,8 @@ public class UserHistoryController {
 		User user = userService.getBy(userId).get();
 		JSONArray arr = new JSONArray(bookList);
 		
+		List<UserHistory> userHistoryList = new ArrayList<>();
+		
 		for(int i=0; i < arr.length(); i++) {
 			int bookId = arr.getInt(i);
 			Books book = bookService.getBy(bookId);
@@ -51,10 +74,10 @@ public class UserHistoryController {
 			UserHistory history = new UserHistory();
 			history.setBook(book);
 			history.setUser(user);
-			
-			userHistoryService.add(history);
+			userHistoryList.add(history);
 		}
 		userService.add(user);
+		userHistoryService.addAll(userHistoryList);
 		
 		Response response = new Response();
 		response.setSuccess(true);

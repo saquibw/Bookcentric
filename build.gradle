@@ -29,6 +29,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
+	compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.4'
 	runtime('org.springframework.boot:spring-boot-devtools')
 	compile 'mysql:mysql-connector-java'
 	compileOnly('org.projectlombok:lombok')
