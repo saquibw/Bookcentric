@@ -73,7 +73,7 @@
 
 										<tr th:each="history : ${user.userHistory}">
 											<td class="hidden" th:text="${history.id}"></td>
-											<td th:text="${history.book.name}"></td>
+											<td th:text="${history.books.name}"></td>
 											<td th:text="${history.issueDate}"></td>
 											<td th:text="${history.dueDate}"></td>
 											<td th:text="${history.returnDate}"></td>

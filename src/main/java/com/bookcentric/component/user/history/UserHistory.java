@@ -33,5 +33,5 @@ public class UserHistory {
 	private User user;
 	
 	@ManyToOne @JoinColumn(name="bookId")
-	private Books book;
+	private Books books;
 }

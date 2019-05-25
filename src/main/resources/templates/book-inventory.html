@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<div class="container-fluid">
+			<div class="row justify-content-md-center top-space">
+			
+				<div th:insert="fragments/body :: management-navbar"></div>
+				
+				<div class="col-md-8 card management-card">
+					<div class="card-body">
+						<h1>Book Inventory</h1>
+						
+						<table class="table">
+							<thead>
+								<tr>
+									<th class="hidden">Id</th>
+									<th>Book code</th>
+									<th>Book name</th>
+									<th>Author</th>
+									<th>Total count</th>
+									<th>Issued</th>
+									<th>Available</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="book : ${books}">
+									<td class="hidden" th:text="${book.id}"></td>
+									<td th:text="${book.code}"></td>
+									<td th:text="${book.name}"></td>
+									<td th:text="${book.author.name}"></td>
+									<td th:text="${book.count}"></td>
+									<td th:text="${book.issuedCount}"></td>
+									<td th:text="${book.remainingCount}"></td>
+									<td><a class="btn btn-primary btn-sm" th:href="@{'/book/view/' + ${book.id}}">View</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+	<section th:insert="fragments/body :: js-container"></section>
+	
+</body>
+
+</html>

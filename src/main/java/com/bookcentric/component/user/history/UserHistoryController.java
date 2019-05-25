@@ -1,17 +1,11 @@
 package com.bookcentric.component.user.history;
 
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +20,6 @@ import com.bookcentric.component.user.User;
 import com.bookcentric.component.user.UserDTO;
 import com.bookcentric.component.user.UserService;
 import com.bookcentric.custom.util.Response;
-import com.mysql.jdbc.StringUtils;
 
 @Controller
 public class UserHistoryController {
@@ -72,7 +65,7 @@ public class UserHistoryController {
 			user.getReadingQueue().remove(book);
 			
 			UserHistory history = new UserHistory();
-			history.setBook(book);
+			history.setBooks(book);
 			history.setUser(user);
 			userHistoryList.add(history);
 		}

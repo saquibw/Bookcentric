@@ -17,15 +17,17 @@
 				
 				<div class="col-md-8 card management-card">
 					<div class="card-body">
-						<h1>Book Entry</h1>
+						<h1>Book Update</h1>
 
 						<!-- Form -->
-						<form th:action="@{/book/add}" th:object="${book}" method="post"
+						<form th:action="@{/book/update}" th:object="${book}" method="post"
 							autocomplete="off">
 
+							<input type="text" class="form-control hidden" th:field="*{id}">
+							
 							<div th:insert="fragments/forms :: book-form"></div>
 
-							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="submit" class="btn btn-primary">Update</button>
 						</form>
 					</div>
 

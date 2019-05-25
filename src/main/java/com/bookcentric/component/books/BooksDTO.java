@@ -2,15 +2,10 @@ package com.bookcentric.component.books;
 
 import java.util.List;
 
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.bookcentric.component.books.author.Author;
 import com.bookcentric.component.books.genre.Genre;
@@ -20,11 +15,7 @@ import com.bookcentric.component.user.history.UserHistory;
 import lombok.Data;
 
 @Data
-@Entity
-@Table(name="books")
-public class Books {
-	
-	@Id @GeneratedValue
+public class BooksDTO {
 	private Integer id;
 	private String name;
 	private String year;
@@ -34,18 +25,10 @@ public class Books {
 	private String type;
 	private String goodreadsLink;
 	private Integer count;
-	
-	@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="authorId")
+	private Integer issuedCount;
+	private Integer remainingCount;
 	private Author author;
-	
-	@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="publisherId")
 	private Publisher publisher;
-	
-	@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="genreId")
 	private Genre genre;
-	
-	@OneToMany(mappedBy="books")
 	private List<UserHistory> userHistory;
-	
-	
 }
