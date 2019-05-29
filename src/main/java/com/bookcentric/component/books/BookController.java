@@ -1,13 +1,23 @@
 package com.bookcentric.component.books;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bookcentric.component.books.author.Author;
@@ -24,6 +34,8 @@ public class BookController {
 	@Autowired AuthorService authorService;
 	@Autowired PublisherService publisherService;
 	@Autowired GenreService genreService;
+	@Autowired ModelMapper mapper;
+	@Autowired HttpServletResponse response;
 	
 	@GetMapping("/book/entry")
 	public ModelAndView viewBookEntry() {
@@ -44,8 +56,12 @@ public class BookController {
 	} 
 	
 	@PostMapping("/book/add")
-	public String addBooks(Books book) {
+	public String addBooks(Books book, @RequestParam("file") MultipartFile file) throws IOException {
 		bookService.add(book);
+		
+		if(file != null && file.getSize() > 0) {
+			bookService.storeImage(file, book.getId());
+		}	
 		
 		return "redirect:/book/entry";
 	}
@@ -82,9 +98,33 @@ public class BookController {
 	}
 	
 	@PostMapping("/book/update")
-	public String updateBook(Books book) {
+	public String updateBook(Books book, @RequestParam("file") MultipartFile file) throws IOException {
 		bookService.add(book);
 		
+		if(file != null && file.getSize() > 0) {
+			bookService.storeImage(file, book.getId());
+		}
+		
+		return "redirect:/book/inventory";
+	}
+	
+	@GetMapping("/get/image/{id}")
+	@ResponseBody
+	public void getImage(@PathVariable Integer id) throws SQLException, IOException {
+		response.setContentType("image/jpeg");
+		
+		byte[] image = bookService.getImageBy(id);
+		if(image != null) {
+			
+			InputStream is =  new ByteArrayInputStream(image);
+			IOUtils.copy(is, response.getOutputStream());
+		}		
+	}
+	
+	@GetMapping("/book/delete/{id}")
+	public String deleteBook(@PathVariable("id") Integer id) {
+		Books book = bookService.getBy(id);
+		bookService.delete(book);
 		return "redirect:/book/inventory";
 	}
 }

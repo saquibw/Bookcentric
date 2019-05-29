@@ -20,7 +20,7 @@
 						<h1>Book Update</h1>
 
 						<!-- Form -->
-						<form th:action="@{/book/update}" th:object="${book}" method="post"
+						<form th:action="@{/book/update}" th:object="${book}" method="post" encType="multipart/form-data"
 							autocomplete="off">
 
 							<input type="text" class="form-control hidden" th:field="*{id}">

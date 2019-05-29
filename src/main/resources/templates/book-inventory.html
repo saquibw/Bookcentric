@@ -21,10 +21,11 @@
 							<thead>
 								<tr>
 									<th class="hidden">Id</th>
-									<th>Book code</th>
-									<th>Book name</th>
+									<th></th>
+									<th>Code</th>
+									<th>Name</th>
 									<th>Author</th>
-									<th>Total count</th>
+									<th>Count</th>
 									<th>Issued</th>
 									<th>Available</th>
 									<th></th>
@@ -33,13 +34,15 @@
 							<tbody>
 								<tr th:each="book : ${books}">
 									<td class="hidden" th:text="${book.id}"></td>
+									<td><img th:src="@{'/get/image/' + ${book.id}}" height="42" width="42"></td>
 									<td th:text="${book.code}"></td>
 									<td th:text="${book.name}"></td>
 									<td th:text="${book.author.name}"></td>
 									<td th:text="${book.count}"></td>
 									<td th:text="${book.issuedCount}"></td>
 									<td th:text="${book.remainingCount}"></td>
-									<td><a class="btn btn-primary btn-sm" th:href="@{'/book/view/' + ${book.id}}">View</a></td>
+									<td><a class="fa fa-edit edit-icon" th:href="@{'/book/view/' + ${book.id}}"></a></td>
+									<td><a class="fa fa-trash delete-icon" th:href="@{'/book/delete/' + ${book.id}}"></a></td>
 								</tr>
 							</tbody>
 						</table>

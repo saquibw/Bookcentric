@@ -92,3 +92,19 @@
 	caption-side: top !important;
 	text-align: center !important;
 }
+
+.special-books-navigation {
+	font-size: 30px !important;
+	margin-top: 70px;
+	cursor: pointer;
+}
+
+.delete-icon {
+	font-size: 20px !important;
+	margin-top: 14px;
+}
+
+.edit-icon {
+	font-size: 20px !important;
+	margin-top: 15px;
+}

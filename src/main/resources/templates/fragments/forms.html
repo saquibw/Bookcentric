@@ -234,7 +234,16 @@
 			</div>
 		
 			<div class="form-group col">
-				
+				<input type="checkbox" th:name="newArrival" th:value="newArrival" th:field=*{newArrival}>New arrival
+				<input type="checkbox" th:name="bestSeller" th:value="bestSeller" th:field=*{bestSeller}>Best seller
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="form-group col">
+				<label>Upload image</label> 
+				<input type="file" class="form-control" name="file">
+					
 			</div>
 		</div>
 	

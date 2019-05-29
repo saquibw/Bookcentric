@@ -20,7 +20,7 @@
 						<h1>Book Entry</h1>
 
 						<!-- Form -->
-						<form th:action="@{/book/add}" th:object="${book}" method="post"
+						<form th:action="@{/book/add}" th:object="${book}" method="post" encType="multipart/form-data"
 							autocomplete="off">
 
 							<div th:insert="fragments/forms :: book-form"></div>
