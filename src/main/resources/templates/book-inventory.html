@@ -55,6 +55,35 @@
 
 	<section th:insert="fragments/body :: js-container"></section>
 	
+	<script>
+		$(document).ready(function() {
+			$(".delete-icon").click(function(e) {
+				e.preventDefault();
+				
+				var currentRow = $(this).closest('tr');
+				var id = currentRow.find("td:eq(0)").text();
+				
+				var request = $.ajax({
+					type: "POST",
+					url: "/book/delete",
+					dataType: 'JSON',
+					data: {
+						"id": id
+					}
+				});
+				
+				request.done(function(response) {
+					if(response.success) {
+						$(currentRow).remove();
+					} else {
+						alert("Book deletion failed. Please try again.");
+					}
+				});
+			});
+			
+		});
+	</script>
+	
 </body>
 
 </html>

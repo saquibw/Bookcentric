@@ -108,3 +108,15 @@
 	font-size: 20px !important;
 	margin-top: 15px;
 }
+
+.color-red {
+	color: red;
+}
+
+.color-green {
+	color: green;
+}
+
+.font-fourteen-pix {
+	font-size: 14px !important;
+}

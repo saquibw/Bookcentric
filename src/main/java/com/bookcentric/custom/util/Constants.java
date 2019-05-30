@@ -8,5 +8,8 @@ public class Constants {
 	
 	public static String TYPE_BEST_SELLER = "bestSeller";
 	public static String TYPE_NEW_ARRIVAL = "newArrival";
+	
+	public static String ACTION_ADD = "add";
+	public static String ACTION_REMOVE = "remove";
 
 }

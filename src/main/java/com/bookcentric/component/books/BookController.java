@@ -1,20 +1,20 @@
 package com.bookcentric.component.books;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +26,8 @@ import com.bookcentric.component.books.genre.Genre;
 import com.bookcentric.component.books.genre.GenreService;
 import com.bookcentric.component.books.publisher.Publisher;
 import com.bookcentric.component.books.publisher.PublisherService;
+import com.bookcentric.component.user.UserService;
+import com.bookcentric.custom.util.Response;
 
 @Controller
 public class BookController {	
@@ -36,6 +38,7 @@ public class BookController {
 	@Autowired GenreService genreService;
 	@Autowired ModelMapper mapper;
 	@Autowired HttpServletResponse response;
+	@Autowired UserService userService;
 	
 	@GetMapping("/book/entry")
 	public ModelAndView viewBookEntry() {
@@ -116,15 +119,26 @@ public class BookController {
 		byte[] image = bookService.getImageBy(id);
 		if(image != null) {
 			
-			InputStream is =  new ByteArrayInputStream(image);
-			IOUtils.copy(is, response.getOutputStream());
+			//InputStream is =  new ByteArrayInputStream(image);
+			//IOUtils.copy(is, response.getOutputStream());
+			ServletOutputStream stream = response.getOutputStream();
+			stream.write(image);
+			stream.flush();
+			stream.close();
 		}		
 	}
 	
-	@GetMapping("/book/delete/{id}")
-	public String deleteBook(@PathVariable("id") Integer id) {
+	@ResponseBody
+	@RequestMapping(value="/book/delete", method=RequestMethod.POST)
+	public Response deleteBook(@RequestParam("id") Integer id) {
 		Books book = bookService.getBy(id);
 		bookService.delete(book);
-		return "redirect:/book/inventory";
+		
+		Response response = new Response();
+		response.setSuccess(true);
+		
+		return response;
 	}
+	
+	
 }

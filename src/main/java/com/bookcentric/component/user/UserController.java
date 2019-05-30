@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bookcentric.component.books.BookService;
+import com.bookcentric.component.books.Books;
 import com.bookcentric.component.user.deliveryarea.DeliveryArea;
 import com.bookcentric.component.user.deliveryarea.DeliveryAreaService;
 import com.bookcentric.component.user.parent.Parent;
@@ -39,6 +41,8 @@ public class UserController {
 	@Autowired private DeliveryAreaService deliveryAreaService;
 	
 	@Autowired private PaymentModeService paymentModeService;
+	
+	@Autowired BookService bookService;
 	
 	
 	
@@ -106,6 +110,41 @@ public class UserController {
 			response.setSuccess(true);
 		}
 		
+		return response;
+		
+	}
+	
+	@ResponseBody
+	@PostMapping("/user/update/readingqueue")
+	public Response updateReadingQueue(@RequestParam("bookId") Integer bookId, @RequestParam("action") String action) {
+		Response response = new Response();
+		String message = "";
+		
+		Books book = bookService.getBy(bookId);
+		User user = userService.getBy(16).get();
+		List<Books> readingQueue = user.getReadingQueue();
+				
+		if(Constants.ACTION_ADD.equals(action)) {
+			if(readingQueue.size() < 6) {
+				readingQueue.add(book);
+				user.setReadingQueue(readingQueue);
+				userService.add(user);				
+				response.setSuccess(true);
+			} else {
+				message = "You have already added 6 books in your reading queue!";
+				response.setSuccess(false);
+				response.setData(message);
+			}
+			
+		} else {
+			if(readingQueue.contains(book)) {
+				readingQueue.remove(book);
+				user.setReadingQueue(readingQueue);
+				userService.add(user);				
+				response.setSuccess(true);
+			}
+		}
+				
 		return response;
 		
 	}

@@ -11,6 +11,7 @@ import com.bookcentric.component.books.author.Author;
 import com.bookcentric.component.books.genre.Genre;
 import com.bookcentric.component.books.publisher.Publisher;
 import com.bookcentric.component.user.history.UserHistory;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -27,8 +28,10 @@ public class BooksDTO {
 	private Integer count;
 	private Integer issuedCount;
 	private Integer remainingCount;
-	private Author author;
-	private Publisher publisher;
-	private Genre genre;
-	private List<UserHistory> userHistory;
+	@JsonIgnore private Author author;
+	@JsonIgnore private Publisher publisher;
+	@JsonIgnore private Genre genre;
+	@JsonIgnore private List<UserHistory> userHistory;
+	private boolean readingQueue;
+	private boolean wishlist;
 }
