@@ -100,7 +100,13 @@
 				<label>List your favourite genres*</label> 
 				<input type="text" class="form-control" th:field="*{genre}" required>
 			</div>
-
+			
+			<div class="form-group col">
+				<label>Special instructions</label> <input type="text" class="form-control" th:field="*{instruction}">
+			</div>
+		</div>
+		
+		<div class="row">
 			<div class="form-group col hidden">
 				<label>Membership ID</label> <input type="text" class="form-control" th:field="*{membershipId}">
 			</div>
