@@ -85,4 +85,9 @@ public class BookServiceImpl implements BookService {
 		repository.delete(book);		
 	}
 
+	@Override
+	public List<Books> searchByBookName(String searchText) {
+		return repository.getByBookName(searchText);
+	}
+
 }

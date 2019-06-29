@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<div class="container-fluid">
+			<div class="row justify-content-md-center top-space">
+
+				<div th:insert="fragments/body :: management-navbar"></div>
+
+				<div class="col-md-10 card management-card">
+					<div class="card-body">
+
+						<div class="left full-width">
+							<div class="left">
+								<h1>Update Reading Queue</h1>
+							</div>
+						</div>
+
+						<div class="full-width">
+
+							<div class="col-md-6 left">
+								<div class="row">
+									<div class="form-group col">
+										<label>Search books</label> <input type="text" id="searchBox" class="form-control">
+									</div>
+								</div>
+								
+								<table class="table search-queue">
+									<tbody>
+										
+									</tbody>
+								</table>
+
+
+							</div>
+
+							<div class="col-md-6 left">
+
+								<table class="table reading-queue">
+									<thead>
+										<tr>
+											<th>Book name</th>
+											<th></th>
+											<th></th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr th:each="book : ${user.readingQueue}">
+											<td class="hidden" th:text="${book.id}"></td>
+											<td th:text="${book.name}"></td>
+											<td><a class="fa fa-trash delete-icon" href="javascript:void(0)"></a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<section th:insert="fragments/body :: js-container"></section>
+	
+	<script>
+		$(document).ready(function() {
+			var ACTION_ADD = "add";
+			var ACTION_REMOVE = "remove";
+			var searchTriggerTimer = null;
+			var searchBox = $("#searchBox")
+			
+			searchBox.keyup(function() {
+				if(searchTriggerTimer) {
+					clearTimeout(searchTriggerTimer);
+				}
+				searchTriggerTimer = setTimeout(function() {
+					let searchText = searchBox.val();
+					
+					let tbody = $(".search-queue tbody");
+					tbody.empty();
+					if(!searchText) return;
+					
+					var request = $.ajax({
+						type: "GET",
+						url: "/book/search/readingqueue",
+						dataType: 'JSON',
+						data: {
+							"searchText": searchText
+						}
+					});
+					
+					request.done(function(response) {
+						if(response.success) {
+							let data = response.data;
+							if(data && data.length > 0) {
+								$.each(data, function(key, value) {
+									const row = "<tr><td>" + value.name + "</td><td><button class='btn btn-primary btn-sm add-icon' data-id=" + value.id + ">Add</button></td></tr>";
+									tbody.append(row);
+								});
+								
+								$(".add-icon").click(function(e) {
+									e.preventDefault();
+									addToReadingQueue(this);
+								});
+							}
+						}
+					});
+
+				}, 400);
+			});
+			
+			function addToReadingQueue(element) {
+				const bookId = $(element).attr("data-id");
+				updateReadingQueue(element, bookId, ACTION_ADD);
+			}
+			
+			function removeFromReadingQueue(element) {
+				var row = $(element).closest('tr');
+				var bookId = $(row).find("td:eq(0)").text();
+				updateReadingQueue(element, bookId, ACTION_REMOVE);
+			}
+			
+			function updateReadingQueue(element, bookId, action) {
+				var request = $.ajax({
+					type: "POST",
+					url: "/user/update/readingqueue",
+					dataType: 'JSON',
+					data: {
+						"bookId": bookId,
+						"action": action
+					}
+				});
+				
+				request.done(function(response){
+					if(response.success) {
+						if(action == ACTION_ADD) {
+							var row = $(element).closest('tr');
+							var bookName = $(row).find("td:first").text();
+							var bookId = $(row).find("button").data("id");
+							$(row).remove();
+							
+							var rqRow = "<tr><td class='hidden'>"+bookId+"</td><td>"+bookName+"</td><td><a class='fa fa-trash delete-icon' href='javascript:void(0)'></a></td></tr>"
+							$(".reading-queue tbody").append(rqRow);
+							
+							attachReadingQueueListener();
+						} else {
+							var row = $(element).closest('tr');
+							$(row).remove();
+						}
+					} else {
+						alert(response.data);
+					}
+				});
+			}
+			
+			function attachReadingQueueListener() {
+				$(".delete-icon").off("click");
+				$(".delete-icon").on("click", function() {
+					removeFromReadingQueue(this);
+				});
+			}
+			
+			attachReadingQueueListener();
+		});
+	</script>
+</body>
+</html>

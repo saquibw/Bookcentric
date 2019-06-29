@@ -29,6 +29,8 @@ public class UserHistoryController {
 	@Autowired private BookService bookService;
 	
 	@Autowired private UserHistoryService userHistoryService;
+	
+	@Autowired private ModelMapper mapper;
 
 	@GetMapping("/user/history/{id}")
 	public ModelAndView getUserHistoryDetails(@PathVariable("id") int id) {
@@ -36,7 +38,6 @@ public class UserHistoryController {
 		
 		User user = userService.getBy(id).get();
 		
-		ModelMapper mapper = new ModelMapper();
 		UserDTO userDto = mapper.map(user, UserDTO.class);
 		/*DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(Locale.US).withZone(ZoneId.systemDefault());
 		userDto.getUserHistory().forEach(u -> {
@@ -75,5 +76,18 @@ public class UserHistoryController {
 		Response response = new Response();
 		response.setSuccess(true);
 		return response;
+	}
+	
+	@GetMapping("/user/history/readingqueue/{id}")
+	public ModelAndView getReadingQueue(@PathVariable("id") int userId) {
+		ModelAndView view = new ModelAndView("reading-queue-update");
+		
+		User user = userService.getBy(userId).get();
+		
+		UserDTO userDto = mapper.map(user, UserDTO.class);
+		
+		view.addObject("user", userDto);
+		
+		return view;
 	}
 }

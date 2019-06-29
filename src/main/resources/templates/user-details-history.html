@@ -44,12 +44,11 @@
 											<td class="hidden" th:text="${book.id}"></td>
 											<td th:text="${book.name}"></td>
 											<td><input type="checkbox"></td>
-
-											<!-- <td><a class="btn btn-primary btn-sm" th:href="@{'/user/get/history/' + ${user.id}}">View history</a></td> -->
 										</tr>
 									</tbody>
 								</table>
-								<button class="btn btn-primary" id="issueButton">Issue</button>
+								<button class="btn btn-primary btn-sm" id="issueButton">Issue</button>
+								<a class="btn btn-primary btn-sm" th:href="@{'/user/history/readingqueue/' + ${user.id}}">Edit</a>
 							</div>
 
 							<div class="col-md-8 left">
@@ -106,7 +105,7 @@
 		$("#issueButton").click(function() {
 			var bookList = [];
 			var userId = $(".userId").text();
-			console.log(userId);
+
 			$(".readingQueue > tbody > tr").each(function(index, row) {
 				var checkBox = $(row).find("input");
 				if(checkBox.prop('checked')) {

@@ -25,4 +25,6 @@ public interface BookService {
 	public byte[] getImageBy(Integer id);
 	
 	public void delete(Books book);
+	
+	public List<Books> searchByBookName(String searchText);
 }

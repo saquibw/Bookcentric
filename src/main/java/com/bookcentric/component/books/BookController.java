@@ -119,8 +119,6 @@ public class BookController {
 		byte[] image = bookService.getImageBy(id);
 		if(image != null) {
 			
-			//InputStream is =  new ByteArrayInputStream(image);
-			//IOUtils.copy(is, response.getOutputStream());
 			ServletOutputStream stream = response.getOutputStream();
 			stream.write(image);
 			stream.flush();
@@ -135,6 +133,19 @@ public class BookController {
 		bookService.delete(book);
 		
 		Response response = new Response();
+		response.setSuccess(true);
+		
+		return response;
+	}
+	
+	@ResponseBody
+	@GetMapping("/book/search/readingqueue")
+	public Response getBooks(@RequestParam("searchText") String searchText) {
+		List<Books> books = bookService.searchByBookName(searchText);
+		
+		
+		Response response = new Response();
+		response.setData(books);
 		response.setSuccess(true);
 		
 		return response;

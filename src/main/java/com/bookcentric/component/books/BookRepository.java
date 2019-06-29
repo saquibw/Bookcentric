@@ -20,4 +20,7 @@ public interface BookRepository extends JpaRepository<Books, Integer> {
 	
 	@Query(value = "Select image From books where id = :id", nativeQuery=true)
 	public byte[] getImageById(@Param("id") Integer id);
+	
+	@Query(value = "Select * From books where name like CONCAT('%', :searchText, '%')", nativeQuery=true)
+	public List<Books> getByBookName(@Param("searchText") String searchText);
 }

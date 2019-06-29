@@ -42,7 +42,7 @@
 									<td th:text="${book.issuedCount}"></td>
 									<td th:text="${book.remainingCount}"></td>
 									<td><a class="fa fa-edit edit-icon" th:href="@{'/book/view/' + ${book.id}}"></a></td>
-									<td><a class="fa fa-trash delete-icon" th:href="@{'/book/delete/' + ${book.id}}"></a></td>
+									<td><a class="fa fa-trash delete-icon" href="javascript:void(0)"></a></td>
 								</tr>
 							</tbody>
 						</table>
