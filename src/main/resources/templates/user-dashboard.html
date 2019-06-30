@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<div class="container-fluid">
+			<div class="row justify-content-md-center top-space">
+				
+				<div class="col-md-10 card management-card">
+					<div class="card-body">
+						<h1>Member Dashboard</h1>
+						
+						<div class="full-width">
+							<div class="col-md-2 left">
+								<img src="/images/user-avatar.png" height="100" width="100">
+							</div>
+							
+							<div class="col-md-10 left">
+								<div><label>Name: </label> <label th:text="${user.firstName} + ' ' + ${user.middleName} + ' ' + ${user.lastName}"></label></div>
+								<div><label>Membership No: </label> <label th:text="${user.membershipId}"></label></div>
+								<div><label>Subscription plan: </label> <label th:text="${user.subscription.category.name}"></label></div>
+								<div><label>Date of renewal: </label> <label th:text="${user.dateOfRenewal}"></label></div>
+							</div>							
+						</div>
+						
+						<div class="full-width">
+							
+							<div class="col-md-6 left border-rounded-all height-300-px max-height-300-px overflow-auto margin-bottom-10px">
+								<table class="table">
+									<caption class="table-caption">Library Card</caption>
+									<thead>
+										<tr>
+											<th>Book name</th>
+											<th>Issue date</th>
+											<th>Due date</th>
+											<th>Return date</th>
+										</tr>
+									</thead>
+									
+									<tbody>
+
+										<tr th:each="history : ${user.userHistory}">
+											<td th:text="${history.books.name}"></td>
+											<td th:text="${history.issueDate}"></td>
+											<td th:text="${history.dueDate}"></td>
+											<td th:text="${history.returnDate}"></td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+							
+							<div class="col-md-6 left border-rounded-all height-300-px max-height-300-px overflow-auto margin-bottom-10px">
+								<table class="table readingQueue">
+									<caption class="table-caption">Reading Queue</caption>
+									<thead>
+										<tr>
+											<th>Book name</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="book : ${user.readingQueue}">
+											<td class="hidden" th:text="${book.id}"></td>
+											<td th:text="${book.name}"></td>
+											<td><a title="Remove from Reading Queue" class="fa fa-minus-circle delete-icon reading-queue-delete" href="javascript:void(0)"></a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>							
+						</div>
+						
+						<div class="full-width">
+							<div class="col-md-6 left border-rounded-all height-300-px max-height-300-px overflow-auto margin-bottom-10px">
+								<table class="table readingQueue">
+									<caption class="table-caption">TBR (To Be Read)</caption>
+									<thead>
+										<tr>
+											<th>Book name</th>
+											<th></th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="book : ${user.wishlist}">
+											<td class="hidden" th:text="${book.id}"></td>
+											<td th:text="${book.name}"></td>
+											<td><a title="Add to Reading Queue" class="fa fa-plus-circle add-icon color-green reading-queue-add" href="javascript:void(0)"></a></td>
+											<td><a title="Remove from TBR" class="fa fa-minus-circle delete-icon wishlist-delete" href="javascript:void(0)"></a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							
+							<div class="col-md-6 left border-rounded-all height-300-px max-height-300-px overflow-auto margin-bottom-10px">
+								<table class="table">
+									<caption class="table-caption">Badges</caption>
+									<thead>
+										<tr>
+											
+										</tr>
+									</thead>
+									<tbody>
+										
+									</tbody>
+								</table>
+							</div>							
+						</div>
+						
+					</div>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+	
+	<section th:insert="fragments/body :: js-container"></section>
+	
+	<script>
+	
+		$(document).ready(function() {
+			var ACTION_ADD = "add";
+			var ACTION_REMOVE = "remove";
+			
+			$(".reading-queue-delete").click(function() {
+				removeFromReadingQueue(this);
+			});
+			
+			$(".wishlist-delete").click(function() {
+				removeFromWishlist(this);
+			});
+			
+			$(".reading-queue-add").click(function() {
+				var confirmation = confirm("Are you sure you want to add this book to reading queue?");
+				if(confirmation) {
+					addToReadingQueue(this);
+				}
+			});
+			
+			function removeFromReadingQueue(element) {
+				var row = $(element).closest('tr');
+				var bookId = $(row).find("td:eq(0)").text();
+				var url = "/user/update/readingqueue";
+				
+				updateList(element, url, bookId, ACTION_REMOVE, row);
+			}
+			
+			function removeFromWishlist(element) {
+				var row = $(element).closest('tr');
+				var bookId = $(row).find("td:eq(0)").text();
+				var url = "/user/update/wishlist";
+				
+				updateList(element, url, bookId, ACTION_REMOVE, row);
+			}
+			
+			function addToReadingQueue(element) {
+				var row = $(element).closest('tr');
+				var bookId = $(row).find("td:eq(0)").text();
+				var url = "/user/update/readingqueue";
+				
+				updateList(element, url, bookId, ACTION_ADD, row);
+			}
+			
+			function updateList(element, url, bookId, action, row) {
+				var request = $.ajax({
+					type: "POST",
+					url: url,
+					dataType: 'JSON',
+					data: {
+						"bookId": bookId,
+						"action": action
+					}
+				});
+				
+				request.done(function(response){
+					if(response.success) {
+						if(action == ACTION_ADD) {
+							location.reload();
+						} else {
+							$(row).remove();	
+						}		
+					} else {
+						alert(response.data);
+					}
+				});
+			}
+		});
+		
+	</script>
+
+</body>
+
+</html>

@@ -406,7 +406,7 @@ body{
 
 a{
     color: #CD4E4E;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 a:hover{
     color: #888;

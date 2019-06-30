@@ -3,12 +3,8 @@ package com.bookcentric.component.user;
 import java.util.List;
 import java.util.Optional;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,59 +21,61 @@ import com.bookcentric.component.user.deliveryarea.DeliveryAreaService;
 import com.bookcentric.component.user.parent.Parent;
 import com.bookcentric.component.user.paymentmode.PaymentMode;
 import com.bookcentric.component.user.paymentmode.PaymentModeService;
+import com.bookcentric.component.user.security.UserSecurityService;
 import com.bookcentric.component.user.subscription.Subscription;
 import com.bookcentric.component.user.subscription.SubscriptionService;
 import com.bookcentric.custom.util.Constants;
 import com.bookcentric.custom.util.Response;
-import com.google.gson.JsonObject;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 @Controller
 public class UserController {
-	
+
 	@Autowired private UserService userService;
-	
+
 	@Autowired private SubscriptionService subscriptionService;
-	
+
 	@Autowired private DeliveryAreaService deliveryAreaService;
-	
+
 	@Autowired private PaymentModeService paymentModeService;
-	
+
 	@Autowired BookService bookService;
-	
-	
-	
+
+	@Autowired UserSecurityService userSecurityService;
+
+
 	@GetMapping("/user/registration")
-	public ModelAndView viewRegistration(Model model) {
+	public ModelAndView viewRegistration() {
 		ModelAndView regView = new ModelAndView("user-registration");
-		
+
 		List<Subscription> subscriptionList = subscriptionService.findAll();
 		List<DeliveryArea> deliveryAreaList = deliveryAreaService.findAll();
 		List<PaymentMode> paymentModeList = paymentModeService.findAll();
-		
-		model.addAttribute("pageTitle", "Registration page");
-		model.addAttribute("user", new User());
-		model.addAttribute("subscriptionList", subscriptionList);
-		model.addAttribute("areaList", deliveryAreaList);
-		model.addAttribute("paymentModeList", paymentModeList);
-		
+
+		regView.addObject("pageTitle", "Registration page");
+		regView.addObject("user", new User());
+		regView.addObject("subscriptionList", subscriptionList);
+		regView.addObject("areaList", deliveryAreaList);
+		regView.addObject("paymentModeList", paymentModeList);
+
 		return regView;	
 	}
-	
+
 	@PostMapping(value="/user/add")
-	public String addUser(User user) {
-		
+	public String addUser(User user) throws MySQLIntegrityConstraintViolationException {
+
 		user.setStatus(Constants.STATUS_PENDING);
 		userService.add(user);
-		
+
 		return "redirect:/user/registration";
 	}
-	
+
 	@GetMapping("/user/get/{id}")
-	public ModelAndView getUser(@PathVariable("id") int id, Model model) {
+	public ModelAndView getUser(@PathVariable("id") int id) {
 		ModelAndView editView = new ModelAndView("user-update");
 		Optional<User> u = userService.getBy(id);
 		User user = u.get();
-		
+
 		if(user.getParent() == null) {
 			user.setParent(new Parent());
 		}
@@ -85,57 +83,57 @@ public class UserController {
 		List<Subscription> subscriptionList = subscriptionService.findAll();
 		List<DeliveryArea> deliveryAreaList = deliveryAreaService.findAll();
 		List<PaymentMode> paymentModeList = paymentModeService.findAll();
-		
+
 		editView.addObject("user", user);
-		model.addAttribute("subscriptionList", subscriptionList);
-		model.addAttribute("areaList", deliveryAreaList);
-		model.addAttribute("paymentModeList", paymentModeList);
-		
+		editView.addObject("subscriptionList", subscriptionList);
+		editView.addObject("areaList", deliveryAreaList);
+		editView.addObject("paymentModeList", paymentModeList);
+
 		return editView;
 	}
-	
+
 	@PostMapping("/user/update")
-	public String updateUser(User user) {
+	public String updateUser(User user) throws MySQLIntegrityConstraintViolationException {
 		userService.add(user);
-		
+
 		return "redirect:/management/user";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="/user/updatestatus", method=RequestMethod.POST)
 	public Response updateStatus(@RequestParam("status") String status, @RequestParam("id") Integer id) {
 		Response response = new Response();
-		
+
 		if(userService.updateStatus(id, status)) {
 			response.setSuccess(true);
 		}
-		
+
 		return response;
-		
+
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/user/update/readingqueue")
-	public Response updateReadingQueue(@RequestParam("bookId") Integer bookId, @RequestParam("action") String action) {
+	public Response updateReadingQueue(@RequestParam("bookId") Integer bookId, @RequestParam("action") String action) throws MySQLIntegrityConstraintViolationException {
 		Response response = new Response();
 		String message = "";
-		
+
 		Books book = bookService.getBy(bookId);
-		User user = userService.getBy(16).get();
+		User user = userSecurityService.getLoggedInUser();;
 		List<Books> readingQueue = user.getReadingQueue();
-				
+
 		if(Constants.ACTION_ADD.equals(action)) {
-			if(readingQueue.size() < 6) {
+			if(readingQueue.size() < 10) {
 				readingQueue.add(book);
 				user.setReadingQueue(readingQueue);
 				userService.add(user);				
 				response.setSuccess(true);
 			} else {
-				message = "You have already added 6 books in your reading queue!";
+				message = "You have already added 10 books in your reading queue!";
 				response.setSuccess(false);
 				response.setData(message);
 			}
-			
+
 		} else {
 			if(readingQueue.contains(book)) {
 				readingQueue.remove(book);
@@ -144,8 +142,35 @@ public class UserController {
 				response.setSuccess(true);
 			}
 		}
-				
-		return response;
-		
+
+		return response;		
+	}
+
+	@ResponseBody
+	@PostMapping("/user/update/wishlist")
+	public Response updateWishlist(@RequestParam("bookId") Integer bookId, @RequestParam("action") String action) throws MySQLIntegrityConstraintViolationException {
+		Response response = new Response();
+
+		Books book = bookService.getBy(bookId);
+		//User user = userService.getBy(16).get();
+		User user = userSecurityService.getLoggedInUser();
+		List<Books> wishlist = user.getWishlist();
+
+		if(Constants.ACTION_ADD.equals(action)) {
+
+			wishlist.add(book);
+			user.setWishlist(wishlist);
+			userService.add(user);				
+			response.setSuccess(true);
+		} else {
+			if(wishlist.contains(book)) {
+				wishlist.remove(book);
+				user.setWishlist(wishlist);
+				userService.add(user);				
+				response.setSuccess(true);
+			}
+		}
+
+		return response;		
 	}
 }

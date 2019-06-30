@@ -8,6 +8,8 @@ var TreasuryManager = (function() {
 	var NAVIGATION_BACKWARD = "backward";
 	var ACTION_ADD = "add";
 	var ACTION_REMOVE = "remove";
+	var LIST_NAME_READING_QUEUE = "readingQueue";
+	var LIST_NAME_WISHLIST = "wishlist";
 
 	var specialBooks = [];
 	var specialBooksCount = 0;
@@ -95,7 +97,12 @@ var TreasuryManager = (function() {
 		
 		$(".toggle-reading-queue").click(function(e) {
 			e.preventDefault();
-			toggleReadingQueue(this);
+			toggleList(this, LIST_NAME_READING_QUEUE);
+		});
+		
+		$(".toggle-wishlist").click(function(e) {
+			e.preventDefault();
+			toggleList(this, LIST_NAME_WISHLIST);
 		});
 	}
 
@@ -105,12 +112,16 @@ var TreasuryManager = (function() {
 		temp.html(template);
 		$(temp).find("#book-name").text(book.name);
 		$(temp).find("#book-image").attr("src", "/get/image/" + book.id);
-		$(temp).find(".toggle-wishlist").attr("data-id", book.id);
 		
 		let readingQueue = $(temp).find(".toggle-reading-queue");
 		let readingQueueIcon = readingQueue.find("i");
+		
+		let wishList = $(temp).find(".toggle-wishlist");
+		let wishListIcon = wishList.find("i");
 				
 		readingQueue.attr("data-id", book.id);
+		wishList.attr("data-id", book.id);
+		
 		if(book.readingQueue) {
 			readingQueue.addClass(ACTION_REMOVE);
 			readingQueueIcon.addClass("color-green");
@@ -119,12 +130,19 @@ var TreasuryManager = (function() {
 			readingQueueIcon.removeClass("color-green");
 		}
 		
-		
+		if(book.wishlist) {
+			wishList.addClass(ACTION_REMOVE);
+			wishListIcon.addClass("color-red");
+		} else {
+			wishList.addClass(ACTION_ADD);
+			wishListIcon.removeClass("color-red");
+		}
+				
 		$(".special-books").append(temp.html());
 		temp.empty();
 	}
 	
-	function toggleReadingQueue(element) {
+	function toggleList(element, listName) {
 		let elm = $(element);
 		let i = elm.find("i");		
 		let bookId = elm.attr('data-id');
@@ -144,14 +162,24 @@ var TreasuryManager = (function() {
 			action = ACTION_REMOVE;
 		}
 		
+		let data = {
+				"bookId": bookId,
+				"action": action
+			};
+		
+		if(listName == LIST_NAME_READING_QUEUE) {
+			toggleReadingQueue(elm, i, data, book, action)
+		} else if (listName == LIST_NAME_WISHLIST) {
+			toggleWishlist(elm, i, data, book, action);
+		}
+	}
+	
+	function toggleReadingQueue(elm, i, data, book, action) {
 		var request = $.ajax({
 			type: "POST",
 			url: "/user/update/readingqueue",
 			dataType: 'JSON',
-			data: {
-				"bookId": bookId,
-				"action": action
-			}
+			data: data
 		});
 		
 		request.done(function(response){
@@ -166,6 +194,33 @@ var TreasuryManager = (function() {
 					elm.addClass(ACTION_ADD);
 					i.removeClass("color-green");
 					book.readingQueue = false;
+				}
+			} else {
+				alert(response.data);
+			}
+		});
+	}
+	
+	function toggleWishlist(elm, i, data, book, action) {
+		var request = $.ajax({
+			type: "POST",
+			url: "/user/update/wishlist",
+			dataType: 'JSON',
+			data: data
+		});
+		
+		request.done(function(response){
+			if(response.success) {
+				if(action == ACTION_ADD) {
+					elm.removeClass(ACTION_ADD);
+					elm.addClass(ACTION_REMOVE);
+					i.addClass("color-red");
+					book.wishlist = true;
+				} else {
+					elm.removeClass(ACTION_REMOVE);
+					elm.addClass(ACTION_ADD);
+					i.removeClass("color-red");
+					book.wishlist = false;
 				}
 			} else {
 				alert(response.data);

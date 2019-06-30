@@ -60,6 +60,10 @@ public class User {
 	@JoinTable(name = "reading_queue", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "bookId"))
 	private List<Books> readingQueue;
 	
+	@ManyToMany
+	@JoinTable(name = "wishlist", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "bookId"))
+	private List<Books> wishlist;
+	
 	@OneToMany(mappedBy="user")
 	private List<UserHistory> userHistory;
 }
