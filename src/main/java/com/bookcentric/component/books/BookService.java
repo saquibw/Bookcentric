@@ -27,4 +27,6 @@ public interface BookService {
 	public void delete(Books book);
 	
 	public List<Books> searchByBookName(String searchText);
+	
+	public void updateCount(BooksDTO book);
 }

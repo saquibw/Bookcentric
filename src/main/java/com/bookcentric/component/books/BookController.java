@@ -26,12 +26,14 @@ import com.bookcentric.component.books.genre.Genre;
 import com.bookcentric.component.books.genre.GenreService;
 import com.bookcentric.component.books.publisher.Publisher;
 import com.bookcentric.component.books.publisher.PublisherService;
+import com.bookcentric.component.user.User;
 import com.bookcentric.component.user.UserService;
+import com.bookcentric.component.user.security.UserSecurityService;
 import com.bookcentric.custom.util.Response;
 
 @Controller
 public class BookController {	
-	
+
 	@Autowired BookService bookService;
 	@Autowired AuthorService authorService;
 	@Autowired PublisherService publisherService;
@@ -39,117 +41,142 @@ public class BookController {
 	@Autowired ModelMapper mapper;
 	@Autowired HttpServletResponse response;
 	@Autowired UserService userService;
-	
+	@Autowired UserSecurityService userSecurityService;
+
 	@GetMapping("/book/entry")
 	public ModelAndView viewBookEntry() {
 		ModelAndView bookView = new ModelAndView("book-entry");
-		
+
 		Books book = new Books();
 		List<Author> authorList = authorService.getAll();
 		List<Publisher> publisherList = publisherService.getAll();
 		List<Genre> genreList = genreService.getAll();
-		
+
 		bookView.addObject("pageTitle", "BookCentric - Book entry");
 		bookView.addObject("book", book);
 		bookView.addObject("authorList", authorList);
 		bookView.addObject("publisherList", publisherList);
 		bookView.addObject("genreList", genreList);
-		
+
 		return bookView;
 	} 
-	
+
 	@PostMapping("/book/add")
 	public String addBooks(Books book, @RequestParam("file") MultipartFile file) throws IOException {
 		bookService.add(book);
-		
+
 		if(file != null && file.getSize() > 0) {
 			bookService.storeImage(file, book.getId());
 		}	
-		
+
 		return "redirect:/book/entry";
 	}
-	
+
 	@GetMapping("/book/inventory")
 	public ModelAndView getbooks() {
 		ModelAndView bookView = new ModelAndView("book-inventory");
-		
+
 		List<Books> books = bookService.getAll();
 		List<BooksDTO> bookList = bookService.getFilterdHistoryByUnreturnedBooks(bookService.getFrom(books));	
 
-		bookView.addObject("pageTitle", "BookCentric - Book entry");
+		bookView.addObject("pageTitle", "BookCentric - Book inventory");
 		bookView.addObject("books", bookList);
-		
+
 		return bookView;
 	}
-	
+
 	@GetMapping("/book/view/{id}")
 	public ModelAndView viewBook(@PathVariable("id") Integer id) {
 		ModelAndView bookView = new ModelAndView("book-update");
-		
+
 		Books book = bookService.getBy(id);
 		List<Author> authorList = authorService.getAll();
 		List<Publisher> publisherList = publisherService.getAll();
 		List<Genre> genreList = genreService.getAll();
-		
+
 		bookView.addObject("pageTitle", "BookCentric - Book update");
 		bookView.addObject("book", book);
 		bookView.addObject("authorList", authorList);
 		bookView.addObject("publisherList", publisherList);
 		bookView.addObject("genreList", genreList);
-		
+
 		return bookView;
 	}
-	
+
 	@PostMapping("/book/update")
 	public String updateBook(Books book, @RequestParam("file") MultipartFile file) throws IOException {
 		bookService.add(book);
-		
+
 		if(file != null && file.getSize() > 0) {
 			bookService.storeImage(file, book.getId());
 		}
-		
+
 		return "redirect:/book/inventory";
 	}
-	
+
 	@GetMapping("/get/image/{id}")
 	@ResponseBody
 	public void getImage(@PathVariable Integer id) throws SQLException, IOException {
 		response.setContentType("image/jpeg");
-		
+
 		byte[] image = bookService.getImageBy(id);
 		if(image != null) {
-			
+
 			ServletOutputStream stream = response.getOutputStream();
 			stream.write(image);
 			stream.flush();
 			stream.close();
 		}		
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="/book/delete", method=RequestMethod.POST)
 	public Response deleteBook(@RequestParam("id") Integer id) {
 		Books book = bookService.getBy(id);
 		bookService.delete(book);
-		
+
 		Response response = new Response();
 		response.setSuccess(true);
-		
+
 		return response;
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/book/search/readingqueue")
 	public Response getBooks(@RequestParam("searchText") String searchText) {
 		List<Books> books = bookService.searchByBookName(searchText);
-		
-		
+
+
 		Response response = new Response();
 		response.setData(books);
 		response.setSuccess(true);
-		
+
 		return response;
 	}
-	
-	
+
+	@GetMapping("book/get/{id}")
+	public ModelAndView getBookView(@PathVariable int id) {
+		ModelAndView bookView = new ModelAndView("book");
+
+		Books books = bookService.getBy(id);
+
+		BooksDTO book = mapper.map(books, BooksDTO.class);
+		bookService.updateCount(book);
+		User user = userSecurityService.getLoggedInUser();
+
+		if(user != null) {
+			if(user.getReadingQueue().contains(books)) {
+				book.setReadingQueue(true);				
+			}
+			if(user.getWishlist().contains(books)) {
+				book.setWishlist(true);				
+			}
+		}
+		
+		bookView.addObject("book", book);
+
+		return bookView;
+	}
+
+
 }

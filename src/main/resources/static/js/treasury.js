@@ -110,8 +110,15 @@ var TreasuryManager = (function() {
 		let template = $("#book-item").html();
 		let temp = $("#temp-container");
 		temp.html(template);
-		$(temp).find("#book-name").text(book.name);
-		$(temp).find("#book-image").attr("src", "/get/image/" + book.id);
+		
+		let bookName = $(temp).find("#book-name");
+		bookName.text(book.name);
+		bookName.attr("href", "/book/get/" + book.id);
+		
+		let bookImage = $(temp).find("#book-image");
+		bookImage.attr("src", "/get/image/" + book.id);
+		bookImage.parent().attr("href", "/book/get/" + book.id);
+		
 		
 		let readingQueue = $(temp).find(".toggle-reading-queue");
 		let readingQueueIcon = readingQueue.find("i");

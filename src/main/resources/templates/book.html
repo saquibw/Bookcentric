@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<div class="container-fluid">
+			<div class="row justify-content-md-center top-space">
+				
+				<div class="col-md-10 card management-card">
+					<div class="card-body">
+					
+						<div class="full-width">
+							<div class="col-md-2 left">
+								<img th:src="@{'/get/image/' + ${book.id}}" height="150" width="150">
+							</div>
+							
+							<div class="col-md-10 left">
+								<div><label>Name of the book: </label> <label th:text="${book.name}"></label></div>
+								<div><label>Author: </label> <label th:text="${book.author.name}"></label></div>
+								<div><label>Genre: </label> <label th:text="${book.genre.name}"></label></div>
+								<div><label>Year of publication: </label> <label th:text="${book.year}"></label></div>
+								<div><label>Publisher: </label> <label th:text="${book.publisher.name}"></label></div>
+								<div><label>No of pages: </label> <label th:text="${book.noOfPages}"></label></div>
+							</div>							
+						</div>
+						
+						<div class="full-width">
+							<div class="col-md-12 left min-height-200-px border-rounded-all">
+								<label th:text="${book.blurb}"></label>
+							</div>					
+						</div>
+						
+						<div class="full-width">
+							<div class="col-md-12 left">
+								<div><label>Tags: </label><label></label></div>
+								<div><label>Status: </label><label th:text="${book.remainingCount} > 0 ? 'Available' : 'Not available'"></label></div>
+								<div>
+									<div th:if="${book.wishlist}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-wishlist remove"><i class="fa fa-heart font-medium color-red"></i></a><label>Add to Wishlist</label></div>
+									<div th:unless="${book.wishlist}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-wishlist add"><i class="fa fa-heart font-medium color-gray"></i></a><label>Add to Wishlist</label></div>
+								</div>
+								<div>
+									<div th:if="${book.readingQueue}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-reading-queue remove"><i class="fa fa-plus-square font-medium color-green"></i></a><label>Add to Reading Queue</label></div>
+									<div th:unless="${book.readingQueue}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-reading-queue add"><i class="fa fa-plus-square font-medium color-gray"></i></a><label>Add to Reading Queue</label></div>
+								</div>
+															
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<section th:insert="fragments/body :: js-container"></section>
+	
+	<script>
+		$(document).ready(function() {
+			var ACTION_ADD = "add";
+			var ACTION_REMOVE = "remove";
+			var LIST_NAME_READING_QUEUE = "readingQueue";
+			var LIST_NAME_WISHLIST = "wishlist";
+			
+			$(".toggle-wishlist").click(function(e) {
+				e.preventDefault();
+				toggleList(this, LIST_NAME_WISHLIST);
+			});
+			
+			$(".toggle-reading-queue").click(function(e) {
+				e.preventDefault();
+				toggleList(this, LIST_NAME_READING_QUEUE);
+			});
+			
+			function toggleList(element, listName) {
+				let elm = $(element);
+				let i = elm.find("i");		
+				let bookId = elm.attr('data-id');
+				let action = "";
+				let book = null;
+				
+				if(elm.hasClass(ACTION_ADD)) {
+					action = ACTION_ADD;
+				} else {
+					action = ACTION_REMOVE;
+				}
+				
+				let data = {
+						"bookId": bookId,
+						"action": action
+					};
+				
+				if(listName == LIST_NAME_READING_QUEUE) {
+					toggleReadingQueue(elm, i, data, action)
+				} else if (listName == LIST_NAME_WISHLIST) {
+					toggleWishlist(elm, i, data, action);
+				}
+			}
+			
+			function toggleReadingQueue(elm, i, data, action) {
+				var request = $.ajax({
+					type: "POST",
+					url: "/user/update/readingqueue",
+					dataType: 'JSON',
+					data: data
+				});
+				
+				request.done(function(response){
+					if(response.success) {
+						if(action == ACTION_ADD) {
+							elm.removeClass(ACTION_ADD);
+							elm.addClass(ACTION_REMOVE);
+							i.removeClass("color-gray");
+							i.addClass("color-green");
+						} else {
+							elm.removeClass(ACTION_REMOVE);
+							elm.addClass(ACTION_ADD);
+							i.removeClass("color-green");
+							i.addClass("color-gray");
+						}
+					} else {
+						alert(response.data);
+					}
+				});
+			}
+			
+			function toggleWishlist(elm, i, data, action) {
+				var request = $.ajax({
+					type: "POST",
+					url: "/user/update/wishlist",
+					dataType: 'JSON',
+					data: data
+				});
+				
+				request.done(function(response){
+					if(response.success) {
+						if(action == ACTION_ADD) {
+							elm.removeClass(ACTION_ADD);
+							elm.addClass(ACTION_REMOVE);
+							i.removeClass("color-gray");
+							i.addClass("color-red");
+						} else {
+							elm.removeClass(ACTION_REMOVE);
+							elm.addClass(ACTION_ADD);
+							i.removeClass("color-red");
+							i.addClass("color-gray");
+						}
+					} else {
+						alert(response.data);
+					}
+				});
+			}
+		});
+	</script>
+</body>
+
+</html>

@@ -53,7 +53,7 @@ public class BookServiceImpl implements BookService {
 		return bookList;
 	}
 	
-	private void updateCount(BooksDTO book) {
+	public void updateCount(BooksDTO book) {
 		book.setIssuedCount(book.getUserHistory().size());
 		book.setRemainingCount(book.getCount() - book.getIssuedCount());
 	}

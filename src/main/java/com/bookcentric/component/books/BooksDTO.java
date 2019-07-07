@@ -34,4 +34,5 @@ public class BooksDTO {
 	@JsonIgnore private List<UserHistory> userHistory;
 	private boolean readingQueue;
 	private boolean wishlist;
+
 }

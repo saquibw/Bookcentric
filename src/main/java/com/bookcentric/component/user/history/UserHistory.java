@@ -1,6 +1,7 @@
 package com.bookcentric.component.user.history;
 
-import java.time.Instant;
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,10 +23,9 @@ public class UserHistory {
 
 	@Id @GeneratedValue
 	private Integer id;
-	@CreationTimestamp
-	private Instant issueDate;
-	private Instant dueDate;
-	private Instant returnDate;
+	private LocalDate issueDate;
+	private LocalDate dueDate;
+	private LocalDate returnDate;
 	private boolean reissue;
 	private String remarks;
 	

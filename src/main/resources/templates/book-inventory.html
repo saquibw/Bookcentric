@@ -35,14 +35,14 @@
 							<tbody>
 								<tr th:each="book : ${books}">
 									<td class="hidden" th:text="${book.id}"></td>
-									<td><img th:src="@{'/get/image/' + ${book.id}}" height="42" width="42"></td>
+									<td><a th:href="@{'/book/get/' + ${book.id}}"><img th:src="@{'/get/image/' + ${book.id}}" height="42" width="42"></a></td>
 									<td th:text="${book.code}"></td>
-									<td th:text="${book.name}"></td>
+									<td><a th:text="${book.name}" class="color-black" th:href="@{'/book/get/' + ${book.id}}"></a></td>
 									<td th:text="${book.author.name}"></td>
 									<td th:text="${book.count}"></td>
 									<td th:text="${book.issuedCount}"></td>
 									<td th:text="${book.remainingCount}"></td>
-									<td><a class="fa fa-edit edit-icon" th:href="@{'/book/view/' + ${book.id}}"></a></td>
+									<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/book/view/' + ${book.id}}"></a></td>
 									<td><a class="fa fa-trash delete-icon" href="javascript:void(0)"></a></td>
 								</tr>
 							</tbody>

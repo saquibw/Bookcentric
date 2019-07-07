@@ -45,7 +45,7 @@
 									<tbody>
 
 										<tr th:each="history : ${user.userHistory}">
-											<td th:text="${history.books.name}"></td>
+											<td><a th:text="${history.books.name}" class="color-black" th:href="@{'/book/get/' + ${history.books.id}}"></a></td>
 											<td th:text="${history.issueDate}"></td>
 											<td th:text="${history.dueDate}"></td>
 											<td th:text="${history.returnDate}"></td>
@@ -67,7 +67,7 @@
 									<tbody>
 										<tr th:each="book : ${user.readingQueue}">
 											<td class="hidden" th:text="${book.id}"></td>
-											<td th:text="${book.name}"></td>
+											<td><a th:text="${book.name}" class="color-black" th:href="@{'/book/get/' + ${book.id}}"></a></td>
 											<td><a title="Remove from Reading Queue" class="fa fa-minus-circle delete-icon reading-queue-delete" href="javascript:void(0)"></a></td>
 										</tr>
 									</tbody>
@@ -78,7 +78,7 @@
 						<div class="full-width">
 							<div class="col-md-6 left border-rounded-all height-300-px max-height-300-px overflow-auto margin-bottom-10px">
 								<table class="table readingQueue">
-									<caption class="table-caption">TBR (To Be Read)</caption>
+									<caption class="table-caption">Wishlist</caption>
 									<thead>
 										<tr>
 											<th>Book name</th>
@@ -89,7 +89,7 @@
 									<tbody>
 										<tr th:each="book : ${user.wishlist}">
 											<td class="hidden" th:text="${book.id}"></td>
-											<td th:text="${book.name}"></td>
+											<td> <a th:text="${book.name}" class="color-black" th:href="@{'/book/get/' + ${book.id}}"></a></td>
 											<td><a title="Add to Reading Queue" class="fa fa-plus-circle add-icon color-green reading-queue-add" href="javascript:void(0)"></a></td>
 											<td><a title="Remove from TBR" class="fa fa-minus-circle delete-icon wishlist-delete" href="javascript:void(0)"></a></td>
 										</tr>

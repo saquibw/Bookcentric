@@ -98,13 +98,14 @@
 							"searchText": searchText
 						}
 					});
-					
+					//<a title="Add to Reading Queue" class="fa fa-plus-circle add-icon color-green reading-queue-add" href="javascript:void(0)"></a>
 					request.done(function(response) {
 						if(response.success) {
 							let data = response.data;
 							if(data && data.length > 0) {
 								$.each(data, function(key, value) {
-									const row = "<tr><td>" + value.name + "</td><td><button class='btn btn-primary btn-sm add-icon' data-id=" + value.id + ">Add</button></td></tr>";
+									//const row = "<tr><td>" + value.name + "</td><td><button class='btn btn-primary btn-sm add-icon' data-id=" + value.id + ">Add</button></td></tr>";
+									const row = "<tr><td>" + value.name + "</td><td><a title='Add to Reading Queue' class='fa fa-plus-circle color-green add-icon' href='javascript:void(0)' data-id=" + value.id + "></a></td></tr>";
 									tbody.append(row);
 								});
 								
@@ -146,7 +147,7 @@
 						if(action == ACTION_ADD) {
 							var row = $(element).closest('tr');
 							var bookName = $(row).find("td:first").text();
-							var bookId = $(row).find("button").data("id");
+							var bookId = $(row).find("a").data("id");
 							$(row).remove();
 							
 							var rqRow = "<tr><td class='hidden'>"+bookId+"</td><td>"+bookName+"</td><td><a class='fa fa-trash delete-icon' href='javascript:void(0)'></a></td></tr>"

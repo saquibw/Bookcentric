@@ -1,5 +1,6 @@
 package com.bookcentric.component.user.history;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
@@ -20,6 +21,7 @@ import com.bookcentric.component.user.User;
 import com.bookcentric.component.user.UserDTO;
 import com.bookcentric.component.user.UserService;
 import com.bookcentric.custom.util.Response;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 @Controller
 public class UserHistoryController {
@@ -39,13 +41,6 @@ public class UserHistoryController {
 		User user = userService.getBy(id).get();
 		
 		UserDTO userDto = mapper.map(user, UserDTO.class);
-		/*DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(Locale.US).withZone(ZoneId.systemDefault());
-		userDto.getUserHistory().forEach(u -> {
-			if(u.getIssueDate() != null) {
-				u.setIssueDate(formatter.format(u.getIssueDate());
-			}
-			
-		});*/
 		
 		model.addObject("user", userDto);
 		
@@ -54,7 +49,7 @@ public class UserHistoryController {
 	
 	@PostMapping("/user/history/issue")
 	@ResponseBody
-	public Response issueBook(@RequestParam int userId, @RequestParam String bookList) throws JSONException {
+	public Response issueBook(@RequestParam int userId, @RequestParam String bookList) throws JSONException, MySQLIntegrityConstraintViolationException {
 		User user = userService.getBy(userId).get();
 		JSONArray arr = new JSONArray(bookList);
 		
@@ -68,6 +63,7 @@ public class UserHistoryController {
 			UserHistory history = new UserHistory();
 			history.setBooks(book);
 			history.setUser(user);
+			history.setIssueDate(LocalDate.now());
 			userHistoryList.add(history);
 		}
 		userService.add(user);
