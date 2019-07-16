@@ -3,6 +3,7 @@ package com.bookcentric.component.books;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface BookService {
@@ -29,4 +30,6 @@ public interface BookService {
 	public List<Books> searchByBookName(String searchText);
 	
 	public void updateCount(BooksDTO book);
+	
+	public Page<Books> getAllByPageAndSort(Integer initialCount, Integer totalLimit, String searchText); 
 }

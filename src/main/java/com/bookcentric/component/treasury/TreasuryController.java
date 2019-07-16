@@ -1,10 +1,13 @@
 package com.bookcentric.component.treasury;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,6 +71,46 @@ public class TreasuryController {
 		response.setSuccess(true);
 		response.setData(bookList);
 
+		return response;
+	}
+	
+	@ResponseBody
+	@GetMapping("/treasury/get/books/all")
+	public Response getAllBooks(@RequestParam Integer pageNumber, @RequestParam String searchText) {
+		Response response = new Response();
+		
+		Page<Books> books = bookService.getAllByPageAndSort(pageNumber, Constants.BOOKS_COUNT_PER_PAGE, searchText);
+		
+		if(books.getSize() > 0) {
+			List<BooksDTO> bookList = new ArrayList<>();
+			
+			User user = userSecurityService.getLoggedInUser();
+			
+			books.forEach(b -> {
+				BooksDTO book = mapper.map(b, BooksDTO.class);
+				if(user != null) {
+					if(user.getReadingQueue().contains(b)) {
+						book.setReadingQueue(true);				
+					}
+					if(user.getWishlist().contains(b)) {
+						book.setWishlist(true);				
+					}
+				}
+				bookList.add(book);
+			});
+			
+			Map<String, Object> data = new HashMap<>();
+			data.put("bookList", bookList);
+			data.put("totalCount", books.getTotalElements());
+			data.put("isFirstPage", books.isFirst());
+			data.put("isLastPage", books.isLast());
+			
+			response.setSuccess(true);
+			response.setDataMap(data);
+		} else {
+			response.setSuccess(false);
+		}
+		
 		return response;
 	}
 }

@@ -9,8 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mysql.jdbc.Blob;
-
 public interface BookRepository extends JpaRepository<Books, Integer> {
 	public List<Books> findByBestSeller(boolean status);
 	public List<Books> findByNewArrival(boolean status);
@@ -21,6 +19,6 @@ public interface BookRepository extends JpaRepository<Books, Integer> {
 	@Query(value = "Select image From books where id = :id", nativeQuery=true)
 	public byte[] getImageById(@Param("id") Integer id);
 	
-	@Query(value = "Select * From books where name like CONCAT('%', :searchText, '%')", nativeQuery=true)
-	public List<Books> getByBookName(@Param("searchText") String searchText);
+	/*@Query(value = "Select * From books where name like CONCAT('%', :searchText, '%')", nativeQuery=true)
+	public List<Books> getByBookName(@Param("searchText") String searchText);*/
 }

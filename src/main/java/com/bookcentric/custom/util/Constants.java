@@ -11,5 +11,7 @@ public class Constants {
 	
 	public static String ACTION_ADD = "add";
 	public static String ACTION_REMOVE = "remove";
+	
+	public static Integer BOOKS_COUNT_PER_PAGE = 24;
 
 }

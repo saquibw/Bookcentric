@@ -2,15 +2,21 @@ package com.bookcentric.component.books;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mysql.jdbc.Blob;
+import com.fasterxml.jackson.databind.cfg.SerializerFactoryConfig;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -87,7 +93,41 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<Books> searchByBookName(String searchText) {
-		return repository.getByBookName(searchText);
+		List<Books> books = repository.findAll();
+		
+		return filterBy(searchText.toLowerCase(), books);
+	}
+	
+	public Page<Books> getAllByPageAndSort(Integer initialCount, Integer totalLimit, String searchText) {
+		Sort sort = Sort.by(Sort.Direction.ASC, "name");
+		Pageable pageable =  PageRequest.of(initialCount, totalLimit, sort);
+		
+		Page<Books> books = repository.findAll(pageable);
+
+		if(!searchText.isEmpty()) {
+			String search = searchText.toLowerCase();
+			
+			List<Books> bookList = filterBy(search, books);
+
+			books = new PageImpl<>(bookList, pageable, bookList.size());
+		}		
+		
+		return books;
+	}
+	
+	private List<Books> filterBy(String searchText, Page<Books> list) {
+		return list
+				.stream()
+				.filter(b -> b.getName().toLowerCase().contains(searchText) || b.getAuthor().getName().toLowerCase().contains(searchText) || b.getGenre().getName().toLowerCase().contains(searchText))
+				.collect(Collectors.toList());
+	}
+	
+	private List<Books> filterBy(String searchText, List<Books> list) {
+		System.out.println(list.size());
+		return list
+				.stream()
+				.filter(b -> b.getName().toLowerCase().contains(searchText) || b.getAuthor().getName().toLowerCase().contains(searchText) || b.getGenre().getName().toLowerCase().contains(searchText))
+				.collect(Collectors.toList());
 	}
 
 }

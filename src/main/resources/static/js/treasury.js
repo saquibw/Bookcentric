@@ -15,6 +15,14 @@ var TreasuryManager = (function() {
 	var specialBooksCount = 0;
 	var specialBookStartIndex = 0;
 	var specialBookEndIndex = 0;
+	
+	var booksPageNumber = 0;
+	var isFirstPage = true;
+	var isLastPage = false;
+	var totalBookLimit = 24;
+	var firstBookNumber, lastBookNumber, totalBookCount;
+	
+	var searchTimer = null;
 
 	function getSpecialBooks(type) {
 		var request = $.ajax({
@@ -36,11 +44,49 @@ var TreasuryManager = (function() {
 				} else {
 					specialBookEndIndex = specialBooksCount-1;
 				}				
-				render();			
+				renderSpecialBooks();			
 			}
 
 		});
 	};
+	
+	function getAllBooks(searchText) {
+		var param = {
+				"pageNumber": booksPageNumber,
+				"searchText": searchText
+		}
+		var request = $.ajax({
+			type: "GET",
+			url: "/treasury/get/books/all",
+			dataType: 'JSON',
+			data: param
+		});
+		
+		request.done(function(response) {
+			if(response.success) {
+				data = response.dataMap;
+				books = data.bookList;
+				totalBookCount = data.totalCount;
+				isFirstPage = data.isFirstPage;
+				isLastPage = data.isLastPage;
+				
+				if(booksPageNumber == 0) {
+					firstBookNumber = booksPageNumber + 1;
+					lastBookNumber = booksPageNumber + books.length;
+				} else {
+					firstBookNumber = (booksPageNumber * totalBookLimit) + 1;
+					lastBookNumber = (firstBookNumber + books.length) - 1;
+				}
+				
+				if(books && books.length > 0) {
+					renderAllBooks(books);
+					$(".totalBookCount").text(totalBookCount);
+					$(".pageBookCount").text(firstBookNumber + "-" + lastBookNumber);
+					$(".pageNumber").text(booksPageNumber+1);
+				}
+			}
+		});
+	}
 	
 	function showSpecialBooks(navigation) {
 						
@@ -72,35 +118,63 @@ var TreasuryManager = (function() {
 			}
 		}
 		
-		render();
+		renderSpecialBooks();
 	}
 	
-	function render() {
-		$(".special-books").empty();
+	function renderSpecialBooks() {
+		let container = $(".special-books");
+		let container_navigation_right = $(".special-books-navigation-right");
+		let container_navigation_left = $(".special-books-navigation-left");
+		let toggle_reading_queue = $(".toggle-reading-queue");
+		let toggle_withlist = $(".toggle-wishlist");
+		
+		container.empty();
 		
 		let left = "<i class='fa fa-angle-left special-books-navigation special-books-navigation-left'></i>";				
 		let right = "<i class='fa fa-angle-right special-books-navigation special-books-navigation-right'></i>";
 		
-		$(".special-books").append(left);
+		container.append(left);
 		for(let i=specialBookStartIndex; i<=specialBookEndIndex; i++) {
-			updateTemplateData(specialBooks[i]);
+			let element = updateTemplateData(specialBooks[i]);
+			
+			container.append(element);
+			emptyTempContainer();
+			
 		}
-		$(".special-books").append(right);
+		container.append(right);
 		
-		$(".special-books-navigation-right").click(function() {
+		container_navigation_right.click(function() {
 			showSpecialBooks(NAVIGATION_FORWARD);
 		});
 		
-		$(".special-books-navigation-left").click(function() {
+		container_navigation_left.click(function() {
 			showSpecialBooks(NAVIGATION_BACKWARD);
 		});
 		
-		$(".toggle-reading-queue").click(function(e) {
+		toggleClickAction(container);
+	}
+	
+	function renderAllBooks(books) {
+		let container = $(".all-books");
+		container.empty();
+		
+		for(let i=0; i<books.length; i++) {
+			let element = updateTemplateData(books[i]);
+			
+			container.append(element);
+			emptyTempContainer();
+		}
+		
+		toggleClickAction(container);
+	}
+	
+	function toggleClickAction(container) {
+		$(container).find(".toggle-reading-queue").click(function(e) {
 			e.preventDefault();
 			toggleList(this, LIST_NAME_READING_QUEUE);
 		});
 		
-		$(".toggle-wishlist").click(function(e) {
+		$(container).find(".toggle-wishlist").click(function(e) {
 			e.preventDefault();
 			toggleList(this, LIST_NAME_WISHLIST);
 		});
@@ -144,9 +218,12 @@ var TreasuryManager = (function() {
 			wishList.addClass(ACTION_ADD);
 			wishListIcon.removeClass("color-red");
 		}
-				
-		$(".special-books").append(temp.html());
-		temp.empty();
+		
+		return temp.html();
+	}
+	
+	function emptyTempContainer() {
+		$("#temp-container").empty();
 	}
 	
 	function toggleList(element, listName) {
@@ -237,6 +314,7 @@ var TreasuryManager = (function() {
 	
 	(function() {
 		getSpecialBooks(TYPE_BEST_SELLER);
+		getAllBooks("");
 		
 		$(".best-seller-selection").click(function(e) {
 			e.preventDefault();
@@ -248,7 +326,36 @@ var TreasuryManager = (function() {
 			getSpecialBooks(TYPE_NEW_ARRIVAL);
 		});
 		
+		$(".browseLeft").click(function(e) {
+			e.preventDefault();
+			if(!isFirstPage) {
+				booksPageNumber--;
+				getAllBooks("");
+			}
+		});
 		
+		$(".browseRight").click(function(e) {
+			e.preventDefault();
+			if(!isLastPage) {
+				booksPageNumber++;
+				getAllBooks("");
+			}
+		});
+		
+		$(".bookSearch").keyup(function(e) {
+			e.preventDefault();
+			
+			let text = $(this).val();
+			
+			if(searchTimer) {
+				clearTimeout(searchTimer);
+				searchTimer = null;
+			}
+						
+			searchTimer = setTimeout(function() {
+				getAllBooks(text);
+			}, 1000);
+		});
 	})();
 
 	return {
