@@ -10,7 +10,11 @@ public interface UserService {
 	
 	public List<User> getAll();
 	
-	public Optional<User> getBy(Integer id);
+	public User getBy(Integer id);
 	
-	public boolean updateStatus(Integer id, String status);
+	public boolean sendUserActivationEmail(User user);
+	
+	public boolean sendUserStatusUpdateEmail(User user);
+	
+	/*public boolean updateStatus(Integer id, String status);*/
 }

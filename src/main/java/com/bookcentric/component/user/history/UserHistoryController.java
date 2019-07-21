@@ -38,7 +38,7 @@ public class UserHistoryController {
 	public ModelAndView getUserHistoryDetails(@PathVariable("id") int id) {
 		ModelAndView model = new ModelAndView("user-details-history");
 		
-		User user = userService.getBy(id).get();
+		User user = userService.getBy(id);
 		
 		UserDTO userDto = mapper.map(user, UserDTO.class);
 		
@@ -50,7 +50,7 @@ public class UserHistoryController {
 	@PostMapping("/user/history/issue")
 	@ResponseBody
 	public Response issueBook(@RequestParam int userId, @RequestParam String bookList) throws JSONException, MySQLIntegrityConstraintViolationException {
-		User user = userService.getBy(userId).get();
+		User user = userService.getBy(userId);
 		JSONArray arr = new JSONArray(bookList);
 		
 		List<UserHistory> userHistoryList = new ArrayList<>();
@@ -64,10 +64,13 @@ public class UserHistoryController {
 			history.setBooks(book);
 			history.setUser(user);
 			history.setIssueDate(LocalDate.now());
+			history.setDueDate(LocalDate.now().plusDays(30));
 			userHistoryList.add(history);
 		}
 		userService.add(user);
 		userHistoryService.addAll(userHistoryList);
+		
+		userHistoryService.sendBookIssueEmail(userHistoryList, user);
 		
 		Response response = new Response();
 		response.setSuccess(true);
@@ -78,7 +81,7 @@ public class UserHistoryController {
 	public ModelAndView getReadingQueue(@PathVariable("id") int userId) {
 		ModelAndView view = new ModelAndView("reading-queue-update");
 		
-		User user = userService.getBy(userId).get();
+		User user = userService.getBy(userId);
 		
 		UserDTO userDto = mapper.map(user, UserDTO.class);
 		

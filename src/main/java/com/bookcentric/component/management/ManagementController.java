@@ -52,7 +52,7 @@ public class ManagementController {
 		
 		List<User> userList = userService.getAll();
 		
-		List<User> activeUserList = userList.stream().filter(c -> Constants.STATUS_ACTIVE.equals(c.getStatus())).collect(Collectors.toList());
+		List<User> activeUserList = userList.stream().filter(c -> Constants.STATUS_ACTIVE.equals(c.getStatus().getName())).collect(Collectors.toList());
 		
 		userView.addObject("pageTitle", "BookCentric - User history");
 		userView.addObject("userList", activeUserList);

@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ import javax.persistence.Table;
 import com.bookcentric.component.books.Books;
 import com.bookcentric.component.user.history.UserHistory;
 import com.bookcentric.component.user.parent.Parent;
+import com.bookcentric.component.user.status.UserStatus;
 import com.bookcentric.component.user.subscription.Subscription;
 
 import lombok.Data;
@@ -44,7 +46,6 @@ public class User {
 	private String membershipId;
 	private Instant dateOfJoining;
 	private Instant dateOfRenewal;
-	private String status;
 	private String deliveryArea;
 	private String paymentMode;
 	private String genre;
@@ -66,4 +67,7 @@ public class User {
 	
 	@OneToMany(mappedBy="user")
 	private List<UserHistory> userHistory;
+	
+	@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="statusId")
+	private UserStatus status;
 }

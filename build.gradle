@@ -34,4 +34,8 @@ dependencies {
 	compile 'mysql:mysql-connector-java'
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile group: 'org.json', name: 'json', version: '20180813'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.1.6.RELEASE'
+	
+	
 }

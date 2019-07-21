@@ -15,3 +15,15 @@ spring:
   profiles:
     active:
     - dev
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    port: 587
+    username: noreply.bookcentric@gmail.com
+    password: bookcentric2019
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

@@ -123,7 +123,6 @@ public class BookServiceImpl implements BookService {
 	}
 	
 	private List<Books> filterBy(String searchText, List<Books> list) {
-		System.out.println(list.size());
 		return list
 				.stream()
 				.filter(b -> b.getName().toLowerCase().contains(searchText) || b.getAuthor().getName().toLowerCase().contains(searchText) || b.getGenre().getName().toLowerCase().contains(searchText))

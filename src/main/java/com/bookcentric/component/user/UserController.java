@@ -3,6 +3,7 @@ package com.bookcentric.component.user;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.tomcat.jni.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +23,11 @@ import com.bookcentric.component.user.parent.Parent;
 import com.bookcentric.component.user.paymentmode.PaymentMode;
 import com.bookcentric.component.user.paymentmode.PaymentModeService;
 import com.bookcentric.component.user.security.UserSecurityService;
+import com.bookcentric.component.user.status.UserStatus;
+import com.bookcentric.component.user.status.UserStatusService;
 import com.bookcentric.component.user.subscription.Subscription;
 import com.bookcentric.component.user.subscription.SubscriptionService;
+import com.bookcentric.component.utils.UtilService;
 import com.bookcentric.custom.util.Constants;
 import com.bookcentric.custom.util.Response;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
@@ -42,6 +46,10 @@ public class UserController {
 	@Autowired BookService bookService;
 
 	@Autowired UserSecurityService userSecurityService;
+	
+	@Autowired UserStatusService userStatusService;
+	
+	@Autowired UtilService utilService;
 
 
 	@GetMapping("/user/registration")
@@ -51,12 +59,14 @@ public class UserController {
 		List<Subscription> subscriptionList = subscriptionService.findAll();
 		List<DeliveryArea> deliveryAreaList = deliveryAreaService.findAll();
 		List<PaymentMode> paymentModeList = paymentModeService.findAll();
+		List<UserStatus> userStatusList = userStatusService.findAll();
 
 		regView.addObject("pageTitle", "Registration page");
 		regView.addObject("user", new User());
 		regView.addObject("subscriptionList", subscriptionList);
 		regView.addObject("areaList", deliveryAreaList);
 		regView.addObject("paymentModeList", paymentModeList);
+		regView.addObject("userStatusList", userStatusList);
 
 		return regView;	
 	}
@@ -64,7 +74,9 @@ public class UserController {
 	@PostMapping(value="/user/add")
 	public String addUser(User user) throws MySQLIntegrityConstraintViolationException {
 
-		user.setStatus(Constants.STATUS_PENDING);
+		UserStatus status = userStatusService.getBy(3);
+		user.setStatus(status);
+		
 		userService.add(user);
 
 		return "redirect:/user/registration";
@@ -73,8 +85,7 @@ public class UserController {
 	@GetMapping("/user/get/{id}")
 	public ModelAndView getUser(@PathVariable("id") int id) {
 		ModelAndView editView = new ModelAndView("user-update");
-		Optional<User> u = userService.getBy(id);
-		User user = u.get();
+		User user = userService.getBy(id);
 
 		if(user.getParent() == null) {
 			user.setParent(new Parent());
@@ -83,23 +94,43 @@ public class UserController {
 		List<Subscription> subscriptionList = subscriptionService.findAll();
 		List<DeliveryArea> deliveryAreaList = deliveryAreaService.findAll();
 		List<PaymentMode> paymentModeList = paymentModeService.findAll();
+		List<UserStatus> userStatusList = userStatusService.findAll();
 
 		editView.addObject("user", user);
 		editView.addObject("subscriptionList", subscriptionList);
 		editView.addObject("areaList", deliveryAreaList);
 		editView.addObject("paymentModeList", paymentModeList);
+		editView.addObject("userStatusList", userStatusList);
+		
 
 		return editView;
 	}
 
 	@PostMapping("/user/update")
 	public String updateUser(User user) throws MySQLIntegrityConstraintViolationException {
+		User dbUser = userService.getBy(user.getId());
+		
+		user.setReadingQueue(dbUser.getReadingQueue());
+		user.setWishlist(dbUser.getWishlist());
+		user.setPassword(dbUser.getPassword());
+				
+		if((dbUser.getPassword() == null || dbUser.getPassword().isEmpty()) && Constants.STATUS_ACTIVE.toLowerCase().equals(user.getStatus().getName().toLowerCase())) {
+			String password = utilService.getAlphaNumericString(6);
+			String encryptedPassword = utilService.encryptPassword(password);
+			user.setPassword(encryptedPassword);
+			 
+			dbUser.setPassword(password);
+			userService.sendUserActivationEmail(dbUser);
+		} else if (!user.getStatus().getName().equalsIgnoreCase(dbUser.getStatus().getName())) {
+			userService.sendUserStatusUpdateEmail(user);
+		} 
+		
 		userService.add(user);
-
+		
 		return "redirect:/management/user";
 	}
 
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping(value="/user/updatestatus", method=RequestMethod.POST)
 	public Response updateStatus(@RequestParam("status") String status, @RequestParam("id") Integer id) {
 		Response response = new Response();
@@ -110,7 +141,7 @@ public class UserController {
 
 		return response;
 
-	}
+	}*/
 
 	@ResponseBody
 	@PostMapping("/user/update/readingqueue")

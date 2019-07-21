@@ -27,7 +27,7 @@
 									<th>Phone</th>
 									<th>Status</th>
 									<th></th>
-									<th></th>
+									<!-- <th></th> -->
 								</tr>
 							</thead>
 							<tbody>
@@ -37,12 +37,12 @@
 									<td th:text="${user.firstName}"></td>
 									<td th:text="${user.lastName}"></td>
 									<td th:text="${user.phone}"></td>
-									<td th:text="${user.status}"></td>
+									<td th:text="${user.status.name}"></td>
 									<td><a class="btn btn-primary btn-sm" th:href="@{'/user/get/' + ${user.id}}">Edit</a></td>
-									<td>
+									<!-- <td>
 										<a class="btn btn-primary btn-sm update-status" href="#" th:if="${user.status} == 'Active'">Deactivate</a>
 										<a class="btn btn-primary btn-sm update-status" href="#" th:unless="${user.status} == 'Active'">Activate</a>
-									</td>
+									</td> -->
 								</tr>
 							</tbody>
 						</table>
@@ -55,7 +55,7 @@
 
 	<section th:insert="fragments/body :: js-container"></section>
 	
-	<script>
+	<!-- <script>
 	$(document).ready(function() {
 		$(".update-status").click(function(e) {
 			e.preventDefault();
@@ -95,7 +95,7 @@
 			
 		});
 	});
-	</script>
+	</script> -->
 </body>
 
 </html>
