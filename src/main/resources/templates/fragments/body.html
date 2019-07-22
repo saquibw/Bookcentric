@@ -60,19 +60,22 @@
 
 	<div th:fragment="management-navbar" class="management-navbar">
 		<ul>
-			<li class="nav-dropdown"><a href="javascript:void(0)"
-				class="dropbtn">User</a>
+			<li class="nav-dropdown"><a href="javascript:void(0)" class="dropbtn">User</a>
 				<div class="dropdown-content">
-					<a href="/management/user">User Management</a> <a
-						href="/management/user/history">User History</a>
-				</div></li>
-			<li class="nav-dropdown"><a href="javascript:void(0)"
-				class="dropbtn">Book</a>
+					<a href="/management/user">User Management</a> 
+					<a href="/management/user/history">User History</a>
+				</div>
+			</li>
+			<li class="nav-dropdown"><a href="javascript:void(0)" class="dropbtn">Book</a>
 				<div class="dropdown-content">
-					<a href="/book/entry">Book Entry</a> <a href="/book/inventory">Book
-						Inventory</a>
-				</div></li>
-			<li><a href="#">Subscription</a></li>
+					<a href="/book/entry">Book Entry</a> <a href="/book/inventory">Book Inventory</a>
+				</div>
+			</li>
+			<li class="nav-dropdown"><a href="javascript:void(0)" class="dropbtn">Subscription</a>
+				<div class="dropdown-content">
+					<a href="/category/view">Category</a>
+				</div>
+			</li>
 		</ul>
 	</div>
 
