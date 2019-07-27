@@ -16,5 +16,7 @@ public interface UserService {
 	
 	public boolean sendUserStatusUpdateEmail(User user);
 	
+	public boolean sendUserRegistrationEmail(User user);
+	
 	/*public boolean updateStatus(Integer id, String status);*/
 }

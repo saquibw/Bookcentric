@@ -57,7 +57,6 @@ public class UserController {
 		ModelAndView regView = new ModelAndView("user-registration");
 
 		List<Subscription> subscriptionList = subscriptionService.findAll();
-		System.out.println(subscriptionList.toString());
 		List<DeliveryArea> deliveryAreaList = deliveryAreaService.findAll();
 		List<PaymentMode> paymentModeList = paymentModeService.findAll();
 		List<UserStatus> userStatusList = userStatusService.findAll();
@@ -79,6 +78,8 @@ public class UserController {
 		user.setStatus(status);
 		
 		userService.add(user);
+		
+		userService.sendUserRegistrationEmail(user);
 
 		return "redirect:/user/registration";
 	}

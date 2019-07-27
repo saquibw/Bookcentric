@@ -102,15 +102,17 @@ public class BookServiceImpl implements BookService {
 		Sort sort = Sort.by(Sort.Direction.ASC, "name");
 		Pageable pageable =  PageRequest.of(initialCount, totalLimit, sort);
 		
-		Page<Books> books = repository.findAll(pageable);
+		Page<Books> books = null;
 
 		if(!searchText.isEmpty()) {
 			String search = searchText.toLowerCase();
 			
-			List<Books> bookList = filterBy(search, books);
+			List<Books> bookList = filterBy(search, repository.findAll());
 
 			books = new PageImpl<>(bookList, pageable, bookList.size());
-		}		
+		} else {
+			books = repository.findAll(pageable);
+		}	
 		
 		return books;
 	}

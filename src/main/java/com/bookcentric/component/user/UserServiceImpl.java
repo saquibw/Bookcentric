@@ -65,6 +65,20 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
+	@Override
+	public boolean sendUserRegistrationEmail(User user) {
+		String to = "bookcentricbd@gmail.com";
+		String subject = "A new user has been registered";
+		
+		StringBuilder text = new StringBuilder();
+		text.append(String.format("User %s %s %s (%s) has completed registration. Please click below to check.", user.getFirstName(), user.getMiddleName(), user.getLastName(), user.getEmail()));
+		text.append("\n\n");
+		text.append("http://localhost:8080/management/user");
+		
+		emailService.sendSimpleEmail(to, subject, text.toString());
+		return true;
+	}
+
 	/*@Override
 	public boolean updateStatus(Integer id, String status) {
 		boolean success = false;
