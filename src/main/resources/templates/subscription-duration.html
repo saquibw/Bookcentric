@@ -17,10 +17,10 @@
 
 				<div class="col-md-8 card management-card left">
 					<div class="card-body">
-						<h1>Plan Duration</h1>
+						<h1>Subscription Duration</h1>
 
 						<!-- Form -->
-						<form th:action="@{/planduration/add}" th:object="${planDuration}" method="post" autocomplete="off">
+						<form th:action="@{/subscriptionduration/add}" th:object="${subscriptionDuration}" method="post" autocomplete="off">
 
 							<div class="row">
 								<div class="form-group col">
@@ -52,11 +52,11 @@
 							</thead>
 							
 							<tbody>
-								<tr th:each="p : ${planDurationList}">
+								<tr th:each="p : ${subscriptionDurationList}">
 									<td th:text="${p.name}"></td>
 									<td th:text="${p.durationInDays}"></td>
-									<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/planduration/edit/' + ${p.id}}"></a></td>
-									<td><a class="fa fa-trash delete-icon" th:href="@{'/planduration/delete/' + ${p.id}}"></a></td>
+									<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/subscriptionduration/edit/' + ${p.id}}"></a></td>
+									<td><a class="fa fa-trash delete-icon" th:href="@{'/subscriptionduration/delete/' + ${p.id}}"></a></td>
 								</tr>
 							</tbody>
 						</table>

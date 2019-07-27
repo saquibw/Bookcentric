@@ -17,18 +17,18 @@
 
 				<div class="col-md-8 card management-card left">
 					<div class="card-body">
-						<h1>Plan Duration</h1>
+						<h1>Borrow Limit</h1>
 
 						<!-- Form -->
-						<form th:action="@{/planduration/add}" th:object="${planDuration}" method="post" autocomplete="off">
+						<form th:action="@{/borrowlimit/add}" th:object="${borrowLimit}" method="post" autocomplete="off">
 
 							<div class="row">
 								<div class="form-group col">
-									<label>Duration name*</label> <input type="text" class="form-control" th:field="*{name}" required>
+									<label>Borrow limit (each time)*</label> <input type="number" class="form-control" th:field="*{eachTime}" required>
 								</div>
 								
 								<div class="form-group col">
-									<label>Duration (in days)*</label> <input type="number" class="form-control" th:field="*{durationInDays}" required>
+									<label>Borrow limit (Per month)*</label> <input type="number" class="form-control" th:field="*{perMonth}" required>
 								</div>
 								
 								<div class="form-group col hidden">
@@ -44,19 +44,19 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th>Duration name</th>
-									<th>Duration (in days)</th>
+									<th>Borrow limit (each time)</th>
+									<th>Borrow limit (Per month)</th>
 									<th></th>
 									<th></th>
 								</tr>
 							</thead>
 							
 							<tbody>
-								<tr th:each="p : ${planDurationList}">
-									<td th:text="${p.name}"></td>
-									<td th:text="${p.durationInDays}"></td>
-									<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/planduration/edit/' + ${p.id}}"></a></td>
-									<td><a class="fa fa-trash delete-icon" th:href="@{'/planduration/delete/' + ${p.id}}"></a></td>
+								<tr th:each="b : ${borrowLimitList}">
+									<td th:text="${b.eachTime}"></td>
+									<td th:text="${b.perMonth}"></td>
+									<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/borrowlimit/edit/' + ${b.id}}"></a></td>
+									<td><a class="fa fa-trash delete-icon" th:href="@{'/borrowlimit/delete/' + ${b.id}}"></a></td>
 								</tr>
 							</tbody>
 						</table>

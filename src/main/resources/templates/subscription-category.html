@@ -15,7 +15,7 @@
 
 				<div th:insert="fragments/body :: management-navbar"></div>
 
-				<div class="col-md-8 card management-card left">
+				<div class="col-md-10 card management-card left">
 					<div class="card-body">
 						<h1>Category</h1>
 
@@ -33,13 +33,50 @@
 							
 							<div class="row">
 								<div class="form-group col">
-									<input type="checkbox" th:name="underAge" th:value="underAge" th:field="*{underAge}"><label>Please check if this is an under age category</label>
+									<label>Borrow limit*</label> 
+									<select class="form-control" th:field=*{borrowLimit} required>
+										<option th:each="borrowLimit : ${borrowLimitList}" th:value="${borrowLimit.id}" 
+										th:text="'Each time-' + ${borrowLimit.eachTime} + ', Per month-' + ${borrowLimit.perMonth}">
+									</select>
+								</div>
+								
+								<div class="form-group col">
+									<label>Plan duration*</label> 
+									<select class="form-control" th:field=*{planDuration} required>
+										<option th:each="planDuration : ${planDurationList}" 
+										th:value="${planDuration.id}" th:text="${planDuration.name}">
+									</select>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col">
+									<label>Security amount*</label> <input type="number" class="form-control" th:field="*{securityAmount}" required>
 								</div>
 								
 								<div class="form-group col hidden">
 									<input type="text" class="form-control" th:field="*{id}">
-								</div>
+								</div>	
+							</div>
 							
+							<div class="row">
+								<div class="form-group col">
+									<input type="checkbox" th:name="underAge" th:value="underAge" th:field="*{underAge}"><label>Please check if this is an under age category</label>
+								</div>
+								
+								<div class="form-group col">
+									<input type="checkbox" th:name="family" th:value="family" th:field="*{family}"><label>Please check if this is a family category</label>
+								</div>						
+							</div>
+							
+							<div class="row">
+								<div class="form-group col">
+									<input type="checkbox" th:name="cancellationPolicy" 
+									th:value="cancellationPolicy" th:field="*{cancellationPolicy}">
+									<label>Please check if cancellation policy is applicable</label>
+								</div>
+								
+								
 							</div>
 
 							<button type="submit" class="btn btn-primary">Save</button>
@@ -52,7 +89,12 @@
 								<tr>
 									<th>Category name</th>
 									<th>Category description</th>
+									<th>Borrow limit</th>
+									<th>Plan duration</th>
+									<th>Security amount</th>
+									<th>Cancellation policy</th>
 									<th>Under age</th>
+									<th>Family</th>
 									<th></th>
 									<th></th>
 								</tr>
@@ -62,7 +104,12 @@
 								<tr th:each="category : ${categoryList}">
 									<td th:text="${category.name}"></td>
 									<td th:text="${category.description}"></td>
+									<td th:text="'Each time-' + ${category.borrowLimit.eachTime} + ', Per month-' + ${category.borrowLimit.perMonth}"></td>
+									<td th:text="${category.planDuration.name}"></td>
+									<td th:text="${category.securityAmount}"></td>
+									<td th:text="${category.cancellationPolicy}"></td>
 									<td th:text="${category.underAge}"></td>
+									<td th:text="${category.family}"></td>
 									<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/category/edit/' + ${category.id}}"></a></td>
 									<td><a class="fa fa-trash delete-icon" th:href="@{'/category/delete/' + ${category.id}}"></a></td>
 								</tr>

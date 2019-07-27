@@ -72,7 +72,7 @@
 				<select class="form-control" th:field=*{subscription} required>
 					<option th:each="subscription : ${subscriptionList}"
 						th:value="${subscription.id}"
-						th:text="${subscription.category.name}">
+						th:text="${subscription.category.name} + ' (' + ${subscription.subscriptionDuration.name} + ')'">
 				</select>
 			</div>
 		</div>

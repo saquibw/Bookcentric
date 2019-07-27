@@ -1,4 +1,4 @@
-package com.bookcentric.component.user.planduration;
+package com.bookcentric.component.subscription.planduration;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

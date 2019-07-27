@@ -1,4 +1,4 @@
-package com.bookcentric.component.user.planduration;
+package com.bookcentric.component.subscription.planduration;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +9,9 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="planduration")
+@Table(name="plan_duration")
 public class PlanDuration {
+	
 	@Id @GeneratedValue
 	private Integer id;
 	private String name;

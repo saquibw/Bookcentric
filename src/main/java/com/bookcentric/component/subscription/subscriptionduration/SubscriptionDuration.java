@@ -1,4 +1,4 @@
-package com.bookcentric.component.user.category;
+package com.bookcentric.component.subscription.subscriptionduration;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +9,11 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="category")
-public class Category {
+@Table(name="subscription_duration")
+public class SubscriptionDuration {
+	
 	@Id @GeneratedValue
 	private Integer id;
 	private String name;
-	private String description;
-	private Boolean underAge;
+	private Integer durationInDays;
 }

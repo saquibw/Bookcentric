@@ -1,4 +1,4 @@
-package com.bookcentric.component.user.subscription;
+package com.bookcentric.component.subscription;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

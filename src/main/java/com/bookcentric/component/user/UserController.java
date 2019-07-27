@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bookcentric.component.books.BookService;
 import com.bookcentric.component.books.Books;
+import com.bookcentric.component.subscription.Subscription;
+import com.bookcentric.component.subscription.SubscriptionService;
 import com.bookcentric.component.user.deliveryarea.DeliveryArea;
 import com.bookcentric.component.user.deliveryarea.DeliveryAreaService;
 import com.bookcentric.component.user.parent.Parent;
@@ -25,8 +27,6 @@ import com.bookcentric.component.user.paymentmode.PaymentModeService;
 import com.bookcentric.component.user.security.UserSecurityService;
 import com.bookcentric.component.user.status.UserStatus;
 import com.bookcentric.component.user.status.UserStatusService;
-import com.bookcentric.component.user.subscription.Subscription;
-import com.bookcentric.component.user.subscription.SubscriptionService;
 import com.bookcentric.component.utils.UtilService;
 import com.bookcentric.custom.util.Constants;
 import com.bookcentric.custom.util.Response;
@@ -57,6 +57,7 @@ public class UserController {
 		ModelAndView regView = new ModelAndView("user-registration");
 
 		List<Subscription> subscriptionList = subscriptionService.findAll();
+		System.out.println(subscriptionList.toString());
 		List<DeliveryArea> deliveryAreaList = deliveryAreaService.findAll();
 		List<PaymentMode> paymentModeList = paymentModeService.findAll();
 		List<UserStatus> userStatusList = userStatusService.findAll();

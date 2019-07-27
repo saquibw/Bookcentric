@@ -19,10 +19,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.bookcentric.component.books.Books;
+import com.bookcentric.component.subscription.Subscription;
 import com.bookcentric.component.user.history.UserHistory;
 import com.bookcentric.component.user.parent.Parent;
 import com.bookcentric.component.user.status.UserStatus;
-import com.bookcentric.component.user.subscription.Subscription;
 
 import lombok.Data;
 
