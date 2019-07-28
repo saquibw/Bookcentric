@@ -71,4 +71,22 @@ public class SubscriptionController {
 		
 		return "redirect:/subscription/view";
 	}
+	
+	@GetMapping("/subscription/view/plans")
+	public ModelAndView viewSubscriptionPlans() {
+		ModelAndView view = new ModelAndView("subscription-plans");
+		
+		List<Subscription> subscriptionList = subscriptionService.findAll();
+		List<Category> categoryList = categoryService.findAll();
+		
+		List<SubscriptionResponse> plans = subscriptionService.getSubscriptionPlansData(subscriptionList, categoryList);
+		List<SubscriptionResponse> childrenPlans = subscriptionService.getSubscriptionChildrenPlansData(subscriptionList, categoryList);
+		List<SubscriptionResponse> familyPlans = subscriptionService.getSubscriptionFamilyPlansData(subscriptionList, categoryList);
+		
+		view.addObject("plans", plans);
+		view.addObject("childrenPlans", childrenPlans);
+		view.addObject("familyPlans", familyPlans);
+		
+		return view;
+	}
 }

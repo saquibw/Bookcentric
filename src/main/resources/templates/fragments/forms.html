@@ -68,7 +68,7 @@
 			</div>
 
 			<div class="form-group col">
-				<label>Subscription*</label> 
+				<label>Subscription*</label> <a th:href="@{/subscription/view/plans}" target="_blank">View plans</a>
 				<select class="form-control" th:field=*{subscription} required>
 					<option th:each="subscription : ${subscriptionList}"
 						th:value="${subscription.id}"

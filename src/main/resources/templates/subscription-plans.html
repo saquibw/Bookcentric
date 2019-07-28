@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<!-- Main body -->
+		<div class="container-fluid">
+
+			<div class="row justify-content-md-center top-space">
+
+				<!-- <div th:insert="fragments/body :: management-navbar"></div> -->
+
+				<div class="col-md-10 card management-card left">
+					<div class="card-body">
+						<h1>Subscription Plans</h1>
+						
+						<table class="table" border="1">
+							<thead>
+								<tr>
+									<th>Subscription Plan</th>
+									<th>Books borrowed at a time</th>
+									<th>Limit per month</th>
+									<th>Duration</th>
+									<th>Security Deposit BDT (Refundable upon cancellation)</th>
+									<th>Monthly BDT</th>
+									<th>Half-Yearly BDT</th>
+									<th>Yearly BDT</th>
+									<th>Cancellation any time</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr th:each="plan : ${plans}">
+									<td th:text="${plan.name}"></td>
+									<td th:text="${plan.limitEachTime}"></td>
+									<td th:text="${plan.limitPerMonth}"></td>
+									<td th:text="${plan.duration}"></td>
+									<td th:text="${plan.securityAmount}"></td>
+									<td th:text="${plan.monthlyAmount}"></td>
+									<td th:text="${plan.halfYearlyAmount}"></td>
+									<td th:text="${plan.yearlyAmount}"></td>
+									<td th:text="${plan.cancellationPolicy}"></td>
+								</tr>
+							</tbody>
+						</table>
+						
+						<h1>Children's Subscription Plans</h1>
+						
+						<table class="table" border="1">
+							<thead>
+								<tr>
+									<th>Subscription Plan</th>
+									<th>Books borrowed at a time</th>
+									<th>Limit per month</th>
+									<th>Duration</th>
+									<th>Security Deposit BDT (Refundable upon cancellation)</th>
+									<th>Monthly BDT</th>
+									<th>Half-Yearly BDT</th>
+									<th>Yearly BDT</th>
+									<th>Cancellation any time</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr th:each="plan : ${childrenPlans}">
+									<td th:text="${plan.name}"></td>
+									<td th:text="${plan.limitEachTime}"></td>
+									<td th:text="${plan.limitPerMonth}"></td>
+									<td th:text="${plan.duration}"></td>
+									<td th:text="${plan.securityAmount}"></td>
+									<td th:text="${plan.monthlyAmount}"></td>
+									<td th:text="${plan.halfYearlyAmount}"></td>
+									<td th:text="${plan.yearlyAmount}"></td>
+									<td th:text="${plan.cancellationPolicy}"></td>
+								</tr>
+							</tbody>
+						</table>
+						
+						<h1>Family Subscription Plans</h1>
+						
+						<table class="table" border="1">
+							<thead>
+								<tr>
+									<th>Subscription Plan</th>
+									<th>Books borrowed at a time</th>
+									<th>Limit per month</th>
+									<th>Duration</th>
+									<th>Security Deposit BDT (Refundable upon cancellation)</th>
+									<th>Monthly BDT</th>
+									<th>Half-Yearly BDT</th>
+									<th>Yearly BDT</th>
+									<th>Cancellation any time</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr th:each="plan : ${familyPlans}">
+									<td th:text="${plan.name}"></td>
+									<td th:text="${plan.limitEachTime}"></td>
+									<td th:text="${plan.limitPerMonth}"></td>
+									<td th:text="${plan.duration}"></td>
+									<td th:text="${plan.securityAmount}"></td>
+									<td th:text="${plan.monthlyAmount}"></td>
+									<td th:text="${plan.halfYearlyAmount}"></td>
+									<td th:text="${plan.yearlyAmount}"></td>
+									<td th:text="${plan.cancellationPolicy}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+			</div>
+			<!--/row -->
+		</div>
+		<!--/container-->
+	</div>
+
+	<!-- <section th:insert="fragments/body :: js-container"></section> -->
+
+</body>
+</html>
