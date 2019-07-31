@@ -31,5 +31,5 @@ public interface BookService {
 	
 	public void updateCount(BooksDTO book);
 	
-	public Page<Books> getAllByPageAndSort(Integer initialCount, Integer totalLimit, String searchText); 
+	public Page<Books> getAllByPageAndSort(Integer pageNumber, Integer pageSize, String searchText); 
 }

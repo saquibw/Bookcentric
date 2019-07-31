@@ -2,7 +2,6 @@ package com.bookcentric.component.books;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,8 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.fasterxml.jackson.databind.cfg.SerializerFactoryConfig;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -55,6 +52,7 @@ public class BookServiceImpl implements BookService {
 		bookList.forEach(b -> {
 			b.setUserHistory(b.getUserHistory().stream().filter(u -> u.getReturnDate() == null).collect(Collectors.toList()));
 			updateCount(b);
+			b.setAuthorName(b.getAuthor().getName());
 		});
 		return bookList;
 	}
@@ -98,9 +96,10 @@ public class BookServiceImpl implements BookService {
 		return filterBy(searchText.toLowerCase(), books);
 	}
 	
-	public Page<Books> getAllByPageAndSort(Integer initialCount, Integer totalLimit, String searchText) {
+	@Override
+	public Page<Books> getAllByPageAndSort(Integer pageNumber, Integer pageSize, String searchText) {
 		Sort sort = Sort.by(Sort.Direction.ASC, "name");
-		Pageable pageable =  PageRequest.of(initialCount, totalLimit, sort);
+		Pageable pageable =  PageRequest.of(pageNumber, pageSize, sort);
 		
 		Page<Books> books = null;
 

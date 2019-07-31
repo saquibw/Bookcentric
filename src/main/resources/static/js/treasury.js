@@ -19,7 +19,7 @@ var TreasuryManager = (function() {
 	var booksPageNumber = 0;
 	var isFirstPage = true;
 	var isLastPage = false;
-	var totalBookLimit = 24;
+	var totalBookLimit = 30;
 	var firstBookNumber, lastBookNumber, totalBookCount;
 	
 	var searchTimer = null;
@@ -353,6 +353,13 @@ var TreasuryManager = (function() {
 			}
 						
 			searchTimer = setTimeout(function() {
+				firstBookNumber = 0;
+				lastBookNumber = 0;
+				totalBookCount = 0;
+				booksPageNumber = 0;
+				isFirstPage = true;
+				isLastPage = false;
+								
 				getAllBooks(text);
 			}, 1000);
 		});

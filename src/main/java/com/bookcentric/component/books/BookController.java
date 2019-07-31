@@ -2,13 +2,16 @@ package com.bookcentric.component.books;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +32,7 @@ import com.bookcentric.component.books.publisher.PublisherService;
 import com.bookcentric.component.user.User;
 import com.bookcentric.component.user.UserService;
 import com.bookcentric.component.user.security.UserSecurityService;
+import com.bookcentric.custom.util.Constants;
 import com.bookcentric.custom.util.Response;
 
 @Controller
@@ -73,14 +77,11 @@ public class BookController {
 	}
 
 	@GetMapping("/book/inventory")
-	public ModelAndView getbooks() {
+	public ModelAndView getInventoryView() {
 		ModelAndView bookView = new ModelAndView("book-inventory");
 
-		List<Books> books = bookService.getAll();
-		List<BooksDTO> bookList = bookService.getFilterdHistoryByUnreturnedBooks(bookService.getFrom(books));	
-
 		bookView.addObject("pageTitle", "BookCentric - Book inventory");
-		bookView.addObject("books", bookList);
+		//bookView.addObject("books", bookList);
 
 		return bookView;
 	}
@@ -154,7 +155,7 @@ public class BookController {
 		return response;
 	}
 
-	@GetMapping("book/get/{id}")
+	@GetMapping("/book/get/{id}")
 	public ModelAndView getBookView(@PathVariable int id) {
 		ModelAndView bookView = new ModelAndView("book");
 
@@ -178,5 +179,29 @@ public class BookController {
 		return bookView;
 	}
 
+	@ResponseBody
+	@GetMapping("/book/get/all")
+	public Response getAllBooks(@RequestParam Integer pageNumber, @RequestParam String searchText) {
+		Response response = new Response();
+		
+		Page<Books> books = bookService.getAllByPageAndSort(pageNumber, Constants.BOOKS_COUNT_PER_PAGE, searchText);
+		
+		if(books.getSize() > 0) {
+			List<BooksDTO> bookList = bookService.getFilterdHistoryByUnreturnedBooks(bookService.getFrom(books.getContent()));
+			
+			Map<String, Object> data = new HashMap<>();
+			data.put("bookList", bookList);
+			data.put("totalCount", books.getTotalElements());
+			data.put("isFirstPage", books.isFirst());
+			data.put("isLastPage", books.isLast());
+			
+			response.setSuccess(true);
+			response.setDataMap(data);
+		} else {
+			response.setSuccess(false);
+		}
+		
+		return response;
+	}
 
 }

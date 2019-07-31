@@ -17,6 +17,15 @@
 					<div class="card-body">
 						<h1>Book Inventory</h1>
 						
+						<div class="left section-text mt-10">Showing <label class="pageBookCount"></label> of <label class="totalBookCount"></label>	results</div>
+						
+						<div class="right">
+							<form class="form-inline">
+								<i class="fa fa-search" aria-hidden="true"></i> 
+								<input class="form-control ml-3 bookSearch" type="text" placeholder="Book, Author, Genre, Tag" aria-label="Search">
+							</form>
+						</div>
+						
 						<table class="table">
 							<thead>
 								<tr>
@@ -33,20 +42,17 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="book : ${books}">
-									<td class="hidden" th:text="${book.id}"></td>
-									<td><a th:href="@{'/book/get/' + ${book.id}}"><img th:src="@{'/get/image/' + ${book.id}}" height="42" width="42"></a></td>
-									<td th:text="${book.code}"></td>
-									<td><a th:text="${book.name}" class="color-black" th:href="@{'/book/get/' + ${book.id}}"></a></td>
-									<td th:text="${book.author.name}"></td>
-									<td th:text="${book.count}"></td>
-									<td th:text="${book.issuedCount}"></td>
-									<td th:text="${book.remainingCount}"></td>
-									<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/book/view/' + ${book.id}}"></a></td>
-									<td><a class="fa fa-trash delete-icon" href="javascript:void(0)"></a></td>
-								</tr>
+								
 							</tbody>
 						</table>
+						
+						<!-- Pagination -->
+                    	<div class="pagination left margin-top-10px">
+                        	<a href="javascript:void(0)" class="browseLeft"><i class="fa fa-angle-left"></i></a>
+                        	<a href="javascript:void(0)" class="active pageNumber"><label></label></a>
+                        	<a href="javascript:void(0)" class="browseRight"><i class="fa fa-angle-right"></i></a>
+                    	</div>
+                    <!-- End Pagination -->
 					</div>
 				</div>
 				
@@ -58,30 +64,153 @@
 	
 	<script>
 		$(document).ready(function() {
-			$(".delete-icon").click(function(e) {
-				e.preventDefault();
-				
-				var currentRow = $(this).closest('tr');
-				var id = currentRow.find("td:eq(0)").text();
+			var booksPageNumber = 0;
+			var isFirstPage = true;
+			var isLastPage = false;
+			var totalBookLimit = 30;
+			var firstBookNumber, lastBookNumber, totalBookCount;
+			var searchTimer = null;
+			
+			function getAllBooks(searchText) {
+				var param = {
+						"pageNumber": booksPageNumber,
+						"searchText": searchText
+				}
 				
 				var request = $.ajax({
-					type: "POST",
-					url: "/book/delete",
+					type: "GET",
+					url: "/book/get/all",
 					dataType: 'JSON',
-					data: {
-						"id": id
-					}
+					data: param
 				});
 				
 				request.done(function(response) {
 					if(response.success) {
-						$(currentRow).remove();
-					} else {
-						alert("Book deletion failed. Please try again.");
+						data = response.dataMap;
+						books = data.bookList;
+						totalBookCount = data.totalCount;
+						isFirstPage = data.isFirstPage;
+						isLastPage = data.isLastPage;
+						
+						if(booksPageNumber == 0) {
+							firstBookNumber = booksPageNumber + 1;
+							lastBookNumber = booksPageNumber + books.length;
+						} else {
+							firstBookNumber = (booksPageNumber * totalBookLimit) + 1;
+							lastBookNumber = (firstBookNumber + books.length) - 1;
+						}
+						
+						if(books && books.length > 0) {
+							render(books);
+							$(".totalBookCount").text(totalBookCount);
+							$(".pageBookCount").text(firstBookNumber + "-" + lastBookNumber);
+							$(".pageNumber").text(booksPageNumber+1);
+							
+							attachDeleteListener();
+						}
 					}
 				});
+			}
+			
+			function getTableRow(book) {
+				var tr = "<tr>";
+				
+				tr += "<td class='hidden'>" + book.id + "</td>";
+				tr += "<td><a href=/book/get/" + book.id.toString() + " target='_blank'><img src=/get/image/" + book.id + " height=42 width=42></a></td>";
+				tr += "<td>" + book.code + "</td>";
+				tr += "<td><a class='color-black' href=/book/get/" + book.id + " target='_blank'>" + book.name + "</a></td>";
+				tr += "<td>" + book.authorName + "</td>";
+				tr += "<td>" + book.count + "</td>";
+				tr += "<td>" + book.issuedCount + "</td>";
+				tr += "<td>" + book.remainingCount + "</td>";
+				tr += "<td><a class='fa fa-edit edit-icon color-green' href=/book/view/" + book.id + "></a></td>";
+				tr += "<td><a class='fa fa-trash delete-icon' href='javascript:void(0)'></a></td>";
+				
+				tr += "</tr>";
+				
+				return tr;
+			}
+			
+			function render(books) {
+				var container = $(".table tbody");
+				container.empty();
+				
+				$.each(books, function(key, book) {
+					var row = getTableRow(book);
+					container.append(row);
+				});
+			}
+			
+			function attachDeleteListener(element) {
+				$(".table tbody").find(".delete-icon").click(function(e) {
+					e.preventDefault();
+					
+					var currentRow = $(this).closest('tr');
+					var id = currentRow.find("td:eq(0)").text();
+					
+					var request = $.ajax({
+						type: "POST",
+						url: "/book/delete",
+						dataType: 'JSON',
+						data: {
+							"id": id
+						}
+					});
+					
+					request.done(function(response) {
+						if(response.success) {
+							$(currentRow).remove();
+							
+							$(".totalBookCount").text(--totalBookCount);
+							$(".pageBookCount").text(firstBookNumber + "-" + (--lastBookNumber));
+						} else {
+							alert("Book deletion failed. Please try again.");
+						}
+					});
+				});
+			}			
+			
+			$(".browseLeft").click(function(e) {
+				e.preventDefault();
+				if(!isFirstPage) {
+					booksPageNumber--;
+					getAllBooks("");
+				}
 			});
 			
+			$(".browseRight").click(function(e) {
+				e.preventDefault();
+				if(!isLastPage) {
+					booksPageNumber++;
+					getAllBooks("");
+				}
+			});
+			
+			$(".bookSearch").keyup(function(e) {
+				e.preventDefault();
+				
+				let text = $(this).val();
+				
+				if(searchTimer) {
+					clearTimeout(searchTimer);
+					searchTimer = null;
+				}
+							
+				searchTimer = setTimeout(function() {
+					firstBookNumber = 0;
+					lastBookNumber = 0;
+					totalBookCount = 0;
+					booksPageNumber = 0;
+					isFirstPage = true;
+					isLastPage = false;
+									
+					getAllBooks(text);
+				}, 1000);
+			});
+			
+			(function() {
+				getAllBooks("");
+			})();
 		});
 	</script>
 	
