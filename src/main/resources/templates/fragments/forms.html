@@ -180,7 +180,8 @@
 		<div class="row">
 			<div class="form-group col">
 				<label>Author*</label> 
-				<select class="form-control" th:field=*{author} required>
+				<select class="form-control selectpicker" th:field=*{author} required multiple>
+					<option value="" disabled selected>Select author</option>
 					<option th:each="author : ${authorList}"
 						th:value="${author.id}"
 						th:text="${author.name}">
@@ -189,7 +190,8 @@
 		
 			<div class="form-group col">
 				<label>Publisher*</label> 
-				<select class="form-control" th:field=*{publisher} required>
+				<select class="form-control selectpicker" th:field=*{publisher} required multiple>
+					<option value="" disabled selected>Select publisher</option>
 					<option th:each="publisher : ${publisherList}"
 						th:value="${publisher.id}"
 						th:text="${publisher.name}">
@@ -212,7 +214,8 @@
 		<div class="row">
 			<div class="form-group col">
 				<label>Genre*</label> 
-				<select class="form-control" th:field=*{genre} required>
+				<select class="form-control selectpicker" th:field=*{genre} required multiple>
+					<option value="" disabled selected>Select genre</option>
 					<option th:each="genre : ${genreList}"
 						th:value="${genre.id}"
 						th:text="${genre.name}">

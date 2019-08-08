@@ -164,3 +164,9 @@
 .font-medium {
 	font-size: 1.5em !important;
 }
+
+.select-picker-button {
+	border: 1px solid #ced4da;
+    background: #fff;
+    color: #495057;
+}

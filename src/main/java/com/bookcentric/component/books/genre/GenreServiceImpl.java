@@ -11,8 +11,23 @@ public class GenreServiceImpl implements GenreService {
 	@Autowired GenreRepository repository;
 
 	@Override
-	public List<Genre> getAll() {
+	public List<Genre> findAll() {
 		return repository.findAll();
+	}
+
+	@Override
+	public Genre findBy(Integer id) {
+		return repository.getOne(id);
+	}
+
+	@Override
+	public void save(Genre genre) {
+		repository.save(genre);
+	}
+
+	@Override
+	public void delete(Genre genre) {
+		repository.delete(genre);
 	}
 
 }

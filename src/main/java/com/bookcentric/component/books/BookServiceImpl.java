@@ -52,7 +52,6 @@ public class BookServiceImpl implements BookService {
 		bookList.forEach(b -> {
 			b.setUserHistory(b.getUserHistory().stream().filter(u -> u.getReturnDate() == null).collect(Collectors.toList()));
 			updateCount(b);
-			b.setAuthorName(b.getAuthor().getName());
 		});
 		return bookList;
 	}
@@ -116,17 +115,20 @@ public class BookServiceImpl implements BookService {
 		return books;
 	}
 	
-	private List<Books> filterBy(String searchText, Page<Books> list) {
+	/*private List<Books> filterBy(String searchText, Page<Books> list) {
 		return list
 				.stream()
-				.filter(b -> b.getName().toLowerCase().contains(searchText) || b.getAuthor().getName().toLowerCase().contains(searchText) || b.getGenre().getName().toLowerCase().contains(searchText))
+				.filter(b -> b.getName().toLowerCase().contains(searchText) || b.getAuthorName().toLowerCase().contains(searchText) || b.getGenreName().toLowerCase().contains(searchText))
 				.collect(Collectors.toList());
-	}
+	}*/
 	
 	private List<Books> filterBy(String searchText, List<Books> list) {
 		return list
 				.stream()
-				.filter(b -> b.getName().toLowerCase().contains(searchText) || b.getAuthor().getName().toLowerCase().contains(searchText) || b.getGenre().getName().toLowerCase().contains(searchText))
+				.filter(b -> b.getName().toLowerCase().contains(searchText) 
+						|| b.getAuthorName().toLowerCase().contains(searchText) 
+						|| b.getGenreName().toLowerCase().contains(searchText) 
+						/*|| b.getPublisherName().toLowerCase().contains(searchText)*/)
 				.collect(Collectors.toList());
 	}
 

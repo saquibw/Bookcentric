@@ -52,9 +52,9 @@ public class BookController {
 		ModelAndView bookView = new ModelAndView("book-entry");
 
 		Books book = new Books();
-		List<Author> authorList = authorService.getAll();
-		List<Publisher> publisherList = publisherService.getAll();
-		List<Genre> genreList = genreService.getAll();
+		List<Author> authorList = authorService.findAll();
+		List<Publisher> publisherList = publisherService.findAll();
+		List<Genre> genreList = genreService.findAll();
 
 		bookView.addObject("pageTitle", "BookCentric - Book entry");
 		bookView.addObject("book", book);
@@ -91,9 +91,9 @@ public class BookController {
 		ModelAndView bookView = new ModelAndView("book-update");
 
 		Books book = bookService.getBy(id);
-		List<Author> authorList = authorService.getAll();
-		List<Publisher> publisherList = publisherService.getAll();
-		List<Genre> genreList = genreService.getAll();
+		List<Author> authorList = authorService.findAll();
+		List<Publisher> publisherList = publisherService.findAll();
+		List<Genre> genreList = genreService.findAll();
 
 		bookView.addObject("pageTitle", "BookCentric - Book update");
 		bookView.addObject("book", book);
@@ -163,6 +163,7 @@ public class BookController {
 
 		BooksDTO book = mapper.map(books, BooksDTO.class);
 		bookService.updateCount(book);
+		book.setAuthorName(books.getAuthorName());
 		User user = userSecurityService.getLoggedInUser();
 
 		if(user != null) {

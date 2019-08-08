@@ -21,7 +21,7 @@ import lombok.Data;
 @Table(name="subscription")
 public class Subscription {
 	
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;	
 	private Integer price;
 	

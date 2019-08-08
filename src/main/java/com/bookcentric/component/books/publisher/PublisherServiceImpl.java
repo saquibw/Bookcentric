@@ -11,9 +11,24 @@ public class PublisherServiceImpl implements PublisherService{
 	@Autowired PublisherRepository repository;
 
 	@Override
-	public List<Publisher> getAll() {
+	public List<Publisher> findAll() {
 
 		return repository.findAll();
+	}
+
+	@Override
+	public Publisher findBy(Integer id) {
+		return repository.getOne(id);
+	}
+
+	@Override
+	public void save(Publisher publisher) {
+		repository.save(publisher);
+	}
+
+	@Override
+	public void delete(Publisher publisher) {
+		repository.delete(publisher);
 	}
 
 }

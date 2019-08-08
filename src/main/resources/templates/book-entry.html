@@ -39,6 +39,15 @@
 	</div>
 
 	<section th:insert="fragments/body :: js-container"></section>
+	
+	<script>
+		$(document).ready(function() {
+			setTimeout(function() {
+				$(".dropdown").find("button").addClass("select-picker-button");
+			},500);
+			
+		});
+	</script>
 
 </body>
 </html>

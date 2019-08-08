@@ -33,15 +33,14 @@ public class BorrowLimitController {
 	}
 	
 	@PostMapping("/borrowlimit/add")
-	public String saveborrowLimit(BorrowLimit borrowLimit) {
-		System.out.println(borrowLimit.toString());
+	public String saveBorrowLimit(BorrowLimit borrowLimit) {
 		borrowLimitService.save(borrowLimit);
 		
 		return "redirect:/borrowlimit/view";
 	}
 	
 	@GetMapping("/borrowlimit/delete/{id}")
-	public String deleteborrowLimit(@PathVariable(name="id") Integer id) {
+	public String deleteBorrowLimit(@PathVariable(name="id") Integer id) {
 		BorrowLimit borrowLimit = borrowLimitService.findBy(id);
 		borrowLimitService.delete(borrowLimit);
 		
