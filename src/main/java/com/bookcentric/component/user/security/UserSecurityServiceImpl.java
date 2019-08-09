@@ -14,7 +14,7 @@ public class UserSecurityServiceImpl implements UserSecurityService{
 	@Override
 	public User getLoggedInUser() {
 
-		return userService.getBy(16);
+		return userService.getBy(1);
 	}
 
 }

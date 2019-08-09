@@ -11,10 +11,10 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/bookcentric
     username: root
-    password: root   
+    password: ${BOOKCENTRIC_JDBC_DATASOURCE_PASSWORD}
   profiles:
     active:
-    - dev
+    - ${BOOKCENTRIC_APP_PROFILE_ACTIVE}
   mail:
     default-encoding: UTF-8
     host: smtp.gmail.com
@@ -27,3 +27,10 @@ spring:
           auth: true
           starttls:
             enable: true
+logging:
+  level: 
+    com.bookcentric: DEBUG
+  file: bookcentric.log
+
+server:
+  port: 50000

@@ -16,6 +16,9 @@
 ### Class files ###
 *.class
 
+### Log files ###
+*.log
+
 ### IntelliJ IDEA ###
 .idea
 *.iws

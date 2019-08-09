@@ -111,7 +111,7 @@ public class BookServiceImpl implements BookService {
 		} else {
 			books = repository.findAll(pageable);
 		}	
-		
+
 		return books;
 	}
 	

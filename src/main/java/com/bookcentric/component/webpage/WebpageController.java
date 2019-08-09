@@ -11,9 +11,14 @@ public class WebpageController {
 	
 	@Autowired 
 	private WebpageService webpageService;
+	
+	@GetMapping("/")
+	public String view() {
+		return "redirect:/home";		
+	}
 
 	@GetMapping("/home")
-	public ModelAndView viewRegistration(Model model) {
+	public ModelAndView viewHome() {
 		return webpageService.viewHomepage();		
 	}
 }
