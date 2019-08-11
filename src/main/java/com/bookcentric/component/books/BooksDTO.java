@@ -28,14 +28,12 @@ public class BooksDTO {
 	private Integer count;
 	private Integer issuedCount;
 	private Integer remainingCount;
-	// private List<Author> author;
-	// @JsonIgnore private Publisher publisher;
-	// @JsonIgnore private Genre genre;
 	@JsonIgnore private List<UserHistory> userHistory;
 	private boolean readingQueue;
 	private boolean wishlist;
 	private String authorName;
 	private String genreName;
 	private String publisherName;
+	private String tagName;
 
 }

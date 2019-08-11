@@ -102,7 +102,7 @@ public class Books {
 		String name = "";
 		List<Tag> tagList = getTag();
 		if(tagList.size() > 0) {
-			StringJoiner joiner = new StringJoiner(" And ");
+			StringJoiner joiner = new StringJoiner(", ");
 			tagList.forEach(t -> {
 				joiner.add(t.getName());
 			});
