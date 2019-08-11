@@ -9,18 +9,18 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: false
   datasource:
-    url: jdbc:mysql://localhost:3306/bookcentric
-    username: root
+    url: ${BOOKCENTRIC_JDBC_DATASOURCE_URL}
+    username: ${BOOKCENTRIC_JDBC_DATASOURCE_USERNAME}
     password: ${BOOKCENTRIC_JDBC_DATASOURCE_PASSWORD}
   profiles:
     active:
-    - ${BOOKCENTRIC_APP_PROFILE_ACTIVE}
+    - ${BOOKCENTRIC_PROFILE_ACTIVE}
   mail:
     default-encoding: UTF-8
     host: smtp.gmail.com
     port: 587
-    username: noreply.bookcentric@gmail.com
-    password: bookcentric2019
+    username: ${BOOKCENTRIC_EMAIL_USER}
+    password: ${BOOKCENTRIC_EMAIL_PASSWORD}
     properties:
       mail:
         smtp:

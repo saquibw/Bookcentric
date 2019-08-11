@@ -29,6 +29,8 @@ import com.bookcentric.component.books.genre.Genre;
 import com.bookcentric.component.books.genre.GenreService;
 import com.bookcentric.component.books.publisher.Publisher;
 import com.bookcentric.component.books.publisher.PublisherService;
+import com.bookcentric.component.books.tag.Tag;
+import com.bookcentric.component.books.tag.TagService;
 import com.bookcentric.component.user.User;
 import com.bookcentric.component.user.UserService;
 import com.bookcentric.component.user.security.UserSecurityService;
@@ -46,6 +48,7 @@ public class BookController {
 	@Autowired HttpServletResponse response;
 	@Autowired UserService userService;
 	@Autowired UserSecurityService userSecurityService;
+	@Autowired TagService tagService;
 
 	@GetMapping("/book/entry")
 	public ModelAndView viewBookEntry() {
@@ -55,12 +58,14 @@ public class BookController {
 		List<Author> authorList = authorService.findAll();
 		List<Publisher> publisherList = publisherService.findAll();
 		List<Genre> genreList = genreService.findAll();
+		List<Tag> tagList = tagService.findAll();
 
 		bookView.addObject("pageTitle", "BookCentric - Book entry");
 		bookView.addObject("book", book);
 		bookView.addObject("authorList", authorList);
 		bookView.addObject("publisherList", publisherList);
 		bookView.addObject("genreList", genreList);
+		bookView.addObject("tagList", tagList);
 
 		return bookView;
 	} 
@@ -81,7 +86,6 @@ public class BookController {
 		ModelAndView bookView = new ModelAndView("book-inventory");
 
 		bookView.addObject("pageTitle", "BookCentric - Book inventory");
-		//bookView.addObject("books", bookList);
 
 		return bookView;
 	}
@@ -94,12 +98,14 @@ public class BookController {
 		List<Author> authorList = authorService.findAll();
 		List<Publisher> publisherList = publisherService.findAll();
 		List<Genre> genreList = genreService.findAll();
+		List<Tag> tagList = tagService.findAll();
 
 		bookView.addObject("pageTitle", "BookCentric - Book update");
 		bookView.addObject("book", book);
 		bookView.addObject("authorList", authorList);
 		bookView.addObject("publisherList", publisherList);
 		bookView.addObject("genreList", genreList);
+		bookView.addObject("tagList", tagList);
 
 		return bookView;
 	}
@@ -176,6 +182,7 @@ public class BookController {
 		}
 		
 		bookView.addObject("book", book);
+		bookView.addObject("pageTitle", "BookCentric - Book");
 
 		return bookView;
 	}

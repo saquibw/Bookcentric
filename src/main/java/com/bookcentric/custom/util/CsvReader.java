@@ -15,12 +15,12 @@ import com.bookcentric.component.books.Books;
 import com.bookcentric.component.books.author.AuthorRepository;
 import com.opencsv.CSVReader;
 
-@RestController
+//@RestController
 public class CsvReader {
 	
 	@Autowired BookService bookService; 
 	
-	@GetMapping("/readcsv")
+	//@GetMapping("/readcsv")
 	public void readCsv() {
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get("The Treasury.csv"));

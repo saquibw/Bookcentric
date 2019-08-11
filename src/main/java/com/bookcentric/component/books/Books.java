@@ -4,19 +4,18 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.bookcentric.component.books.author.Author;
 import com.bookcentric.component.books.genre.Genre;
 import com.bookcentric.component.books.publisher.Publisher;
+import com.bookcentric.component.books.tag.Tag;
 import com.bookcentric.component.user.history.UserHistory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -39,21 +38,10 @@ public class Books {
 	private Integer count;
 	private boolean bestSeller;
 	private boolean newArrival;
-	//private MultipartFile imageFile;
-	//private byte[] image;
-	
-	/*@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="authorId") @JsonIgnore
-	private Author author;*/
 	
 	@ManyToMany
 	@JoinTable(name = "book_author_pair", joinColumns = @JoinColumn(name = "bookId"), inverseJoinColumns = @JoinColumn(name = "authorId"))
 	private List<Author> author;
-	
-	/*@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="publisherId") @JsonIgnore
-	private Publisher publisher;*/
-	
-	/*@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="genreId") @JsonIgnore
-	private Genre genre;*/
 	
 	@ManyToMany
 	@JoinTable(name = "book_genre_pair", joinColumns = @JoinColumn(name = "bookId"), inverseJoinColumns = @JoinColumn(name = "genreId"))
@@ -62,6 +50,10 @@ public class Books {
 	@ManyToMany
 	@JoinTable(name = "book_publisher_pair", joinColumns = @JoinColumn(name = "bookId"), inverseJoinColumns = @JoinColumn(name = "publisherId"))
 	private List<Publisher> publisher;
+	
+	@ManyToMany
+	@JoinTable(name = "book_tag_pair", joinColumns = @JoinColumn(name = "bookId"), inverseJoinColumns = @JoinColumn(name = "tagId"))
+	private List<Tag> tag;
 	
 	@OneToMany(mappedBy="books") @JsonIgnore
 	private List<UserHistory> userHistory;
@@ -100,6 +92,19 @@ public class Books {
 			StringJoiner joiner = new StringJoiner(" And ");
 			publisherList.forEach(p -> {
 				joiner.add(p.getName());
+			});
+			name = joiner.toString();
+		}
+		return name;
+	}
+	
+	public String getTagName() {
+		String name = "";
+		List<Tag> tagList = getTag();
+		if(tagList.size() > 0) {
+			StringJoiner joiner = new StringJoiner(" And ");
+			tagList.forEach(t -> {
+				joiner.add(t.getName());
 			});
 			name = joiner.toString();
 		}

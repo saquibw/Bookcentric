@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bookcentric.component.utils.EmailService;
 import com.bookcentric.component.utils.UtilService;
+import com.bookcentric.config.AppConfig;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 @Service
@@ -16,6 +17,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired private UserRepository userRepository;
 	
 	@Autowired EmailService emailService;
+	
+	@Autowired AppConfig config;
 	
 	public void add(User user) throws MySQLIntegrityConstraintViolationException{
 		
@@ -67,7 +70,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean sendUserRegistrationEmail(User user) {
-		String to = "bookcentricbd@gmail.com";
+		//String to = "bookcentricbd@gmail.com";
+		String to = config.getEmailRecipient();
+		System.out.println(to);
 		String subject = "A new user has been registered";
 		
 		StringBuilder text = new StringBuilder();

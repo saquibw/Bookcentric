@@ -181,7 +181,7 @@
 			<div class="form-group col">
 				<label>Author*</label> 
 				<select class="form-control selectpicker" th:field=*{author} required multiple>
-					<option value="" disabled selected>Select author</option>
+					<option value="" disabled>Select author</option>
 					<option th:each="author : ${authorList}"
 						th:value="${author.id}"
 						th:text="${author.name}">
@@ -191,10 +191,32 @@
 			<div class="form-group col">
 				<label>Publisher*</label> 
 				<select class="form-control selectpicker" th:field=*{publisher} required multiple>
-					<option value="" disabled selected>Select publisher</option>
+					<option value="" disabled>Select publisher</option>
 					<option th:each="publisher : ${publisherList}"
 						th:value="${publisher.id}"
 						th:text="${publisher.name}">
+				</select>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="form-group col">
+				<label>Genre*</label> 
+				<select class="form-control selectpicker" th:field=*{genre} required multiple>
+					<option value="" disabled>Select genre</option>
+					<option th:each="genre : ${genreList}"
+						th:value="${genre.id}"
+						th:text="${genre.name}">
+				</select>
+			</div>
+		
+			<div class="form-group col">
+				<label>Tag*</label> 
+				<select class="form-control selectpicker" th:field=*{tag} required multiple>
+					<option value="" disabled>Select tag</option>
+					<option th:each="tag : ${tagList}"
+						th:value="${tag.id}"
+						th:text="${tag.name}">
 				</select>
 			</div>
 		</div>
@@ -213,18 +235,13 @@
 		
 		<div class="row">
 			<div class="form-group col">
-				<label>Genre*</label> 
-				<select class="form-control selectpicker" th:field=*{genre} required multiple>
-					<option value="" disabled selected>Select genre</option>
-					<option th:each="genre : ${genreList}"
-						th:value="${genre.id}"
-						th:text="${genre.name}">
-				</select>
+				<label>Blurb</label> <textarea class="form-control"
+					th:field="*{blurb}"></textarea>
 			</div>
 		
 			<div class="form-group col">
-				<label>Blurb</label> <textarea class="form-control"
-					th:field="*{blurb}"></textarea>
+				<label>Goodreads link</label> <input type="text" class="form-control"
+					th:field="*{goodreadsLink}">
 			</div>
 		</div>
 		
@@ -236,20 +253,15 @@
 					<option th:value="Paperback" th:text="Paperback">
 				</select>
 			</div>
-		
-			<div class="form-group col">
-				<label>Goodreads link</label> <input type="text" class="form-control"
-					th:field="*{goodreadsLink}">
-			</div>
-		</div>
-		
-		<div class="row">
+			
 			<div class="form-group col">
 				<label>Total count*</label> 
 				<input type="number" class="form-control"
 					th:field="*{count}" required>
-			</div>
+			</div>			
+		</div>
 		
+		<div class="row">
 			<div class="form-group col">
 				<input type="checkbox" th:name="newArrival" th:value="newArrival" th:field=*{newArrival}>New arrival
 				<input type="checkbox" th:name="bestSeller" th:value="bestSeller" th:field=*{bestSeller}>Best seller
