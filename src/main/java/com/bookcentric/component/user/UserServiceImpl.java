@@ -1,14 +1,16 @@
 package com.bookcentric.component.user;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bookcentric.component.utils.EmailService;
-import com.bookcentric.component.utils.UtilService;
 import com.bookcentric.config.AppConfig;
+import com.bookcentric.custom.util.Constants;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 @Service
@@ -44,9 +46,9 @@ public class UserServiceImpl implements UserService {
 		String subject = "Your account has been activated";
 		
 		StringBuilder text = new StringBuilder();
-		text.append(String.format("Dear %s %s %s", user.getFirstName(), user.getMiddleName(), user.getLastName()));
+		text.append(String.format("Dear %s", user.getFullName()));
 		text.append("\n\n");
-		text.append(String.format("Your account has been activated. Please use password: %s to login here: %s", user.getPassword(), "https://bookcentric.com/login"));
+		text.append(String.format("Your account has been activated. Please use password: %s to login here: %s", user.getPassword(), "https://bookcentricbd.com/login"));
 		
 		emailService.sendSimpleEmail(to, subject, text.toString());
 		
@@ -59,7 +61,7 @@ public class UserServiceImpl implements UserService {
 		String subject = "Your account status has been updated";
 		
 		StringBuilder text = new StringBuilder();
-		text.append(String.format("Dear %s %s %s", user.getFirstName(), user.getMiddleName(), user.getLastName()));
+		text.append(String.format("Dear %s", user.getFullName()));
 		text.append("\n\n");
 		text.append(String.format("Your account status has been changed to : %s", user.getStatus().getName()));
 		
@@ -70,31 +72,39 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean sendUserRegistrationEmail(User user) {
-		//String to = "bookcentricbd@gmail.com";
 		String to = config.getEmailRecipient();
-		System.out.println(to);
 		String subject = "A new user has been registered";
 		
 		StringBuilder text = new StringBuilder();
-		text.append(String.format("User %s %s %s (%s) has completed registration. Please click below to check.", user.getFirstName(), user.getMiddleName(), user.getLastName(), user.getEmail()));
+		text.append(String.format("User %s (%s) has completed registration. Please click below to check.", user.getFullName(), user.getEmail()));
 		text.append("\n\n");
-		text.append("http://localhost:8080/management/user");
+		text.append("http://bookcentricbd.com/management/user");
 		
 		emailService.sendSimpleEmail(to, subject, text.toString());
+		
 		return true;
 	}
 
-	/*@Override
-	public boolean updateStatus(Integer id, String status) {
-		boolean success = false;
-		Optional<User> u = userRepository.findById(id);
-		if(u.isPresent()) {
-			User user = u.get();
-			user.setStatus(status);
-			
-			userRepository.save(user);
-			success = true;
+	@Override
+	@Transactional
+	public void sendSubscriptionExpiryEmail() {
+		List<User> userList = userRepository.findByActiveUserAndSubscriptionExpiry(Constants.EXPIRY_AFTER_DAYS);
+		
+		if(userList != null && userList.size() > 0) {
+			userList.forEach(user -> {
+				String to = user.getEmail();
+				String subject = "Your subscription will expire soon";
+				String subscriptionPlanName = user.getSubscription().getCategory().getName();
+				String expiryDate = user.getDateOfRenewal().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
+				
+				StringBuilder text = new StringBuilder();
+				text.append(String.format("Dear %s", user.getFullName()));
+				text.append("\n\n");
+				text.append(String.format("Your subscription for the plan %s is going to expire on %s. Please contact bookcentric admin for service renewal.", subscriptionPlanName, expiryDate));
+				
+				emailService.sendSimpleEmail(to, subject, text.toString());
+			});
 		}
-		return success;
-	}*/
+	}
+
 }

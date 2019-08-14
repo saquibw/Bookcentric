@@ -11,4 +11,6 @@ public interface UserHistoryService {
 	public void addAll(List<UserHistory> userHistoryList);
 	
 	public boolean sendBookIssueEmail(List<UserHistory> userHistoryList, User user);
+	
+	public void sendPlanExpiryEmail();
 }

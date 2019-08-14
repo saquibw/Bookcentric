@@ -21,7 +21,7 @@ public class EmailServiceImpl implements EmailService {
 	@Async
 	@Override
 	public void sendSimpleEmail(String to, String subject, String message) {
-		log.debug("Sending email with subject {} to {}", subject, to);
+		log.debug("Sending email with subject '{}' to {}", subject, to);
 		
 		SimpleMailMessage m = new SimpleMailMessage();
 		m.setTo(to);
@@ -30,13 +30,13 @@ public class EmailServiceImpl implements EmailService {
 
 		emailSender.send(m);
 		
-		log.debug("Email sending success with subject {} to {}", subject, to);
+		log.debug("Email sending success with subject '{}' to {}", subject, to);
 	}
 
 	@Async
 	@Override
 	public void sendHtmlEmail(String to, String subject, String message) throws MessagingException {
-		log.debug("Sending email with subject {} to {}", subject, to);
+		log.debug("Sending email with subject '{}' to {}", subject, to);
 		
 		MimeMessage msg = emailSender.createMimeMessage();
 		
@@ -48,7 +48,7 @@ public class EmailServiceImpl implements EmailService {
 		
 		emailSender.send(msg);
 		
-		log.debug("Email sending success with subject {} to {}", subject, to);
+		log.debug("Email sending success with subject '{}' to {}", subject, to);
 	}
 
 }

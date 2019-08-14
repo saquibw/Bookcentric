@@ -1,6 +1,9 @@
 package com.bookcentric.component.user.history;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.bookcentric.component.user.User;
 import com.bookcentric.component.utils.EmailService;
+import com.bookcentric.custom.util.Constants;
 
 @Service
 public class UserHistoryServiceImpl implements UserHistoryService {
@@ -34,7 +38,7 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		String subject = "Books have been issued to you";
 		
 		StringBuilder text = new StringBuilder();
-		text.append(String.format("Dear %s %s %s", user.getFirstName(), user.getMiddleName(), user.getLastName()));
+		text.append(String.format("Dear %s", user.getFullName()));
 		text.append("<br><br>");
 		text.append("Following books have been issued to you.");
 		text.append("<br><br>");
@@ -56,4 +60,56 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		return true;
 	}
 
+	@Override
+	public void sendPlanExpiryEmail() {
+		List<UserHistory> historyList = repository.findByActiveUserAndPlanExpiry(Constants.EXPIRY_AFTER_DAYS);
+		Map<Integer, List<UserHistory>> historyMap = new HashMap<Integer, List<UserHistory>>();
+
+		if(historyList != null && historyList.size() > 0) {		
+			historyList.forEach(history -> {
+				User user = history.getUser();
+				if(historyMap.containsKey(user.getId())) {
+					historyMap.get(user.getId()).add(history);
+				} else {
+					List<UserHistory> historyListForSingleUser = new ArrayList<>();
+					historyListForSingleUser.add(history);
+					historyMap.put(user.getId(), historyListForSingleUser);
+				}
+			});
+			
+			String subject = "Books due date will expire soon";
+			
+			historyMap.forEach((k, v) -> {
+				User receiver = v.stream().findFirst().get().getUser();
+				String to = receiver.getEmail();
+				String emailText = preparePlanExpiryText(receiver, v);
+				
+				try {
+					emailService.sendHtmlEmail(to, subject, emailText);
+				} catch (MessagingException e) {
+					e.printStackTrace();
+				}
+			});
+		}		
+	}
+	
+	private String preparePlanExpiryText(User user, List<UserHistory> historyList) {
+		StringBuilder text = new StringBuilder();
+		
+		text.append(String.format("Dear %s", user.getFullName()));
+		text.append("<br><br>");
+		text.append("The due date of the following books are going to expire soon. Please return those as per schedule.");
+		text.append("<br><br>");
+		
+		text.append("<table border='1'><tr><th>Book name</th><th>Issue date</th><th>Due date</th></tr>");
+		
+		historyList.forEach(u -> {
+			text.append(String.format("<tr><td>%s</td><td>%s</td><td>%s</td></tr>", u.getBooks().getName(), u.getIssueDate(), u.getDueDate()));
+		});
+		
+		text.append("</table>");
+		
+		return text.toString();
+	}
+	
 }

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.bookcentric.component.books.BookService;
 import com.bookcentric.component.books.Books;
 import com.bookcentric.component.user.User;
@@ -22,7 +21,9 @@ import com.bookcentric.component.user.UserDTO;
 import com.bookcentric.component.user.UserService;
 import com.bookcentric.custom.util.Response;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class UserHistoryController {
 	
@@ -53,6 +54,19 @@ public class UserHistoryController {
 		User user = userService.getBy(userId);
 		JSONArray arr = new JSONArray(bookList);
 		
+		if(user.getDateOfJoining() == null) {
+			LocalDate today = LocalDate.now();
+			
+			log.debug("Issueing books for the first time for user {}", user.getFullName());
+			Integer renewalInDays = user.getSubscription().getSubscriptionDuration().getDurationInDays();
+			LocalDate renewalDate = today.plusDays(renewalInDays);
+			
+			user.setDateOfJoining(today);
+			user.setDateOfRenewal(renewalDate);
+		}
+		
+		Integer planDueInDays = user.getSubscription().getCategory().getPlanDuration().getDurationInDays();
+		
 		List<UserHistory> userHistoryList = new ArrayList<>();
 		
 		for(int i=0; i < arr.length(); i++) {
@@ -64,7 +78,7 @@ public class UserHistoryController {
 			history.setBooks(book);
 			history.setUser(user);
 			history.setIssueDate(LocalDate.now());
-			history.setDueDate(LocalDate.now().plusDays(30));
+			history.setDueDate(LocalDate.now().plusDays(planDueInDays));
 			userHistoryList.add(history);
 		}
 		userService.add(user);

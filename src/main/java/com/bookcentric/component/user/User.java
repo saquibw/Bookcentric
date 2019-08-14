@@ -1,10 +1,9 @@
 package com.bookcentric.component.user;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -44,8 +43,8 @@ public class User {
 	private String gender;
 	private String password;
 	private String membershipId;
-	private Instant dateOfJoining;
-	private Instant dateOfRenewal;
+	private LocalDate dateOfJoining;
+	private LocalDate dateOfRenewal;
 	private String deliveryArea;
 	private String paymentMode;
 	private String genre;
@@ -70,4 +69,8 @@ public class User {
 	
 	@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="statusId")
 	private UserStatus status;
+	
+	public String getFullName() {
+		return getFirstName() + ' ' + getMiddleName() + ' ' + getLastName();
+	}
 }

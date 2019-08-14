@@ -35,6 +35,8 @@ public class TreasuryController {
 	public ModelAndView getTreasuryView() {
 		ModelAndView treasuryView = new ModelAndView("treasury");
 
+		treasuryView.addObject("pageTitle", "BookCentric - Treasury");
+		
 		return treasuryView;
 	}
 

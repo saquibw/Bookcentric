@@ -18,5 +18,5 @@ public interface UserService {
 	
 	public boolean sendUserRegistrationEmail(User user);
 	
-	/*public boolean updateStatus(Integer id, String status);*/
+	public void sendSubscriptionExpiryEmail();
 }
