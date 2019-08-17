@@ -19,4 +19,6 @@ public interface UserService {
 	public boolean sendUserRegistrationEmail(User user);
 	
 	public void sendSubscriptionExpiryEmail();
+	
+	public void renewSubscriptionDate();
 }

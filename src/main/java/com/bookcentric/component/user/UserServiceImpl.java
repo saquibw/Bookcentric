@@ -6,12 +6,15 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.bookcentric.component.utils.EmailService;
 import com.bookcentric.config.AppConfig;
 import com.bookcentric.custom.util.Constants;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -85,6 +88,7 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
+	@Async
 	@Override
 	@Transactional
 	public void sendSubscriptionExpiryEmail() {
@@ -106,5 +110,23 @@ public class UserServiceImpl implements UserService {
 			});
 		}
 	}
+
+	@Async
+	@Override
+	@Transactional
+	public void renewSubscriptionDate() {
+		List<User> expiredUsers = userRepository.findAllActiveExpiresToday();
+		
+		if(expiredUsers != null && expiredUsers.size() > 0) {
+			expiredUsers.forEach(u -> {
+				int subscriptionDurationInMonths = u.getSubscription().getSubscriptionDuration().getDurationInDays() / 30;
+				u.setDateOfRenewal(u.getDateOfRenewal().plusMonths(subscriptionDurationInMonths));
+			});
+			userRepository.saveAll(expiredUsers);
+		}
+		
+	}
+	
+	
 
 }

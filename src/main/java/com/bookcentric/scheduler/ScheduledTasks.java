@@ -7,15 +7,19 @@ import org.springframework.stereotype.Component;
 import com.bookcentric.component.user.UserService;
 import com.bookcentric.component.user.history.UserHistoryService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class ScheduledTasks {
 	@Autowired UserService userService;
 	@Autowired UserHistoryService userHistoryService;
 	
-	@Scheduled(fixedRate = 10000)
+	@Scheduled(cron = "0 5 6 * * ?") //Everyday UTC 06:05:00 which means BST (Bangladeshi time) 00:05:00
 	public void scheduledTaskEveryDay() {
-		System.out.println("Scheduled task run");
-		//userHistoryService.sendPlanExpiryEmail();
+		log.info("Scheduled tasks run");
+		userHistoryService.sendPlanExpiryEmail();
 		userService.sendSubscriptionExpiryEmail();
+		userService.renewSubscriptionDate();
 	}
 }

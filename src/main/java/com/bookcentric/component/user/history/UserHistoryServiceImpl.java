@@ -8,11 +8,14 @@ import java.util.Map;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.bookcentric.component.user.User;
 import com.bookcentric.component.utils.EmailService;
 import com.bookcentric.custom.util.Constants;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 public class UserHistoryServiceImpl implements UserHistoryService {
@@ -60,6 +63,7 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		return true;
 	}
 
+	@Async
 	@Override
 	public void sendPlanExpiryEmail() {
 		List<UserHistory> historyList = repository.findByActiveUserAndPlanExpiry(Constants.EXPIRY_AFTER_DAYS);

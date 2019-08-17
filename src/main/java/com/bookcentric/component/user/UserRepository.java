@@ -10,4 +10,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	@Query(value = "Select u FROM User u WHERE u.status.id = 1 AND DATEDIFF(dateOfRenewal, NOW()) = :expiryAfter")
 	public List<User> findByActiveUserAndSubscriptionExpiry(@Param("expiryAfter") Integer expiryAfter);
+	
+	@Query(value = "Select u FROM User u WHERE u.status.id = 1 AND u.dateOfRenewal = CURDATE()")
+	public List<User> findAllActiveExpiresToday();
 }
