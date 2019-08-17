@@ -2,7 +2,8 @@ var TreasuryManager = (function() {
 
 	var TYPE_BEST_SELLER = "bestSeller";
 	var TYPE_NEW_ARRIVAL = "newArrival";
-	var TYPE_READING_CHALLANGE = "readingChallange";
+	var TYPE_CHILDREN = "children";
+	var TYPE_READING_CHALLENGE = "readingChallenge";
 	var SPECIAL_BOOKS_SHOW_LIMIT = 5;
 	var NAVIGATION_FORWARD = "forward";
 	var NAVIGATION_BACKWARD = "backward";
@@ -326,6 +327,16 @@ var TreasuryManager = (function() {
 			getSpecialBooks(TYPE_NEW_ARRIVAL);
 		});
 		
+		$(".children_selection").click(function(e) {
+			e.preventDefault();
+			getSpecialBooks(TYPE_CHILDREN);
+		});
+		
+		$(".reading_challenge_selection").click(function(e) {
+			e.preventDefault();
+			getSpecialBooks(TYPE_READING_CHALLENGE);
+		});
+		
 		$(".browseLeft").click(function(e) {
 			e.preventDefault();
 			if(!isFirstPage) {
@@ -366,9 +377,9 @@ var TreasuryManager = (function() {
 	})();
 
 	return {
-		TYPE_BEST_SELLER: TYPE_BEST_SELLER,
+		/*TYPE_BEST_SELLER: TYPE_BEST_SELLER,
 		TYPE_NEW_ARRIVAL: TYPE_NEW_ARRIVAL,
 		TYPE_READING_CHALLANGE: TYPE_READING_CHALLANGE,
-		getSpecialBooks: getSpecialBooks
+		getSpecialBooks: getSpecialBooks*/
 	}
 })();

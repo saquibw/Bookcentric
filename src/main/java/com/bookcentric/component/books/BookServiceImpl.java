@@ -127,9 +127,20 @@ public class BookServiceImpl implements BookService {
 				.stream()
 				.filter(b -> b.getName().toLowerCase().contains(searchText) 
 						|| b.getAuthorName().toLowerCase().contains(searchText) 
-						|| b.getGenreName().toLowerCase().contains(searchText) 
+						|| b.getGenreName().toLowerCase().contains(searchText)
+						|| b.getTagName().toLowerCase().contains(searchText)
 						/*|| b.getPublisherName().toLowerCase().contains(searchText)*/)
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Books> getChildrensBooks() {
+		return repository.findByChildren(true);
+	}
+
+	@Override
+	public List<Books> getReadingChallengeBooks() {
+		return repository.findByReadingChallenge(true);
 	}
 
 }

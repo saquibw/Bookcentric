@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 public interface BookRepository extends JpaRepository<Books, Integer> {
 	public List<Books> findByBestSeller(boolean status);
 	public List<Books> findByNewArrival(boolean status);
+	public List<Books> findByChildren(boolean status);
+	public List<Books> findByReadingChallenge(boolean status);
 	
 	@Query(value = "Update books set image = :image Where id=:id", nativeQuery=true) @Async @Modifying @Transactional
 	public void updateImageById(@Param("image") byte[] image, @Param("id") Integer id);

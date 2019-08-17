@@ -50,6 +50,10 @@ public class TreasuryController {
 			books = bookService.getBestSellerBooks();
 		} else if(Constants.TYPE_NEW_ARRIVAL.equals(type)) {
 			books = bookService.getNewArrivalBooks();
+		} else if(Constants.TYPE_CHILDREN.equals(type)) {
+			books = bookService.getChildrensBooks();
+		} else if(Constants.TYPE_READING_CHALLENGE.equals(type)) {
+			books = bookService.getReadingChallengeBooks();
 		}
 
 		User user = userSecurityService.getLoggedInUser();

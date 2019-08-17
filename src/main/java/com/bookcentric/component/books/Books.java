@@ -38,6 +38,8 @@ public class Books {
 	private Integer count;
 	private boolean bestSeller;
 	private boolean newArrival;
+	private boolean children;
+	private boolean readingChallenge;
 	
 	@ManyToMany
 	@JoinTable(name = "book_author_pair", joinColumns = @JoinColumn(name = "bookId"), inverseJoinColumns = @JoinColumn(name = "authorId"))

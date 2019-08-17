@@ -21,6 +21,10 @@ public interface BookService {
 	
 	public List<Books> getNewArrivalBooks();
 	
+	public List<Books> getChildrensBooks();
+	
+	public List<Books> getReadingChallengeBooks();
+	
 	public void storeImage(MultipartFile file, Integer id) throws IOException;
 	
 	public byte[] getImageBy(Integer id);
