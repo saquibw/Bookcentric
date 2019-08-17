@@ -15,8 +15,6 @@ import com.bookcentric.component.user.User;
 import com.bookcentric.component.utils.EmailService;
 import com.bookcentric.custom.util.Constants;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
 public class UserHistoryServiceImpl implements UserHistoryService {
 	
@@ -114,6 +112,11 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		text.append("</table>");
 		
 		return text.toString();
+	}
+
+	@Override
+	public UserHistory findBy(Integer id) {
+		return repository.getOne(id);
 	}
 	
 }

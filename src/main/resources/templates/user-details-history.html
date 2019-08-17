@@ -21,8 +21,7 @@
 								<h1>User Details History</h1>
 							</div>
 							<div class="left position-absolute right-ten-pix">
-								<label
-									th:text="${user.firstName} + ' ' + ${user.middleName} + ' ' + ${user.lastName}"></label>
+								<label th:text="${user.firstName} + ' ' + ${user.middleName} + ' ' + ${user.lastName}"></label>
 								<label th:text="${user.membershipId}" class="position-absolute"></label>
 								<label th:text="${user.id}" class="hidden userId"></label>
 							</div>
@@ -76,11 +75,11 @@
 											<td th:text="${history.issueDate}"></td>
 											<td th:text="${history.dueDate}"></td>
 											<td th:text="${history.returnDate}"></td>
-											<td></td>
+											<td><button class="btn btn-primary btn-sm returnButton">Receive</button></td>
+											<td><button class="btn btn-secondary btn-sm" id="reissueButton">Reissue</button></td>
 											<td></td>
 											<td></td>
 
-											<!-- <td><a class="btn btn-primary btn-sm" th:href="@{'/user/get/history/' + ${user.id}}">View history</a></td> -->
 										</tr>
 
 									</tbody>
@@ -136,6 +135,32 @@
 				alert("Please select atleast one book.");
 			}
 			
+		});
+		
+		$(".readingHistory tbody").find(".returnButton").click(function(e) {
+			e.preventDefault();
+			
+			var currentRow = $(this).closest('tr');
+			var id = currentRow.find("td:eq(0)").text();
+			
+			var confirmation = confirm("Please confirm you have received the book.");
+			
+			if(confirmation == true) {
+				var request = $.ajax({
+					type: "POST",
+					url: "/user/history/return",
+					dataType: 'JSON',
+					data: {
+						"historyId": id
+					}
+				});
+				
+				request.done(function(response) {
+					if(response.success) {
+						location.reload();
+					}
+				});
+			}
 		});
 	})
 	

@@ -13,4 +13,6 @@ public interface UserHistoryService {
 	public boolean sendBookIssueEmail(List<UserHistory> userHistoryList, User user);
 	
 	public void sendPlanExpiryEmail();
+	
+	public UserHistory findBy(Integer id);
 }

@@ -19,6 +19,7 @@ import com.bookcentric.component.books.Books;
 import com.bookcentric.component.user.User;
 import com.bookcentric.component.user.UserDTO;
 import com.bookcentric.component.user.UserService;
+import com.bookcentric.component.utils.UtilService;
 import com.bookcentric.custom.util.Response;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,8 @@ public class UserHistoryController {
 	@Autowired private UserHistoryService userHistoryService;
 	
 	@Autowired private ModelMapper mapper;
+	
+	@Autowired UtilService utils;
 
 	@GetMapping("/user/history/{id}")
 	public ModelAndView getUserHistoryDetails(@PathVariable("id") int id) {
@@ -43,7 +46,7 @@ public class UserHistoryController {
 		
 		UserDTO userDto = mapper.map(user, UserDTO.class);
 		
-		model.addObject("user", userDto);
+		model.addObject("user", userDto);		
 		
 		return model;
 	}
@@ -102,5 +105,19 @@ public class UserHistoryController {
 		view.addObject("user", userDto);
 		
 		return view;
+	}
+	
+	@PostMapping("/user/history/return")
+	@ResponseBody
+	public Response returnBook(@RequestParam int historyId) {
+		Response response = new Response();
+		
+		UserHistory history = userHistoryService.findBy(historyId);
+		history.setReturnDate(LocalDate.now());
+		userHistoryService.add(history);
+		
+		response.success = true;
+		
+		return response;
 	}
 }

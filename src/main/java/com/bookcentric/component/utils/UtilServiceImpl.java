@@ -1,5 +1,8 @@
 package com.bookcentric.component.utils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -42,5 +45,14 @@ public class UtilServiceImpl implements UtilService {
 	public String decryptPassword(String password) {
 		// TODO Auto-generated method stub
 		return password;
+	}
+
+	@Override
+	public LocalDate format(LocalDate date, String pattern) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+		String dateString = date.toString();
+		System.out.println(dateString);
+		System.out.println(LocalDate.parse(dateString, formatter));
+		return LocalDate.parse(dateString);
 	} 
 }
