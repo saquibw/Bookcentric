@@ -2,9 +2,12 @@ package com.bookcentric.component.user.history;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,7 +49,12 @@ public class UserHistoryController {
 		ModelAndView model = new ModelAndView("user-details-history");
 		
 		User user = userService.getBy(id);
-		
+		List<UserHistory> historyList = user.getUserHistory()
+				.stream()
+				.sorted(Comparator.comparing(UserHistory::getIssueDate).reversed())
+				.collect(Collectors.toList()); 
+
+		user.setUserHistory(historyList);
 		UserDTO userDto = mapper.map(user, UserDTO.class);
 		
 		model.addObject("user", userDto);		
