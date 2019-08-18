@@ -118,8 +118,8 @@ public class UserHistoryController {
 		return view;
 	}
 	
-	@PostMapping("/user/history/return")
 	@ResponseBody
+	@PostMapping("/user/history/return")
 	public Response returnBook(@RequestParam int historyId) {
 		Response response = new Response();
 		
@@ -133,6 +133,30 @@ public class UserHistoryController {
 		response.success = true;
 		response.setData(data);
 		
+		return response;
+	}
+	
+	@ResponseBody
+	@PostMapping("/user/history/reissue")
+	public Response reissueBook(@RequestParam int historyId) {
+		Response response = new Response();
+		
+		UserHistory history = userHistoryService.findBy(historyId);
+		LocalDate returnDate = LocalDate.now();
+		history.setReturnDate(returnDate);
+		userHistoryService.add(history);
+		
+		Integer planDueInDays = history.getUser().getSubscription().getCategory().getPlanDuration().getDurationInDays();
+		
+		UserHistory reissueHistory = new UserHistory();
+		reissueHistory.setReissue(true);
+		reissueHistory.setIssueDate(returnDate);
+		reissueHistory.setDueDate(returnDate.plusDays(planDueInDays));
+		reissueHistory.setBooks(history.getBooks());
+		reissueHistory.setUser(history.getUser());
+		userHistoryService.add(reissueHistory);
+		
+		response.success = true;
 		return response;
 	}
 }

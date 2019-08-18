@@ -76,7 +76,7 @@
 											<td th:text="${history.dueDate}"></td>
 											<td th:text="${history.returnDate}"></td>
 											<td><button class="btn btn-primary btn-sm returnButton">Receive</button></td>
-											<td><button class="btn btn-secondary btn-sm" id="reissueButton">Reissue</button></td>
+											<td><button class="btn btn-secondary btn-sm reissueButton">Reissue</button></td>
 											<td></td>
 											<td></td>
 
@@ -128,8 +128,8 @@
 				request.done(function(response){
 					if(response.success) {
 						location.reload();
-						}
-					});
+					}
+				});
 				
 			} else {
 				alert("Please select atleast one book.");
@@ -170,6 +170,41 @@
 				});
 			}
 		});
+		
+		$(".readingHistory tbody").find(".reissueButton").click(function(e) {
+			e.preventDefault();
+			
+			var currentRow = $(this).closest('tr');
+			var returnDateElement = currentRow.find("td:eq(4)");
+			var returnDate = returnDateElement.text();
+			
+			if(returnDate) {
+				alert("Already received book can not be reissued.");
+				return false;
+			}
+			
+			var id = currentRow.find("td:eq(0)").text();
+			
+			var confirmation = confirm("Please confirm you want to reissue this book.");
+			
+			if(confirmation == true) {
+				var request = $.ajax({
+					type: "POST",
+					url: "/user/history/reissue",
+					dataType: 'JSON',
+					data: {
+						"historyId": id
+					}
+				});
+				
+				request.done(function(response) {
+					if(response.success) {
+						location.reload();
+					}
+				});
+			}
+		});
+		
 	})
 	
 	
