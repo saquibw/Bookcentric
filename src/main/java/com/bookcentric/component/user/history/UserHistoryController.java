@@ -2,7 +2,10 @@ package com.bookcentric.component.user.history;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.modelmapper.ModelMapper;
@@ -113,10 +116,14 @@ public class UserHistoryController {
 		Response response = new Response();
 		
 		UserHistory history = userHistoryService.findBy(historyId);
-		history.setReturnDate(LocalDate.now());
+		LocalDate returnDate = LocalDate.now();
+		history.setReturnDate(returnDate);
 		userHistoryService.add(history);
 		
+		Map<String, String> data = new HashMap<>();
+		data.put("returnDate", returnDate.toString());
 		response.success = true;
+		response.setData(data);
 		
 		return response;
 	}

@@ -141,6 +141,14 @@
 			e.preventDefault();
 			
 			var currentRow = $(this).closest('tr');
+			var returnDateElement = currentRow.find("td:eq(4)");
+			var returnDate = returnDateElement.text();
+			
+			if(returnDate) {
+				alert("You have already received this book on " + returnDate);
+				return false;
+			}
+						
 			var id = currentRow.find("td:eq(0)").text();
 			
 			var confirmation = confirm("Please confirm you have received the book.");
@@ -157,7 +165,7 @@
 				
 				request.done(function(response) {
 					if(response.success) {
-						location.reload();
+						returnDateElement.text(response.data.returnDate);
 					}
 				});
 			}
