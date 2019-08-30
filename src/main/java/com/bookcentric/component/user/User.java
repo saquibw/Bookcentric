@@ -49,6 +49,7 @@ public class User {
 	private String paymentMode;
 	private String genre;
 	private String instruction;
+	private String role;
 	
 	@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="subscriptionId")
 	private Subscription subscription;
@@ -73,4 +74,7 @@ public class User {
 	public String getFullName() {
 		return getFirstName() + ' ' + getMiddleName() + ' ' + getLastName();
 	}
+	/*
+	ALTER TABLE `bookcentric`.`user` 
+	ADD COLUMN `role` VARCHAR(45) NULL AFTER `instruction`;*/
 }

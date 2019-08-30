@@ -3,10 +3,14 @@ package com.bookcentric.component.utils;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UtilServiceImpl implements UtilService {
+	
+	@Autowired private PasswordEncoder passwordEncoder;
 
 	@Override
 	public String getAlphaNumericString(int n) { 
@@ -37,8 +41,7 @@ public class UtilServiceImpl implements UtilService {
 
 	@Override
 	public String encryptPassword(String password) {
-		// TODO Auto-generated method stub
-		return password;
+		return passwordEncoder.encode(password);
 	}
 
 	@Override

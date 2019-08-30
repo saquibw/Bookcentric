@@ -76,6 +76,7 @@ public class UserController {
 
 		UserStatus status = userStatusService.getBy(3);
 		user.setStatus(status);
+		user.setRole(Constants.ROLE_USER);
 		
 		userService.add(user);
 		

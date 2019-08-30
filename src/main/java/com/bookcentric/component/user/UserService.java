@@ -12,6 +12,10 @@ public interface UserService {
 	
 	public User getBy(Integer id);
 	
+	public User getByEmail(String email);
+	
+	public UserLoginDTO getBy(String email);
+	
 	public boolean sendUserActivationEmail(User user);
 	
 	public boolean sendUserStatusUpdateEmail(User user);

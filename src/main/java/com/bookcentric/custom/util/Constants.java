@@ -19,6 +19,9 @@ public class Constants {
 	
 	public static Integer EXPIRY_AFTER_DAYS = 2;
 	
+	public static String ROLE_ADMIN = "admin";
+	public static String ROLE_USER = "user";
+	
 	
 
 }
