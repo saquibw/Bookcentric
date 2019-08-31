@@ -37,6 +37,13 @@
 						
 						<label></label>
 						
+						<div class="right">
+							<form class="form-inline">
+								<i class="fa fa-search" aria-hidden="true"></i> 
+								<input class="form-control ml-3 publisherSearch" type="text" placeholder="Search by Publisher" aria-label="Search">
+							</form>
+						</div>
+						
 						<table class="table">
 							<thead>
 								<tr>
@@ -64,6 +71,76 @@
 	</div>
 
 	<section th:insert="fragments/body :: js-container"></section>
+	
+	<script type="text/javascript">
+	
+		$(document).ready(function() {
+			
+			var searchTimer = null;
+			
+			function getAllPublishers(searchText) {
+				var param = {
+						"searchText": searchText
+				}
+				
+				var request = $.ajax({
+					type: "GET",
+					url: "/publisher/get",
+					dataType: 'JSON',
+					data: param
+				});
+				
+				request.done(function(response) {
+					if(response && response.length > 0) {
+						render(response);
+					} else {
+						alert("Nothing found!");
+					}
+				});
+			}
+			
+			function getTableRow(publisher) {
+				var tr = "<tr>";
+				tr += "<td>" + publisher.name + "</td>";
+				tr += "<td><a class='fa fa-edit edit-icon color-green' href=/publisher/edit/" + publisher.id + "></a></td>";
+				tr += "<td><a class='fa fa-trash delete-icon' href=/publisher/delete/" + publisher.id + "></a></td>";
+				tr += "</tr>";
+				
+				return tr;
+			}
+			
+			function render(publishers) {
+				var container = $(".table tbody");
+				container.empty();
+				
+				$.each(publishers, function(key, publisher) {
+					var row = getTableRow(publisher);
+					container.append(row);
+				});
+			}
+			
+			$(".publisherSearch").keyup(function(e) {
+				e.preventDefault();
+				
+				let text = $(this).val();
+				
+				if(searchTimer) {
+					clearTimeout(searchTimer);
+					searchTimer = null;
+				}
+							
+				searchTimer = setTimeout(function() {
+					getAllPublishers(text);
+				}, 1000);
+			});
+			
+			(function() {
+				getAllPublishers("");
+			})();
+			
+		});
+		
+	</script>
 
 </body>
 </html>

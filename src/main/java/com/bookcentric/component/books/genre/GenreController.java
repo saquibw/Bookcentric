@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bookcentric.component.books.author.Author;
-
 @Controller
 public class GenreController {
 	@Autowired GenreService genreService;

@@ -87,7 +87,12 @@
 				});
 				
 				request.done(function(response) {
-					render(response);
+					if(response && response.length > 0) {
+						render(response);
+					} else {
+						alert("Nothing found!");
+					}
+					
 				});
 			}
 			
