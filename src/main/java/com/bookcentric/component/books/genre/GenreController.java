@@ -1,13 +1,19 @@
 package com.bookcentric.component.books.genre;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.bookcentric.component.books.author.Author;
 
 @Controller
 public class GenreController {
@@ -22,10 +28,8 @@ public class GenreController {
 		if(id != null && id > 0) {
 			genre = genreService.findBy(id);
 		}
-		List<Genre> genreList = genreService.findAll();
 		
 		view.addObject("genre", genre);
-		view.addObject("genreList", genreList);
 		view.addObject("pageTitle", "BookCentric - Genre");
 		
 		return view;
@@ -44,5 +48,24 @@ public class GenreController {
 		genreService.delete(genre);
 		
 		return "redirect:/genre/view";
+	}
+	
+	private List<Genre> sortByName(List<Genre> list) {
+		return list.stream().sorted(Comparator.comparing(Genre::getName)).collect(Collectors.toList());
+	}
+	
+	@ResponseBody
+	@GetMapping("/genre/get")
+	public List<Genre> getBySearchtext(@RequestParam String searchText) {
+		List<Genre> genreList = sortByName(genreService.findAll());
+		
+		if(!searchText.isEmpty()) {
+			if(genreList != null && genreList.size() > 0) {
+				genreList = genreList.stream()
+				.filter(genre -> genre.getName().toLowerCase().contains(searchText.toLowerCase()))
+				.collect(Collectors.toList());
+			}
+		}
+		return genreList;
 	}
 }

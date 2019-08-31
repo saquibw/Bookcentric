@@ -37,6 +37,13 @@
 						
 						<label></label>
 						
+						<div class="right">
+							<form class="form-inline">
+								<i class="fa fa-search" aria-hidden="true"></i> 
+								<input class="form-control ml-3 genreSearch" type="text" placeholder="Search by Genre" aria-label="Search">
+							</form>
+						</div>
+						
 						<table class="table">
 							<thead>
 								<tr>
@@ -47,11 +54,7 @@
 							</thead>
 							
 							<tbody>
-								<tr th:each="genre : ${genreList}">
-									<td th:text="${genre.name}"></td>
-									<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/genre/edit/' + ${genre.id}}"></a></td>
-									<td><a class="fa fa-trash delete-icon" th:href="@{'/genre/delete/' + ${genre.id}}"></a></td>
-								</tr>
+								
 							</tbody>
 						</table>
 					</div>
@@ -64,6 +67,72 @@
 	</div>
 
 	<section th:insert="fragments/body :: js-container"></section>
+	
+	<script type="text/javascript">
+	
+		$(document).ready(function() {
+			
+			var searchTimer = null;
+			
+			function getAllGenres(searchText) {
+				var param = {
+						"searchText": searchText
+				}
+				
+				var request = $.ajax({
+					type: "GET",
+					url: "/genre/get",
+					dataType: 'JSON',
+					data: param
+				});
+				
+				request.done(function(response) {
+					render(response);
+				});
+			}
+			
+			function getTableRow(genre) {
+				var tr = "<tr>";
+				tr += "<td>" + genre.name + "</td>";
+				tr += "<td><a class='fa fa-edit edit-icon color-green' href=/genre/edit/" + genre.id + "></a></td>";
+				tr += "<td><a class='fa fa-trash delete-icon' href=/genre/delete/" + genre.id + "></a></td>";
+				tr += "</tr>";
+				
+				return tr;
+			}
+			
+			function render(genres) {
+				var container = $(".table tbody");
+				container.empty();
+				
+				$.each(genres, function(key, genre) {
+					var row = getTableRow(genre);
+					container.append(row);
+				});
+			}
+			
+			$(".genreSearch").keyup(function(e) {
+				e.preventDefault();
+				
+				let text = $(this).val();
+				
+				if(searchTimer) {
+					clearTimeout(searchTimer);
+					searchTimer = null;
+				}
+							
+				searchTimer = setTimeout(function() {
+					getAllGenres(text);
+				}, 1000);
+			});
+			
+			(function() {
+				getAllGenres("");
+			})();
+			
+		});
+		
+	</script>
 
 </body>
 </html>

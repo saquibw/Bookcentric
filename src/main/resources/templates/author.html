@@ -39,7 +39,7 @@
 						
 						<div class="right">
 							<form class="form-inline">
-								<!-- <i class="fa fa-search" aria-hidden="true"></i>  -->
+								<i class="fa fa-search" aria-hidden="true"></i> 
 								<input class="form-control ml-3 authorSearch" type="text" placeholder="Search by Author" aria-label="Search">
 							</form>
 						</div>
@@ -94,8 +94,8 @@
 			function getTableRow(author) {
 				var tr = "<tr>";
 				tr += "<td>" + author.name + "</td>";
-				tr += "<td><a class='fa fa-edit edit-icon color-green' href='/author/edit/'" + author.id + "></a></td>";
-				tr += "<td><a class='fa fa-trash delete-icon' href='/author/delete/'" + author.id + "></a></td>";
+				tr += "<td><a class='fa fa-edit edit-icon color-green' href=/author/edit/" + author.id + "></a></td>";
+				tr += "<td><a class='fa fa-trash delete-icon' href=/author/delete/" + author.id + "></a></td>";
 				tr += "</tr>";
 				
 				return tr;

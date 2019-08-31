@@ -26,10 +26,8 @@ public class AuthorController {
 		if(id != null && id > 0) {
 			author = authorService.findBy(id);
 		}
-		//List<Author> authorList = sortByName(authorService.findAll());
 		
 		view.addObject("author", author);
-		//view.addObject("authorList", authorList);
 		view.addObject("pageTitle", "BookCentric - Author");
 		
 		return view;
