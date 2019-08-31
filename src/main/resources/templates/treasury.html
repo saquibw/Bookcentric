@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+	  
     <head th:insert="fragments/head :: head"></head>
 
     <body class="appear-animate">
-        
         <!-- Page Loader -->        
         <div class="page-loader">
             <div class="loader">Loading...</div>
@@ -233,14 +233,14 @@
 			<div class="col-md-2 col-lg-2 mb-60 mb-xs-40">
 
 			<div class="post-prev-img book-image">
-				<a href="#"><img src="" id="book-image" alt="" /></a>
+				<a href="#" target="_blank"><img src="" id="book-image" alt="" /></a>
 			</div>
 
 			<div class="post-prev-title font-alt align-center">
-				<a href="#" id="book-name"></a>
+				<a href="#" id="book-name" target="_blank"></a>
 			</div>
 
-			<div class="post-prev-more align-center">
+			<div sec:authorize="isAuthenticated()" class="post-prev-more align-center">
 				<a href="javascript:void(0)" title="Add to Wishlist" class="btn btn-mod btn-gray btn-round toggle-wishlist">
 					<i class="fa fa-heart font-fourteen-pix"></i>
 				</a>

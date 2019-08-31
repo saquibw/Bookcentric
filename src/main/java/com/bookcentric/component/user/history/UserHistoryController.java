@@ -6,7 +6,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.json.JSONArray;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.bookcentric.component.books.BookService;
 import com.bookcentric.component.books.Books;
 import com.bookcentric.component.user.User;
@@ -28,6 +28,7 @@ import com.bookcentric.component.user.UserService;
 import com.bookcentric.component.utils.UtilService;
 import com.bookcentric.custom.util.Response;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

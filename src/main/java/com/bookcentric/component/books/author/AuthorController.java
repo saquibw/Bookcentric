@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bookcentric.component.user.security.UserSecurityService;
+
 @Controller
 public class AuthorController {
 	@Autowired AuthorService authorService;

@@ -6438,6 +6438,15 @@ section:hover .small-item-carousel .owl-next{
     background: rgba(0,0,0, .8);
 }
 
+.greetings {
+	position: fixed;
+    top: 5px;
+    right: 30px;
+    font-size: 15px;
+    z-index: 1030;
+    font-style: italic;
+    color: cornsilk;
+}
 
 /* ==============================
    Bootstrap multicolumn grid

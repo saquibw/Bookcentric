@@ -11,12 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bookcentric.component.subscription.borrowlimit.BorrowLimit;
-import com.bookcentric.component.subscription.borrowlimit.BorrowLimitService;
 import com.bookcentric.component.subscription.category.Category;
 import com.bookcentric.component.subscription.category.CategoryService;
-import com.bookcentric.component.subscription.planduration.PlanDuration;
-import com.bookcentric.component.subscription.planduration.PlanDurationService;
 import com.bookcentric.component.subscription.subscriptionduration.SubscriptionDuration;
 import com.bookcentric.component.subscription.subscriptionduration.SubscriptionDurationService;
 
@@ -25,8 +21,6 @@ public class SubscriptionController {
 	
 	@Autowired SubscriptionService subscriptionService;
 	@Autowired CategoryService categoryService;
-	/*@Autowired BorrowLimitService borrowLimitService;
-	@Autowired PlanDurationService planDurationService;*/
 	@Autowired SubscriptionDurationService subscriptionDurationService;
 	
 	@GetMapping({"/subscription/view", "/subscription/edit/{id}"})
@@ -41,15 +35,11 @@ public class SubscriptionController {
 		
 		List<Subscription> subscriptionList = subscriptionService.findAll();
 		List<Category> categoryList = categoryService.findAll();
-		/*List<BorrowLimit> borrowLimitList = borrowLimitService.findAll();
-		List<PlanDuration> planDurationList = planDurationService.findAll();*/
 		List<SubscriptionDuration> subscriptionDurationList = subscriptionDurationService.findAll();
 		
 		view.addObject("subscription", subscription);
 		view.addObject("subscriptionList", subscriptionList);
 		view.addObject("categoryList", categoryList);
-		/*view.addObject("borrowLimitList", borrowLimitList);
-		view.addObject("planDurationList", planDurationList);*/
 		view.addObject("subscriptionDurationList", subscriptionDurationList);
 		view.addObject("pageTitle", "BookCentric - Subscription");
 		

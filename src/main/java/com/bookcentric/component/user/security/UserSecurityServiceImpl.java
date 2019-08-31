@@ -14,8 +14,9 @@ public class UserSecurityServiceImpl implements UserSecurityService{
 	@Autowired private UserService userService;
 
 	@Override
-	public User getLoggedInUser() {
+	public User getLoggedInUser() {     
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(authentication.toString());
 		User user = new User();
 		if(authentication != null) {
 			String email = authentication.getName();

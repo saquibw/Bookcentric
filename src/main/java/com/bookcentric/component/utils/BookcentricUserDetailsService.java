@@ -30,7 +30,7 @@ public class BookcentricUserDetailsService implements UserDetailsService{
 		if(user == null) {
 			throw new UsernameNotFoundException("No user found with username: "+ email);
 		}
-		
+		System.out.println(user.toString());
 		if(user.getStatus().getName().equals(Constants.STATUS_ACTIVE)) {
 			List<String> roles = new ArrayList<>();
 
@@ -38,10 +38,11 @@ public class BookcentricUserDetailsService implements UserDetailsService{
 	        boolean accountNonExpired = true;
 	        boolean credentialsNonExpired = true;
 	        boolean accountNonLocked = true;
-	        
-	        roles.add(Constants.ROLE_USER);
+	        	        
 	        if(user.getRole().equals(Constants.ROLE_ADMIN)) {
-	        	roles.add(Constants.ROLE_ADMIN);
+	        	roles.add("ROLE_ADMIN");
+	        } else {
+	        	roles.add("ROLE_USER");
 	        }
 	        
 	        return  new org.springframework.security.core.userdetails.User

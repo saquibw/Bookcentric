@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:insert="fragments/head :: head"></head>
 
@@ -39,11 +40,11 @@
 							<div class="col-md-12 left">
 								<div><label>Tags: </label><label th:text="${book.tagName}"></label></div>
 								<div><label>Status: </label><label th:text="${book.remainingCount} > 0 ? 'Available' : 'Not available'"></label></div>
-								<div>
+								<div sec:authorize="isAuthenticated()">
 									<div th:if="${book.wishlist}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-wishlist remove"><i class="fa fa-heart font-medium color-red"></i></a><label>Add to Wishlist</label></div>
 									<div th:unless="${book.wishlist}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-wishlist add"><i class="fa fa-heart font-medium color-gray"></i></a><label>Add to Wishlist</label></div>
 								</div>
-								<div>
+								<div sec:authorize="isAuthenticated()">
 									<div th:if="${book.readingQueue}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-reading-queue remove"><i class="fa fa-plus-square font-medium color-green"></i></a><label>Add to Reading Queue</label></div>
 									<div th:unless="${book.readingQueue}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-reading-queue add"><i class="fa fa-plus-square font-medium color-gray"></i></a><label>Add to Reading Queue</label></div>
 								</div>

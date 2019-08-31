@@ -28,9 +28,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			authorizeRequests()
 				.antMatchers("/", "/home").permitAll()
 				.antMatchers("/user/registration", "/user/add").permitAll()
-/*				.antMatchers("/management/**").permitAll()
-				.antMatchers("/user/**").permitAll()*/
 				.antMatchers("/treasury/**").permitAll()
+				.antMatchers("/book/get/**").permitAll()
+				.antMatchers("/get/image/**").permitAll()
+				.antMatchers("/management/**").hasRole("ADMIN")
+				.antMatchers("/user/get/**", "/user/update", "/user/history/**").hasRole("ADMIN")
+				.antMatchers("/book/entry", "/book/add", "/book/inventory", "/book/view/**", "/book/update/**", "/book/delete/**").hasRole("ADMIN")
+				.antMatchers("/author/**", "/genre/**", "/tag/**", "/publisher/**").hasRole("ADMIN")
+				.antMatchers("/borrowlimit/**", "/planduration/**", "/subscriptionduration/**", "/category/**").hasRole("ADMIN")
+				.antMatchers("/user/update/wishlist", "/user/update/readingqueue", "/user/dashboard/").hasAnyRole("ADMIN", "USER")
 				.antMatchers("/css/**").permitAll()
 				.antMatchers("/images/**").permitAll()
 				.antMatchers("/js/**").permitAll()
@@ -45,9 +51,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.permitAll()
 				.and()
 			.logout()
-            	.permitAll()	
-			.and()
-				.csrf().disable();
+				.logoutUrl("/logout")
+				.logoutSuccessUrl("/logoutsuccess")
+            	.invalidateHttpSession(true)
+            	.deleteCookies("JSESSIONID")
+            	.permitAll()
+            	.and()
+            	.csrf().disable();
 	}	
 	
 
