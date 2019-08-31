@@ -64,6 +64,77 @@
 	</div>
 
 	<section th:insert="fragments/body :: js-container"></section>
+	
+	<script type="text/javascript">
+	
+		$(document).ready(function() {
+			
+			var searchTimer = null;
+			
+			function getAllTags(searchText) {
+				var param = {
+						"searchText": searchText
+				}
+				
+				var request = $.ajax({
+					type: "GET",
+					url: "/tag/get",
+					dataType: 'JSON',
+					data: param
+				});
+				
+				request.done(function(response) {
+					if(response && response.length > 0) {
+						render(response);
+					} else {
+						alert("Nothing found!");
+					}
+					
+				});
+			}
+			
+			function getTableRow(tag) {
+				var tr = "<tr>";
+				tr += "<td>" + tag.name + "</td>";
+				tr += "<td><a class='fa fa-edit edit-icon color-green' href=/tag/edit/" + tag.id + "></a></td>";
+				tr += "<td><a class='fa fa-trash delete-icon' href=/tag/delete/" + tag.id + "></a></td>";
+				tr += "</tr>";
+				
+				return tr;
+			}
+			
+			function render(tags) {
+				var container = $(".table tbody");
+				container.empty();
+				
+				$.each(tags, function(key, tag) {
+					var row = getTableRow(tag);
+					container.append(row);
+				});
+			}
+			
+			$(".tagSearch").keyup(function(e) {
+				e.preventDefault();
+				
+				let text = $(this).val();
+				
+				if(searchTimer) {
+					clearTimeout(searchTimer);
+					searchTimer = null;
+				}
+							
+				searchTimer = setTimeout(function() {
+					getAllTags(text);
+				}, 1000);
+			});
+			
+			(function() {
+				getAllTags("");
+			})();
+			
+		});
+		
+	</script>
 
 </body>
 </html>
