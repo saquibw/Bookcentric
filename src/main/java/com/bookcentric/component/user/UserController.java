@@ -1,16 +1,11 @@
 package com.bookcentric.component.user;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.apache.tomcat.jni.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -76,6 +71,7 @@ public class UserController {
 
 		UserStatus status = userStatusService.getBy(3);
 		user.setStatus(status);
+		user.setRole(Constants.ROLE_USER);
 		
 		userService.add(user);
 		
@@ -115,6 +111,7 @@ public class UserController {
 		user.setReadingQueue(dbUser.getReadingQueue());
 		user.setWishlist(dbUser.getWishlist());
 		user.setPassword(dbUser.getPassword());
+		user.setRole(dbUser.getRole());
 				
 		if((dbUser.getPassword() == null || dbUser.getPassword().isEmpty()) && Constants.STATUS_ACTIVE.toLowerCase().equals(user.getStatus().getName().toLowerCase())) {
 			String password = utilService.getAlphaNumericString(6);
@@ -131,19 +128,6 @@ public class UserController {
 		
 		return "redirect:/management/user";
 	}
-
-	/*@ResponseBody
-	@RequestMapping(value="/user/updatestatus", method=RequestMethod.POST)
-	public Response updateStatus(@RequestParam("status") String status, @RequestParam("id") Integer id) {
-		Response response = new Response();
-
-		if(userService.updateStatus(id, status)) {
-			response.setSuccess(true);
-		}
-
-		return response;
-
-	}*/
 
 	@ResponseBody
 	@PostMapping("/user/update/readingqueue")

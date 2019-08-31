@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,6 @@ import com.bookcentric.component.utils.EmailService;
 import com.bookcentric.config.AppConfig;
 import com.bookcentric.custom.util.Constants;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,15 +24,14 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired AppConfig config;
 	
-	public void add(User user) throws MySQLIntegrityConstraintViolationException{
-		
-		userRepository.save(user);
-		
+	@Autowired ModelMapper mapper;
+	
+	public void add(User user) throws MySQLIntegrityConstraintViolationException{		
+		userRepository.save(user);		
 	}
 
 	@Override
-	public List<User> getAll() {
-		
+	public List<User> getAll() {		
 		return userRepository.findAll();
 	}
 
@@ -125,6 +123,19 @@ public class UserServiceImpl implements UserService {
 			userRepository.saveAll(expiredUsers);
 		}
 		
+	}
+
+	@Override
+	public UserLoginDTO getBy(String email) {
+		User user = userRepository.getByEmail(email);
+		UserLoginDTO userDto = mapper.map(user, UserLoginDTO.class);
+		
+		return userDto;
+	}
+
+	@Override
+	public User getByEmail(String email) {
+		return userRepository.getByEmail(email);
 	}
 	
 	

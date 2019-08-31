@@ -155,7 +155,6 @@ public class BookController {
 	public Response getBooks(@RequestParam("searchText") String searchText) {
 		List<Books> books = bookService.searchByBookName(searchText);
 
-
 		Response response = new Response();
 		response.setData(books);
 		response.setSuccess(true);

@@ -9,9 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.bookcentric.component.subscription.borrowlimit.BorrowLimit;
 import com.bookcentric.component.subscription.category.Category;
-import com.bookcentric.component.subscription.planduration.PlanDuration;
 import com.bookcentric.component.subscription.subscriptionduration.SubscriptionDuration;
 
 import lombok.Data;

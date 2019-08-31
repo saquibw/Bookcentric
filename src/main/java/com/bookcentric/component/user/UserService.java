@@ -1,8 +1,6 @@
 package com.bookcentric.component.user;
 
 import java.util.List;
-import java.util.Optional;
-
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 public interface UserService {
@@ -11,6 +9,10 @@ public interface UserService {
 	public List<User> getAll();
 	
 	public User getBy(Integer id);
+	
+	public User getByEmail(String email);
+	
+	public UserLoginDTO getBy(String email);
 	
 	public boolean sendUserActivationEmail(User user);
 	

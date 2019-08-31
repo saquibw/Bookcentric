@@ -13,4 +13,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	@Query(value = "Select u FROM User u WHERE u.status.id = 1 AND u.dateOfRenewal = CURDATE()")
 	public List<User> findAllActiveExpiresToday();
+	
+	public User getByEmail(String email);
 }
