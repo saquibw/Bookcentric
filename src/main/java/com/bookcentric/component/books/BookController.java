@@ -2,9 +2,11 @@ package com.bookcentric.component.books;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -55,10 +57,10 @@ public class BookController {
 		ModelAndView bookView = new ModelAndView("book-entry");
 
 		Books book = new Books();
-		List<Author> authorList = authorService.findAll();
-		List<Publisher> publisherList = publisherService.findAll();
-		List<Genre> genreList = genreService.findAll();
-		List<Tag> tagList = tagService.findAll();
+		List<Author> authorList = getSortedAuthorList();
+		List<Publisher> publisherList = getSortedPublisherList();
+		List<Genre> genreList = getSortedGenreList();
+		List<Tag> tagList = getSortedTagList();
 
 		bookView.addObject("pageTitle", "BookCentric - Book entry");
 		bookView.addObject("book", book);
@@ -95,10 +97,10 @@ public class BookController {
 		ModelAndView bookView = new ModelAndView("book-update");
 
 		Books book = bookService.getBy(id);
-		List<Author> authorList = authorService.findAll();
-		List<Publisher> publisherList = publisherService.findAll();
-		List<Genre> genreList = genreService.findAll();
-		List<Tag> tagList = tagService.findAll();
+		List<Author> authorList = getSortedAuthorList();
+		List<Publisher> publisherList = getSortedPublisherList();
+		List<Genre> genreList = getSortedGenreList();
+		List<Tag> tagList = getSortedTagList();
 
 		bookView.addObject("pageTitle", "BookCentric - Book update");
 		bookView.addObject("book", book);
@@ -210,6 +212,22 @@ public class BookController {
 		}
 		
 		return response;
+	}
+	
+	private List<Author> getSortedAuthorList() {
+		return authorService.findAll().stream().sorted(Comparator.comparing(Author::getName)).collect(Collectors.toList());
+	}
+	
+	private List<Publisher> getSortedPublisherList() {
+		return publisherService.findAll().stream().sorted(Comparator.comparing(Publisher::getName)).collect(Collectors.toList());
+	}
+	
+	private List<Genre> getSortedGenreList() {
+		return genreService.findAll().stream().sorted(Comparator.comparing(Genre::getName)).collect(Collectors.toList());
+	}
+	
+	private List<Tag> getSortedTagList() {
+		return tagService.findAll().stream().sorted(Comparator.comparing(Tag::getName)).collect(Collectors.toList());
 	}
 
 }
