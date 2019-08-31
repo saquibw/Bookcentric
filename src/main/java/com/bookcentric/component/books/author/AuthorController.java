@@ -1,12 +1,16 @@
 package com.bookcentric.component.books.author;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -22,10 +26,10 @@ public class AuthorController {
 		if(id != null && id > 0) {
 			author = authorService.findBy(id);
 		}
-		List<Author> authorList = authorService.findAll();
+		//List<Author> authorList = sortByName(authorService.findAll());
 		
 		view.addObject("author", author);
-		view.addObject("authorList", authorList);
+		//view.addObject("authorList", authorList);
 		view.addObject("pageTitle", "BookCentric - Author");
 		
 		return view;
@@ -44,5 +48,24 @@ public class AuthorController {
 		authorService.delete(author);
 		
 		return "redirect:/author/view";
+	}
+	
+	private List<Author> sortByName(List<Author> list) {
+		return list.stream().sorted(Comparator.comparing(Author::getName)).collect(Collectors.toList());
+	}
+	
+	@ResponseBody
+	@GetMapping("/author/get")
+	public List<Author> getBySearchtext(@RequestParam String searchText) {
+		List<Author> authorList = sortByName(authorService.findAll());
+		
+		if(!searchText.isEmpty()) {
+			if(authorList != null && authorList.size() > 0) {
+				authorList = authorList.stream()
+				.filter(author -> author.getName().toLowerCase().contains(searchText.toLowerCase()))
+				.collect(Collectors.toList());
+			}
+		}
+		return authorList;
 	}
 }

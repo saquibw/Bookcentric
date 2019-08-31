@@ -37,6 +37,13 @@
 						
 						<label></label>
 						
+						<div class="right">
+							<form class="form-inline">
+								<!-- <i class="fa fa-search" aria-hidden="true"></i>  -->
+								<input class="form-control ml-3 authorSearch" type="text" placeholder="Search by Author" aria-label="Search">
+							</form>
+						</div>
+						
 						<table class="table">
 							<thead>
 								<tr>
@@ -47,11 +54,7 @@
 							</thead>
 							
 							<tbody>
-								<tr th:each="author : ${authorList}">
-									<td th:text="${author.name}"></td>
-									<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/author/edit/' + ${author.id}}"></a></td>
-									<td><a class="fa fa-trash delete-icon" th:href="@{'/author/delete/' + ${author.id}}"></a></td>
-								</tr>
+								
 							</tbody>
 						</table>
 					</div>
@@ -64,6 +67,72 @@
 	</div>
 
 	<section th:insert="fragments/body :: js-container"></section>
+	
+	<script type="text/javascript">
+	
+		$(document).ready(function() {
+			
+			var searchTimer = null;
+			
+			function getAllAuthors(searchText) {
+				var param = {
+						"searchText": searchText
+				}
+				
+				var request = $.ajax({
+					type: "GET",
+					url: "/author/get",
+					dataType: 'JSON',
+					data: param
+				});
+				
+				request.done(function(response) {
+					render(response);
+				});
+			}
+			
+			function getTableRow(author) {
+				var tr = "<tr>";
+				tr += "<td>" + author.name + "</td>";
+				tr += "<td><a class='fa fa-edit edit-icon color-green' href='/author/edit/'" + author.id + "></a></td>";
+				tr += "<td><a class='fa fa-trash delete-icon' href='/author/delete/'" + author.id + "></a></td>";
+				tr += "</tr>";
+				
+				return tr;
+			}
+			
+			function render(authors) {
+				var container = $(".table tbody");
+				container.empty();
+				
+				$.each(authors, function(key, author) {
+					var row = getTableRow(author);
+					container.append(row);
+				});
+			}
+			
+			$(".authorSearch").keyup(function(e) {
+				e.preventDefault();
+				
+				let text = $(this).val();
+				
+				if(searchTimer) {
+					clearTimeout(searchTimer);
+					searchTimer = null;
+				}
+							
+				searchTimer = setTimeout(function() {
+					getAllAuthors(text);
+				}, 1000);
+			});
+			
+			(function() {
+				getAllAuthors("");
+			})();
+			
+		});
+		
+	</script>
 
 </body>
 </html>
