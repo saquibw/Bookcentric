@@ -138,6 +138,19 @@ public class UserServiceImpl implements UserService {
 		return userRepository.getByEmail(email);
 	}
 	
-	
+	@Override
+	public boolean sendUserPasswordResetEmail(User user, String password) {
+		String to = user.getEmail();
+		String subject = "Your password has been reset";
+		
+		StringBuilder text = new StringBuilder();
+		text.append(String.format("Dear %s", user.getFullName()));
+		text.append("\n\n");
+		text.append(String.format("Your password has been reset by admin. Please use password: %s to login here: %s", password, "https://bookcentricbd.com/login"));
+		
+		emailService.sendSimpleEmail(to, subject, text.toString());
+		
+		return true;
+	}
 
 }

@@ -169,7 +169,7 @@ public class UserController {
 		Response response = new Response();
 
 		Books book = bookService.getBy(bookId);
-		//User user = userService.getBy(16).get();
+
 		User user = userSecurityService.getLoggedInUser();
 		List<Books> wishlist = user.getWishlist();
 
@@ -189,5 +189,31 @@ public class UserController {
 		}
 
 		return response;		
+	}
+	
+	@ResponseBody
+	@PostMapping("/user/reset/password")
+	public Response resetPasswordByAdmin(@RequestParam("userId") Integer userId) {
+		Response response = new Response();
+		
+		if(userId != null) {
+			User user = userService.getBy(userId);
+			if(user != null) {
+				String password = utilService.getAlphaNumericString(6);
+				String encryptedPassword = utilService.encryptPassword(password);
+				user.setPassword(encryptedPassword);
+				userService.add(user);
+				
+				userService.sendUserPasswordResetEmail(user, password);
+				
+				response.setSuccess(true);
+			} else {
+				response.setSuccess(false);
+			}
+		} else {
+			response.setSuccess(false);
+		}
+		
+		return response;
 	}
 }

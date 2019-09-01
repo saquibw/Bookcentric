@@ -23,4 +23,6 @@ public interface UserService {
 	public void sendSubscriptionExpiryEmail();
 	
 	public void renewSubscriptionDate();
+	
+	public boolean sendUserPasswordResetEmail(User user, String password);
 }

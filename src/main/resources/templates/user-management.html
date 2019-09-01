@@ -27,7 +27,7 @@
 									<th>Phone</th>
 									<th>Status</th>
 									<th></th>
-									<!-- <th></th> -->
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -39,10 +39,7 @@
 									<td th:text="${user.phone}"></td>
 									<td th:text="${user.status.name}"></td>
 									<td><a class="btn btn-primary btn-sm" th:href="@{'/user/get/' + ${user.id}}">Edit</a></td>
-									<!-- <td>
-										<a class="btn btn-primary btn-sm update-status" href="#" th:if="${user.status} == 'Active'">Deactivate</a>
-										<a class="btn btn-primary btn-sm update-status" href="#" th:unless="${user.status} == 'Active'">Activate</a>
-									</td> -->
+									<td><a class="btn btn-secondary btn-sm reset-password" href="javascript:void(0)">Reset password</a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -55,47 +52,37 @@
 
 	<section th:insert="fragments/body :: js-container"></section>
 	
-	<!-- <script>
+	<script>
 	$(document).ready(function() {
-		$(".update-status").click(function(e) {
+		$(".reset-password").click(function(e) {
 			e.preventDefault();
-			var currentRow = $(this).closest('tr');
-			var id = currentRow.find("td:eq(0)").text();
-			var status = "";
-			var button = $(this);
-			var buttonText = button.text();
-			var statusCol = currentRow.find("td:eq(5)");
 			
-			if(buttonText == "Deactivate") {
-				status = "Inactive";
-			} else if (buttonText == "Activate") {
-				status = "Active";
-			}
-			
-			var request = $.ajax({
-				type: "POST",
-				url: "/user/updatestatus",
-				dataType: 'JSON',
-				data: {
-					"status": status,
-					"id": id
-				}
-			});
-			
-			request.done(function(response){
-				if(response.success) {
-					statusCol.text(status);
-					if(buttonText == "Deactivate") {
-						button.text("Activate");
-					} else if (buttonText == "Activate") {
-						button.text("Deactivate");
+			var confirmation = confirm("Are you sure you want to reset this password?");
+			if (confirmation == true) {
+				var currentRow = $(this).closest('tr');
+				var id = currentRow.find("td:eq(0)").text();
+							
+				var request = $.ajax({
+					type: "POST",
+					url: "/user/reset/password",
+					dataType: 'JSON',
+					data: {
+						"userId": id
 					}
-				}
-			});
+				});
+				
+				request.done(function(response){
+					if(response.success) {
+						alert("Password reset successful!");					
+					} else {
+						alert("Password reset failed! Please try again.");
+					}
+				});
+			}
 			
 		});
 	});
-	</script> -->
+	</script>
 </body>
 
 </html>
