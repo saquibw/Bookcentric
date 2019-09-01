@@ -45,9 +45,9 @@ public class UtilServiceImpl implements UtilService {
 	}
 
 	@Override
-	public String decryptPassword(String password) {
-		// TODO Auto-generated method stub
-		return password;
+	public boolean matchPassword(String newPassword, String oldPassword) {
+		
+		return passwordEncoder.matches(newPassword, oldPassword);
 	}
 
 	@Override

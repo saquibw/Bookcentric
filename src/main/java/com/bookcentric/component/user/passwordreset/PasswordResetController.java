@@ -1,7 +1,5 @@
 package com.bookcentric.component.user.passwordreset;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,12 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bookcentric.component.user.User;
 import com.bookcentric.component.user.UserService;
 import com.bookcentric.component.user.security.UserSecurityService;
+import com.bookcentric.component.utils.UtilService;
 
 @Controller
 public class PasswordResetController {
 	@Autowired UserSecurityService securityService;
-	@Autowired PasswordEncoder encoder;
 	@Autowired UserService userService;
+	@Autowired UtilService utilService;
 
 	@GetMapping("/password/reset")
 	public ModelAndView viewPasswordResetPage() {
@@ -45,11 +44,11 @@ public class PasswordResetController {
 		if(pw != null) {
 			User user = securityService.getLoggedInUser();
 			
-			if(!encoder.matches(pw.getCurrentPassword(), user.getPassword())) {
+			if(!utilService.matchPassword(pw.getCurrentPassword(), user.getPassword())) {
 				model.addAttribute("wrongPassword", "true");
 				page = "password-reset";
 			} else {
-				String encodedPw = encoder.encode(pw.getNewPassword());
+				String encodedPw = utilService.encryptPassword(pw.getNewPassword());
 				user.setPassword(encodedPw);
 				userService.add(user);
 				
@@ -57,7 +56,7 @@ public class PasswordResetController {
 		        context.setAuthentication(null);
 		        session.setComplete();
 		        
-		        model.addAttribute("passwordResetSuccess", "true");				
+		        model.addAttribute("passwordResetSuccess", "true");		
 			}
 		}
 		return page;

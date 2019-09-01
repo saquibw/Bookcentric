@@ -7,7 +7,7 @@ public interface UtilService {
 	
 	public String encryptPassword(String password);
 	
-	public String decryptPassword(String password);
+	public boolean matchPassword(String newPassword, String oldPassword);
 	
 	public LocalDate format(LocalDate date, String pattern);
 }
