@@ -1,5 +1,6 @@
 package com.bookcentric.component.user;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -71,6 +72,7 @@ public class UserController {
 				UserStatus status = userStatusService.getBy(3);
 				user.setStatus(status);
 				user.setRole(Constants.ROLE_USER);
+				user.setCreatedAt(LocalDateTime.now());
 				
 				userService.add(user);
 				
@@ -133,6 +135,7 @@ public class UserController {
 		user.setWishlist(dbUser.getWishlist());
 		user.setPassword(dbUser.getPassword());
 		user.setRole(dbUser.getRole());
+		user.setCreatedAt(dbUser.getCreatedAt());
 				
 		if((dbUser.getPassword() == null || dbUser.getPassword().isEmpty()) && Constants.STATUS_ACTIVE.toLowerCase().equals(user.getStatus().getName().toLowerCase())) {
 			String password = utilService.getAlphaNumericString(6);
