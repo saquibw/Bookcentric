@@ -1,5 +1,6 @@
 package com.bookcentric.component.management;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +34,7 @@ public class ManagementController {
 		
 		List<User> userList = userService.getAll().stream()
 				.filter(user -> !user.getRole().equals(Constants.ROLE_ADMIN))
+				.sorted(Comparator.comparing(User::getCreatedAt).reversed())
 				.collect(Collectors.toList());
 		
 		model.addAttribute("pageTitle", "BookCentric - User management");
@@ -47,6 +49,7 @@ public class ManagementController {
 		
 		List<User> activeUserList = userService.getAll().stream()
 				.filter(user -> Constants.STATUS_ACTIVE.equals(user.getStatus().getName()) && !user.getRole().equals(Constants.ROLE_ADMIN))
+				.sorted(Comparator.comparing(User::getFirstName))
 				.collect(Collectors.toList());
 		
 		userView.addObject("pageTitle", "BookCentric - User history");

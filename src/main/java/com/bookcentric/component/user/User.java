@@ -1,6 +1,7 @@
 package com.bookcentric.component.user;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -50,6 +51,7 @@ public class User {
 	private String genre;
 	private String instruction;
 	private String role;
+	private LocalDateTime createdAt;
 	
 	@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="subscriptionId")
 	private Subscription subscription;
