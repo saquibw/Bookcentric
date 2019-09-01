@@ -20,6 +20,9 @@
 						<!-- Form -->
 						<form th:action="@{/user/add}" th:object="${user}" method="post"
 							autocomplete="off">
+							
+							<p th:if="${duplicateEmail}" class="error">Email already exists!</p>
+							<p th:if="${registrationSuccess}" class="success">Registration completed successfully!</p>
 
 							<div th:insert="fragments/forms :: user-form"></div>
 

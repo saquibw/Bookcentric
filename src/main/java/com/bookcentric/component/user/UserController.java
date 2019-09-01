@@ -1,6 +1,8 @@
 package com.bookcentric.component.user;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +51,39 @@ public class UserController {
 
 	@GetMapping("/user/registration")
 	public ModelAndView viewRegistration() {
+		return getUserRegModel();
+	}
+
+	@PostMapping(value="/user/add")
+	public ModelAndView addUser(User user) throws MySQLIntegrityConstraintViolationException {
+		ModelAndView mv = getUserRegModel();
+		
+		List<User> userList = userService.getAll();
+		
+		if(user != null && !user.getEmail().isEmpty()) {
+			List<User> duplicateEmailList = userList.stream().
+					filter(u -> u.getEmail().equals(user.getEmail()))
+					.collect(Collectors.toList());
+			if(duplicateEmailList != null && duplicateEmailList.size() > 0) {
+				mv.addObject("user", user);
+				mv.addObject("duplicateEmail", "true");
+			} else {
+				UserStatus status = userStatusService.getBy(3);
+				user.setStatus(status);
+				user.setRole(Constants.ROLE_USER);
+				
+				userService.add(user);
+				
+				userService.sendUserRegistrationEmail(user);
+				
+				mv.addObject("registrationSuccess", "true");
+			}
+		}
+
+		return mv;
+	}
+	
+	private ModelAndView getUserRegModel() {
 		ModelAndView regView = new ModelAndView("user-registration");
 
 		List<Subscription> subscriptionList = subscriptionService.findAll();
@@ -63,21 +98,7 @@ public class UserController {
 		regView.addObject("paymentModeList", paymentModeList);
 		regView.addObject("userStatusList", userStatusList);
 
-		return regView;	
-	}
-
-	@PostMapping(value="/user/add")
-	public String addUser(User user) throws MySQLIntegrityConstraintViolationException {
-
-		UserStatus status = userStatusService.getBy(3);
-		user.setStatus(status);
-		user.setRole(Constants.ROLE_USER);
-		
-		userService.add(user);
-		
-		userService.sendUserRegistrationEmail(user);
-
-		return "redirect:/user/registration";
+		return regView;
 	}
 
 	@GetMapping("/user/get/{id}")
