@@ -4,7 +4,7 @@ import java.util.List;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 public interface UserService {
-	public void add(User user) throws MySQLIntegrityConstraintViolationException;
+	public void add(User user);
 	
 	public List<User> getAll();
 	

@@ -30,7 +30,7 @@ public class BookcentricUserDetailsService implements UserDetailsService{
 		if(user == null) {
 			throw new UsernameNotFoundException("No user found with username: "+ email);
 		}
-		System.out.println(user.toString());
+
 		if(user.getStatus().getName().equals(Constants.STATUS_ACTIVE)) {
 			List<String> roles = new ArrayList<>();
 

@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired ModelMapper mapper;
 	
-	public void add(User user) throws MySQLIntegrityConstraintViolationException{		
+	public void add(User user) {		
 		userRepository.save(user);		
 	}
 
