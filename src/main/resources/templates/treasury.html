@@ -27,9 +27,6 @@
                             <div class="row">                        
                                 <div class="col-md-8 align-left">
                                     <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Treasury</h1>
-                                    <div class="hs-line-4 font-alt">
-                                        Find the book you're looking for
-                                    </div>
                                 </div>
                             </div>
                             
@@ -231,13 +228,13 @@
             
         <script id="book-item" type="text/template">
 			<div class="col-md-2 col-lg-2 mb-60 mb-xs-40">
-
+			<label></label>
 			<div class="post-prev-img book-image">
-				<a href="#" target="_blank"><img src="" id="book-image" alt="" /></a>
+				<a href="#" target="_blank"><img src="" id="book-image" alt="No image"/></a>
 			</div>
 
 			<div class="post-prev-title font-alt align-center">
-				<a href="#" id="book-name" target="_blank"></a>
+				<a href="#" id="book-name" target="_blank" data-toggle="tooltip" title="Hooray!"></a>
 			</div>
 
 			<div sec:authorize="isAuthenticated()" class="post-prev-more align-center">
@@ -247,6 +244,17 @@
 				<a href="javascript:void(0)" title="Add to Reading Queue" class="btn btn-mod btn-gray btn-round toggle-reading-queue">
 					<i class="fa fa-plus-square font-fourteen-pix"></i>
 				</a>
+			</div>
+
+			</div>
+
+		</script>
+		
+		<script id="special-book-item" type="text/template">
+			<div class="col-md-2 col-lg-2 mb-60 mb-xs-40">
+
+			<div class="post-prev-img book-image">
+				<a href="#" target="_blank"><img src="" id="book-image" alt="No image" /></a>
 			</div>
 
 			</div>

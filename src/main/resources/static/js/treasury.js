@@ -136,7 +136,7 @@ var TreasuryManager = (function() {
 		
 		container.append(left);
 		for(let i=specialBookStartIndex; i<=specialBookEndIndex; i++) {
-			let element = updateTemplateData(specialBooks[i]);
+			let element = updateTemplateDataForSpecialBooks(specialBooks[i]);
 			
 			container.append(element);
 			emptyTempContainer();
@@ -187,8 +187,13 @@ var TreasuryManager = (function() {
 		temp.html(template);
 		
 		let bookName = $(temp).find("#book-name");
-		bookName.text(book.name);
+		let bookNameStr = book.name;
+		if(bookNameStr.length > 10) {
+			bookNameStr = bookNameStr.substr(0,10).trim() + "...";
+		}
+		bookName.text(bookNameStr);
 		bookName.attr("href", "/book/get/" + book.id);
+		bookName.attr('title',book.name);
 		
 		let bookImage = $(temp).find("#book-image");
 		bookImage.attr("src", "/get/image/" + book.id);
@@ -219,6 +224,18 @@ var TreasuryManager = (function() {
 			wishList.addClass(ACTION_ADD);
 			wishListIcon.removeClass("color-red");
 		}
+		
+		return temp.html();
+	}
+	
+	function updateTemplateDataForSpecialBooks (book) {
+		let template = $("#special-book-item").html();
+		let temp = $("#temp-container");
+		temp.html(template);
+		
+		let bookImage = $(temp).find("#book-image");
+		bookImage.attr("src", "/get/image/" + book.id);
+		bookImage.parent().attr("href", "/book/get/" + book.id);
 		
 		return temp.html();
 	}
