@@ -488,12 +488,11 @@ hr.black{
 }
 .font-alt{
     font-family: 'Chloe', sans-serif;
-    /*text-transform: uppercase;*/
     letter-spacing: 0.2em;
 }
 
 .font-prata {
-	font-family: 'prata';
+	font-family: 'prata', sans-serif;
 	letter-spacing: 0.2em;
 }
 .serif{
@@ -1357,7 +1356,7 @@ a.bg-video-button-muted{
 .hs-line-11{
     margin-top: 0;
     position: relative;
-    font-size: 40px;
+    font-size: 50px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5em;
