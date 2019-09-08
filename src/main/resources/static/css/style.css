@@ -434,6 +434,10 @@ p{
 ul, ol{
     margin: 0 0 1.5em 0;
 }
+
+ol li {
+	margin: 0 0 1em 0;
+}
 blockquote{
     margin: 3em 0 3em 0;
     padding: 0;
@@ -483,10 +487,14 @@ hr.black{
     letter-spacing: 1px;
 }
 .font-alt{
-    /* font-family: 'Chloe', sans-serif; */
-    font-family: sans-serif;
+    font-family: 'Chloe', sans-serif;
     /*text-transform: uppercase;*/
     letter-spacing: 0.2em;
+}
+
+.font-prata {
+	font-family: 'prata';
+	letter-spacing: 0.2em;
 }
 .serif{
     font-family: 'Chloe', sans-serif;

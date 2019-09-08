@@ -79,4 +79,11 @@ public class SubscriptionController {
 		
 		return view;
 	}
+	
+	@GetMapping("/subscription/view/deliveryinformation")
+	public ModelAndView viewDeliveryInformation() {
+		ModelAndView view = new ModelAndView("delivery-information");
+		
+		return view;
+	}
 }

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<!-- Main body -->
+		<div class="container-fluid">
+
+			<div class="row justify-content-md-center top-space">
+
+				<div th:insert="fragments/body :: management-navbar"></div>
+
+				<div class="col-md-8 card management-card left">
+					<div class="card-body">
+						<h1>Delivery Information</h1>
+
+						<div class="color-red">
+							<h6>NOTE : Delivery Charges :</h6>
+							<ul>
+								<li><label>Bookster - Tk 60/delivery</label></li>
+								<li><label>Bookbug - Tk 60/delivery</label></li>
+								<li><label>Bookbomb - Free</label></li>
+								<li><label>Bookcub - Tk 60/delivery</label></li>
+								<li><label>Bookling- Tk 60/delivery</label></li>
+								<li><label>Bookwiz - Tk 60/delivery</label></li>
+								<li><label>Bookzilla - Free</label></li>
+								<li><label>Bookbrood - Tk.60/delivery</label></li>
+								<li><label>Bookclan - Free</label></li>
+							</ul>
+						</div>
+
+						<div class="color-deep-blue">
+							<p align="justify">Bookcentric allows members to read books
+								on a monthly, half-yearly or yearly subscription plan. Members
+								would thus be able to read books of their favourite authors and
+								genres without burning a hole in their pockets. By choosing the
+								half-yearly and yearly plans, members can pay even less and add
+								to their savings.</p>
+							<p align="justify">For example, a ‘Booknerd’ will receive the
+								first 3 books they want, when they sign up. If the member
+								chooses to return 1 book after a week, the next book from their
+								Reading Queue (RQ) will be available for delivery or pick-up, so
+								that they always have 3 books with them. Similarly, say if the
+								member chooses to return all 3 books in a week, they will be
+								mailed a fresh set of 3 books from their queue. The same details
+								apply to ‘Booksters’ and ‘Bookbugs’. For example the ‘Booksters’
+								will be able to hold on to one book at a time. So as soon as
+								that book is returned any time during the month, they will get
+								the next book from their queue. ‘Bookbugs’ can keep 2 books at a
+								time. So if they return one book they will get the next one in
+								their queue. If they return both at once, they will receive 2
+								new ones from their RQ.</p>
+
+							<p align="justify">The members would be required to pay a
+								security deposit according to their subscription plan. The
+								security deposit would be refundable upon cancellation of
+								membership. Students can pay the security deposit in three
+								installments.</p>
+						</div>
+
+						<div>
+							<h5>
+								<span class="color-deep-yellow">Delivery and
+									Pick-up/Drop-off Options</span>
+							</h5>
+
+							<div class="color-deep-blue">
+								<label><strong>Pick-up and drop-off facility
+										would be available at the following locations during the hours
+										mentioned below:</strong></label>
+								<ol>
+									<li>House 29, Road 9/A, Dhanmondi<br>
+										Time: 9:30 am till 6:30 pm, Saturday – Thursday<br>
+										Phone: 01715083333
+									</li>
+									<li>Flat #A4, House #15<br>
+										Road #124, Gulshan,<br>
+										Dhaka-1212<br>
+										Time: 10:00 am till 5pm, Saturday - Thursday
+									</li>
+									<li>Happy Rehman Plaza, 4th Floor, Suite # 4,<br>
+										25-27, Kazi Nazrul Islam Avenue, Bangla Motor<br>
+										Time: 10:00 am till 6:30 pm, Saturday – Thursday<br>
+										Beside Bishwa Shahitto Kendra/Baatighar<br> 
+										Phone: 01731374781
+									</li>
+									<li>Mohammedi Hardware Mart,<br>
+										33, Enayet Bazaar, Chittagong<br> 
+										Time : 10am-6.30pm , Saturday-Thursday<br>
+										Phone : 01731374781
+									</li>
+								</ol>
+							</div>
+							
+							<div class="color-deep-blue">
+								<h6>Please note that delivery is only available in the following areas:</h6>
+								
+								<span>A. Dhaka</span>
+								<ul>
+									<li>Gulshan 1</li>
+									<li>Gulshan 2</li>
+									<li>Baridhara</li>
+									<li>Baridhara DOHS</li>
+									<li>Niketon</li>
+									<li>Banani</li>
+									<li>Paribag</li>
+									<li>Shahbag</li>
+									<li>Eskaton</li>
+									<li>Elephant Road</li>
+									<li>Green Road</li>
+									<li>Dhanmondi</li>
+									<li>Lalmatia</li>
+									<li>Mohammadpur</li>
+									<li>Kalabagan</li>
+									<li>Paltan (Only Fridays)</li>
+									<li>University Area (Only on weekdays)</li>
+									<li>All other areas (Only on Weekends)</li>
+								</ul>
+							</div>
+							
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+			<!--/row -->
+		</div>
+		<!--/container-->
+	</div>
+
+	<section th:insert="fragments/body :: js-container"></section>
+
+</body>
+</html>
