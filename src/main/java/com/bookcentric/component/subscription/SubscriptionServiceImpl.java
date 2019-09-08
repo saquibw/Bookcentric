@@ -70,7 +70,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	private List<SubscriptionResponse> getFilteredPlans(List<Category> filteredCategoryList, List<Subscription> subscriptionList) {
-		System.out.println(filteredCategoryList.toString());
 		List<SubscriptionResponse> plans = new ArrayList<>();
 		if(filteredCategoryList != null && filteredCategoryList.size() > 0) {
 			filteredCategoryList.forEach(fc -> {
@@ -80,10 +79,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 				response.setLimitPerMonth(fc.getBorrowLimit().getPerMonth());
 				response.setDuration(fc.getPlanDuration().getName());
 				response.setSecurityAmount(fc.getSecurityAmount());
-				response.setCancellationPolicy(fc.isCancellationPolicy());
 				
 				List<Subscription> filteredSubscriptionList = subscriptionList.stream().filter(fs -> fs.getCategory().getId() == fc.getId()).collect(Collectors.toList());
-				System.out.println(filteredSubscriptionList.toString());
+
 				if(filteredSubscriptionList != null && filteredSubscriptionList.size() > 0) {
 					filteredSubscriptionList.forEach(f -> {
 						int days = f.getSubscriptionDuration().getDurationInDays();

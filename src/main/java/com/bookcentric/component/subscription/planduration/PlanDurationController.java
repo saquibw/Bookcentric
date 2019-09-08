@@ -14,7 +14,7 @@ public class PlanDurationController {
 	
 	@Autowired PlanDurationService planDurationService;
 
-	@GetMapping({"/planduration/view", "/planduration/edit/{id}"})
+	//@GetMapping({"/planduration/view", "/planduration/edit/{id}"})
 	public ModelAndView view(@PathVariable(name="id", required=false) Integer id) {
 		ModelAndView view = new ModelAndView("plan-duration");
 		
@@ -32,14 +32,14 @@ public class PlanDurationController {
 		return view;
 	}
 	
-	@PostMapping("/planduration/add")
+	//@PostMapping("/planduration/add")
 	public String savePlanDuration(PlanDuration planDuration) {
 		planDurationService.save(planDuration);
 		
 		return "redirect:/planduration/view";
 	}
 	
-	@GetMapping("/planduration/delete/{id}")
+	//@GetMapping("/planduration/delete/{id}")
 	public String deletePlanDuration(@PathVariable(name="id") Integer id) {
 		PlanDuration planDuration = planDurationService.findBy(id);
 		planDurationService.delete(planDuration);

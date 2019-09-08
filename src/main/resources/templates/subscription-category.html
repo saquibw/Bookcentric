@@ -27,7 +27,11 @@
 									<label>Category Name*</label> <input type="text" class="form-control" th:field="*{name}" required>
 								</div>
 								<div class="form-group col">
-									<label>Category description</label> <input type="text" class="form-control" th:field="*{description}">
+									<label>Security amount*</label> <input type="number" class="form-control" th:field="*{securityAmount}" required>
+								</div>
+								
+								<div class="form-group col hidden">
+									<input type="text" class="form-control" th:field="*{id}">
 								</div>
 							</div>
 							
@@ -51,32 +55,12 @@
 							
 							<div class="row">
 								<div class="form-group col">
-									<label>Security amount*</label> <input type="number" class="form-control" th:field="*{securityAmount}" required>
-								</div>
-								
-								<div class="form-group col hidden">
-									<input type="text" class="form-control" th:field="*{id}">
-								</div>	
-							</div>
-							
-							<div class="row">
-								<div class="form-group col">
 									<input type="checkbox" th:name="underAge" th:value="underAge" th:field="*{underAge}"><label>Please check if this is an under age category</label>
 								</div>
 								
 								<div class="form-group col">
 									<input type="checkbox" th:name="family" th:value="family" th:field="*{family}"><label>Please check if this is a family category</label>
 								</div>						
-							</div>
-							
-							<div class="row">
-								<div class="form-group col">
-									<input type="checkbox" th:name="cancellationPolicy" 
-									th:value="cancellationPolicy" th:field="*{cancellationPolicy}">
-									<label>Please check if cancellation policy is applicable</label>
-								</div>
-								
-								
 							</div>
 
 							<button type="submit" class="btn btn-primary">Save</button>
@@ -88,11 +72,9 @@
 							<thead>
 								<tr>
 									<th>Category name</th>
-									<th>Category description</th>
 									<th>Borrow limit</th>
 									<th>Plan duration</th>
 									<th>Security amount</th>
-									<th>Cancellation policy</th>
 									<th>Under age</th>
 									<th>Family</th>
 									<th></th>
@@ -103,11 +85,9 @@
 							<tbody>
 								<tr th:each="category : ${categoryList}">
 									<td th:text="${category.name}"></td>
-									<td th:text="${category.description}"></td>
 									<td th:text="'Each time-' + ${category.borrowLimit.eachTime} + ', Per month-' + ${category.borrowLimit.perMonth}"></td>
 									<td th:text="${category.planDuration.name}"></td>
 									<td th:text="${category.securityAmount}"></td>
-									<td th:text="${category.cancellationPolicy}"></td>
 									<td th:text="${category.underAge}"></td>
 									<td th:text="${category.family}"></td>
 									<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/category/edit/' + ${category.id}}"></a></td>
