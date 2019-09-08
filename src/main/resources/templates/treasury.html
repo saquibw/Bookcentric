@@ -17,7 +17,7 @@
             <div th:insert="fragments/body :: menue"></div>
 
             <!-- Head Section -->
-            <section class="home-section bg-dark-alfa-50 parallax-2 fixed-height-medium fixed-max-height-400px" data-background="images/books/8.jpg">
+            <section class="home-section bg-dark-alfa-50 parallax-2 fixed-height-medium fixed-max-height-400px" data-background="images/books/treasury-page-header.png">
                 <div class="js-height-parent container">
                     
                     <!-- Hero Content -->
@@ -103,6 +103,41 @@
 			
 			
 		</section>
+		
+		<section class="small-section bg-gray-lighter">
+                <div class="container relative">
+                    
+                    <form class="form align-center" id="mailchimp">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 mx-auto">
+                                
+                                <div class="newsletter-label font-alt">
+                                    
+                                </div>
+                                
+                                <div class="mb-20">
+                                    <!-- Post Item -->
+                                    <div class="left col-sm-6 col-md-6 col-lg-6 mb-md-50 wow fadeIn" data-wow-delay="0.1s" data-wow-duration="2s">
+                                        <div class="post-prev-img">
+                                            <a href="#"><img src="images/books/need-a-recommendation.png" alt="..." /></a>
+                                        </div>
+                                    </div>
+                                    <!-- Post Item -->
+                                    <div class="left col-sm-6 col-md-6 col-lg-6 mb-md-50 wow fadeIn" data-wow-delay="0.1s" data-wow-duration="2s">
+                                        <div class="post-prev-img">
+                                            <a href="#"><img src="images/books/wish-for-a-book.png" alt="..." /></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="subscribe-result"></div>
+                                
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+            </section>
 
             <!-- End Section -->
             
@@ -129,7 +164,7 @@
 			</div>
 
 			<div sec:authorize="isAuthenticated()" class="post-prev-more align-center">
-				<a href="javascript:void(0)" title="Add to Wishlist" class="btn btn-mod btn-gray btn-round toggle-wishlist">
+				<a href="javascript:void(0)" title="Add to TBR" class="btn btn-mod btn-gray btn-round toggle-wishlist">
 					<i class="fa fa-heart font-fourteen-pix"></i>
 				</a>
 				<a href="javascript:void(0)" title="Add to Reading Queue" class="btn btn-mod btn-gray btn-round toggle-reading-queue">

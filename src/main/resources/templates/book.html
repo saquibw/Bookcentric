@@ -7,7 +7,14 @@
 <body>
 
 	<div class="page">
-		<header th:insert="fragments/body :: header"></header>
+		<div th:insert="fragments/body :: logo"></div>
+            <div th:insert="fragments/body :: menue"></div>
+
+            <!-- Head Section -->
+            <section class="home-section bg-dark-alfa-50 parallax-2 fixed-height-medium fixed-max-height-400px" data-background="/images/books/book-page-header.png">
+                
+            </section>
+            <!-- End Head Section -->
 
 		<div class="container-fluid">
 			<div class="row justify-content-md-center top-space">
@@ -20,33 +27,33 @@
 								<img th:src="@{'/get/image/' + ${book.id}}" height="150" width="150">
 							</div>
 							
-							<div class="col-md-10 left">
-								<div><label>Name of the book: </label> <label th:text="${book.name}"></label></div>
-								<div><label>Author: </label> <label th:text="${book.authorName}"></label></div>
-								<div><label>Genre: </label> <label th:text="${book.genreName}"></label></div>
-								<div><label>Publisher: </label> <label th:text="${book.publisherName}"></label></div>
-								<div><label>Year of publication: </label> <label th:text="${book.year}"></label></div>
-								<div><label>No of pages: </label> <label th:text="${book.noOfPages}"></label></div>
+							<div class="col-md-10 left font-prata margin-bottom-10px">
+								<div><label class="strong">Name of the book: </label> <label th:text="${book.name}"></label></div>
+								<div><label class="strong">Author: </label> <label th:text="${book.authorName}"></label></div>
+								<div><label class="strong">Genre: </label> <label th:text="${book.genreName}"></label></div>
+								<div><label class="strong">Publisher: </label> <label th:text="${book.publisherName}"></label></div>
+								<div><label class="strong">Year of publication: </label> <label th:text="${book.year}"></label></div>
+								<div><label class="strong">No of pages: </label> <label th:text="${book.noOfPages}"></label></div>
 							</div>							
 						</div>
 						
 						<div class="full-width">
-							<div class="col-md-12 left min-height-200-px border-rounded-all">
-								<label th:text="${book.blurb}"></label>
+							<div class="col-md-12 left min-height-200-px">
+								<textarea rows="6" readonly th:text="${book.blurb}" class="no-border col-md-12"></textarea>
 							</div>					
 						</div>
 						
 						<div class="full-width">
-							<div class="col-md-12 left">
-								<div><label>Tags: </label><label th:text="${book.tagName}"></label></div>
-								<div><label>Status: </label><label th:text="${book.remainingCount} > 0 ? 'Available' : 'Not available'"></label></div>
+							<div class="col-md-12 left font-prata">
+								<div><label class="strong label-margin-right">Tags: </label><label th:text="${book.tagName}"></label></div>
+								<div><label class="strong label-margin-right">Status: </label><label th:text="${book.remainingCount} > 0 ? 'Available' : 'Not available'"></label></div>
 								<div sec:authorize="isAuthenticated()">
-									<div th:if="${book.wishlist}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-wishlist remove"><i class="fa fa-heart font-medium color-red"></i></a><label>Add to Wishlist</label></div>
-									<div th:unless="${book.wishlist}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-wishlist add"><i class="fa fa-heart font-medium color-gray"></i></a><label>Add to Wishlist</label></div>
+									<div th:if="${book.wishlist}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-wishlist remove"><i class="fa fa-heart font-medium color-red"></i></a><label>Add to my TBR</label></div>
+									<div th:unless="${book.wishlist}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-wishlist add"><i class="fa fa-heart font-medium color-gray"></i></a><label>Add to my TBR</label></div>
 								</div>
 								<div sec:authorize="isAuthenticated()">
-									<div th:if="${book.readingQueue}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-reading-queue remove"><i class="fa fa-plus-square font-medium color-green"></i></a><label>Add to Reading Queue</label></div>
-									<div th:unless="${book.readingQueue}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-reading-queue add"><i class="fa fa-plus-square font-medium color-gray"></i></a><label>Add to Reading Queue</label></div>
+									<div th:if="${book.readingQueue}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-reading-queue remove"><i class="fa fa-plus-square font-medium color-green"></i></a><label>Add to my Reading Queue</label></div>
+									<div th:unless="${book.readingQueue}"><a href="javascript:void(0)" th:attr="data-id=${book.id}" class="btn toggle-reading-queue add"><i class="fa fa-plus-square font-medium color-gray"></i></a><label>Add to my Reading Queue</label></div>
 								</div>
 															
 							</div>

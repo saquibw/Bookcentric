@@ -139,6 +139,10 @@
 	font-size: 14px !important;
 }
 
+.font-20-px {
+	font-size: 20px !important;
+}
+
 .border-rounded-all {
 	border-style: solid;
   	border-width: 1px;
@@ -173,8 +177,16 @@
 	font-size: 1.5em !important;
 }
 
+.no-border {
+	border: none;
+}
+
 .select-picker-button {
 	border: 1px solid #ced4da;
     background: #fff;
     color: #495057;
+}
+
+.label-margin-right {
+	margin-right: .5rem;
 }

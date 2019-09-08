@@ -25,7 +25,7 @@
 									<th>Subscription Plan</th>
 									<th>Books borrowed at a time</th>
 									<th>Limit per month</th>
-									<th>Duration</th>
+									<!-- <th>Duration</th> -->
 									<th>Security Deposit BDT (Refundable upon cancellation)</th>
 									<th>Monthly BDT</th>
 									<th>Half-Yearly BDT</th>
@@ -38,7 +38,7 @@
 									<td th:text="${plan.name}"></td>
 									<td th:text="${plan.limitEachTime}"></td>
 									<td th:text="${plan.limitPerMonth}"></td>
-									<td th:text="${plan.duration}"></td>
+									<!-- <td th:text="${plan.duration}"></td> -->
 									<td th:text="${plan.securityAmount}"></td>
 									<td th:text="${plan.monthlyAmount}"></td>
 									<td th:text="${plan.halfYearlyAmount}"></td>
@@ -55,7 +55,7 @@
 									<th>Subscription Plan</th>
 									<th>Books borrowed at a time</th>
 									<th>Limit per month</th>
-									<th>Duration</th>
+									<!-- <th>Duration</th> -->
 									<th>Security Deposit BDT (Refundable upon cancellation)</th>
 									<th>Monthly BDT</th>
 									<th>Half-Yearly BDT</th>
@@ -68,7 +68,7 @@
 									<td th:text="${plan.name}"></td>
 									<td th:text="${plan.limitEachTime}"></td>
 									<td th:text="${plan.limitPerMonth}"></td>
-									<td th:text="${plan.duration}"></td>
+									<!-- <td th:text="${plan.duration}"></td> -->
 									<td th:text="${plan.securityAmount}"></td>
 									<td th:text="${plan.monthlyAmount}"></td>
 									<td th:text="${plan.halfYearlyAmount}"></td>
@@ -85,7 +85,7 @@
 									<th>Subscription Plan</th>
 									<th>Books borrowed at a time</th>
 									<th>Limit per month</th>
-									<th>Duration</th>
+									<!-- <th>Duration</th> -->
 									<th>Security Deposit BDT (Refundable upon cancellation)</th>
 									<th>Monthly BDT</th>
 									<th>Half-Yearly BDT</th>
@@ -98,7 +98,7 @@
 									<td th:text="${plan.name}"></td>
 									<td th:text="${plan.limitEachTime}"></td>
 									<td th:text="${plan.limitPerMonth}"></td>
-									<td th:text="${plan.duration}"></td>
+									<!-- <td th:text="${plan.duration}"></td> -->
 									<td th:text="${plan.securityAmount}"></td>
 									<td th:text="${plan.monthlyAmount}"></td>
 									<td th:text="${plan.halfYearlyAmount}"></td>
@@ -114,8 +114,16 @@
 		</div>
 		<!--/container-->
 	</div>
-
-	<!-- <section th:insert="fragments/body :: js-container"></section> -->
+	
+	<script>
+		(function() {
+			var elem = document.querySelector('.fm-button');
+			elem.parentNode.removeChild(elem);
+			
+			elem = document.querySelector('#fullscreen-menu');
+			elem.parentNode.removeChild(elem);
+		})();
+	</script>
 
 </body>
 </html>
