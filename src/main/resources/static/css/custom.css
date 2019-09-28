@@ -13,59 +13,61 @@
 
 .management-navbar {
 	position: relative;
-    top: -55px;
+	top: -55px;
 }
 
 .management-navbar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid #e7e7e7;
-  background-color: #f3f3f3;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 1px solid #e7e7e7;
+	background-color: #f3f3f3;
 }
 
 .management-navbar li {
-  float: left;
+	float: left;
 }
 
 .management-navbar li a, .dropbtn {
-  display: block;
-  color: #666;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+	display: block;
+	color: #666;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 }
 
 .management-navbar li a:hover, .nav-dropdown:hover .dropbtn {
-  background-color: #111;
+	background-color: #111;
 }
 
 .management-navbar li.nav-dropdown {
-  display: inline-block;
+	display: inline-block;
 }
 
 .management-navbar div.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
 }
 
 .management-navbar div.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	text-align: left;
 }
 
-.management-navbar div.dropdown-content a:hover {background-color: #f1f1f1;}
+.management-navbar div.dropdown-content a:hover {
+	background-color: #f1f1f1;
+}
 
-.management-navbar li.nav-dropdown:hover div.dropdown-content{
-  display: block;
+.management-navbar li.nav-dropdown:hover div.dropdown-content {
+	display: block;
 }
 
 .management-card {
@@ -145,8 +147,8 @@
 
 .border-rounded-all {
 	border-style: solid;
-  	border-width: 1px;
-  	border-radius: 5px;
+	border-width: 1px;
+	border-radius: 5px;
 }
 
 .height-300-px {
@@ -183,10 +185,18 @@
 
 .select-picker-button {
 	border: 1px solid #ced4da;
-    background: #fff;
-    color: #495057;
+	background: #fff;
+	color: #495057;
 }
 
 .label-margin-right {
 	margin-right: .5rem;
+}
+
+.font-size-1-1-rem {
+	font-size: 1.1rem;
+}
+
+textarea {
+	text-align: justify;
 }

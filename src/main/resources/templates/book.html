@@ -20,7 +20,7 @@
 			<div class="row justify-content-md-center top-space">
 				
 				<div class="col-md-10 card management-card">
-					<div class="card-body">
+					<div class="card-body font-size-1-1-rem">
 					
 						<div class="full-width">
 							<div class="col-md-2 left">
@@ -32,14 +32,14 @@
 								<div><label class="strong">Author: </label> <label th:text="${book.authorName}"></label></div>
 								<div><label class="strong">Genre: </label> <label th:text="${book.genreName}"></label></div>
 								<div><label class="strong">Publisher: </label> <label th:text="${book.publisherName}"></label></div>
-								<div><label class="strong">Year of publication: </label> <label th:text="${book.year}"></label></div>
-								<div><label class="strong">No of pages: </label> <label th:text="${book.noOfPages}"></label></div>
+								<div><label class="strong">Year of Publication: </label> <label th:text="${book.year}"></label></div>
+								<div><label class="strong">Number of Pages: </label> <label th:text="${book.noOfPages}"></label></div>
 							</div>							
 						</div>
 						
 						<div class="full-width">
-							<div class="col-md-12 left min-height-200-px">
-								<textarea rows="6" readonly th:text="${book.blurb}" class="no-border col-md-12"></textarea>
+							<div class="col-md-12 left min-height-200-px margin-bottom-10px">
+								<textarea rows="8" readonly th:text="${book.blurb}" class="no-border col-md-12"></textarea>
 							</div>					
 						</div>
 						
@@ -63,6 +63,11 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- <div>
+			<footer th:insert="fragments/body :: footer"></footer>
+		</div> -->
+		
 	</div>
 	
 	<section th:insert="fragments/body :: js-container"></section>
