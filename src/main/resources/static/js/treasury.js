@@ -55,13 +55,7 @@ var TreasuryManager = (function() {
 		});
 	};
 
-	function getAllBooks(searchText, searchTag) {				
-		/*if(searchTag) {
-			removeFromStorage(SESSION_STORAGE_SEARCH_KEY);
-		} else {
-			searchTag = ""
-		}*/
-		
+	function getAllBooks(searchText, searchTag) {						
 		var param = {
 				"pageNumber": currentPageNumber,
 				"searchText": searchText ? searchText : "",
@@ -76,6 +70,9 @@ var TreasuryManager = (function() {
 		$(".pageNumberContainer").empty();
 		$(".all-books").append("<div class='loader'></div>");
 		$(".searchTag").html("");
+		
+		// 
+		
 				
 		var request = $.ajax({
 			type: "GET",
@@ -92,8 +89,6 @@ var TreasuryManager = (function() {
 				isFirstPage = data.isFirstPage;
 				isLastPage = data.isLastPage;
 				totalPageCount = data.totalPageCount;
-				
-				console.log(data);
 
 				if(currentPageNumber == 0) {
 					firstBookNumber = currentPageNumber + 1;
@@ -170,11 +165,9 @@ var TreasuryManager = (function() {
 				let searchText = $(".bookSearch").val();
 				let searchTag = getFromStorage(SESSION_STORAGE_SEARCH_KEY);
 				getAllBooks(searchText, searchTag);
+				moveToPosition();
 			}			
 		});
-		/*console.log(start);
-		console.log(end);
-		console.log(selected);*/
 	}
 
 	function showSpecialBooks(navigation) {
@@ -584,6 +577,10 @@ var TreasuryManager = (function() {
 	function removeFromStorage(key) {
 		sessionStorage.removeItem(key);
 	}
+	
+	function moveToPosition() {
+		window.scrollTo(0, 650);
+	}
 
 	(function() {
 		let searchTagKey = getFromStorage(SESSION_STORAGE_SEARCH_KEY);
@@ -618,6 +615,7 @@ var TreasuryManager = (function() {
 				let searchTag = getFromStorage(SESSION_STORAGE_SEARCH_KEY);
 				currentPageNumber--;
 				getAllBooks(searchText, searchTag);
+				moveToPosition();
 			}
 		});
 
@@ -628,6 +626,7 @@ var TreasuryManager = (function() {
 				let searchTag = getFromStorage(SESSION_STORAGE_SEARCH_KEY);
 				currentPageNumber++;
 				getAllBooks(searchText, searchTag);
+				moveToPosition();
 			}
 		});
 		
@@ -638,6 +637,7 @@ var TreasuryManager = (function() {
 				let searchTag = getFromStorage(SESSION_STORAGE_SEARCH_KEY);
 				currentPageNumber = 0;
 				getAllBooks(searchText, searchTag);
+				moveToPosition();
 			}
 		});
 		
@@ -648,6 +648,7 @@ var TreasuryManager = (function() {
 				let searchTag = getFromStorage(SESSION_STORAGE_SEARCH_KEY);
 				currentPageNumber = totalPageCount-1;
 				getAllBooks(searchText, searchTag);
+				moveToPosition();
 			}
 		});
 		
