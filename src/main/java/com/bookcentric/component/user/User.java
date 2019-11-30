@@ -76,7 +76,4 @@ public class User {
 	public String getFullName() {
 		return getFirstName() + ' ' + getMiddleName() + ' ' + getLastName();
 	}
-	/*
-	ALTER TABLE `bookcentric`.`user` 
-	ADD COLUMN `role` VARCHAR(45) NULL AFTER `instruction`;*/
 }

@@ -701,9 +701,6 @@ var TreasuryManager = (function() {
 	})();
 
 	return {
-		/*TYPE_BEST_SELLER: TYPE_BEST_SELLER,
-		TYPE_NEW_ARRIVAL: TYPE_NEW_ARRIVAL,
-		TYPE_READING_CHALLANGE: TYPE_READING_CHALLANGE,
-		getSpecialBooks: getSpecialBooks*/
+		
 	}
 })();

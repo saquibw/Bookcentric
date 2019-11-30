@@ -54,8 +54,7 @@ public class UtilServiceImpl implements UtilService {
 	public LocalDate format(LocalDate date, String pattern) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
 		String dateString = date.toString();
-		System.out.println(dateString);
-		System.out.println(LocalDate.parse(dateString, formatter));
+
 		return LocalDate.parse(dateString);
 	} 
 }

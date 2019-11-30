@@ -28,39 +28,13 @@
 							</div>
 							
 							<div class="col-md-10 left font-prata margin-bottom-10px">
+								<label class="bookId" th:text="${book.id}"></label>
 								<div><label class="strong">Name of the book: </label> <label th:text="${book.name}"></label></div>
 								<div><label class="strong">Author: </label> <label th:text="${book.authorName}"></label></div>
 								<div><label class="strong">Genre: </label> <label th:text="${book.genreName}"></label></div>
 								<div><label class="strong">Publisher: </label> <label th:text="${book.publisherName}"></label></div>
 								<div><label class="strong">Year of Publication: </label> <label th:text="${book.year}"></label></div>
 								<div><label class="strong">Number of Pages: </label> <label th:text="${book.noOfPages}"></label></div>
-								
-								<!-- <table class="table">
-									<tr>
-										<td><label class="strong">Name of the book :</label></td>
-										<td><label th:text="${book.name}"></label></td>
-									</tr>
-									<tr>
-										<td><label class="strong">Author : </label></td>
-										<td><label th:text="${book.authorName}"></label></td>
-									</tr>
-									<tr>
-										<td><label class="strong">Genre : </label></td>
-										<td><label th:text="${book.genreName}"></label></td>
-									</tr>
-									<tr>
-										<td><label class="strong">Publisher : </label></td>
-										<td><label th:text="${book.publisherName}"></label></td>
-									</tr>
-									<tr>
-										<td><label class="strong">Year of Publication : </label></td>
-										<td><label th:text="${book.year}"></label></td>
-									</tr>
-									<tr>
-										<td><label class="strong">Number of Pages : </label></td>
-										<td><label th:text="${book.noOfPages}"></label></td>
-									</tr>
-								</table> -->
 							</div>							
 						</div>
 						
@@ -86,6 +60,27 @@
 							</div>
 						</div>
 						
+						<div class="full-width" sec:authorize="isAuthenticated()">
+							<div class="col-md-12 left font-prata margin-top-20px">
+								<div><label class="strong label-margin-right">User review: </label></div>
+								<div>
+									<div class="col-md-2 left">
+										<div class="self-rating-container"></div>
+										<div class="color-gray font-12-pix">
+											<span class="self-review-info"></span>
+										</div>
+									</div>
+									<!-- <div class="col-md-10 left self-comment-container"></div> -->
+									<div class="col-md-10 left">
+										<textarea class="form-control col-md-10 left self-comment-container" disabled></textarea>
+										<button type="button" class="btn btn-success btn-sm margin-left-20px margin-top-10px review-edit-btn">Edit</button>
+										<button type="button" class="btn btn-success btn-sm margin-left-20px margin-top-10px hidden review-update-btn">Update</button>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -98,104 +93,7 @@
 	</div>
 	
 	<section th:insert="fragments/body :: js-container"></section>
-	
-	<script>
-		$(document).ready(function() {
-			var ACTION_ADD = "add";
-			var ACTION_REMOVE = "remove";
-			var LIST_NAME_READING_QUEUE = "readingQueue";
-			var LIST_NAME_WISHLIST = "wishlist";
-			
-			$(".toggle-wishlist").click(function(e) {
-				e.preventDefault();
-				toggleList(this, LIST_NAME_WISHLIST);
-			});
-			
-			$(".toggle-reading-queue").click(function(e) {
-				e.preventDefault();
-				toggleList(this, LIST_NAME_READING_QUEUE);
-			});
-			
-			function toggleList(element, listName) {
-				let elm = $(element);
-				let i = elm.find("i");		
-				let bookId = elm.attr('data-id');
-				let action = "";
-				let book = null;
-				
-				if(elm.hasClass(ACTION_ADD)) {
-					action = ACTION_ADD;
-				} else {
-					action = ACTION_REMOVE;
-				}
-				
-				let data = {
-						"bookId": bookId,
-						"action": action
-					};
-				
-				if(listName == LIST_NAME_READING_QUEUE) {
-					toggleReadingQueue(elm, i, data, action)
-				} else if (listName == LIST_NAME_WISHLIST) {
-					toggleWishlist(elm, i, data, action);
-				}
-			}
-			
-			function toggleReadingQueue(elm, i, data, action) {
-				var request = $.ajax({
-					type: "POST",
-					url: "/user/update/readingqueue",
-					dataType: 'JSON',
-					data: data
-				});
-				
-				request.done(function(response){
-					if(response.success) {
-						if(action == ACTION_ADD) {
-							elm.removeClass(ACTION_ADD);
-							elm.addClass(ACTION_REMOVE);
-							i.removeClass("color-gray");
-							i.addClass("color-green");
-						} else {
-							elm.removeClass(ACTION_REMOVE);
-							elm.addClass(ACTION_ADD);
-							i.removeClass("color-green");
-							i.addClass("color-gray");
-						}
-					} else {
-						alert(response.data);
-					}
-				});
-			}
-			
-			function toggleWishlist(elm, i, data, action) {
-				var request = $.ajax({
-					type: "POST",
-					url: "/user/update/wishlist",
-					dataType: 'JSON',
-					data: data
-				});
-				
-				request.done(function(response){
-					if(response.success) {
-						if(action == ACTION_ADD) {
-							elm.removeClass(ACTION_ADD);
-							elm.addClass(ACTION_REMOVE);
-							i.removeClass("color-gray");
-							i.addClass("color-red");
-						} else {
-							elm.removeClass(ACTION_REMOVE);
-							elm.addClass(ACTION_ADD);
-							i.removeClass("color-red");
-							i.addClass("color-gray");
-						}
-					} else {
-						alert(response.data);
-					}
-				});
-			}
-		});
-	</script>
+	<script type="text/javascript" src="/js/book.js">></script>
 </body>
 
 </html>

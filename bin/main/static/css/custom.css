@@ -137,12 +137,20 @@
 	color: #B7950B;
 }
 
+.color-orange {
+	color: orange;
+}
+
 .font-fourteen-pix {
 	font-size: 14px !important;
 }
 
 .font-20-px {
 	font-size: 20px !important;
+}
+
+.font-12-pix {
+	font-size: 12px !important;
 }
 
 .border-rounded-all {
@@ -177,6 +185,14 @@
 
 .margin-left-10px {
 	margin-left: 10px;
+}
+
+.margin-left-20px {
+	margin-left: 20px;
+}
+
+.margin-top-20px {
+	margin-top: 20px;
 }
 
 .font-medium {
