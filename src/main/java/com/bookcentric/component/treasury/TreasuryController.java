@@ -128,4 +128,16 @@ public class TreasuryController {
 		
 		return response;
 	}
+	
+	@ResponseBody
+	@GetMapping("/treasury/get/books/search/all")
+	public Response getAllBooksBySearchCriteria(@RequestParam String searchText) {
+		Response response = new Response();
+		Map<String, Object> data = new HashMap<>();
+		data.put("bookList", bookService.getAllBySearchCriteria(searchText));
+		response.setSuccess(true);
+		response.setDataMap(data);
+		
+		return response;
+	}
 }

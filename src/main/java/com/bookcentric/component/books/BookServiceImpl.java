@@ -2,6 +2,7 @@ package com.bookcentric.component.books;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -105,7 +106,7 @@ public class BookServiceImpl implements BookService {
 		if(!searchText.isEmpty()) {
 			String search = searchText.toLowerCase();
 			
-			List<Books> bookList = filterBy(search, repository.findAll());
+			List<Books> bookList = filterBy(search, getAll());
 
 			int start = (int) pageable.getOffset();
 			int end = (start + pageable.getPageSize()) > bookList.size() ? bookList.size() : (start + pageable.getPageSize());
@@ -142,9 +143,14 @@ public class BookServiceImpl implements BookService {
 		Sort sort = Sort.by(Sort.Direction.ASC, "name");
 		Pageable pageable =  PageRequest.of(pageNumber, pageSize, sort);
 		
-		List<Books> bookList = getFilteredList(repository.findAll(), searchTag);
+		Page<Books> books = null;
+		List<Books> bookList = getFilteredList(getAll(), searchTag);
 		
-		return new PageImpl<>(bookList, pageable, bookList.size());
+		int start = (int) pageable.getOffset();
+		int end = (start + pageable.getPageSize()) > bookList.size() ? bookList.size() : (start + pageable.getPageSize());
+		books = new PageImpl<>(bookList.subList(start, end), pageable, bookList.size());
+		
+		return books;
 	}
 	
 	private List<Books> getFilteredList(List<Books> bookList, String searchTag) {
@@ -152,11 +158,26 @@ public class BookServiceImpl implements BookService {
 		String searchTagKey = searchArr[0];
 		String searchTagValue = searchArr[1].toLowerCase().trim();
 		
-		if(searchTagKey.equals("genre")) return bookList.stream().filter(b -> b.getGenreName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
-		else if(searchTagKey.equals("author")) return bookList.stream().filter(b -> b.getAuthorName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
-		else if(searchTagKey.equals("tag")) return bookList.stream().filter(b -> b.getTagName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
+		if(searchTagKey.equals("genre")) bookList = bookList.stream().filter(b -> b.getGenreName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
+		else if(searchTagKey.equals("author")) bookList =  bookList.stream().filter(b -> b.getAuthorName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
+		else if(searchTagKey.equals("tag")) bookList =  bookList.stream().filter(b -> b.getTagName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
 		
-		return bookList.subList(0, 30);
+		return bookList;
+	}
+	
+	@Override
+	public List<Books> getAllBySearchCriteria(String searchText) {
+		List<Books> bookList = null;
+
+		if(!searchText.isEmpty()) {
+			String search = searchText.toLowerCase();
+			
+			bookList = filterBy(search, getAll());
+			bookList.sort(Comparator.comparing(Books::getName));
+
+		}
+
+		return bookList;
 	}
 
 }

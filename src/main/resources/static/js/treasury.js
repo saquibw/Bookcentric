@@ -56,18 +56,27 @@ var TreasuryManager = (function() {
 	};
 
 	function getAllBooks(searchText, searchTag) {				
-		if(searchTag) {
+		/*if(searchTag) {
 			removeFromStorage(SESSION_STORAGE_SEARCH_KEY);
 		} else {
 			searchTag = ""
-		}
+		}*/
 		
 		var param = {
 				"pageNumber": currentPageNumber,
-				"searchText": searchText,
-				"searchTag": searchTag
+				"searchText": searchText ? searchText : "",
+				"searchTag": searchTag ? searchTag : "",
 		}
 		
+		if(searchText || searchTag) {
+			$(".clearSearch").removeClass("hidden");
+		}
+		
+		$(".all-books").empty();
+		$(".pageNumberContainer").empty();
+		$(".all-books").append("<div class='loader'></div>");
+		$(".searchTag").html("");
+				
 		var request = $.ajax({
 			type: "GET",
 			url: "/treasury/get/books/all",
@@ -106,6 +115,10 @@ var TreasuryManager = (function() {
 						let t = searchTag.split("_");
 						$(".searchTag").html("for " + t[0] + " <i>" + t[1] + "</i>");
 					}
+					
+					if(searchText) {
+						$(".searchTag").html("for search <i>" + searchText + "</i>");
+					}
 				}
 			} else {
 				$(".all-books").find(".loader").remove();
@@ -119,20 +132,25 @@ var TreasuryManager = (function() {
 	
 	function renderPageNumber() {
 		const container = $(".pageNumberContainer");
+		container.empty();
 		let start, end = 0;
 		let selected = currentPageNumber+1;
-		if(selected <= 5) {
-			start = 1;
-			end = 10;
-		} else if(selected >= (totalPageCount-5)) {
-			end = totalPageCount;
-			start = end-9;
-		} else {
-			start = selected - 4;
-			end = selected + 5;
-		}
 		
-		container.empty();
+		if(totalPageCount < 10) {
+			start = 1;
+			end = totalPageCount;
+		} else {
+			if(selected <= 5) {
+				start = 1;
+				end = 10;
+			} else if(selected >= (totalPageCount-5)) {
+				end = totalPageCount;
+				start = end-9;
+			} else {
+				start = selected - 4;
+				end = selected + 5;
+			}
+		}
 		
 		for(i=start; i<=end; i++) {
 			let temp = "" + i-1 + "";
@@ -145,14 +163,14 @@ var TreasuryManager = (function() {
 		container.find("a").click(function(e) {
 			e.preventDefault();
 			
-			$(".all-books").empty();
-			$(".all-books").append("<div class='loader'></div>");
-			
 			let pageNo = $(this).data("page");
-			currentPageNumber = pageNo;
 			
-			let searchText = $(".bookSearch").val();
-			getAllBooks(searchText, "");
+			if(currentPageNumber != pageNo) {				
+				currentPageNumber = pageNo;				
+				let searchText = $(".bookSearch").val();
+				let searchTag = getFromStorage(SESSION_STORAGE_SEARCH_KEY);
+				getAllBooks(searchText, searchTag);
+			}			
 		});
 		/*console.log(start);
 		console.log(end);
@@ -408,7 +426,7 @@ var TreasuryManager = (function() {
 		}
 		var request = $.ajax({
 			type: "GET",
-			url: "/treasury/get/books/all",
+			url: "/treasury/get/books/search/all",
 			dataType: 'JSON',
 			data: param
 		});
@@ -425,6 +443,7 @@ var TreasuryManager = (function() {
 					var authorList = [];
 					var tagList = [];
 					searchText = searchText.toLowerCase();
+
 					books.forEach(function(val, key) {
 						let bookName = val.name;
 						let bookId = val.id;
@@ -595,33 +614,51 @@ var TreasuryManager = (function() {
 		$(".browseLeft").click(function(e) {
 			e.preventDefault();
 			if(!isFirstPage) {
+				let searchText = $(".bookSearch").val();
+				let searchTag = getFromStorage(SESSION_STORAGE_SEARCH_KEY);
 				currentPageNumber--;
-				getAllBooks("", "");
+				getAllBooks(searchText, searchTag);
 			}
 		});
 
 		$(".browseRight").click(function(e) {
 			e.preventDefault();
 			if(!isLastPage) {
+				let searchText = $(".bookSearch").val();
+				let searchTag = getFromStorage(SESSION_STORAGE_SEARCH_KEY);
 				currentPageNumber++;
-				getAllBooks("", "");
+				getAllBooks(searchText, searchTag);
 			}
 		});
 		
 		$(".browseToFirst").click(function(e) {
 			e.preventDefault();
 			if(!isFirstPage) {
+				let searchText = $(".bookSearch").val();
+				let searchTag = getFromStorage(SESSION_STORAGE_SEARCH_KEY);
 				currentPageNumber = 0;
-				getAllBooks("", "");
+				getAllBooks(searchText, searchTag);
 			}
 		});
 		
 		$(".browseToLast").click(function(e) {
 			e.preventDefault();
 			if(!isLastPage) {
+				let searchText = $(".bookSearch").val();
+				let searchTag = getFromStorage(SESSION_STORAGE_SEARCH_KEY);
 				currentPageNumber = totalPageCount-1;
-				getAllBooks("", "");
+				getAllBooks(searchText, searchTag);
 			}
+		});
+		
+		$(".clearSearch").click(function(e) {
+			e.preventDefault();
+			$(".bookSearch").val("");
+			removeFromStorage(SESSION_STORAGE_SEARCH_KEY);
+			currentPageNumber = 0;
+			$(this).addClass("hidden");
+			
+			getAllBooks("", "");
 		});
 
 		$(".bookSearch").keyup(function(e) {
@@ -642,14 +679,8 @@ var TreasuryManager = (function() {
 				isLastPage = false;
 				
 				toggleSearchOptionBoxView(false);
-				let allBooksContainer = $(".all-books");
-				allBooksContainer.empty();
-				$(".pageNumberContainer").empty();
-				allBooksContainer.append("<div class='loader'></div>");
 
 				getAllBooks(text.trim(), "");
-				
-				$(".searchTag").html("");
 			} else {
 				if(searchTimer) {
 					clearTimeout(searchTimer);

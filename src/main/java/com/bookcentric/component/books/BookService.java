@@ -38,4 +38,6 @@ public interface BookService {
 	public Page<Books> getAllByPageAndSort(Integer pageNumber, Integer pageSize, String searchText);
 	
 	public Page<Books> getAllBySearchTag(Integer pageNumber, Integer pageSize, String searchTag);
+	
+	public List<Books> getAllBySearchCriteria(String searchText);
 }
