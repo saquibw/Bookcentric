@@ -107,7 +107,9 @@ public class BookServiceImpl implements BookService {
 			
 			List<Books> bookList = filterBy(search, repository.findAll());
 
-			books = new PageImpl<>(bookList, pageable, bookList.size());
+			int start = (int) pageable.getOffset();
+			int end = (start + pageable.getPageSize()) > bookList.size() ? bookList.size() : (start + pageable.getPageSize());
+			books = new PageImpl<>(bookList.subList(start, end), pageable, bookList.size());
 		} else {
 			books = repository.findAll(pageable);
 		}	
@@ -115,21 +117,13 @@ public class BookServiceImpl implements BookService {
 		return books;
 	}
 	
-	/*private List<Books> filterBy(String searchText, Page<Books> list) {
-		return list
-				.stream()
-				.filter(b -> b.getName().toLowerCase().contains(searchText) || b.getAuthorName().toLowerCase().contains(searchText) || b.getGenreName().toLowerCase().contains(searchText))
-				.collect(Collectors.toList());
-	}*/
-	
 	private List<Books> filterBy(String searchText, List<Books> list) {
 		return list
 				.stream()
 				.filter(b -> b.getName().toLowerCase().contains(searchText) 
 						|| b.getAuthorName().toLowerCase().contains(searchText) 
 						|| b.getGenreName().toLowerCase().contains(searchText)
-						|| b.getTagName().toLowerCase().contains(searchText)
-						/*|| b.getPublisherName().toLowerCase().contains(searchText)*/)
+						|| b.getTagName().toLowerCase().contains(searchText))
 				.collect(Collectors.toList());
 	}
 
@@ -141,6 +135,28 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public List<Books> getReadingChallengeBooks() {
 		return repository.findByReadingChallenge(true);
+	}
+
+	@Override
+	public Page<Books> getAllBySearchTag(Integer pageNumber, Integer pageSize, String searchTag) {
+		Sort sort = Sort.by(Sort.Direction.ASC, "name");
+		Pageable pageable =  PageRequest.of(pageNumber, pageSize, sort);
+		
+		List<Books> bookList = getFilteredList(repository.findAll(), searchTag);
+		
+		return new PageImpl<>(bookList, pageable, bookList.size());
+	}
+	
+	private List<Books> getFilteredList(List<Books> bookList, String searchTag) {
+		String[] searchArr = searchTag.split("_");
+		String searchTagKey = searchArr[0];
+		String searchTagValue = searchArr[1].toLowerCase().trim();
+		
+		if(searchTagKey.equals("genre")) return bookList.stream().filter(b -> b.getGenreName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
+		else if(searchTagKey.equals("author")) return bookList.stream().filter(b -> b.getAuthorName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
+		else if(searchTagKey.equals("tag")) return bookList.stream().filter(b -> b.getTagName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
+		
+		return bookList.subList(0, 30);
 	}
 
 }

@@ -82,12 +82,17 @@ public class TreasuryController {
 	
 	@ResponseBody
 	@GetMapping("/treasury/get/books/all")
-	public Response getAllBooks(@RequestParam Integer pageNumber, @RequestParam String searchText) {
+	public Response getAllBooks(@RequestParam Integer pageNumber, @RequestParam String searchText, @RequestParam String searchTag) {
 		Response response = new Response();
 		
-		Page<Books> books = bookService.getAllByPageAndSort(pageNumber, Constants.BOOKS_COUNT_PER_PAGE, searchText);
+		Page<Books> books = null;
+		if(!searchTag.isEmpty()) {
+			books = bookService.getAllBySearchTag(pageNumber, Constants.BOOKS_COUNT_PER_PAGE, searchTag);
+		} else {
+			books = bookService.getAllByPageAndSort(pageNumber, Constants.BOOKS_COUNT_PER_PAGE, searchText);
+		}
 		
-		if(books.getSize() > 0) {
+		if(books != null && books.getSize() > 0) {
 			List<BooksDTO> bookList = new ArrayList<>();
 			
 			User user = userSecurityService.getLoggedInUser();
@@ -107,9 +112,13 @@ public class TreasuryController {
 			
 			Map<String, Object> data = new HashMap<>();
 			data.put("bookList", bookList);
-			data.put("totalCount", books.getTotalElements());
+			data.put("totalBookCount", books.getTotalElements());
 			data.put("isFirstPage", books.isFirst());
 			data.put("isLastPage", books.isLast());
+			data.put("totalPageCount", books.getTotalPages());
+			data.put("hasNextPage", books.hasNext());
+			data.put("hasPreviousPage", books.hasPrevious());
+			data.put("currentPageNumber", books.getNumber());
 			
 			response.setSuccess(true);
 			response.setDataMap(data);
