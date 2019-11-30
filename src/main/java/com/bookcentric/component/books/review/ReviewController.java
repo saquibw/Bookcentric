@@ -109,8 +109,6 @@ public class ReviewController {
 			return mapper.map(l, ReviewDTO.class);
 		}).collect(Collectors.toList());
 		
-		System.out.println(reviewList.toString());
-		
 		response.setSuccess(true);
 		response.setData(reviewList);
 		
