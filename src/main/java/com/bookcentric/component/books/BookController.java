@@ -203,6 +203,10 @@ public class BookController {
 			data.put("totalCount", books.getTotalElements());
 			data.put("isFirstPage", books.isFirst());
 			data.put("isLastPage", books.isLast());
+			data.put("totalPageCount", books.getTotalPages());
+			data.put("hasNextPage", books.hasNext());
+			data.put("hasPreviousPage", books.hasPrevious());
+			data.put("currentPageNumber", books.getNumber());
 			
 			response.setSuccess(true);
 			response.setDataMap(data);

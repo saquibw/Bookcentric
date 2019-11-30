@@ -30,7 +30,9 @@ spring:
 logging:
   level: 
     com.bookcentric: DEBUG
-  file: bookcentric.log
+  file: /bookcentric/logs/bookcentric.log
 
 server:
   port: 50000
+  tomcat:
+    basedir: /bookcentric/tomcat

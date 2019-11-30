@@ -64,7 +64,7 @@ public class Books {
 		String name = "";
 		List<Author> authorList = getAuthor();
 		if(authorList.size() > 0) {
-			StringJoiner joiner = new StringJoiner(" And ");
+			StringJoiner joiner = new StringJoiner(", ");
 			authorList.forEach(a -> {
 				joiner.add(a.getName());
 			});
@@ -78,7 +78,7 @@ public class Books {
 		String name = "";
 		List<Genre> genreList = getGenre();
 		if(genreList.size() > 0) {
-			StringJoiner joiner = new StringJoiner(" And ");
+			StringJoiner joiner = new StringJoiner(", ");
 			genreList.forEach(g -> {
 				joiner.add(g.getName());
 			});
@@ -91,7 +91,7 @@ public class Books {
 		String name = "";
 		List<Publisher> publisherList = getPublisher();
 		if(publisherList.size() > 0) {
-			StringJoiner joiner = new StringJoiner(" And ");
+			StringJoiner joiner = new StringJoiner(", ");
 			publisherList.forEach(p -> {
 				joiner.add(p.getName());
 			});
