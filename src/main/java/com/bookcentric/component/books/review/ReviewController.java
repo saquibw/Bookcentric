@@ -98,12 +98,12 @@ public class ReviewController {
 	public Response getOtherReviews(@RequestParam Integer bookId) {
 		Response response = new Response();
 		
-		List<Review> list = repository.findAllByBookId(bookId);
+		List<Review> list = repository.findAllByBookIdOrderByModifiedAtDesc(bookId);
 		
 		User user = userSecurityService.getLoggedInUser();	
-		if(user != null) {
+		/*if(user != null) {
 			list = list.stream().filter(r -> r.getUser().getId() != user.getId()).collect(Collectors.toList());
-		}
+		}*/
 		
 		List<ReviewDTO> reviewList = list.stream().map(l -> {
 			return mapper.map(l, ReviewDTO.class);

@@ -141,7 +141,7 @@
 	color: orange;
 }
 
-.font-fourteen-pix {
+.font-14-pix {
 	font-size: 14px !important;
 }
 
@@ -260,4 +260,9 @@ textarea {
 
 .w-30 {
 	width: 30% !important;
+}
+
+.other-review-container {
+	overflow-y: auto;
+    max-height: 300px;
 }

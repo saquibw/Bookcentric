@@ -158,9 +158,10 @@ var BookManager = (function() {
 			
 			$(".self-comment-container").text(review.comment);
 			
-			const date = new Date(review.modifiedAt);
-			const d = date.getDate() + ' ' + getMonthName(date.getMonth()) + ' ' + date.getFullYear();
-			const info = "Your review on " + d;
+			const date = getFormattedDate(review.modifiedAt)
+			/*const date = new Date(review.modifiedAt);
+			const d = date.getDate() + ' ' + getMonthName(date.getMonth()) + ' ' + date.getFullYear();*/
+			const info = "Your review on " + date;
 			$(".self-review-info").html(info);
 		}
 		
@@ -170,6 +171,13 @@ var BookManager = (function() {
 		attachRatingListener();
 		
 		
+	}
+	
+	function getFormattedDate(date) {
+		const dateObj = new Date(date);
+		const d = dateObj.getDate() + ' ' + getMonthName(dateObj.getMonth()) + ' ' + dateObj.getFullYear();
+		
+		return d;
 	}
 	
 	function getMonthName(number) {
@@ -217,8 +225,64 @@ var BookManager = (function() {
 		});
 		
 		request.done(function(response) {
-			console.log(response);
+			renderRatingCountBlock(response.data);
+			renderOtherReviewSection(response.data);
 		});
+	}
+	
+	function renderRatingCountBlock(reviewList) {
+		let totalRating = 0;
+		let average = null;
+		let totalRatingCount = 0;
+		let totalCommentCount = 0;
+		let ratingText = "rating";
+		let commentText = "comment";
+
+		if(reviewList && reviewList.length > 0) {
+			reviewList.forEach(function(row, index) {
+				if(row.rating && row.rating > 0) {
+					totalRating += row.rating;
+					totalRatingCount++;
+					if(totalRatingCount > 1) ratingText = "ratings";
+				}
+				
+				if(row.comment) {
+					totalCommentCount++;
+					if(totalCommentCount > 1) commentText = "comments";
+				}
+			});
+							
+			if(totalRating > 0) {
+				average = Math.round(totalRating / reviewList.length);
+				
+			}
+		}
+		const totalReviewCountText = totalRatingCount + " " + ratingText + " / " + totalCommentCount + " " + commentText;
+		$(".other-rating-container").html(generateRatingElement(average));
+		$(".total-review-count").html(totalReviewCountText);
+	}
+	
+	function renderOtherReviewSection(reviewList) {
+		console.log(reviewList);
+		if(reviewList && reviewList.length > 0) {
+			
+			reviewList.forEach(function(row, index) {
+				let template = $("#other-review-row").html();
+				let temp = $(".temp-container");
+				temp.html(template);
+				
+				console.log(template);
+				console.log(temp);
+				
+				$(temp).find(".other-user-name").html(row.userFullName);
+				$(temp).find(".other-date").html(getFormattedDate(row.modifiedAt));
+				$(temp).find(".other-rating").html(generateRatingElement(row.rating));
+				$(temp).find(".other-comment").html(row.comment);
+								
+				$(".other-review-container").append(temp.html());
+			});
+			
+		}
 	}
 	
 	(function() {

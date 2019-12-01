@@ -25,10 +25,15 @@
 						<div class="full-width margin-top-10px">
 							<div class="col-md-2 left">
 								<img th:src="@{'/get/image/' + ${book.id}}" height="150" width="150">
+								<div class="margin-top-10px margin-left-10px other-rating-container">									
+								</div>
+								<div class="color-gray font-12-pix margin-bottom-10px">
+									<span class="total-review-count"></span>
+								</div>
 							</div>
 							
 							<div class="col-md-10 left font-prata margin-bottom-10px">
-								<label class="bookId" th:text="${book.id}"></label>
+								<label class="bookId hidden" th:text="${book.id}"></label>
 								<div><label class="strong">Name of the book: </label> <label th:text="${book.name}"></label></div>
 								<div><label class="strong">Author: </label> <label th:text="${book.authorName}"></label></div>
 								<div><label class="strong">Genre: </label> <label th:text="${book.genreName}"></label></div>
@@ -60,25 +65,35 @@
 							</div>
 						</div>
 						
+						<div class="full-width">
+							<div class="row"><h5 class="margin-top-20px">Reviews and Ratings</h5></div>
+						</div>
+						
+						
 						<div class="full-width" sec:authorize="isAuthenticated()">
-							<div class="col-md-12 left font-prata margin-top-20px">
-								<div><label class="strong label-margin-right">User review: </label></div>
-								<div>
-									<div class="col-md-2 left">
-										<div class="self-rating-container"></div>
-										<div class="color-gray font-12-pix">
-											<span class="self-review-info"></span>
-										</div>
+							<div class="row">
+								<div class="col-md-2 left">
+									<div class="self-rating-container"></div>
+									<div class="color-gray font-12-pix">
+										<span class="self-review-info"></span>
 									</div>
-									<!-- <div class="col-md-10 left self-comment-container"></div> -->
-									<div class="col-md-10 left">
-										<textarea class="form-control col-md-10 left self-comment-container" disabled></textarea>
-										<button type="button" class="btn btn-success btn-sm margin-left-20px margin-top-10px review-edit-btn">Edit</button>
-										<button type="button" class="btn btn-success btn-sm margin-left-20px margin-top-10px hidden review-update-btn">Update</button>
-									</div>
-									
+								</div>
+
+								<div class="col-md-10 left">
+									<textarea
+										class="form-control col-md-10 left self-comment-container"
+										disabled></textarea>
+									<button type="button"
+										class="btn btn-success btn-sm margin-left-20px margin-top-10px review-edit-btn">Edit</button>
+									<button type="button"
+										class="btn btn-success btn-sm margin-left-20px margin-top-10px hidden review-update-btn">Update</button>
 								</div>
 							</div>
+							<hr>
+						</div>
+
+						<div class="full-width font-14-pix">
+							<div class="col-md-12 left font-prata margin-top-20px other-review-container"></div>
 						</div>
 						
 					</div>
@@ -86,14 +101,30 @@
 			</div>
 		</div>
 		
-		<!-- <div>
-			<footer th:insert="fragments/body :: footer"></footer>
+		<!-- <div class="full-width">
+			<div class="row">
+				<footer th:insert="fragments/body :: footer"></footer>
+			</div>			
 		</div> -->
 		
 	</div>
 	
+	<div class="hidden temp-container"></div>
+	
 	<section th:insert="fragments/body :: js-container"></section>
 	<script type="text/javascript" src="/js/book.js">></script>
+
+	<script id="other-review-row" type="text/template">
+		<div class="row">
+			<div class="col-md-2 left">
+				<div class="other-user-name"></div>
+				<div class="other-date"></div>
+				<div class="other-rating"></div>
+			</div>
+			<div class="col-md-10 left other-comment"></div>
+		</div>
+		<hr>
+	</script>
 </body>
 
 </html>
