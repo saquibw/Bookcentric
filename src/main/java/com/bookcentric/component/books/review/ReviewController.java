@@ -7,7 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,7 +31,7 @@ public class ReviewController {
 		Response response = new Response();
 		
 		User user = userSecurityService.getLoggedInUser();		
-		
+
 		Review review = repository.findOneByBookIdAndUserId(bookId, user.getId());
 		ReviewDTO dto = null;
 		if(review != null) {
@@ -40,6 +42,23 @@ public class ReviewController {
 		response.setData(dto);
 		
 		return response;
+	}
+	
+	@ResponseBody
+	@DeleteMapping("/reviews/self/{id}")
+	public Response deleteReview(@PathVariable Integer id) {
+		Response response = new Response();
+		
+		User user = userSecurityService.getLoggedInUser();
+		Review review = repository.findOneByBookIdAndUserId(id, user.getId());
+		
+		if(review != null) {
+			repository.delete(review);
+			response.setSuccess(true);
+		}
+		
+		return response;
+		
 	}
 	
 	@ResponseBody
@@ -99,11 +118,6 @@ public class ReviewController {
 		Response response = new Response();
 		
 		List<Review> list = repository.findAllByBookIdOrderByModifiedAtDesc(bookId);
-		
-		User user = userSecurityService.getLoggedInUser();	
-		/*if(user != null) {
-			list = list.stream().filter(r -> r.getUser().getId() != user.getId()).collect(Collectors.toList());
-		}*/
 		
 		List<ReviewDTO> reviewList = list.stream().map(l -> {
 			return mapper.map(l, ReviewDTO.class);

@@ -70,7 +70,7 @@
 						</div>
 						
 						
-						<div class="full-width" sec:authorize="isAuthenticated()">
+						<div class="full-width self-rating-review-container" sec:authorize="isAuthenticated()">
 							<div class="row">
 								<div class="col-md-2 left">
 									<div class="self-rating-container"></div>
@@ -81,12 +81,10 @@
 
 								<div class="col-md-10 left">
 									<textarea
-										class="form-control col-md-10 left self-comment-container"
-										disabled></textarea>
-									<button type="button"
-										class="btn btn-success btn-sm margin-left-20px margin-top-10px review-edit-btn">Edit</button>
-									<button type="button"
-										class="btn btn-success btn-sm margin-left-20px margin-top-10px hidden review-update-btn">Update</button>
+										class="form-control col-md-10 left self-comment-container"></textarea>
+									<button type="button" class="btn btn-success btn-sm margin-left-10px margin-top-10px hidden review-edit-btn">Edit</button>
+									<button type="button" class="btn btn-success btn-sm margin-left-10px margin-top-10px review-save-btn">Save</button>
+									<button type="button" class="btn btn-danger btn-sm margin-left-10px margin-top-10px hidden review-delete-btn">Delete</button>
 								</div>
 							</div>
 							<hr>

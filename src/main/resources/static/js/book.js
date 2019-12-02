@@ -156,11 +156,19 @@ var BookManager = (function() {
 		if(review) {
 			rating = review.rating;
 			
-			$(".self-comment-container").text(review.comment);
+			const comment = review.comment;
+			if(comment) {
+				$(".self-comment-container").text(review.comment);
+				$(".self-comment-container").prop("disabled", true);
+				$(".review-edit-btn").removeClass("hidden");
+				$(".review-save-btn").addClass("hidden");
+			}
 			
+			if(comment || review.rating) {
+				$(".review-delete-btn").removeClass("hidden");
+			}
+						
 			const date = getFormattedDate(review.modifiedAt)
-			/*const date = new Date(review.modifiedAt);
-			const d = date.getDate() + ' ' + getMonthName(date.getMonth()) + ' ' + date.getFullYear();*/
 			const info = "Your review on " + date;
 			$(".self-review-info").html(info);
 		}
@@ -271,9 +279,6 @@ var BookManager = (function() {
 				let temp = $(".temp-container");
 				temp.html(template);
 				
-				console.log(template);
-				console.log(temp);
-				
 				$(temp).find(".other-user-name").html(row.userFullName);
 				$(temp).find(".other-date").html(getFormattedDate(row.modifiedAt));
 				$(temp).find(".other-rating").html(generateRatingElement(row.rating));
@@ -299,19 +304,43 @@ var BookManager = (function() {
 		$(".review-edit-btn").click(function(e) {
 			e.preventDefault();
 			$(this).addClass("hidden");
-			$(".review-update-btn").removeClass("hidden");
+			$(".review-save-btn").removeClass("hidden");
 			$(".self-comment-container").prop("disabled", false);
 		});
 		
-		$(".review-update-btn").click(function(e) {
+		$(".review-save-btn").click(function(e) {
 			e.preventDefault();
 			const comment = $(".self-comment-container").val();
 			
-			updateSelfComment(comment);
+			if(comment) {
+				updateSelfComment(comment);
 
-			$(this).addClass("hidden");
-			$(".review-edit-btn").removeClass("hidden");
-			$(".self-comment-container").prop("disabled", true);
+				$(this).addClass("hidden");
+				$(".review-edit-btn").removeClass("hidden");
+				$(".self-comment-container").prop("disabled", true);
+			}			
+		});
+		
+		$(".review-delete-btn").click(function(e) {
+			e.preventDefault();
+			
+			var c = confirm("Are you sure you want to delete this review?");
+			
+			if(c) {
+				const bookId = $(".bookId").text();
+				
+				var request = $.ajax({
+					type: "DELETE",
+					url: `/reviews/self/${bookId}`,
+					dataType: 'JSON'
+				});
+				
+				request.done(function(response) {
+					if(response.success) {
+						location.reload();
+					}
+				});
+			}			
 		});
 		
 		getSelfReview();

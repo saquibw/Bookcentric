@@ -2,14 +2,6 @@ package com.bookcentric.component.books;
 
 import java.util.List;
 
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import com.bookcentric.component.books.author.Author;
-import com.bookcentric.component.books.genre.Genre;
-import com.bookcentric.component.books.publisher.Publisher;
 import com.bookcentric.component.user.history.UserHistory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
