@@ -93,6 +93,8 @@
 .table-caption {
 	caption-side: top !important;
 	text-align: center !important;
+	color: black !important;
+	font-weight: bold;
 }
 
 .special-books-navigation {
@@ -265,4 +267,8 @@ textarea {
 .other-review-container {
 	overflow-y: auto;
     max-height: 300px;
+}
+
+.library-card {
+	background-image: url('/images/books/library-card.jpg');
 }
