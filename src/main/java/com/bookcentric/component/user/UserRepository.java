@@ -15,4 +15,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	public List<User> findAllActiveExpiresToday();
 	
 	public User getByEmail(String email);
+	
+	public User findByMembershipId(String id);
 }

@@ -25,4 +25,6 @@ public interface UserService {
 	public void renewSubscriptionDate();
 	
 	public boolean sendUserPasswordResetEmail(User user, String password);
+	
+	public User getByMembershipId(String id);
 }

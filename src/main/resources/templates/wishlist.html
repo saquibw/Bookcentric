@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<!-- Main body -->
+		<div class="container-fluid">
+
+			<div class="row justify-content-md-center top-space">
+
+				<div class="col-md-8 card">
+					<div class="card-body">
+						<h1>Wish List</h1>
+						
+						<label class="margin-bottom-20px">One can never have too many books, so if you have any suggestions for our collection or anything on your TBR that we do not have, please let us know below.</label>
+
+						<!-- Form -->
+						<form th:action="@{/wishlist}" method="post" th:object="${wishlist}" autocomplete="off">
+
+							<div th:insert="fragments/forms :: wishlist-form"></div>
+							
+							<p th:if="${wishlistSuccess}" class="success">Wishlist shared successfully!</p>
+							<p th:if="${membershipFailure}" class="error">Could not find this member. Please check the membership number!</p>
+
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
+					</div>
+
+				</div>
+
+
+			</div>
+			<!--/row -->
+		</div>
+		<!--/container-->
+	</div>
+
+	<section th:insert="fragments/body :: js-container"></section>
+
+</body>
+</html>

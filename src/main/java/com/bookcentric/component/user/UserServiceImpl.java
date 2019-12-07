@@ -40,6 +40,12 @@ public class UserServiceImpl implements UserService {
 		User user = userRepository.getOne(id);
 		return user;
 	}
+	
+	@Override
+	public User getByMembershipId(String id) {
+		User user = userRepository.findByMembershipId(id);
+		return user;
+	}
 
 	@Override
 	public boolean sendUserActivationEmail(User user) {
