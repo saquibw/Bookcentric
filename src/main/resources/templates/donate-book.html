@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<!-- Main body -->
+		<div class="container-fluid">
+
+			<div class="row justify-content-md-center top-space">
+
+				<div class="col-md-8 card management-card left">
+					<div class="card-body">
+						<h1>Donate books</h1>
+
+						<div class="col-sm-8 col-lg-8 pt-20 pb-20 pb-xs-0">
+							<div class="contact-item">
+								<div class="ci-icon">
+									<i class="fa fa-envelope"></i>
+								</div>
+								<div class="ci-title font-alt">Email</div>
+								<div class="ci-text">
+									<a href="mailto:bookcentricbd@gmail.com">bookcentricbd@gmail.com</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-8 col-lg-8 pt-20 pb-20 pb-xs-0 margin-top-20px">
+							<div class="contact-item">
+								<div class="ci-icon">
+									<i class="fa fa-phone"></i>
+								</div>
+								<div class="ci-title font-alt">Call Us</div>
+								<div class="ci-text">
+									+880 1715 083 333<br /> +880 1731 374 781
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!--/row -->
+		</div>
+		<!--/container-->
+	</div>
+
+	<section th:insert="fragments/body :: js-container"></section>
+
+</body>
+</html>

@@ -20,4 +20,9 @@ public class WebpageController {
 	public ModelAndView viewHome() {
 		return webpageService.viewHomepage();		
 	}
+	
+	@GetMapping("/donate-books")
+	public String viewDonateBookPage() {
+		return "donate-book";
+	}
 }
