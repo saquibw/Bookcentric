@@ -101,14 +101,21 @@ public class UserServiceImpl implements UserService {
 		if(userList != null && userList.size() > 0) {
 			userList.forEach(user -> {
 				String to = user.getEmail();
-				String subject = "Your subscription will expire soon";
 				String subscriptionPlanName = user.getSubscription().getCategory().getName();
 				String expiryDate = user.getDateOfRenewal().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
+				
+				String subject = String.format("Your subscription (%s) will expire soon", subscriptionPlanName);
 				
 				StringBuilder text = new StringBuilder();
 				text.append(String.format("Dear %s", user.getFullName()));
 				text.append("\n\n");
-				text.append(String.format("Your subscription for the plan %s is going to expire on %s. Please contact bookcentric admin for service renewal.", subscriptionPlanName, expiryDate));
+				text.append(String.format("This is a gentle reminder that your monthly subscription (%s) was due for renewal on %s.", subscriptionPlanName, expiryDate));
+				text.append("\n");
+				text.append("Please let us know if you would like to renew your subscription so we can do the needful");
+				text.append("\n");
+				text.append("Thank you,");
+				text.append("\n");
+				text.append("Team Bookcentric.");
 				
 				emailService.sendSimpleEmail(to, subject, text.toString());
 			});

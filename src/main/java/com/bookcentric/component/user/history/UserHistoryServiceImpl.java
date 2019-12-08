@@ -100,7 +100,8 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		
 		text.append(String.format("Dear %s", user.getFullName()));
 		text.append("<br><br>");
-		text.append("The due date of the following books are going to expire soon. Please return those as per schedule.");
+		text.append("This is a gentle reminder that following book(s) are going to expire soon. ");
+		text.append("However, if you wish to keep them for another week, you may do so by paying only Tk.20 per week.");
 		text.append("<br><br>");
 		
 		text.append("<table border='1'><tr><th>Book name</th><th>Issue date</th><th>Due date</th></tr>");

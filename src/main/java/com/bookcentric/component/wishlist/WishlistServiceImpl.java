@@ -25,8 +25,7 @@ public class WishlistServiceImpl implements WishlistService {
 		text.append("\n\n");
 		text.append(String.format("%s", wishlist.getRequests()));
 		
-		emailService.sendSimpleEmail(to, subject, text.toString());
-		
+		emailService.sendSimpleEmail(to, subject, text.toString());		
 	}
 
 }
