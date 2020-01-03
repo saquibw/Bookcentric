@@ -18,8 +18,11 @@ public class WishlistController {
 	@GetMapping("/wishlist")
 	public ModelAndView viewWishlist() {
 		Wishlist wishlist = new Wishlist();
+		
 		ModelAndView mv = new ModelAndView("wishlist");
 		mv.addObject("wishlist", wishlist);
+		mv.addObject("pageTitle", "BookCentric - Wishlist");
+		
 		return mv;
 	}
 
@@ -35,6 +38,9 @@ public class WishlistController {
 			mv.addObject("wishlistSuccess", true);
 			mv.addObject("wishlist", new Wishlist());
 		}
+		
+		mv.addObject("pageTitle", "BookCentric - Wishlist");
+		
 		return mv;
 	}
 }

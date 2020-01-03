@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/js/**").permitAll()
 				.antMatchers("/fonts/**").permitAll()
 				.antMatchers("/reviews/other/**").permitAll()
+				.antMatchers("/donate-books/**", "/gift-subscription/**").permitAll()
 				.antMatchers("/reviews/self/**").hasAnyRole("ADMIN", "USER")
 				.anyRequest().authenticated()
 				.and()

@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<!-- Main body -->
+		<div class="container-fluid">
+
+			<div class="row justify-content-md-center top-space">
+
+				<div class="col-md-8 card">
+					<div class="card-body">
+						<h1>Gift a subscription</h1>
+
+						<!-- Form -->
+						<form th:action="@{/gift-subscription}" method="post"
+							th:object="${giftSubscription}" autocomplete="off">
+							
+							<p th:if="${subscriptionSuccess}" class="success">Subscription
+								gifted successfully!</p>
+							<p th:if="${subscriptionFailure}" class="error">Gift a
+								subscription failed. Please contact the administrator.</p>
+
+							<div class="row">
+								<div class="form-group col">
+									<label>Name of Giver*</label> <input type="text"
+										class="form-control" th:field="*{giver}" required>
+								</div>
+								<div class="form-group col">
+									<label>Name of Recipient*</label> <input type="text"
+										class="form-control" th:field="*{recipient}" required>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group col">
+									<label>Email address*</label> <input type="email"
+										class="form-control" th:field="*{email}" required>
+								</div>
+								<div class="form-group col">
+									<label>Phone number*</label> <input type="number"
+										class="form-control" th:field="*{phone}" required>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group col">
+									<label>Gift amount (in BDT)*</label> <input type="text"
+										class="form-control" th:field="*{amount}" required>
+								</div>
+								<div class="form-group col">
+									<label>Delivery address*</label> <input type="text"
+										class="form-control" th:field="*{address}" required>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group col">
+									<label>Date of delivery</label> <input type="date"
+										class="form-control" th:field="*{deliveryDate}" required>
+								</div>
+								<div class="form-group col">
+								
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col"><label>Please choose one of the following designs...</label></div>							
+							</div>
+							
+							<div class="row">
+								<div class="form-group col">
+									<img src="images/books/gift-subscription-certificate.png" alt="..." style="border-style: solid; margin-left: 10%;"/>
+								</div>								
+							</div>
+							
+							<div class="row">
+								<div class="form-group col">
+									<input type="radio" th:field="*{certificateDesign}" value="1">
+									<img src="images/books/opt1.png" alt="...">
+								</div>
+								
+								<div class="form-group col">
+									<input type="radio" th:field="*{certificateDesign}" value="2">
+									<img src="images/books/opt2.png" alt="...">
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group col">
+									<input type="radio" th:field="*{certificateDesign}" value="3">
+									<img src="images/books/opt3.png" alt="...">
+								</div>
+								
+								<div class="form-group col">
+									<input type="radio" th:field="*{certificateDesign}" value="4">
+									<img src="images/books/opt4.jpeg" alt="...">
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col"><label>Choose any of the options:*</label></div>			
+							</div>
+							
+							<div class="row">
+								<div class="form-group col">
+									<input type="radio" th:field="*{option}" value="1" required>
+									<label>You would like to fill in the gift card yourself ( We will leave it completely blank then)</label>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col">
+									<input type="radio" th:field="*{option}" value="2" required>
+									<label>Write a message on my behalf</label>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col">
+									<label>Personal message (if option 2 is chosen above)</label> <input type="text"
+										class="form-control" th:field="*{message}">
+								</div>
+							</div>
+
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
+					</div>
+
+				</div>
+
+
+			</div>
+			<!--/row -->
+		</div>
+		<!--/container-->
+	</div>
+
+	<section th:insert="fragments/body :: js-container"></section>
+
+</body>
+</html>
