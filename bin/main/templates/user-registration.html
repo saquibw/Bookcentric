@@ -31,6 +31,8 @@
 								information</label>
 								
 								<div th:insert="fragments/forms :: parent-form"></div>
+								
+								<div th:insert="fragments/forms :: form-captcha"></div>
 
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
@@ -58,6 +60,8 @@
 			}
 		});
 	</script>
+	
+	<script type="text/javascript" src="/js/captcha.js">></script>
 
 </body>
 </html>

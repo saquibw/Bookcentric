@@ -26,6 +26,8 @@
 							
 							<p th:if="${wishlistSuccess}" class="success">Wishlist shared successfully!</p>
 							<p th:if="${membershipFailure}" class="error">Could not find this member. Please check the membership number!</p>
+							
+							<div th:insert="fragments/forms :: form-captcha"></div>
 
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
@@ -41,6 +43,8 @@
 	</div>
 
 	<section th:insert="fragments/body :: js-container"></section>
+	
+	<script type="text/javascript" src="/js/captcha.js">></script>
 
 </body>
 </html>

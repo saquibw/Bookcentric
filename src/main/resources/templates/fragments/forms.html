@@ -306,6 +306,15 @@
 			</div>
 		</div>
 	</div>
+	
+	<div th:fragment="form-captcha">
+		<div class="row">
+			<div class="form-group col">
+				<label id="captchaValue"></label><input type="number" id="captchaAnswer" class="form-control" required>
+				<p class="error" id="captchaError"></p>
+			</div>
+		</div>
+	</div>
 
 
 </body>
