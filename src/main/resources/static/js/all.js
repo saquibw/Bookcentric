@@ -45,7 +45,7 @@
         init_counters();
         init_team();
         // initPageSliders();
-        init_map();
+        // init_map();
         init_wow();
         init_masonry();
     });
@@ -502,7 +502,7 @@
 /* ---------------------------------------------
  Sliders
  --------------------------------------------- */
-function initPageSliders(){
+/*function initPageSliders(){
     (function($){
         "use strict";
         
@@ -734,7 +734,7 @@ function initPageSliders(){
         }
 
     })(jQuery);
-};
+};*/
 
 
 /* ---------------------------------------------
@@ -1030,7 +1030,7 @@ function js_height_init(){
  Google map
  --------------------------------------------- */
 
-var gmMapDiv = $("#map-canvas");
+/*var gmMapDiv = $("#map-canvas");
 
 function init_map(){
     (function($){
@@ -1077,7 +1077,7 @@ function init_map(){
             });
         }
     })(jQuery);
-}
+}*/
 
 
 /* ---------------------------------------------
