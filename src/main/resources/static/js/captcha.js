@@ -7,7 +7,7 @@ var CaptchaManager = (function() {
 		captchaRand2 = Math.floor(Math.random()*10);
 		rightAnswer = captchaRand1 + captchaRand2;
 		
-		$("#captchaValue").text("What is " + captchaRand1 + " + " + captchaRand2 + " ?");
+		$("#captchaValue").text("What is " + captchaRand1 + " + " + captchaRand2 + " ? *");
 	}
 	
 	function initListener() {
