@@ -25,4 +25,9 @@ public class WebpageController {
 	public String viewDonateBookPage() {
 		return "donate-book";
 	}
+	
+	@GetMapping("/coming-soon")
+	public String comingSoon() {
+		return "coming-soon";
+	}
 }
