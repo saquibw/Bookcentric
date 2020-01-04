@@ -69,10 +69,7 @@ var TreasuryManager = (function() {
 		$(".all-books").empty();
 		$(".pageNumberContainer").empty();
 		$(".all-books").append("<div class='loader'></div>");
-		$(".searchTag").html("");
-		
-		// 
-		
+		$(".searchTag").html("");		
 				
 		var request = $.ajax({
 			type: "GET",
@@ -205,8 +202,6 @@ var TreasuryManager = (function() {
 
 	function renderSpecialBooks() {
 		let container = $(".special-books");
-		let container_navigation_right = $(".special-books-navigation-right");
-		let container_navigation_left = $(".special-books-navigation-left");
 		let toggle_reading_queue = $(".toggle-reading-queue");
 		let toggle_withlist = $(".toggle-wishlist");
 
@@ -224,6 +219,9 @@ var TreasuryManager = (function() {
 
 		}
 		container.append(right);
+		
+		let container_navigation_right = $(".special-books-navigation-right");
+		let container_navigation_left = $(".special-books-navigation-left");
 
 		container_navigation_right.click(function() {
 			showSpecialBooks(NAVIGATION_FORWARD);
