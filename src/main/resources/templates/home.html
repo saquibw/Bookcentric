@@ -158,102 +158,40 @@
                 </div>
             </section>
             <!-- End Process Section -->
+            
+            <script id="newBookItemContainerScript" type="text/template">
+				<div>
+					<div class="container relative">
+                        <div class="row">
+                        	<div class="col-md-12 align-center newBookItemContainer">
+                        		<h2 class="section-title align-left mb-30 mb-sm-40 ml-13">
+                            		<span>New at Bookcentric</span>
+                        		</h2>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</script>
+			
+			<script id="newBookItem" type="text/template">
+				<div class="left col-md-3 col-lg-3 mb-60 mb-xs-40 wow fadeIn" data-wow-delay="0.1s" data-wow-duration="2s">
+            		<div class="post-prev-img">
+                		<a href="" target="_blank"><img src="" alt="covers" /></a>              
+            		</div>
+        		</div>
+			</script>
+			
+			<div class="hidden" id="temp-container">
+			</div>
+			
+			<div class="hidden" id="temp-book-container">
+			</div>
 
             <!-- Treasury Section -->
-            <section class="page-section bg-dark bg-dark-alfa-30 fullwidth-slider" data-background="images/books/pbg-1.png">
-                
-                <!-- Slide Item -->
-                <div>
-                    <div class="container relative">
-                        <div class="row">
-
-                        <div class="col-md-12 align-center">
-                        <h2 class="section-title align-left mb-30 mb-sm-40 ml-13">
-                            <span>New at Bookcentric</span>
-                        </h2>
-                        <!-- Shop Item -->
-                        <div class="left col-md-3 col-lg-3 mb-60 mb-xs-40 wow fadeIn" data-wow-delay="0.1s" data-wow-duration="2s">
-                            <div class="post-prev-img">
-                                <a href="#"><img src="images/covers/1.jpg" alt="covers" /></a>
-                                
-                            </div>
-                        </div>
-                        <!-- End Shop Item -->
-                        
-                        <!-- Shop Item -->
-                        <div class="left col-md-3 col-lg-3 mb-60 mb-xs-40 wow fadeIn" data-wow-delay="0.2s" data-wow-duration="2s">
-                            <div class="post-prev-img">
-                                <a href="#"><img src="images/covers/2.jpg" alt="covers" /></a>
-                            </div>
-                        </div>
-                        <!-- End Shop Item -->
-                        
-                        <!-- Shop Item -->
-                        <div class="left col-md-3 col-lg-3 mb-60 mb-xs-40 wow fadeIn" data-wow-delay="0.3s" data-wow-duration="2s">
-                            <div class="post-prev-img">
-                                <a href="#"><img src="images/covers/3.jpg" alt="covers" /></a>
-                            </div>
-                        </div>
-                        <!-- End Shop Item -->
-                        
-                        <!-- Shop Item -->
-                        <div class="left col-md-3 col-lg-3 mb-60 mb-xs-40 wow fadeIn" data-wow-delay="0.4s" data-wow-duration="2s">
-                            <div class="post-prev-img">
-                                <a href="#"><img src="images/covers/4.jpg" alt="covers" /></a>
-                            </div>
-                        </div>
-                        <!-- End Shop Item -->
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Slide Item -->
-                
-                <!-- Slide Item -->
-                <div>
-                    <div class="container relative">
-                        <div class="row">
-                        <div class="col-md-12 align-center">
-                        <h2 class="section-title align-left mb-30 mb-sm-40 ml-13">
-                            <span>New at Bookcentric</span>
-                        </h2>
-                        <!-- Shop Item -->
-                        <div class="left col-md-3 col-lg-3 mb-60 mb-xs-40 wow fadeIn" data-wow-delay="0.1s" data-wow-duration="2s">
-                            <div class="post-prev-img">
-                                <a href="#"><img src="images/covers/5.jpg" alt="covers" /></a>
-                                
-                            </div>
-                        </div>
-                        <!-- End Shop Item -->
-                        
-                        <!-- Shop Item -->
-                        <div class="left col-md-3 col-lg-3 mb-60 mb-xs-40 wow fadeIn" data-wow-delay="0.2s" data-wow-duration="2s">
-                            <div class="post-prev-img">
-                                <a href="#"><img src="images/covers/6.jpg" alt="covers" /></a>
-                            </div>
-                        </div>
-                        <!-- End Shop Item -->
-                        
-                        <!-- Shop Item -->
-                        <div class="left col-md-3 col-lg-3 mb-60 mb-xs-40 wow fadeIn" data-wow-delay="0.3s" data-wow-duration="2s">
-                            <div class="post-prev-img">
-                                <a href="#"><img src="images/covers/7.jpg" alt="covers" /></a>
-                            </div>
-                        </div>
-                        <!-- End Shop Item -->
-                        
-                        <!-- Shop Item -->
-                        <div class="left col-md-3 col-lg-3 mb-60 mb-xs-40 wow fadeIn" data-wow-delay="0.4s" data-wow-duration="2s">
-                            <div class="post-prev-img">
-                                <a href="#"><img src="images/covers/8.jpg" alt="covers" /></a>
-                            </div>
-                        </div>
-                        <!-- End Shop Item -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Slide Item -->
+            <section class="page-section bg-dark bg-dark-alfa-30 fullwidth-slider newBookContainer" data-background="images/books/pbg-1.png">
+            	
+            	<!-- Container where new books will be placed -->
                 
             </section>
             <!-- End Treasury Section -->
@@ -627,7 +565,8 @@
         <script type="text/javascript" src="js/jquery.ajaxchimp.min.js"></script> 
         <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.tools.min.js"></script>
 		<script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-        <script type="text/javascript" src="js/rev-slider.js"></script>     
+        <script type="text/javascript" src="js/rev-slider.js"></script>
+        <script type="text/javascript" src="js/home.js"></script>     
         <!--[if lt IE 10]><script type="text/javascript" src="js/placeholder.js"></script><![endif]-->
         
     </body>
