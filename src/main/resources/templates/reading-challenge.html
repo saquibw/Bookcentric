@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+        
+        <div class="col-md-12 card management-card">
+			<div class="card-body">
+					
+				<div class="full-width margin-top-10px">
+				
+					<div class="col-md-6 left">
+						<h4>Reading challenges</h4>
+						
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Subject</th>
+									<th>Month</th>
+									<th>Year</th>
+									<th>Published</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="rc: ${readingChallenges}">
+									<td th:text="${rc.subject}"></td>
+									<td th:text="${rc.month}"></td>
+									<td th:text="${rc.year}"></td>
+									<td th:text="${rc.published}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+					<div class="col-md-6 left">
+						<h4>Prepare reading challenge</h4>
+						
+						<form th:action="@{/reading-challenge}" th:object="${readingChallenge}" method="post" encType="multipart/form-data" autocomplete="off">
+							<div class="row">
+								<div class="form-group col">
+									<label>Subject*</label> <input type="text" class="form-control" th:field="*{subject}" required placeholder="Ex. A book about egyptian methodology">
+								</div>
+								<div class="form-group col">
+									<label>Month name*</label> <input type="text" class="form-control" th:field="*{month}" placeholder="Ex. January">
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col">
+									<label>Year*</label> <input type="number" class="form-control" th:field="*{year}" required placeholder="Ex. 2020">
+								</div>
+								<div class="form-group col">
+									<label><input type="checkbox" th:field="*{published}">Published*</label>
+								</div>
+							</div>
+							
+							<div class="row">
+								<input type="text" class="form-control hidden" th:field="*{id}">
+								<div class="form-group col">
+									<label>Upload image</label> 
+									<input type="file" class="form-control" name="file">					
+								</div>
+							</div>
+							
+							<button type="submit" class="btn btn-primary">Save</button>
+						
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+        
+     </div>
+
+</body>
+
+</html>
