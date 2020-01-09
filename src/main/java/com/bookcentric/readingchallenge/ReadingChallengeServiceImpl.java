@@ -33,5 +33,10 @@ public class ReadingChallengeServiceImpl implements ReadingChallengeService {
 	public List<ReadingChallenge> getAll() {
 		return repository.findAllByOrderByIdDesc();
 	}
+	
+	@Override
+	public ReadingChallenge getBy(Integer id) {
+		return repository.getOne(id);
+	}
 
 }

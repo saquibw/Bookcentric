@@ -1,6 +1,7 @@
 package com.bookcentric.readingchallenge;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +22,6 @@ public class ReadingChallengeBook {
 	private String author;
 	private String url;
 	
-	@ManyToOne @JoinColumn(name="readingChallengeId")
+	@ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name="readingChallengeId")
 	private ReadingChallenge readingChallenge;
 }

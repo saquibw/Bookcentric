@@ -2,6 +2,7 @@ package com.bookcentric.readingchallenge;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +24,7 @@ public class ReadingChallenge {
 	private String subject;
 	private boolean published;
 	
-	@OneToMany(mappedBy="readingChallenge")
+	@OneToMany(mappedBy="readingChallenge", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<ReadingChallengeBook> books;
 
 }

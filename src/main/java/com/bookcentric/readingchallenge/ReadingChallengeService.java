@@ -10,4 +10,5 @@ public interface ReadingChallengeService {
 	public void saveImage(MultipartFile file, Integer id) throws IOException;
 	public byte[] getImageBy(Integer id);
 	public List<ReadingChallenge> getAll();
+	public ReadingChallenge getBy(Integer id);
 }

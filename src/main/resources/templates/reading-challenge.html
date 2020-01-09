@@ -17,9 +17,10 @@
 					<div class="col-md-6 left">
 						<h4>Reading challenges</h4>
 						
-						<table class="table">
+						<table class="table readingChallengeList">
 							<thead>
 								<tr>
+									<th></th>
 									<th>Subject</th>
 									<th>Month</th>
 									<th>Year</th>
@@ -28,6 +29,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="rc: ${readingChallenges}">
+									<td class="hidden" th:text="${rc.id}"></td>
 									<td th:text="${rc.subject}"></td>
 									<td th:text="${rc.month}"></td>
 									<td th:text="${rc.year}"></td>
@@ -55,8 +57,29 @@
 									<label>Year*</label> <input type="number" class="form-control" th:field="*{year}" required placeholder="Ex. 2020">
 								</div>
 								<div class="form-group col">
-									<label><input type="checkbox" th:field="*{published}">Published*</label>
+									<input type="checkbox" th:field="*{published}"><span>Published*</span>
 								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col">
+									<button class="btn btn-sm btn-success add-book">Add books</button>
+									<table class="table bookList">
+										<thead>
+											<tr><th>Book name</th><th>Author</th><th>Url</th><th></th></tr>
+										</thead>
+										<tbody>
+											<tr th:if="${readingChallenge.books.empty}" class="no-books-row"><td colspan="4"> No Books Available </td></tr>
+											<tr th:each="book, itemStat : *{books}">
+												<td><input th:field="*{books[__${itemStat.index}__].name}" /></td>
+            									<td><input th:field="*{books[__${itemStat.index}__].author}" /></td>
+            									<td><input th:field="*{books[__${itemStat.index}__].url}" /></td>
+            									<td><input class="hidden" th:field="*{books[__${itemStat.index}__].id}" /></td>
+        									</tr>
+										</tbody>
+									</table>
+								</div>
+								
 							</div>
 							
 							<div class="row">
@@ -76,6 +99,39 @@
 		</div>
         
      </div>
+     
+     <section th:insert="fragments/body :: js-container"></section>
+     
+     <script type="text/javascript">
+     	$(document).ready(function() {
+     		
+     		$(".add-book").click(function(e) {
+     			e.preventDefault();
+     			if(!$(".no-books-row").hasClass("hidden")) {
+     				$(".no-books-row").addClass("hidden");
+     			}
+     			const tbody = $(".bookList").find("tbody");
+     			const count = $(tbody).find("tr").length-1;
+     			console.log(count);
+     			let row = "<tr>";
+     			row += "<td><input type='text' name='books[" + count + "].name'></td>";
+     			row += "<td><input type='text' name='books[" + count + "].author'></td>";
+     			row += "<td><input type='text' name='books[" + count + "].url'></td>";
+     			row += "<td><input class='hidden' type='text' name='books[" + count + "].id'></td>";
+     			row += "</row>"
+     			$(tbody).append(row);
+     		});
+     		
+     		$(".readingChallengeList tbody").find("tr").click(function(e) {
+     			e.preventDefault();
+     			
+     			var currentRow = $(this).closest('tr');
+				var id = currentRow.find("td:eq(0)").text();
+				console.log(id);
+				location.href = '/reading-challenge/' + id;
+     		});
+     	});
+     </script>
 
 </body>
 
