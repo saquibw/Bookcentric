@@ -280,3 +280,8 @@ textarea {
 .dashboard-background {
 	background-image: url('/images/books/library-card.jpg');
 }
+
+.readingChallengeList > tbody > tr:hover {
+	cursor: pointer;
+	background-color: #ccc;	
+}

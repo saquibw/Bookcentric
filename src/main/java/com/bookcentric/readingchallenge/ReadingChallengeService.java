@@ -11,4 +11,6 @@ public interface ReadingChallengeService {
 	public byte[] getImageBy(Integer id);
 	public List<ReadingChallenge> getAll();
 	public ReadingChallenge getBy(Integer id);
+	public void deleteBy(Integer id);
+	public void deleteBook(Integer bookId);
 }

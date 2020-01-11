@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ReadingChallengeServiceImpl implements ReadingChallengeService {
 	
 	@Autowired ReadingChallengeRepository repository;
+	@Autowired ReadingChallengeBookRepository bookRepository;
 
 	@Override
 	public void save(ReadingChallenge readingChallenge) {
@@ -37,6 +38,17 @@ public class ReadingChallengeServiceImpl implements ReadingChallengeService {
 	@Override
 	public ReadingChallenge getBy(Integer id) {
 		return repository.getOne(id);
+	}
+
+	@Override
+	public void deleteBy(Integer id) {
+		repository.deleteById(id);;
+	}
+
+	@Override
+	public void deleteBook(Integer bookId) {
+		bookRepository.deleteById(bookId);
+		
 	}
 
 }

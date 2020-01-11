@@ -8,6 +8,11 @@
 
 	<div class="page">
 		<header th:insert="fragments/body :: header"></header>
+		
+		<div class="container-fluid">
+		<div class="row justify-content-md-center top-space">
+
+		<div th:insert="fragments/body :: management-navbar"></div>
         
         <div class="col-md-12 card management-card">
 			<div class="card-body">
@@ -20,11 +25,13 @@
 						<table class="table readingChallengeList">
 							<thead>
 								<tr>
-									<th></th>
+									<th class="hidden"></th>
 									<th>Subject</th>
 									<th>Month</th>
 									<th>Year</th>
 									<th>Published</th>
+									<th></th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -34,6 +41,8 @@
 									<td th:text="${rc.month}"></td>
 									<td th:text="${rc.year}"></td>
 									<td th:text="${rc.published}"></td>
+									<td><a class='fa fa-edit edit-icon color-green'></a></td>
+									<td><a class='fa fa-trash delete-icon'></a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -45,16 +54,16 @@
 						<form th:action="@{/reading-challenge}" th:object="${readingChallenge}" method="post" encType="multipart/form-data" autocomplete="off">
 							<div class="row">
 								<div class="form-group col">
-									<label>Subject*</label> <input type="text" class="form-control" th:field="*{subject}" required placeholder="Ex. A book about egyptian methodology">
+									<label>Subject*</label> <input type="text" class="form-control" th:field="*{subject}" required>
 								</div>
 								<div class="form-group col">
-									<label>Month name*</label> <input type="text" class="form-control" th:field="*{month}" placeholder="Ex. January">
+									<label>Month name*</label> <input type="text" class="form-control" th:field="*{month}">
 								</div>
 							</div>
 							
 							<div class="row">
 								<div class="form-group col">
-									<label>Year*</label> <input type="number" class="form-control" th:field="*{year}" required placeholder="Ex. 2020">
+									<label>Year*</label> <input type="number" class="form-control" th:field="*{year}" required>
 								</div>
 								<div class="form-group col">
 									<input type="checkbox" th:field="*{published}"><span>Published*</span>
@@ -64,17 +73,19 @@
 							<div class="row">
 								<div class="form-group col">
 									<button class="btn btn-sm btn-success add-book">Add books</button>
+									<a href="/reading-challenge/view">Clear</a>
 									<table class="table bookList">
 										<thead>
-											<tr><th>Book name</th><th>Author</th><th>Url</th><th></th></tr>
+											<tr><th></th><th>Book name</th><th>Author</th><th>Url</th><th></th></tr>
 										</thead>
 										<tbody>
 											<tr th:if="${readingChallenge.books.empty}" class="no-books-row"><td colspan="4"> No Books Available </td></tr>
 											<tr th:each="book, itemStat : *{books}">
-												<td><input th:field="*{books[__${itemStat.index}__].name}" /></td>
-            									<td><input th:field="*{books[__${itemStat.index}__].author}" /></td>
-            									<td><input th:field="*{books[__${itemStat.index}__].url}" /></td>
-            									<td><input class="hidden" th:field="*{books[__${itemStat.index}__].id}" /></td>
+											<td><input type="text" class="form-control hidden" th:field="*{books[__${itemStat.index}__].id}" /></td>
+												<td><input type="text" class="form-control" required th:field="*{books[__${itemStat.index}__].name}" /></td>
+            									<td><input type="text" class="form-control" required th:field="*{books[__${itemStat.index}__].author}" /></td>
+            									<td><input type="text" class="form-control" th:field="*{books[__${itemStat.index}__].url}" /></td>
+            									<td><a class='fa fa-trash book-delete-icon'></a></td>
         									</tr>
 										</tbody>
 									</table>
@@ -100,6 +111,9 @@
         
      </div>
      
+     </div>
+     </div>
+     
      <section th:insert="fragments/body :: js-container"></section>
      
      <script type="text/javascript">
@@ -108,28 +122,70 @@
      		$(".add-book").click(function(e) {
      			e.preventDefault();
      			if(!$(".no-books-row").hasClass("hidden")) {
-     				$(".no-books-row").addClass("hidden");
+     				$(".no-books-row").remove();
      			}
      			const tbody = $(".bookList").find("tbody");
-     			const count = $(tbody).find("tr").length-1;
-     			console.log(count);
+     			const count = $(tbody).find("tr").length;
+
      			let row = "<tr>";
-     			row += "<td><input type='text' name='books[" + count + "].name'></td>";
-     			row += "<td><input type='text' name='books[" + count + "].author'></td>";
-     			row += "<td><input type='text' name='books[" + count + "].url'></td>";
-     			row += "<td><input class='hidden' type='text' name='books[" + count + "].id'></td>";
+     			row += "<td><input type='text' class='form-control hidden' name='books[" + count + "].id'></td>";
+     			row += "<td><input type='text' class='form-control' required name='books[" + count + "].name'></td>";
+     			row += "<td><input type='text' class='form-control' required name='books[" + count + "].author'></td>";
+     			row += "<td><input type='text' class='form-control' name='books[" + count + "].url'></td>";
+     			row += "<td><a class='fa fa-trash book-delete-icon'></a></td>";
      			row += "</row>"
      			$(tbody).append(row);
+     			
+     			$(".book-delete-icon").off("click");
+     			$(".book-delete-icon").click(function(e) {
+     				e.preventDefault();
+         			deleteBook(this);
+     			});
      		});
      		
-     		$(".readingChallengeList tbody").find("tr").click(function(e) {
+     		$(".edit-icon").click(function(e) {
      			e.preventDefault();
-     			
      			var currentRow = $(this).closest('tr');
 				var id = currentRow.find("td:eq(0)").text();
-				console.log(id);
-				location.href = '/reading-challenge/' + id;
+				location.href = '/reading-challenge/edit/' + id;
      		});
+     		
+     		$(".delete-icon").click(function(e) {
+     			e.preventDefault();
+     			var currentRow = $(this).closest('tr');
+				var id = currentRow.find("td:eq(0)").text();
+				location.href = '/reading-challenge/delete/' + id;
+     		});
+     		
+     		function deleteBook(self) {
+     			var currentRow = $(self).closest('tr');
+				var id = currentRow.find("td:eq(0) input").val();
+				console.log(id);
+				if(id) {
+					var request = $.ajax({
+						type: "POST",
+						url: "/reading-challenge/delete/book",
+						dataType: 'JSON',
+						data: {
+							"bookId": id
+						}
+					});
+					
+					request.done(function(response) {
+						if(response.success) {
+							currentRow.remove();
+						}
+					});
+				} else {
+					currentRow.remove();
+				}
+     		}
+     		
+     		$(".book-delete-icon").click(function(e) {
+     			e.preventDefault();
+     			deleteBook(this);
+     		});
+     		
      	});
      </script>
 
