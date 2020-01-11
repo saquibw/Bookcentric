@@ -120,7 +120,7 @@ public class BookServiceImpl implements BookService {
 	
 	private List<Books> filterBy(String searchText, List<Books> list) {
 		return list
-				.stream()
+				.parallelStream()
 				.filter(b -> b.getName().toLowerCase().contains(searchText) 
 						|| b.getAuthorName().toLowerCase().contains(searchText) 
 						|| b.getGenreName().toLowerCase().contains(searchText)
@@ -158,9 +158,9 @@ public class BookServiceImpl implements BookService {
 		String searchTagKey = searchArr[0];
 		String searchTagValue = searchArr[1].toLowerCase().trim();
 		
-		if(searchTagKey.equals("genre")) bookList = bookList.stream().filter(b -> b.getGenreName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
-		else if(searchTagKey.equals("author")) bookList =  bookList.stream().filter(b -> b.getAuthorName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
-		else if(searchTagKey.equals("tag")) bookList =  bookList.stream().filter(b -> b.getTagName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
+		if(searchTagKey.equals("genre")) bookList = bookList.parallelStream().filter(b -> b.getGenreName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
+		else if(searchTagKey.equals("author")) bookList =  bookList.parallelStream().filter(b -> b.getAuthorName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
+		else if(searchTagKey.equals("tag")) bookList =  bookList.parallelStream().filter(b -> b.getTagName().toLowerCase().contains(searchTagValue)).collect(Collectors.toList());
 		
 		return bookList;
 	}
