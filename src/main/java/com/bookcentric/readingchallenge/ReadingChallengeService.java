@@ -13,4 +13,5 @@ public interface ReadingChallengeService {
 	public ReadingChallenge getBy(Integer id);
 	public void deleteBy(Integer id);
 	public void deleteBook(Integer bookId);
+	public ReadingChallenge getLatest();
 }

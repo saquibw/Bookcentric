@@ -1,14 +1,16 @@
 package com.bookcentric.readingchallenge;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,9 +26,10 @@ import com.bookcentric.custom.util.Response;
 public class ReadingChallengeController {
 	
 	@Autowired ReadingChallengeService readingChallengeService;
+	@Autowired HttpServletResponse response;
 
-	@GetMapping({"/reading-challenge/view", "/reading-challenge/edit/{id}"})
-	public ModelAndView getView(@PathVariable(name="id", required=false) Integer id) {
+	@GetMapping({"/reading-challenge/management/view", "/reading-challenge/management/edit/{id}"})
+	public ModelAndView getManagementView(@PathVariable(name="id", required=false) Integer id) {
 		ModelAndView view = new ModelAndView("reading-challenge-management");
 		
 		ReadingChallenge rc = new ReadingChallenge();
@@ -46,14 +49,14 @@ public class ReadingChallengeController {
 		return view;
 	}
 	
-	@GetMapping("reading-challenge/delete/{id}")
+	@GetMapping("reading-challenge/management/delete/{id}")
 	public String deleteReadingChallenge(@PathVariable(name="id") Integer id) {
 		readingChallengeService.deleteBy(id);
 		
 		return "redirect:/reading-challenge/view";
 	}
 	
-	@PostMapping("/reading-challenge")
+	@PostMapping("/reading-challenge/management")
 	public String save(@ModelAttribute ReadingChallenge readingChallenge, @RequestParam("file") MultipartFile file) throws IOException {
 
 		readingChallenge.setBooks(readingChallenge.getBooks()
@@ -68,16 +71,46 @@ public class ReadingChallengeController {
 			readingChallengeService.saveImage(file, readingChallenge.getId());
 		}
 		
-		return "redirect:/reading-challenge/view";
+		return "redirect:/reading-challenge/management/view";
 	}
 	
 	@ResponseBody
-	@PostMapping("/reading-challenge/delete/book")
+	@PostMapping("/reading-challenge/management/delete/book")
 	public Response deleteBook(@RequestParam("bookId") Integer bookId) {
 		Response response = new Response();
 		readingChallengeService.deleteBook(bookId);
 		response.success = true;
 		
 		return response;
+	}
+	
+	@GetMapping("/reading-challenge")
+	public ModelAndView getUserView() {
+		ModelAndView view = new ModelAndView("reading-challenge");
+		
+		ReadingChallenge rc = readingChallengeService.getLatest();
+		if(rc == null) {
+			rc = new ReadingChallenge();
+		}
+		System.out.println(rc.getSubject());
+		view.addObject("rc", rc);
+		view.addObject("pageTitle", "BookCentric - Reading challenge");
+		
+		return view;
+	}
+	
+	@GetMapping("/reading-challenge/image/{id}")
+	@ResponseBody
+	public void getImage(@PathVariable Integer id) throws SQLException, IOException {
+		response.setContentType("image/jpeg");
+
+		byte[] image = readingChallengeService.getImageBy(id);
+		if(image != null) {
+
+			ServletOutputStream stream = response.getOutputStream();
+			stream.write(image);
+			stream.flush();
+			stream.close();
+		}		
 	}
 }

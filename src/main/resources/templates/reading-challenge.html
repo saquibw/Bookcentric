@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<div th:insert="fragments/body :: logo"></div>
+            <div th:insert="fragments/body :: menue"></div>
+
+            <!-- Head Section -->
+            <section class="home-section bg-dark-alfa-50 parallax-2 fixed-height-medium fixed-max-height-400px" data-background="/images/blog/readingchallenge.png">
+                <div class="js-height-parent container">
+                    
+                    <!-- Hero Content -->
+                    <div class="home-content">
+                        <div class="home-text">
+                            
+                            <div class="row">                        
+                                <div class="col-md-8 align-left font-alt">
+                                    <h1 class="hs-line-11 font-alt mb-20 mb-xs-0"><!-- Bookcentric reading challenge --></h1>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- End Hero Content -->                    
+                </div>
+            </section>
+            
+            <div class="container-fluid">
+				<div class="row justify-content-md-center top-space">
+					<div class="col-md-6 card management-card">
+						<div class="card-body">
+							<div th:if="${rc.subject != null}">
+							<ul>
+								<li><h4 class="text-uppercase">Bookcentric reading challenge</h4></li>
+								<li><h5 class="text-uppercase" th:text="${rc.month} + ' ' + ${rc.year}"></h5></li>
+								<li><h6 class="text-uppercase" th:text="${rc.subject}"></h6></li>
+								<li><p class="text-uppercase">Bookcentric suggests:</p></li>
+							</ul>
+														
+							<ol>
+								<li th:each="book : ${rc.books}">
+									<div th:if="${book.url == ''}"><label th:text="${book.name} + ' by ' + ${book.author}"></label></div>
+									<div th:if="${book.url != ''}"><a th:href="@{${book.url}}" target="_blank" th:text="${book.name} + ' by ' + ${book.author}"></a></div>
+									
+								</li>
+							</ol>
+							
+							<img class="w-100" th:src="@{'/reading-challenge/image/' + ${rc.id}}" alt="...">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+           
+		</div>
+		
+		<section th:insert="fragments/body :: js-container"></section>
+		
+	</body>
+</html>

@@ -51,4 +51,9 @@ public class ReadingChallengeServiceImpl implements ReadingChallengeService {
 		
 	}
 
+	@Override
+	public ReadingChallenge getLatest() {
+		return repository.getLatest();
+	}
+
 }

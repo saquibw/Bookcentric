@@ -160,7 +160,7 @@
      		function deleteBook(self) {
      			var currentRow = $(self).closest('tr');
 				var id = currentRow.find("td:eq(0) input").val();
-				console.log(id);
+
 				if(id) {
 					var request = $.ajax({
 						type: "POST",
