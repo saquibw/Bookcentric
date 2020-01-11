@@ -84,11 +84,18 @@ public class ReadingChallengeController {
 		return response;
 	}
 	
-	@GetMapping("/reading-challenge")
-	public ModelAndView getUserView() {
+	@GetMapping({"/reading-challenge", "/reading-challenge/{id}"})
+	public ModelAndView getUserView(@PathVariable(name="id", required=false) Integer id) {
 		ModelAndView view = new ModelAndView("reading-challenge");
 		
-		ReadingChallenge rc = readingChallengeService.getLatest();
+		ReadingChallenge rc = null;
+		
+		if(id != null && id > 0) {
+			rc = readingChallengeService.getBy(id);
+		} else {
+			rc = readingChallengeService.getLatest();
+		} 
+		
 		if(rc == null) {
 			rc = new ReadingChallenge();
 		}

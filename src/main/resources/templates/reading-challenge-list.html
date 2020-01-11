@@ -19,7 +19,7 @@
 								<h1>List of reading challenges</h1>
 								<ul>
 									<li th:each="rc : ${rcs}">
-										<a th:text="${rc.month} + ' ' + ${rc.year} + ': ' + ${rc.subject}" th:href="@{'/reading-challenge'}"></a>
+										<a th:text="${rc.month} + ' ' + ${rc.year} + ': ' + ${rc.subject}" th:href="@{'/reading-challenge/' + ${rc.id}}"></a>
 									</li>
 								</ul>
 							</div>
