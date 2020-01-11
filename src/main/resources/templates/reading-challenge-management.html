@@ -51,7 +51,7 @@
 					<div class="col-md-6 left">
 						<h4>Prepare reading challenge</h4>
 						
-						<form th:action="@{/reading-challenge}" th:object="${readingChallenge}" method="post" encType="multipart/form-data" autocomplete="off">
+						<form th:action="@{/reading-challenge/management}" th:object="${readingChallenge}" method="post" encType="multipart/form-data" autocomplete="off">
 							<div class="row">
 								<div class="form-group col">
 									<label>Subject*</label> <input type="text" class="form-control" th:field="*{subject}" required>
@@ -147,14 +147,14 @@
      			e.preventDefault();
      			var currentRow = $(this).closest('tr');
 				var id = currentRow.find("td:eq(0)").text();
-				location.href = '/reading-challenge/edit/' + id;
+				location.href = '/reading-challenge/management/edit/' + id;
      		});
      		
      		$(".delete-icon").click(function(e) {
      			e.preventDefault();
      			var currentRow = $(this).closest('tr');
 				var id = currentRow.find("td:eq(0)").text();
-				location.href = '/reading-challenge/delete/' + id;
+				location.href = '/reading-challenge/management/delete/' + id;
      		});
      		
      		function deleteBook(self) {
@@ -164,7 +164,7 @@
 				if(id) {
 					var request = $.ajax({
 						type: "POST",
-						url: "/reading-challenge/delete/book",
+						url: "/reading-challenge/management/delete/book",
 						dataType: 'JSON',
 						data: {
 							"bookId": id

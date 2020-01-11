@@ -37,6 +37,7 @@
 						<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management">Management</a></li>
 						<li><a href="/treasury">Treasury</a></li>
 						<li sec:authorize="isAuthenticated()"><a href="/user/dashboard">Member Dashboard</a></li>
+						<li sec:authorize="isAuthenticated()"><a href="/reading-challenge/all">Reading Challenge</a></li>
 						<li sec:authorize="isAuthenticated()"><a href="/password/reset">Reset Password</a></li>
 						<li sec:authorize="isAnonymous()"><a href="/login">Login</a></li>
 						<li sec:authorize="isAuthenticated()"><a href="/logout">Logout</a></li>
@@ -79,7 +80,7 @@
 			</li>
 			<li class="nav-dropdown"><a href="javascript:void(0)" class="dropbtn">Events</a>
 				<div class="dropdown-content">
-					<a href="/reading-challenge/view">Reading Challenge</a>
+					<a href="/reading-challenge/management/view">Reading Challenge</a>
 				</div>
 			</li>
 			<li class="nav-dropdown"><a href="javascript:void(0)" class="dropbtn">Subscription</a>

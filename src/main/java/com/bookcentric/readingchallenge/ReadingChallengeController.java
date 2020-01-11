@@ -53,7 +53,7 @@ public class ReadingChallengeController {
 	public String deleteReadingChallenge(@PathVariable(name="id") Integer id) {
 		readingChallengeService.deleteBy(id);
 		
-		return "redirect:/reading-challenge/view";
+		return "redirect:/reading-challenge/management/view";
 	}
 	
 	@PostMapping("/reading-challenge/management")
@@ -92,7 +92,7 @@ public class ReadingChallengeController {
 		if(rc == null) {
 			rc = new ReadingChallenge();
 		}
-		System.out.println(rc.getSubject());
+
 		view.addObject("rc", rc);
 		view.addObject("pageTitle", "BookCentric - Reading challenge");
 		
@@ -112,5 +112,16 @@ public class ReadingChallengeController {
 			stream.flush();
 			stream.close();
 		}		
+	}
+	
+	@GetMapping("/reading-challenge/all")
+	public ModelAndView getList() {
+		ModelAndView mv = new ModelAndView("reading-challenge-list");
+		List<ReadingChallenge> rcs = readingChallengeService.getAllPublished();
+		
+		mv.addObject("rcs", rcs);
+		mv.addObject("pageTitle", "BookCentric - Reading challenge list");
+		
+		return mv;
 	}
 }

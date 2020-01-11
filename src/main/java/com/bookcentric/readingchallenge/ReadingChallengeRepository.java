@@ -20,6 +20,9 @@ public interface ReadingChallengeRepository extends JpaRepository<ReadingChallen
 	
 	public List<ReadingChallenge> findAllByOrderByIdDesc();
 	
-	@Query(value = "Select * From reading_challenge where published=true Order by id desc limit 1;", nativeQuery=true)
+	@Query(value = "Select * From reading_challenge where published=true Order by id desc", nativeQuery=true)
+	public List<ReadingChallenge> findAllByPublished();
+	
+	@Query(value = "Select * From reading_challenge where published=true Order by id desc limit 1", nativeQuery=true)
 	public ReadingChallenge getLatest();
 }

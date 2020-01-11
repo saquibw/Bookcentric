@@ -56,4 +56,9 @@ public class ReadingChallengeServiceImpl implements ReadingChallengeService {
 		return repository.getLatest();
 	}
 
+	@Override
+	public List<ReadingChallenge> getAllPublished() {
+		return repository.findAllByPublished();
+	}
+
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+            
+        <div class="container-fluid">
+				<div class="row justify-content-md-center top-space">
+					<div class="col-md-6 card management-card">
+						<div class="card-body">
+						
+							
+						
+							<div th:if="${rcs != null}">
+								<h1>List of reading challenges</h1>
+								<ul>
+									<li th:each="rc : ${rcs}">
+										<a th:text="${rc.month} + ' ' + ${rc.year} + ': ' + ${rc.subject}" th:href="@{'/reading-challenge'}"></a>
+									</li>
+								</ul>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+            
+   	</div>
+   	
+   	<section th:insert="fragments/body :: js-container"></section>
+</body>
+</html>
