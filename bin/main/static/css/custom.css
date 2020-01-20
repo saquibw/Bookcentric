@@ -285,3 +285,9 @@ textarea {
 	cursor: pointer;
 	background-color: #ccc;	
 }
+
+.content-editor {
+	height: 400px;
+
+	overflow-x: scroll;
+}

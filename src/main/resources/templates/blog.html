@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<div class="container-fluid">
+			<div class="row justify-content-md-center top-space">
+			
+				<div th:insert="fragments/body :: management-navbar"></div>
+				
+				<div class="col-md-10 card management-card">
+					<div class="card-body">
+						<h1>Thoughts & Musings</h1>
+						
+							<form th:action="@{/blog/save}" th:object="${blog}" method="post" autocomplete="off">
+
+							<div class="row">
+								<div class="form-group col">
+									<input type="text" class="hidden" th:field="*{id}">
+									<label>Name your thoughts*</label> <input type="text" class="form-control" th:field="*{subject}" required>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col">
+									<label>Describe your thoughts</label>
+									<div class="content-editor form-control" id="contentEditor" contenteditable="true" th:utext="*{content}"></div>
+									<textarea rows="0" cols="0" class="hidden" th:field="*{content}"></textarea>
+								</div>
+							</div>
+
+							<button type="submit" class="btn btn-primary">Post your thoughts</button>
+						</form>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<section th:insert="fragments/body :: js-container"></section>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			$("#contentEditor").keyup(function(e) {
+				e.preventDefault();
+				$("#content").text($("#contentEditor").html());
+			});
+			
+		});
+	</script>
+</body>
+</html>

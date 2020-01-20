@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.bookcentric.blog.Blog;
 import com.bookcentric.component.books.Books;
 import com.bookcentric.component.subscription.Subscription;
 import com.bookcentric.component.user.history.UserHistory;
@@ -69,6 +70,9 @@ public class User {
 	
 	@OneToMany(mappedBy="user")
 	private List<UserHistory> userHistory;
+	
+	@OneToMany(mappedBy="user")
+	private List<Blog> blogs;
 	
 	@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="statusId")
 	private UserStatus status;

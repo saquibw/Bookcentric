@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<div th:insert="fragments/body :: logo"></div>
+        <div th:insert="fragments/body :: menue"></div>
+		
+		<section class="home-section bg-dark-alfa-50 parallax-2 fixed-height-medium fixed-max-height-400px" data-background="/images/blog/thoughtsmusings.jpeg">
+                <div class="js-height-parent container">
+                    
+                    <!-- Hero Content -->
+                    <div class="home-content">
+                        <div class="home-text">
+                            
+                            <div class="row">                        
+                                <div class="col-md-8 align-left font-alt">
+                                    <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Thoughts & Musings</h1>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- End Hero Content -->
+                    
+                </div>
+            </section>
+	
+		<div class="container-fluid">
+			<div class="row justify-content-md-center top-space">
+				
+				<div class="col-md-10 card management-card">
+					<div class="card-body">
+						
+						<div class="full-width">
+							<div class="col-md-6 left">
+								<button class="btn btn-dark active">My blogs</button>
+								<button class="btn btn-dark">Other's blogs</button>
+							</div>
+							<div class="col-md-6 left">
+								<a href="/blog" class="btn btn-success btn-block">Add new</a>
+							</div>
+						</div>
+						
+							
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+
+
+
+<section th:insert="fragments/body :: js-container"></section>
+
+</body>
+
+</html>

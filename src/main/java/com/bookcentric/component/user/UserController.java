@@ -160,7 +160,7 @@ public class UserController {
 		String message = "";
 
 		Books book = bookService.getBy(bookId);
-		User user = userSecurityService.getLoggedInUser();;
+		User user = userSecurityService.getLoggedInUser();
 		List<Books> readingQueue = user.getReadingQueue();
 
 		if(Constants.ACTION_ADD.equals(action)) {
