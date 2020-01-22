@@ -288,6 +288,18 @@ textarea {
 
 .content-editor {
 	height: 400px;
-
 	overflow-x: scroll;
+}
+
+.blog-icons {
+	font-size: 20px !important;
+    margin-right: 3px;
+}
+
+.blog-item {
+	background-color: #f2f2f2;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 1rem !important;
 }

@@ -414,7 +414,7 @@ a:hover{
 }
 
 h1,h2,h3,h4,h5,h6{
-    margin-bottom: 1.3em;
+    /* margin-bottom: 1.3em; */
     line-height: 1.4;
     font-weight: 600;
    
@@ -4259,7 +4259,7 @@ a.link-to-top{
    Blog
    ============================== */
 
-.blog-item{
+/* .blog-item{
     margin-bottom: 80px;
     position: relative;
 }
@@ -4438,7 +4438,7 @@ a.blog-item-more:hover{
     margin-bottom: 30px;
     padding-bottom: 10px;
     border-bottom: 1px solid #eee;
-}
+} */
 
 
 /*

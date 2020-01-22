@@ -35,27 +35,55 @@
 				<div class="col-md-10 card management-card">
 					<div class="card-body">
 						
-						<div class="full-width">
+						<div sec:authorize="isAuthenticated()" class="full-width row mb-5">
 							<div class="col-md-6 left">
-								<button class="btn btn-dark active">My blogs</button>
-								<button class="btn btn-dark">Other's blogs</button>
+								<button class="btn btn-dark active">My thoughts</button>
+								<button class="btn btn-dark">Other's thoughts</button>
 							</div>
 							<div class="col-md-6 left">
-								<a href="/blog" class="btn btn-success btn-block">Add new</a>
+								<a href="/blog" class="btn btn-success btn-block">Write something new</a>
 							</div>
 						</div>
 						
-							
+						<div class="blog-container"></div>
+						
 					</div>
 				</div>
 			</div>
 		</div>
 	
 	</div>
+	
+	<div class="hidden" id="temp-container"></div>
+	
+	<section th:insert="fragments/body :: js-container"></section>
 
+	<script type="text/javascript" src="/js/blog-list.js">></script>
 
-
-<section th:insert="fragments/body :: js-container"></section>
+	<script id="blog-item" type="text/template">
+		<div class="full-width row blog-item">
+							<label class="hidden" id="blog-item-id"></label>
+							<div class="col-md-3 left" id="blog-image-container">
+								<img alt="..." src="#" height="150" width="150">
+							</div>
+							<div class="col-md-9 left">
+								<div class="full-width"><h2><a href="#" class="text-dark" id="blog-item-header" target="_blank"></a></h2></div>
+								<div class="full-width h-50">
+									<span class="text-secondary font-14-pix" id="blog-item-body">g</span>
+									<a class="ml-1" id="blog-item-details" href="#" target="_blank">Read more >></a>
+								</div>
+								<div class="full-width">
+									<span class="col-md-4"><i class="fa fa-user-circle blog-icons"></i><label id="blog-item-author-name"></label></span> 
+									<span class="col-md-2"><i class="fa fa-comment blog-icons"></i><label id="blog-item-comment-count"></label></span> 
+									<span class="col-md-2"><i class="fa fa-calendar blog-icons"></i><label id="blog-item-creation-date"></label></span>
+									<span sec:authorize="isAuthenticated()" class="col-md-2" style="float: right;">
+										<a class="fa fa-edit edit-icon color-green" target="_blank" href="#"></a>
+										<a class="fa fa-trash delete-icon color-red margin-left-20px" href="#"></a>
+									</span>
+								</div>								
+							</div>							
+						</div>
+	</script>
 
 </body>
 
