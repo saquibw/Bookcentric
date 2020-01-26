@@ -176,9 +176,7 @@ var BookManager = (function() {
 		const element = generateRatingElement(rating);
 		$(".self-rating-container").html(element);
 				
-		attachRatingListener();
-		
-		
+		attachRatingListener();		
 	}
 	
 	function getFormattedDate(date) {
@@ -271,7 +269,6 @@ var BookManager = (function() {
 	}
 	
 	function renderOtherReviewSection(reviewList) {
-		console.log(reviewList);
 		if(reviewList && reviewList.length > 0) {
 			
 			reviewList.forEach(function(row, index) {

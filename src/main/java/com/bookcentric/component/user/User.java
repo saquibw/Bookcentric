@@ -71,8 +71,8 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<UserHistory> userHistory;
 	
-	@OneToMany(mappedBy="user")
-	private List<Blog> blogs;
+	/*@OneToMany(mappedBy="user")
+	private List<Blog> blogs;*/
 	
 	@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="statusId")
 	private UserStatus status;

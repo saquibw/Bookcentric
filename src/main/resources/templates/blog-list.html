@@ -37,11 +37,11 @@
 						
 						<div sec:authorize="isAuthenticated()" class="full-width row mb-5">
 							<div class="col-md-6 left">
-								<button class="btn btn-dark active">My thoughts</button>
-								<button class="btn btn-dark">Other's thoughts</button>
+								<button class="btn btn-outline-secondary own-blogs">My thoughts</button>
+								<button class="btn btn-outline-secondary other-blogs active">Other's thoughts</button>
 							</div>
 							<div class="col-md-6 left">
-								<a href="/blog" class="btn btn-success btn-block">Write something new</a>
+								<a href="/blogs/me" class="btn btn-success btn-block">Write something new</a>
 							</div>
 						</div>
 						
@@ -63,27 +63,30 @@
 	<script id="blog-item" type="text/template">
 		<div class="full-width row blog-item">
 							<label class="hidden" id="blog-item-id"></label>
-							<div class="col-md-3 left" id="blog-image-container">
-								<img alt="..." src="#" height="150" width="150">
+							<div class="col-md-3 left">
+								<img alt="" src="#" height="75" width="75" id="blog-image">
 							</div>
 							<div class="col-md-9 left">
-								<div class="full-width"><h2><a href="#" class="text-dark" id="blog-item-header" target="_blank"></a></h2></div>
-								<div class="full-width h-50">
-									<span class="text-secondary font-14-pix" id="blog-item-body">g</span>
-									<a class="ml-1" id="blog-item-details" href="#" target="_blank">Read more >></a>
+								<div class="full-width row">
+									<div class="col-md-10"><h2><a href="#" class="text-dark" id="blog-item-header" target="_blank"></a></h2></div>
+									<div class="col-md-2">
+										<a class="ml-1 btn btn-sm btn-info" id="blog-item-details" href="#" target="_blank">View post</a>
+									</div>
 								</div>
 								<div class="full-width">
 									<span class="col-md-4"><i class="fa fa-user-circle blog-icons"></i><label id="blog-item-author-name"></label></span> 
 									<span class="col-md-2"><i class="fa fa-comment blog-icons"></i><label id="blog-item-comment-count"></label></span> 
 									<span class="col-md-2"><i class="fa fa-calendar blog-icons"></i><label id="blog-item-creation-date"></label></span>
-									<span sec:authorize="isAuthenticated()" class="col-md-2" style="float: right;">
-										<a class="fa fa-edit edit-icon color-green" target="_blank" href="#"></a>
-										<a class="fa fa-trash delete-icon color-red margin-left-20px" href="#"></a>
-									</span>
+									<span sec:authorize="isAuthenticated()" class="col-md-2 right" id="mutatable-item-container"></span>									
 								</div>								
 							</div>							
 						</div>
 	</script>
+	
+	<!-- <div class="full-width h-50 row">
+									<div class="text-secondary font-14-pix col-md-10" id="blog-item-body"></div>
+									<div class="col-md-2"><a class="ml-1 btn btn-sm btn-info" id="blog-item-details" href="#" target="_blank">View post</a></div>
+								</div> -->
 
 </body>
 

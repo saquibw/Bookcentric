@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<div class="container-fluid">
+			<div class="row justify-content-md-center top-space">
+				
+				<div class="col-md-10 card management-card">
+					<div class="card-body">				
+							<div class="row">
+								<div class="form-group col">
+									<h1 th:text="${blog.subject}"></h1>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col">
+									<label class="hidden blogId" th:text="${blog.id}"></label>
+									<div class="content-editor form-control" id="contentEditor" contenteditable="false" th:utext="${blog.content}"></div>
+								</div>
+							</div>
+							
+						<div class="full-width">
+							<div class="row"><h5 class="margin-top-20px">Comments</h5></div>
+						</div>
+						
+						<div class="full-width self-rating-review-container" sec:authorize="isAuthenticated()">
+							<div class="row">
+								<div class="col-md-12 left">
+									<textarea class="form-control col-md-10 left self-comment-container"></textarea>
+									<button type="button" class="btn btn-success btn-sm margin-left-10px margin-top-10px hidden comment-edit-btn">Edit</button>
+									<button type="button" class="btn btn-success btn-sm margin-left-10px margin-top-10px comment-save-btn">Save</button>
+									<button type="button" class="btn btn-danger btn-sm margin-left-10px margin-top-10px hidden comment-delete-btn">Delete</button>
+								</div>
+							</div>
+							<hr>
+						</div>	
+						
+						<div class="full-width font-14-pix">
+							<div class="col-md-12 left font-prata margin-top-20px other-comment-container"></div>
+						</div>
+											
+					</div>											
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="hidden temp-container"></div>
+	
+	<section th:insert="fragments/body :: js-container"></section>
+	<script type="text/javascript" src="/js/blog-view.js">></script>
+	
+	<script id="other-comment-row" type="text/template">
+		<div class="row">
+			<div class="col-md-2 left">
+				<div class="other-user-name"></div>
+				<div class="other-date font-italic"></div>
+			</div>
+			<div class="col-md-10 left other-comment"></div>
+		</div>
+		<hr>
+	</script>
+
+</body>
+</html>

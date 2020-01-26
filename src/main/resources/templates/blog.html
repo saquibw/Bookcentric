@@ -11,13 +11,13 @@
 		<div class="container-fluid">
 			<div class="row justify-content-md-center top-space">
 			
-				<div th:insert="fragments/body :: management-navbar"></div>
+				<div sec:authorize="hasRole('ROLE_ADMIN')" th:insert="fragments/body :: management-navbar"></div>
 				
 				<div class="col-md-10 card management-card">
 					<div class="card-body">
 						<h1>Thoughts & Musings</h1>
 						
-							<form th:action="@{/blog/save}" th:object="${blog}" method="post" autocomplete="off">
+							<form th:action="@{/blogs/me/save}" th:object="${blog}" method="post" encType="multipart/form-data" autocomplete="off">
 
 							<div class="row">
 								<div class="form-group col">
@@ -33,8 +33,17 @@
 									<textarea rows="0" cols="0" class="hidden" th:field="*{content}"></textarea>
 								</div>
 							</div>
-
-							<button type="submit" class="btn btn-primary">Post your thoughts</button>
+							
+							<div class="row">
+								<input type="text" class="form-control hidden" th:field="*{published}">
+								<div class="form-group col">
+									<label>Upload image</label> 
+									<input type="file" class="form-control" name="file">					
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary submit-blog">Save your thoughts</button>
+							<button th:unless="${blog.published}" class="btn btn-success publish-blog">Publish your thoughts</button>
+							<button th:if="${blog.published}" class="btn btn-success unpublish-blog">Unpublish your thoughts</button>
 						</form>
 						
 					</div>
@@ -44,15 +53,33 @@
 	</div>
 	
 	<section th:insert="fragments/body :: js-container"></section>
-	
+
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
+
 			$("#contentEditor").keyup(function(e) {
 				e.preventDefault();
 				$("#content").text($("#contentEditor").html());
 			});
+
+			var publishButton = $(".publish-blog");
+			var unPublishButton = $(".unpublish-blog");
+			if (publishButton) {
+				publishButton.click(function(e) {
+					e.preventDefault();
+					$("#published").val(true);
+					$(".submit-blog").click();
+				});
+			}
 			
+			if (unPublishButton) {
+				unPublishButton.click(function(e) {
+					e.preventDefault();
+					$("#published").val(false);
+					$(".submit-blog").click();
+				});
+			}
+
 		});
 	</script>
 </body>
