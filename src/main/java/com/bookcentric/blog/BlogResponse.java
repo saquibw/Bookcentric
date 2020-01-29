@@ -12,5 +12,6 @@ public class BlogResponse {
 	private boolean own;
 	private boolean admin;
 	private boolean published;
+	private Integer commentCount;
 	
 }

@@ -25,9 +25,15 @@ var BlogManager = (function() {
 						
 						appendMutatingIcons(blog.own, blog.admin);
 						
+						$(temp).find("#blog-item-id").text(blog.id);
+						
 						let blogHeader = $(temp).find("#blog-item-header");
 						blogHeader.text(blog.subject);
 						blogHeader.attr("href", "/blogs/all/view/" + blog.id);
+						
+						if(!blog.published) {
+							$(temp).find("#blog-item-published").text("Unpublished");
+						}
 						
 						let blogImage = $(temp).find("#blog-image");
 						blogImage.attr("src", "/blogs/all/image/" + blog.id);
@@ -37,6 +43,7 @@ var BlogManager = (function() {
 						
 						$(temp).find("#blog-item-author-name").text(blog.userFullName);
 						$(temp).find("#blog-item-creation-date").text(blog.createdAtText);
+						$(temp).find("#blog-item-comment-count").text(blog.commentCount);
 						
 						let editIcon = $(temp).find(".edit-icon");
 						if(editIcon) {
@@ -46,7 +53,7 @@ var BlogManager = (function() {
 						container.append(temp.html());						
 						temp.empty();
 					});
-					
+					attachDeleteListener();
 				};
 			}
 		});
@@ -96,6 +103,33 @@ var BlogManager = (function() {
 				getAllBlogs();
 			});
 		}
+	}
+	
+	function attachDeleteListener() {
+		$(".delete-icon").click(function(e) {
+			e.preventDefault();
+			let blogItem = $(this).closest(".blog-item");
+			let id = blogItem.find("#blog-item-id").text();
+			
+			var c = confirm("Are you sure you want to delete this blog?");
+			
+			if(c) {
+				const blogId = $(".blogId").text();
+				
+				var request = $.ajax({
+					type: "DELETE",
+					url: `/blogs/me/${id}`,
+					dataType: 'JSON'
+				});
+				
+				request.done(function(response) {
+					if(response.success) {
+						blogItem.remove();
+					}
+				});
+			}
+
+		});
 	}
 	
 	(function() {

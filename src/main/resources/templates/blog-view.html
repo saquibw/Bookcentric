@@ -13,19 +13,24 @@
 				
 				<div class="col-md-10 card management-card">
 					<div class="card-body">				
-							<div class="row">
-								<div class="form-group col">
-									<h1 th:text="${blog.subject}"></h1>
-								</div>
+							<div class="row col">
+								<h1 th:text="${blog.subject}"></h1>
 							</div>
 							
+							<div class="row col">
+								<h6 th:text="${blog.userName}"></h6>								
+							</div>
+							<div class="row col">
+								<label class="ml-1 font-14-pix" th:text="${blog.createdAtText}"></label>
+							</div>
+							<hr>
 							<div class="row">
 								<div class="form-group col">
 									<label class="hidden blogId" th:text="${blog.id}"></label>
-									<div class="content-editor form-control" id="contentEditor" contenteditable="false" th:utext="${blog.content}"></div>
+									<div class="content-viewer" th:utext="${blog.content}"></div>
 								</div>
 							</div>
-							
+							<hr>
 						<div class="full-width">
 							<div class="row"><h5 class="margin-top-20px">Comments</h5></div>
 						</div>
@@ -61,7 +66,7 @@
 		<div class="row">
 			<div class="col-md-2 left">
 				<div class="other-user-name"></div>
-				<div class="other-date font-italic"></div>
+				<div class="other-date font-italic text-secondary"></div>
 			</div>
 			<div class="col-md-10 left other-comment"></div>
 		</div>

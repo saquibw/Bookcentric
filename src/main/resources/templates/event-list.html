@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+            
+        <div class="container-fluid">
+				<div class="row justify-content-md-center top-space">
+				
+				<div th:insert="fragments/body :: management-navbar" sec:authorize="hasRole('ROLE_ADMIN')"></div>
+				
+					<div class="col-md-6 card management-card">
+						<div class="card-body">
+												
+							<div class="col-md-10 left">
+								<h1>List of events</h1>
+								<ul th:if="${events != null}">
+									<li th:each="e : ${events}">
+										<a th:text="${e.subject}" th:href="@{'/events/all/' + ${e.id}}"></a>
+									</li>
+								</ul>
+							</div>
+							
+							<div class="col-md-2 left" sec:authorize="hasRole('ROLE_ADMIN')">
+								<a class="btn btn-success" href="/events/me">Add new</a>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+            
+   	</div>
+   	
+   	<section th:insert="fragments/body :: js-container"></section>
+</body>
+</html>

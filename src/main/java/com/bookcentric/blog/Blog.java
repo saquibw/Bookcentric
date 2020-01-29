@@ -1,6 +1,9 @@
 package com.bookcentric.blog;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -31,4 +34,15 @@ public class Blog {
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="userId")
 	private User user;
+	
+	@OneToMany(mappedBy="blog")
+	private List<BlogComments> comments;
+	
+	public String getUserName() {
+		return user.getFullName();
+	}
+	
+	public String getCreatedAtText() {
+		return createdAt.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+	}
 }

@@ -41,8 +41,8 @@
 									<td th:text="${rc.month}"></td>
 									<td th:text="${rc.year}"></td>
 									<td th:text="${rc.published}"></td>
-									<td><a class='fa fa-edit edit-icon color-green'></a></td>
-									<td><a class='fa fa-trash delete-icon'></a></td>
+									<td><a class='fa fa-edit edit-icon color-green' href="JavaScript:void(0);"></a></td>
+									<td><a class='fa fa-trash delete-icon color-red' href="JavaScript:void(0);"></a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -73,7 +73,7 @@
 							<div class="row">
 								<div class="form-group col">
 									<button class="btn btn-sm btn-success add-book">Add books</button>
-									<a href="/reading-challenge/view">Clear</a>
+									<a href="/reading-challenge/management/view">Clear</a>
 									<table class="table bookList">
 										<thead>
 											<tr><th></th><th>Book name</th><th>Author</th><th>Url</th><th></th></tr>

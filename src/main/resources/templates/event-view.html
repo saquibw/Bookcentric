@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<div class="container-fluid">
+			<div class="row justify-content-md-center top-space">
+				
+				<div class="col-md-10 card management-card">
+					<div class="card-body">	
+							
+							<div class="row">
+								<div class="col-md-10">
+									<h1 th:text="${event.subject}"></h1>
+								</div>
+								<div class="col-md-2" sec:authorize="hasRole('ROLE_ADMIN')">
+									<a class="fa fa-edit edit-icon color-green" th:href="@{'/events/me/' + ${event.id}}"></a>
+									<a class="fa fa-trash delete-icon color-red ml-3" th:href="@{'/events/me/delete/' + ${event.id}}"></a>
+								</div>
+							</div>			
+							
+							
+							<hr>
+							<div class="row">
+								<div class="form-group col">
+									<div class="content-viewer" th:utext="${event.content}"></div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<img class="w-100" th:src="@{'/events/all/image/' + ${event.id}}" alt="..."></img>
+							</div>
+						
+						
+						
+											
+					</div>											
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<section th:insert="fragments/body :: js-container"></section>
+
+</body>
+</html>

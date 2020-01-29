@@ -129,7 +129,7 @@ var BlogViewManager = (function() {
 						location.reload();
 					}
 				});
-			}			
+			}		
 		});
 		
 		getSelfComment();

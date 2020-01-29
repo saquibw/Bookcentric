@@ -291,6 +291,10 @@ textarea {
 	overflow-x: scroll;
 }
 
+.content-viewer {
+	height: 400px;
+}
+
 .blog-icons {
 	font-size: 20px !important;
     margin-right: 3px;
@@ -302,4 +306,9 @@ textarea {
     padding-top: 10px;
     margin-bottom: 10px;
     border-radius: 1rem !important;
+}
+
+.other-comment-container {
+	overflow-y: auto;
+    max-height: 300px;
 }

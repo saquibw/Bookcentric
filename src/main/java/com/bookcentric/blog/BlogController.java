@@ -80,13 +80,25 @@ public class BlogController {
 
 		return "redirect:/blogs/me/edit/" + blog.getId().toString();
 	}
+	
+	@ResponseBody
+	@DeleteMapping("/blogs/me/{blogId}")
+	public Response deleteBlog(@PathVariable Integer blogId) {
+		Response response = new Response();
+		
+		Blog blog = repository.findById(blogId).get();
+		
+		if(blog != null) {
+			repository.delete(blog);
+			response.setSuccess(true);
+		}
+		
+		return response;		
+	}
 
 	@GetMapping("/blogs/all/view")
 	public ModelAndView viewBlogList() {
-		List<Blog> blogList = repository.findAll();
-
 		ModelAndView mv = new ModelAndView("blog-list");
-		mv.addObject("blogList", blogList);
 
 		return mv;
 	}
@@ -121,6 +133,7 @@ public class BlogController {
 					br.setCreatedAtText(b.getCreatedAt().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
 					br.setAdmin(!ObjectUtils.isEmpty(user) && user.getRole().equals("admin") ? true : false);
 					br.setOwn(!ObjectUtils.isEmpty(user) && user.getId().equals(b.getUser().getId()) ? true : false);
+					br.setCommentCount(b.getComments().size());
 					return br;
 				}).collect(Collectors.toList());
 
