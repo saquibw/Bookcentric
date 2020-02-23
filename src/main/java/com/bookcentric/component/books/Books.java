@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import com.bookcentric.component.books.author.Author;
 import com.bookcentric.component.books.genre.Genre;
 import com.bookcentric.component.books.publisher.Publisher;
@@ -63,10 +64,13 @@ public class Books {
 	public String getAuthorName() {
 		String name = "";
 		List<Author> authorList = getAuthor();
-		if(authorList.size() > 0) {
+		System.out.println(authorList);
+		if(authorList != null && !authorList.isEmpty()) {
 			StringJoiner joiner = new StringJoiner(", ");
 			authorList.forEach(a -> {
-				joiner.add(a.getName());
+				if(a != null) {
+					joiner.add(a.getName());
+				}
 			});
 			name = joiner.toString();
 		}
@@ -77,10 +81,12 @@ public class Books {
 	public String getGenreName() {
 		String name = "";
 		List<Genre> genreList = getGenre();
-		if(genreList.size() > 0) {
+		if(genreList != null && !genreList.isEmpty()) {
 			StringJoiner joiner = new StringJoiner(", ");
 			genreList.forEach(g -> {
-				joiner.add(g.getName());
+				if(g != null) {
+					joiner.add(g.getName());
+				}
 			});
 			name = joiner.toString();
 		}
@@ -90,10 +96,12 @@ public class Books {
 	public String getPublisherName() {
 		String name = "";
 		List<Publisher> publisherList = getPublisher();
-		if(publisherList.size() > 0) {
+		if(publisherList != null && !publisherList.isEmpty()) {
 			StringJoiner joiner = new StringJoiner(", ");
 			publisherList.forEach(p -> {
-				joiner.add(p.getName());
+				if(p != null) {
+					joiner.add(p.getName());
+				}
 			});
 			name = joiner.toString();
 		}
@@ -103,10 +111,12 @@ public class Books {
 	public String getTagName() {
 		String name = "";
 		List<Tag> tagList = getTag();
-		if(tagList.size() > 0) {
+		if(tagList != null && !tagList.isEmpty()) {
 			StringJoiner joiner = new StringJoiner(", ");
 			tagList.forEach(t -> {
-				joiner.add(t.getName());
+				if(t != null) {
+					joiner.add(t.getName());
+				}				
 			});
 			name = joiner.toString();
 		}

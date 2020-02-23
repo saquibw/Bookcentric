@@ -45,13 +45,13 @@
                 
                 <div class="col-sm-12">
                     <h3>
-                    	<a href="javascript:void(0)" class="best-seller-selection">Bestsellers</a> 
-                    	<label>/</label> 
-                    	<a href="jacascript:void(0)" class="new_arrival_selection">New At Bookcentric</a>
-                    	<label>/</label> 
-                    	<a href="jacascript:void(0)" class="children_selection">Children's</a>
-                    	<label>/</label> 
-                    	<a href="jacascript:void(0)" class="reading_challenge_selection">Bookcentric Reading Challenge</a>
+                    	<a href="javascript:void(0)" class="best-seller-selection mobile-font-size-15">Bestsellers /</a> 
+                    	<!-- <label>/</label>  -->
+                    	<a href="jacascript:void(0)" class="new_arrival_selection mobile-font-size-15">New At Bookcentric /</a>
+                    	<!-- <label>/</label>  -->
+                    	<a href="jacascript:void(0)" class="children_selection mobile-font-size-15">Children's /</a>
+                    	<!-- <label>/</label>  -->
+                    	<a href="jacascript:void(0)" class="reading_challenge_selection mobile-font-size-15">Bookcentric Reading Challenge</a>
                     </h3>
                     
                     
@@ -130,13 +130,13 @@
                                 
                                 <div class="mb-20">
                                     <!-- Post Item -->
-                                    <div class="left col-sm-6 col-md-6 col-lg-6 mb-md-50 wow fadeIn" data-wow-delay="0.1s" data-wow-duration="2s">
+                                    <div class="left col-sm-6 col-md-6 col-lg-6 mb-md-50 wow fadeIn mobile-width-50" data-wow-delay="0.1s" data-wow-duration="2s">
                                         <div class="post-prev-img">
                                             <a href="https://www.facebook.com/bookcentric/" target="_blank"><img src="images/books/need-a-recommendation.png" alt="..." /></a>
                                         </div>
                                     </div>
                                     <!-- Post Item -->
-                                    <div class="left col-sm-6 col-md-6 col-lg-6 mb-md-50 wow fadeIn" data-wow-delay="0.1s" data-wow-duration="2s">
+                                    <div class="left col-sm-6 col-md-6 col-lg-6 mb-md-50 wow fadeIn mobile-width-50" data-wow-delay="0.1s" data-wow-duration="2s">
                                         <div class="post-prev-img">
                                             <a href="/wishlist" target="_blank"><img src="images/books/wish-for-a-book.png" alt="..." /></a>
                                         </div>
@@ -166,22 +166,22 @@
         <section th:insert="fragments/body :: js-container"></section>
             
         <script id="book-item" type="text/template">
-			<div class="col-md-2 col-lg-2 mb-60 mb-xs-40">
+			<div class="col-md-2 col-lg-2 mb-60 mb-xs-40 mobile-width-25">
 			<label></label>
 			<div class="post-prev-img book-image">
 				<a href="#" target="_blank"><img src="" id="book-image" alt="No image"/></a>
 			</div>
 
-			<div class="post-prev-title font-prata align-center">
+			<div class="post-prev-title font-prata align-center mobile-font-size-10">
 				<a href="#" id="book-name" target="_blank" data-toggle="tooltip" title="Hooray!"></a>
 			</div>
 
 			<div sec:authorize="isAuthenticated()" class="post-prev-more align-center">
 				<a href="javascript:void(0)" title="Add to TBR" class="btn btn-mod btn-gray btn-round toggle-wishlist">
-					<i class="fa fa-heart font-14-pix"></i>
+					<i class="fa fa-heart font-14-pix mobile-font-size-10"></i>
 				</a>
 				<a href="javascript:void(0)" title="Add to Reading Queue" class="btn btn-mod btn-gray btn-round toggle-reading-queue">
-					<i class="fa fa-plus-square font-14-pix"></i>
+					<i class="fa fa-plus-square font-14-pix mobile-font-size-10"></i>
 				</a>
 			</div>
 
@@ -190,7 +190,7 @@
 		</script>
 		
 		<script id="special-book-item" type="text/template">
-			<div class="col-md-2 col-lg-2 mb-60 mb-xs-40">
+			<div class="col-md-2 col-lg-2 mb-60 mb-xs-40 mobile-width-25">
 
 			<div class="post-prev-img book-image">
 				<a href="#" target="_blank"><img src="" id="book-image" alt="No image" /></a>
