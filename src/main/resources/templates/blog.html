@@ -11,7 +11,7 @@
 		<div class="container-fluid">
 			<div class="row justify-content-md-center top-space">
 			
-				<div sec:authorize="hasRole('ROLE_ADMIN')" th:insert="fragments/body :: management-navbar"></div>
+				<div th:insert="fragments/body :: management-navbar"></div>
 				
 				<div class="col-md-10 card management-card">
 					<div class="card-body">

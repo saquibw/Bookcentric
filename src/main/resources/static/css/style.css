@@ -6514,3 +6514,47 @@ section:hover .small-item-carousel .owl-next{
     .multi-columns-row .col-lg-2:nth-child(6n + 7) { clear: left; }
     .multi-columns-row .col-lg-1:nth-child(12n + 13) { clear: left; }
 }
+
+@media only screen and (max-width: 500px) {
+	.mobile-width-50 {
+		width: 50% !important;
+	}
+	
+	.mobile-width-25 {
+		width: 25% !important;
+	}
+	
+	.mobile-width-33 {
+		width: 33% !important;
+	}
+	
+	.icon-title a{
+		font-size: 1rem !important;
+   }
+   
+   .mobile-width-20 {
+		width: 20% !important;
+	}
+	
+	.mobile-width-80 {
+		width: 80% !important;
+	}
+	
+	.mobile-width-70 {
+		width: 70% !important;
+	}
+	
+	.mobile-font-size-10 {
+		font-size: 10px !important;
+	}
+	
+	.mobile-font-size-15 {
+		font-size: 15px !important;
+	}
+   
+   .management-navbar {
+   		font-size: 10px !important;
+   		margin-left: 65px !important;
+   		top: -35px !important;
+   }
+}

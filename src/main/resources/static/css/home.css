@@ -37,7 +37,7 @@
     text-decoration: none;
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1200px) {
    .about__text {
      font-size : 40px;
    }
@@ -46,22 +46,4 @@
     font-size: 5em;
    }
 
-}
-
-@media only screen and (max-width: 400px) {
-	.mobile-width-50 {
-		width: 50%;
-	}
-	
-	.mobile-width-25 {
-		width: 25%;
-	}
-	
-	.mobile-width-33 {
-		width: 33%;
-	}
-	
-	.icon-title a{
-		font-size: 1rem
-   }
 }

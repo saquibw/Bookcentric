@@ -62,7 +62,7 @@
 		<!-- End Menu Overlay  -->
 	</div>
 
-	<div th:fragment="management-navbar" class="management-navbar">
+	<div sec:authorize="hasRole('ROLE_ADMIN')" th:fragment="management-navbar" class="management-navbar">
 		<ul>
 			<li class="nav-dropdown"><a href="javascript:void(0)" class="dropbtn">User</a>
 				<div class="dropdown-content">

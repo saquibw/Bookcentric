@@ -36,12 +36,12 @@
 					<div class="card-body">
 						
 						<div sec:authorize="isAuthenticated()" class="full-width row mb-5">
-							<div class="col-md-6 left">
-								<button class="btn btn-outline-secondary own-blogs">My thoughts</button>
-								<button class="btn btn-outline-secondary other-blogs active">Other's thoughts</button>
+							<div class="col-md-6 left mobile-width-50">
+								<button class="btn btn-outline-secondary own-blogs mobile-font-size-10">My thoughts</button>
+								<button class="btn btn-outline-secondary other-blogs active mobile-font-size-10">Other's thoughts</button>
 							</div>
-							<div class="col-md-6 left">
-								<a href="/blogs/me" class="btn btn-success btn-block">Write something new</a>
+							<div class="col-md-6 left mobile-width-50">
+								<a href="/blogs/me" class="btn btn-success btn-block mobile-font-size-10">Write something new</a>
 							</div>
 						</div>
 						
@@ -63,20 +63,20 @@
 	<script id="blog-item" type="text/template">
 		<div class="full-width row blog-item">
 							<label class="hidden" id="blog-item-id"></label>
-							<div class="col-md-3 left">
+							<div class="col-md-3 left mobile-width-20">
 								<img alt="" src="#" height="75" width="75" id="blog-image">
 							</div>
-							<div class="col-md-9 left">
+							<div class="col-md-9 left mobile-width-80">
 								<div class="full-width row">
-									<div class="col-md-10"><h2><a href="#" class="text-dark left" id="blog-item-header" target="_blank"></a></h2><span class="left ml-1 small color-red" id="blog-item-published"></span></div>
-									<div class="col-md-2">
-										<a class="ml-1 btn btn-sm btn-info" id="blog-item-details" href="#" target="_blank">View post</a>
+									<div class="col-md-10 mobile-width-70"><h2><a href="#" class="text-dark left mobile-font-size-15" id="blog-item-header" target="_blank"></a></h2><span class="left ml-1 small color-red mobile-font-size-10" id="blog-item-published"></span></div>
+									<div class="col-md-2 mobile-width-20">
+										<a class="ml-1 btn btn-sm btn-info mobile-font-size-10" id="blog-item-details" href="#" target="_blank">View post</a>
 									</div>
 								</div>
-								<div class="full-width">
-									<span class="col-md-4"><i class="fa fa-user-circle blog-icons"></i><label id="blog-item-author-name"></label></span> 
-									<span class="col-md-2"><i class="fa fa-comment blog-icons"></i><label id="blog-item-comment-count"></label></span> 
-									<span class="col-md-2"><i class="fa fa-calendar blog-icons"></i><label id="blog-item-creation-date"></label></span>
+								<div class="full-width row mobile-font-size-10">
+									<span class="col-md-4"><i class="fa fa-user-circle blog-icons mobile-font-size-10"></i><label id="blog-item-author-name"></label></span> 
+									<span class="col-md-2"><i class="fa fa-comment blog-icons mobile-font-size-10"></i><label id="blog-item-comment-count"></label></span> 
+									<span class="col-md-4"><i class="fa fa-calendar blog-icons mobile-font-size-10"></i><label id="blog-item-creation-date"></label></span>
 									<span sec:authorize="isAuthenticated()" class="col-md-2 right" id="mutatable-item-container"></span>									
 								</div>								
 							</div>							
