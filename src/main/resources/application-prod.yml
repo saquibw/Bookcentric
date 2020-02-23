@@ -4,3 +4,7 @@ spring:
     
 app:
   email-recipient: ${BOOKCENTRIC_APP_EMAIL_RECIPIENT}
+
+server:
+  tomcat:
+    basedir: /bookcentric/tomcat

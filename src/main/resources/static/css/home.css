@@ -9,7 +9,6 @@
     margin-left: 13px !important;
 }
 .quote-size {
-    font-size: 5em;
     margin-bottom: 0 !important;
     font-family: 'Chloe', sans-serif;
     letter-spacing: 5px;
@@ -25,7 +24,6 @@
 }
 
 .about__text {
-    font-size: 40px;
     text-align: justify;
 }
 
@@ -37,4 +35,33 @@
 .icon-title a:hover{
     color: #777 !important;
     text-decoration: none;
+}
+
+@media only screen and (min-width: 1000px) {
+   .about__text {
+     font-size : 40px;
+   }
+   
+   .quote-size {
+    font-size: 5em;
+   }
+
+}
+
+@media only screen and (max-width: 400px) {
+	.mobile-width-50 {
+		width: 50%;
+	}
+	
+	.mobile-width-25 {
+		width: 25%;
+	}
+	
+	.mobile-width-33 {
+		width: 33%;
+	}
+	
+	.icon-title a{
+		font-size: 1rem
+   }
 }
