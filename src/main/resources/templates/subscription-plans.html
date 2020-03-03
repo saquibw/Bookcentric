@@ -36,8 +36,8 @@
 							<tbody>
 								<tr th:each="plan : ${plans}">
 									<td th:text="${plan.name}"></td>
-									<td th:text="${plan.limitEachTime}"></td>
-									<td th:text="${plan.limitPerMonth}"></td>
+									<td th:text="${plan.limitEachTime} > 0 ? ${plan.limitEachTime} : 'Unlimited'"></td>
+									<td th:text="${plan.limitPerMonth} > 0 ? ${plan.limitPerMonth} : 'Unlimited'"></td>
 									<!-- <td th:text="${plan.duration}"></td> -->
 									<td th:text="${plan.securityAmount}"></td>
 									<td th:text="${plan.monthlyAmount}"></td>
@@ -66,8 +66,8 @@
 							<tbody>
 								<tr th:each="plan : ${childrenPlans}">
 									<td th:text="${plan.name}"></td>
-									<td th:text="${plan.limitEachTime}"></td>
-									<td th:text="${plan.limitPerMonth}"></td>
+									<td th:text="${plan.limitEachTime} > 0 ? ${plan.limitEachTime} : 'Unlimited'"></td>
+									<td th:text="${plan.limitPerMonth} > 0 ? ${plan.limitPerMonth} : 'Unlimited'"></td>
 									<!-- <td th:text="${plan.duration}"></td> -->
 									<td th:text="${plan.securityAmount}"></td>
 									<td th:text="${plan.monthlyAmount}"></td>
@@ -96,8 +96,8 @@
 							<tbody>
 								<tr th:each="plan : ${familyPlans}">
 									<td th:text="${plan.name}"></td>
-									<td th:text="${plan.limitEachTime}"></td>
-									<td th:text="${plan.limitPerMonth}"></td>
+									<td th:text="${plan.limitEachTime} > 0 ? ${plan.limitEachTime} : 'Unlimited'"></td>
+									<td th:text="${plan.limitPerMonth} > 0 ? ${plan.limitPerMonth} : 'Unlimited'"></td>
 									<!-- <td th:text="${plan.duration}"></td> -->
 									<td th:text="${plan.securityAmount}"></td>
 									<td th:text="${plan.monthlyAmount}"></td>
