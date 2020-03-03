@@ -19,7 +19,7 @@
 					<div class="card-body">
 						<h1>Edit user</h1>
 
-						<form th:action="@{/user/update}" th:object="${user}"
+						<form th:action="@{/user/me/update}" th:object="${user}" encType="multipart/form-data"
 							method="post" autocomplete="off">
 
 							<div class="form-group col hidden">
@@ -28,6 +28,13 @@
 							</div>
 
 							<div th:insert="fragments/forms :: user-form"></div>
+							
+							<div class="row">
+								<div class="form-group col">
+									<label>Upload image</label> 
+									<input type="file" class="form-control" name="file">					
+								</div>
+							</div>
 
 							<strong><label>Parent/gurdian's information</label></strong>
 
@@ -48,6 +55,10 @@
 			$("#parentInfo").removeClass("hidden");
 			$("#membershipId").parent().removeClass("hidden");
 			$("#status").parent().removeClass("hidden");
+			$("#membershipId").prop( "disabled", true );
+			$("#status").prop( "disabled", true );
+			$("#subscription").prop( "disabled", true );
+			$("#email").prop( "disabled", true );
 		});
 	</script>
 

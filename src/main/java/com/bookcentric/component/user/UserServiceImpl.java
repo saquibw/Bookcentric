@@ -1,5 +1,6 @@
 package com.bookcentric.component.user;
 
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -9,11 +10,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bookcentric.component.utils.EmailService;
 import com.bookcentric.config.AppConfig;
 import com.bookcentric.custom.util.Constants;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -164,6 +165,17 @@ public class UserServiceImpl implements UserService {
 		emailService.sendSimpleEmail(to, subject, text.toString());
 		
 		return true;
+	}
+
+	@Override
+	public void storeImage(MultipartFile file, Integer id) throws IOException {
+		byte[] image = file.getBytes();
+		userRepository.updateImageById(image, id);		
+	}
+	
+	@Override
+	public byte[] getImageBy(Integer id) {
+		return userRepository.getImageById(id);
 	}
 
 }

@@ -45,7 +45,6 @@ public class CategoryController {
 	
 	@PostMapping("/category/add")
 	public String saveCategory(Category category) {
-		System.out.println(category.toString());
 		categoryService.save(category);
 		
 		return "redirect:/category/view";

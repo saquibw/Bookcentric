@@ -1,8 +1,13 @@
 package com.bookcentric.component.user;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bookcentric.component.books.BookService;
@@ -48,6 +54,8 @@ public class UserController {
 	@Autowired UserStatusService userStatusService;
 	
 	@Autowired UtilService utilService;
+	
+	@Autowired HttpServletResponse response;
 
 
 	@GetMapping("/user/registration")
@@ -103,9 +111,14 @@ public class UserController {
 		return regView;
 	}
 
-	@GetMapping("/user/get/{id}")
-	public ModelAndView getUser(@PathVariable("id") int id) {
+	@GetMapping({"/user/get/{id}", "/user/get/{id}/{self}"})
+	public ModelAndView getUser(@PathVariable("id") int id, @PathVariable(name="self", required=false) boolean self) {
 		ModelAndView editView = new ModelAndView("user-update");
+		
+		if(self) {
+			editView.setViewName("user-self-update");
+		}
+		
 		User user = userService.getBy(id);
 
 		if(user.getParent() == null) {
@@ -151,6 +164,51 @@ public class UserController {
 		userService.add(user);
 		
 		return "redirect:/management/user";
+	}
+	
+	@GetMapping("/user/me")
+	public String getSelfUser() {
+		User user = userSecurityService.getLoggedInUser();
+		
+		return "redirect:/user/get/" + user.getId() + "/true";
+	}
+	
+	@PostMapping("/user/me/update")
+	public String updateSelfUser(User user, @RequestParam("file") MultipartFile file) throws MySQLIntegrityConstraintViolationException, IOException {
+		User dbUser = userService.getBy(user.getId());
+		
+		user.setReadingQueue(dbUser.getReadingQueue());
+		user.setWishlist(dbUser.getWishlist());
+		user.setPassword(dbUser.getPassword());
+		user.setRole(dbUser.getRole());
+		user.setCreatedAt(dbUser.getCreatedAt());
+		user.setMembershipId(dbUser.getMembershipId());
+		user.setStatus(dbUser.getStatus());
+		user.setEmail(dbUser.getEmail());
+		user.setSubscription(dbUser.getSubscription());
+		
+		userService.add(user);
+		
+		if(file != null && file.getSize() > 0) {
+			userService.storeImage(file, user.getId());
+		}	
+		
+		return "redirect:/user/get/" + user.getId() + "/true";
+	}
+	
+	@GetMapping("/user/me/image/{id}")
+	@ResponseBody
+	public void getImage(@PathVariable Integer id) throws SQLException, IOException {
+		response.setContentType("image/jpeg");
+
+		byte[] image = userService.getImageBy(id);
+		if(image != null) {
+
+			ServletOutputStream stream = response.getOutputStream();
+			stream.write(image);
+			stream.flush();
+			stream.close();
+		}		
 	}
 
 	@ResponseBody

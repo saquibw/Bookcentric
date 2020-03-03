@@ -44,11 +44,9 @@ public class GiftSubscriptionServiceImpl implements GiftSubscriptionService {
 	
 	private String getFullDate(String date) {
 		LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		System.out.println(localDate);
 		
 		StringBuilder d = new StringBuilder();
 		d.append(String.format("%d %s %s", localDate.getDayOfMonth(), localDate.getMonth(), localDate.getYear()));
-		System.out.println(d.toString());
 		
 		return d.toString(); 
 	}

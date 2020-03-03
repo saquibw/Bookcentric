@@ -62,13 +62,13 @@
 
 		<div class="row">
 
-			<div class="form-group col">
+			<div class="form-group col" style="width:50%">
 				<label>Date of Birth*</label> 
 				<input type="date" class="form-control" th:field="*{dateOfBirth}" required>
 			</div>
 
 			<div class="form-group col">
-				<label>Subscription*</label> <a th:href="@{/subscription/view/plans}" target="_blank">View plans</a>
+				<label>Subscription*</label> <sup><a th:href="@{/subscription/view/plans}" target="_blank">View plans</a></sup>
 				<select class="form-control" th:field=*{subscription} required>
 					<option th:each="subscription : ${subscriptionList}"
 						th:value="${subscription.id}"

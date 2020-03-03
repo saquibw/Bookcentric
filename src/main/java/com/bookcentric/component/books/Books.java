@@ -64,7 +64,7 @@ public class Books {
 	public String getAuthorName() {
 		String name = "";
 		List<Author> authorList = getAuthor();
-		System.out.println(authorList);
+
 		if(authorList != null && !authorList.isEmpty()) {
 			StringJoiner joiner = new StringJoiner(", ");
 			authorList.forEach(a -> {

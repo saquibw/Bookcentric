@@ -40,12 +40,10 @@
 						<li><a href="/events/all">Events</a></li>
 						<li><a href="/reading-challenge/all">Reading Challenge</a></li>
 						<li><a href="/blogs/all/view">Thoughts & Musings</a></li>
+						<li sec:authorize="isAuthenticated()"><a href="/user/me">Update user</a></li>
 						<li sec:authorize="isAuthenticated()"><a href="/password/reset">Reset Password</a></li>
 						<li sec:authorize="isAnonymous()"><a href="/login">Login</a></li>
 						<li sec:authorize="isAuthenticated()"><a href="/logout">Logout</a></li>
-						<!-- <li><a href="events.html">Events</a></li>
-                            <li><a href="thoughts_musings.html">Thoughts & Musings</a></li>
-                            <li><a href="dashboard.html">Member Dashboard</a></li> -->
 					</ul>
 
 					<!-- Social Links -->
@@ -147,7 +145,7 @@
 						href="https://twitter.com/bookcentricbd" title="Twitter"
 						target="_blank"><i class="fa fa-twitter"></i></a> <a href="#"
 						title="Youtube" target="_blank"><i class="fa fa-youtube"></i></a>
-					<a href="https://www.instagram.com/mashooexplores/"
+					<a href="https://www.instagram.com/bookcentricbd/"
 						title="instagram" target="_blank"><i class="fa fa-instagram"></i></a>
 				</div>
 

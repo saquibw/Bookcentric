@@ -1368,8 +1368,8 @@ a.bg-video-button-muted{
     font-size: 80px;
     font-weight: 600;
     line-height: 1.2;
-    text-transform: uppercase;
-    letter-spacing: 0.4em;
+    /* text-transform: uppercase;
+    letter-spacing: 0.4em; */
 }
 .hs-line-13{
     margin-top: 0;
@@ -6556,5 +6556,17 @@ section:hover .small-item-carousel .owl-next{
    		font-size: 10px !important;
    		margin-left: 65px !important;
    		top: -35px !important;
+   }
+   
+   .testimonial-author {
+   	font-size: 1em;
+   }
+   
+   .section-title {
+   	font-size: 3em !important;
+   }
+   
+   .text-constant {
+   	font-size: 8em !important;
    }
 }
