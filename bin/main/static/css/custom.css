@@ -328,3 +328,7 @@ textarea {
     left: calc(-50vw + 50%);
     margin-top: 10px;
 }
+
+.font-typewriter {
+	font-family: special_eliteregular;
+}

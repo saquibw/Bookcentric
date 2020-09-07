@@ -15,6 +15,10 @@ Project:    BookCentric
     font-family: "Prata";
     src: url("../fonts/Prata-Regular.ttf") format("truetype");
 }
+@font-face {
+    font-family: 'special_eliteregular';
+    src: url('../fonts/SpecialElite-Regular.ttf') format('truetype');
+}
 @import url('https://fonts.googleapis.com/css?family=Prata');
 
 /*@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400italic,700italic,400,300,700');

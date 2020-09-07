@@ -62,7 +62,7 @@
 										</tr>
 									</thead>
 									
-									<tbody>
+									<tbody class="font-typewriter">
 
 										<tr th:each="history : ${user.userHistory}">
 											<td><a th:text="${history.books.name}" class="color-black" th:href="@{'/book/get/' + ${history.books.id}}"></a></td>
