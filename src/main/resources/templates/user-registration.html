@@ -3,7 +3,7 @@
 
 <head th:insert="fragments/head :: head"></head>
 
-<body>
+<body class="appear-animate">
 
 	<div class="page">
 		<header th:insert="fragments/body :: header"></header>
@@ -36,6 +36,10 @@
 
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
+					</div>
+					
+					<div class="child-footer">
+						<footer th:insert="fragments/body :: footer"></footer>
 					</div>
 
 				</div>
