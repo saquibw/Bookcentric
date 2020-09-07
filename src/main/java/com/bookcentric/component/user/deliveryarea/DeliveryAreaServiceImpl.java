@@ -12,8 +12,22 @@ public class DeliveryAreaServiceImpl implements DeliveryAreaService {
 
 	@Override
 	public List<DeliveryArea> findAll() {
-		
 		return repo.findAll();
+	}
+	
+	@Override
+	public DeliveryArea findBy(Integer id) {
+		return repo.getOne(id);
+	}
+
+	@Override
+	public void save(DeliveryArea deliveryArea) {
+		repo.save(deliveryArea);
+	}
+	
+	@Override
+	public void delete(DeliveryArea deliveryArea) {
+		repo.delete(deliveryArea);
 	}
 
 }
