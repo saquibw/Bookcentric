@@ -32,15 +32,17 @@
 								</div>
 							</div>
 							
-							<div class="row">
-								<img class="w-100" th:src="@{'/events/all/image/' + ${event.id}}" alt="..."></img>
-							</div>
-						
-						
-						
-											
-					</div>											
+							<div class="row user-list-btn-grp">
+								<img class="w-50" th:src="@{'/events/all/image/' + ${event.id}}" alt="..."></img>
+							</div>																	
+					</div>	
+					
+					<div class="child-footer">
+						<footer th:insert="fragments/body :: footer"></footer>
+					</div>
+														
 				</div>
+				
 			</div>
 		</div>
 	</div>

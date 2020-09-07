@@ -326,3 +326,10 @@ textarea {
 	text-align:center;
 	display: block;
 }
+
+.child-footer {
+	width: 100vw;
+    position: relative;
+    left: calc(-50vw + 50%);
+    margin-top: 50px;
+}
