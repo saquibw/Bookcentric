@@ -281,11 +281,6 @@ textarea {
     max-height: 300px;
 }
 
-.event-list-container {
-	overflow-y: auto;
-    max-height: 350px;
-}
-
 .dashboard-background {
 	background-image: url('/images/books/library-card.jpg');
 }
@@ -331,5 +326,5 @@ textarea {
 	width: 100vw;
     position: relative;
     left: calc(-50vw + 50%);
-    margin-top: 50px;
+    margin-top: 10px;
 }

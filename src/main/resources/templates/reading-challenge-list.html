@@ -12,9 +12,7 @@
 				<div class="row justify-content-md-center top-space">
 					<div class="col-md-6 card management-card">
 						<div class="card-body">
-						
-							
-						
+												
 							<div th:if="${rcs != null}">
 								<h1>List of reading challenges</h1>
 								<ul>
@@ -24,6 +22,10 @@
 								</ul>
 							</div>
 							
+						</div>
+						
+						<div class="child-footer">
+							<footer th:insert="fragments/body :: footer"></footer>
 						</div>
 					</div>
 				</div>
