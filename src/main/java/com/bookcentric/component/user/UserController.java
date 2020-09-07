@@ -213,12 +213,21 @@ public class UserController {
 
 	@ResponseBody
 	@PostMapping("/user/update/readingqueue")
-	public Response updateReadingQueue(@RequestParam("bookId") Integer bookId, @RequestParam("action") String action) throws MySQLIntegrityConstraintViolationException {
+	public Response updateReadingQueue(
+			@RequestParam(name="bookId") Integer bookId, 
+			@RequestParam(name="action") String action,
+			@RequestParam(name="otherUserId", required=false) Integer otherUserId) throws MySQLIntegrityConstraintViolationException {
 		Response response = new Response();
 		String message = "";
 
 		Books book = bookService.getBy(bookId);
 		User user = userSecurityService.getLoggedInUser();
+		
+		// When an admin adds books to reading queue for another user
+		if (otherUserId != null && otherUserId > 0) {
+			user = userService.getBy(otherUserId);
+		}
+		
 		List<Books> readingQueue = user.getReadingQueue();
 
 		if(Constants.ACTION_ADD.equals(action)) {
