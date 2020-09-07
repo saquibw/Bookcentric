@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/book/entry", "/book/add", "/book/inventory", "/book/view/**", "/book/update/**", "/book/delete/**").hasRole("ADMIN")
 				.antMatchers("/author/**", "/genre/**", "/tag/**", "/publisher/**", "/reading-challenge/management/**", "/events/me/**").hasRole("ADMIN")
 				.antMatchers("/borrowlimit/**", "/subscriptionduration/**", "/category/**", "/deliveryarea/**", "/paymentmode/**").hasRole("ADMIN")
-				.antMatchers("/user/update/wishlist", "/user/update/readingqueue", "/user/dashboard/", "/user/self/**").hasAnyRole("ADMIN", "USER")
+				.antMatchers("/user/update/wishlist", "/user/update/readingqueue", "/user/dashboard/", "/user/me/**").hasAnyRole("ADMIN", "USER")
 				.antMatchers("/css/**", "/images/**", "/js/**", "/fonts/**").permitAll()
 				.antMatchers("/donate-books/**", "/gift-subscription/**", "/coming-soon/**", "/reviews/other/**", "/events/all/**").permitAll()
 				.antMatchers("/reviews/self/**", "/blogs/me/**").hasAnyRole("ADMIN", "USER")

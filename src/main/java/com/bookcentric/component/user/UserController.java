@@ -167,10 +167,32 @@ public class UserController {
 	}
 	
 	@GetMapping("/user/me")
-	public String getSelfUser() {
+	public ModelAndView getSelfUser() {
 		User user = userSecurityService.getLoggedInUser();
 		
-		return "redirect:/user/get/" + user.getId() + "/true";
+		ModelAndView editView = new ModelAndView("user-self-update");
+		
+		//User user = userService.getBy(id);
+
+		if(user.getParent() == null) {
+			user.setParent(new Parent());
+		}
+
+		List<Subscription> subscriptionList = subscriptionService.findAll();
+		List<DeliveryArea> deliveryAreaList = deliveryAreaService.findAll();
+		List<PaymentMode> paymentModeList = paymentModeService.findAll();
+		List<UserStatus> userStatusList = userStatusService.findAll();
+
+		editView.addObject("user", user);
+		editView.addObject("subscriptionList", subscriptionList);
+		editView.addObject("areaList", deliveryAreaList);
+		editView.addObject("paymentModeList", paymentModeList);
+		editView.addObject("userStatusList", userStatusList);
+		
+
+		return editView;
+		
+		// return "redirect:/user/get/" + user.getId() + "/true";
 	}
 	
 	@PostMapping("/user/me/update")
@@ -193,7 +215,7 @@ public class UserController {
 			userService.storeImage(file, user.getId());
 		}	
 		
-		return "redirect:/user/get/" + user.getId() + "/true";
+		return "redirect:/user/me";
 	}
 	
 	@GetMapping("/user/me/image/{id}")
