@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bookcentric.component.user.User;
@@ -29,13 +30,21 @@ public class ManagementController {
 	}
 	
 	@GetMapping("/management/user")
-	public ModelAndView viewUserManagement(Model model) {
+	public ModelAndView viewUserManagement(Model model, @RequestParam(required = false) String status) {
 		ModelAndView userView = new ModelAndView("user-management");
+		
+		System.out.println(status);
 		
 		List<User> userList = userService.getAll().stream()
 				.filter(user -> !user.getRole().equals(Constants.ROLE_ADMIN))
 				.sorted(Comparator.comparing(User::getCreatedAt).reversed())
 				.collect(Collectors.toList());
+		
+		if (status != null) {
+			userList = userList.stream()
+					.filter(user -> user.getStatus().getName().equals(status))
+					.collect(Collectors.toList());
+		}
 		
 		model.addAttribute("pageTitle", "BookCentric - User management");
 		model.addAttribute("userList", userList);

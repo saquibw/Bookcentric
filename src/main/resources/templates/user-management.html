@@ -17,6 +17,15 @@
 					<div class="card-body table-responsive">
 						<h1>User Management</h1>
 						
+						<div class="btn-group user-list-btn-grp" role="group">
+  							<a type="button" href="/management/user" class="btn btn-secondary">All</a>
+  							<a type="button" href="/management/user?status=Active" class="btn btn-secondary">Active</a>
+  							<a type="button" href="/management/user?status=Break" class="btn btn-secondary">Break</a>
+  							<a type="button" href="/management/user?status=Pending" class="btn btn-secondary">Pending</a>
+  							<a type="button" href="/management/user?status=Cancelled" class="btn btn-secondary">Cancelled</a>
+  							<a type="button" href="/management/user?status=Deleted" class="btn btn-secondary">Deleted</a>
+						</div>
+						
 						<table class="table">
 							<thead>
 								<tr>
