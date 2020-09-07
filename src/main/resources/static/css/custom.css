@@ -169,6 +169,10 @@
 	min-height: 200px;
 }
 
+.min-height-500-px {
+	min-height: 500px;
+}
+
 .max-height-300-px {
 	max-height: 300px;
 }
@@ -275,6 +279,11 @@ textarea {
 .other-review-container {
 	overflow-y: auto;
     max-height: 300px;
+}
+
+.event-list-container {
+	overflow-y: auto;
+    max-height: 350px;
 }
 
 .dashboard-background {
