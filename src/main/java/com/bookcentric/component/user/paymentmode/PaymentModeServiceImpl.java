@@ -12,8 +12,22 @@ public class PaymentModeServiceImpl implements PaymentModeService {
 
 	@Override
 	public List<PaymentMode> findAll() {
-		
 		return repo.findAll();
+	}
+	
+	@Override
+	public PaymentMode findBy(Integer id) {
+		return repo.getOne(id);
+	}
+
+	@Override
+	public void save(PaymentMode paymentMode) {
+		repo.save(paymentMode);
+	}
+	
+	@Override
+	public void delete(PaymentMode paymentMode) {
+		repo.delete(paymentMode);
 	}
 
 }

@@ -18,7 +18,6 @@ public class DeliveryAreaController {
 	public ModelAndView viewDeliveryAreaPage(@PathVariable(name="id", required=false) Integer id) {
 		ModelAndView view = new ModelAndView("delivery-area");
 		
-		// BorrowLimit borrowLimit = new BorrowLimit();
 		DeliveryArea deliveryArea = new DeliveryArea();
 		
 		if(id != null && id > 0) {
@@ -41,7 +40,7 @@ public class DeliveryAreaController {
 	}
 	
 	@GetMapping("/deliveryarea/delete/{id}")
-	public String deleteBorrowLimit(@PathVariable(name="id") Integer id) {
+	public String deleteDeliveryArea(@PathVariable(name="id") Integer id) {
 		DeliveryArea deliveryArea = deliveryAreaService.findBy(id);
 		deliveryAreaService.delete(deliveryArea);
 		
