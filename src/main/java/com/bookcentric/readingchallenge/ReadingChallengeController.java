@@ -59,13 +59,16 @@ public class ReadingChallengeController {
 	@PostMapping("/reading-challenge/management")
 	public String save(@ModelAttribute ReadingChallenge readingChallenge, @RequestParam("file") MultipartFile file) throws IOException {
 
-		readingChallenge.setBooks(readingChallenge.getBooks()
-		.stream()
-		.filter(b -> b.getName() != null && b.getAuthor() != null)
-		.collect(Collectors.toList()));
-		readingChallenge.getBooks().forEach(b -> b.setReadingChallenge(readingChallenge));
+		if (readingChallenge.getBooks() != null && readingChallenge.getBooks().size() > 0) {
+			readingChallenge.setBooks(readingChallenge.getBooks()
+					.stream()
+					.filter(b -> b.getName() != null && b.getAuthor() != null)
+					.collect(Collectors.toList()));
+			readingChallenge.getBooks().forEach(b -> b.setReadingChallenge(readingChallenge));
+		}
 		
 		readingChallengeService.save(readingChallenge);
+		
 		
 		if(file != null && file.getSize() > 0) {
 			readingChallengeService.saveImage(file, readingChallenge.getId());
