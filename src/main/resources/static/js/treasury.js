@@ -202,15 +202,9 @@ var TreasuryManager = (function() {
 
 	function renderSpecialBooks() {
 		let container = $(".special-books");
-		let toggle_reading_queue = $(".toggle-reading-queue");
-		let toggle_withlist = $(".toggle-wishlist");
 
 		container.empty();
 
-		let left = "<i class='fa fa-angle-left special-books-navigation special-books-navigation-left'></i>";				
-		let right = "<i class='fa fa-angle-right special-books-navigation special-books-navigation-right'></i>";
-
-		container.append(left);
 		for(let i=specialBookStartIndex; i<=specialBookEndIndex; i++) {
 			let element = updateTemplateDataForSpecialBooks(specialBooks[i]);
 
@@ -218,8 +212,9 @@ var TreasuryManager = (function() {
 			emptyTempContainer();
 
 		}
-		container.append(right);
-		
+	}
+	
+	function attachSpecialBookNavigationListener() {
 		let container_navigation_right = $(".special-books-navigation-right");
 		let container_navigation_left = $(".special-books-navigation-left");
 
@@ -230,8 +225,6 @@ var TreasuryManager = (function() {
 		container_navigation_left.click(function() {
 			showSpecialBooks(NAVIGATION_BACKWARD);
 		});
-
-		toggleClickAction(container);
 	}
 
 	function renderAllBooks(books) {
@@ -585,24 +578,30 @@ var TreasuryManager = (function() {
 		
 		getSpecialBooks(TYPE_BEST_SELLER);
 		getAllBooks("", searchTagKey);
+		
+		attachSpecialBookNavigationListener();
 
 		$(".best-seller-selection").click(function(e) {
 			e.preventDefault();
+			specialBookStartIndex = 0;
 			getSpecialBooks(TYPE_BEST_SELLER);
 		});
 
 		$(".new_arrival_selection").click(function(e) {
 			e.preventDefault();
+			specialBookStartIndex = 0;
 			getSpecialBooks(TYPE_NEW_ARRIVAL);
 		});
 
 		$(".children_selection").click(function(e) {
 			e.preventDefault();
+			specialBookStartIndex = 0;
 			getSpecialBooks(TYPE_CHILDREN);
 		});
 
 		$(".reading_challenge_selection").click(function(e) {
 			e.preventDefault();
+			specialBookStartIndex = 0;
 			getSpecialBooks(TYPE_READING_CHALLENGE);
 		});
 
