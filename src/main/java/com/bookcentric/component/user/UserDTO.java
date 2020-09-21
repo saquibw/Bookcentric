@@ -3,7 +3,7 @@ package com.bookcentric.component.user;
 import java.util.List;
 
 import com.bookcentric.component.books.Books;
-import com.bookcentric.component.user.history.UserHistory;
+import com.bookcentric.component.user.history.UserHistoryDto;
 
 import lombok.Data;
 
@@ -16,5 +16,5 @@ public class UserDTO {
 	private String email;
 	private String membershipId;
 	private List<Books> readingQueue;
-	private List<UserHistory> userHistory;
+	private List<UserHistoryDto> userHistory;
 }

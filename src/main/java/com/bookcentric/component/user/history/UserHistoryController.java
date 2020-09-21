@@ -26,6 +26,7 @@ import com.bookcentric.component.user.User;
 import com.bookcentric.component.user.UserDTO;
 import com.bookcentric.component.user.UserService;
 import com.bookcentric.component.utils.UtilService;
+import com.bookcentric.custom.util.AppUtil;
 import com.bookcentric.custom.util.Response;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
@@ -49,14 +50,25 @@ public class UserHistoryController {
 	public ModelAndView getUserHistoryDetails(@PathVariable("id") int id) {
 		ModelAndView model = new ModelAndView("user-details-history");
 		
+		String dateFormat = "dd MMM, yy";
+		
 		User user = userService.getBy(id);
-		List<UserHistory> historyList = user.getUserHistory()
+		List<UserHistoryDto> historyList = user.getUserHistory()
 				.stream()
 				.sorted(Comparator.comparing(UserHistory::getIssueDate).reversed())
-				.collect(Collectors.toList()); 
-
-		user.setUserHistory(historyList);
+				.map(u -> mapper.map(u, UserHistoryDto.class))
+				.map(u -> {
+					u.setIssueDate(AppUtil.updateLocalDateFormat(u.getIssueDate(), dateFormat));
+					u.setDueDate(AppUtil.updateLocalDateFormat(u.getDueDate(), dateFormat));
+					u.setReturnDate(u.getReturnDate() != null ? AppUtil.updateLocalDateFormat(u.getReturnDate(), dateFormat) : u.getReturnDate());
+					
+					return u;
+				})
+				.collect(Collectors.toList());
+		
 		UserDTO userDto = mapper.map(user, UserDTO.class);
+		userDto.setUserHistory(historyList);
+		
 		
 		model.addObject("user", userDto);		
 		
