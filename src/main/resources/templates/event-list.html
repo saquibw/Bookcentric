@@ -6,12 +6,37 @@
 <body class="appear-animate">
 
 	<div class="page">
-		<header th:insert="fragments/body :: header"></header>
+		<!-- <header th:insert="fragments/body :: header"></header> -->
+		
+		<div th:insert="fragments/body :: logo"></div>
+        <div th:insert="fragments/body :: menue"></div>
+
+        <!-- Head Section -->
+        <section class="home-section bg-dark-alfa-50 parallax-2 fixed-height-medium fixed-max-height-400px" data-background="/images/books/events-page-header.png">                
+        	<div class="js-height-parent container">
+                    
+                    <!-- Hero Content -->
+                    <div class="home-content">
+                        <div class="home-text">
+                            
+                            <div class="row">                        
+                                <div class="col-md-8 align-left font-alt">
+                                    <h1 class="hs-line-12 font-alt mb-20 mb-xs-0">Events</h1>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- End Hero Content -->
+                    
+                </div>
+        </section>
+        <!-- End Head Section -->
 
 		<div class="container-fluid">
 			<div class="row justify-content-md-center top-space">
 
-				<div th:insert="fragments/body :: management-navbar"></div>
+				<!-- <div th:insert="fragments/body :: management-navbar"></div> -->
 
 				<div class="col-md-6 card management-card">
 					<div class="card-body">
