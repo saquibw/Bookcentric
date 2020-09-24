@@ -21,8 +21,8 @@
 								<h1>User Details History</h1>
 							</div>
 							<div class="left position-absolute right-ten-pix">
-								<label th:text="${user.firstName} + ' ' + ${user.middleName} + ' ' + ${user.lastName}"></label>
-								<label th:text="${user.membershipId}" class="position-absolute"></label>
+								<div><label th:text="${user.firstName} + ' ' + ${user.middleName} + ' ' + ${user.lastName}"></label></div>
+								<div><label th:text="${user.membershipId}"></label></div>
 								<label th:text="${user.id}" class="hidden userId"></label>
 							</div>
 						</div>
@@ -62,7 +62,6 @@
 											<th>Return date</th>
 											<th></th>
 											<th></th>
-											<th></th>
 										</tr>
 
 									</thead>
@@ -77,8 +76,6 @@
 											<td th:text="${history.returnDate}"></td>
 											<td><button class="btn btn-primary btn-sm returnButton">Receive</button></td>
 											<td><button class="btn btn-secondary btn-sm reissueButton">Reissue</button></td>
-											<td></td>
-											<td></td>
 
 										</tr>
 

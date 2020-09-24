@@ -68,8 +68,7 @@ public class UserHistoryController {
 		
 		UserDTO userDto = mapper.map(user, UserDTO.class);
 		userDto.setUserHistory(historyList);
-		
-		
+				
 		model.addObject("user", userDto);		
 		
 		return model;
