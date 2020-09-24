@@ -282,8 +282,15 @@ var BookManager = (function() {
 				$(temp).find(".other-comment").html(row.comment);
 								
 				$(".other-review-container").append(temp.html());
-			});
-			
+			});			
+		}
+	}
+	
+	function getYear() {
+		let yearPlaceholder = $("#bookcentricYear");
+		var year = new Date().getFullYear();
+		if (yearPlaceholder) {
+			$(yearPlaceholder).text(year);
 		}
 	}
 	
@@ -342,5 +349,6 @@ var BookManager = (function() {
 		
 		getSelfReview();
 		getAllReviews();
+		getYear();
 	})();
 })();

@@ -572,6 +572,14 @@ var TreasuryManager = (function() {
 	function moveToPosition() {
 		window.scrollTo(0, 650);
 	}
+	
+	function getYear() {
+		let yearPlaceholder = $("#bookcentricYear");
+		var year = new Date().getFullYear();
+		if(yearPlaceholder) {
+			$(yearPlaceholder).text(year);
+		}		
+	}
 
 	(function() {
 		let searchTagKey = getFromStorage(SESSION_STORAGE_SEARCH_KEY);
@@ -580,6 +588,8 @@ var TreasuryManager = (function() {
 		getAllBooks("", searchTagKey);
 		
 		attachSpecialBookNavigationListener();
+		
+		getYear();
 
 		$(".best-seller-selection").click(function(e) {
 			e.preventDefault();
@@ -696,8 +706,4 @@ var TreasuryManager = (function() {
 			}			
 		});
 	})();
-
-	return {
-		
-	}
 })();

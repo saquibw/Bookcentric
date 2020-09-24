@@ -282,7 +282,16 @@ var HomeManager = (function() {
 	    })(jQuery);
 	};
 	
+	function getYear() {
+		let yearPlaceholder = $("#bookcentricYear");
+		var year = new Date().getFullYear();
+		if(yearPlaceholder) {
+			$(yearPlaceholder).text(year);
+		}		
+	}
+	
 	(function() {
 		getSpecialBooks(TYPE_NEW_ARRIVAL);
+		getYear();
 	})();
 })();

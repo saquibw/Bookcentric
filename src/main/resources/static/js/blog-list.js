@@ -132,8 +132,17 @@ var BlogManager = (function() {
 		});
 	}
 	
+	function getYear() {
+		let yearPlaceholder = $("#bookcentricYear");
+		var year = new Date().getFullYear();
+		if (yearPlaceholder) {
+			$(yearPlaceholder).text(year);
+		}
+	}
+	
 	(function() {
 		getAllBlogs();
 		attachListeners();
+		getYear();
 	})();
 })();

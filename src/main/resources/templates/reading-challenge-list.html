@@ -58,5 +58,19 @@
    	</div>
    	
    	<section th:insert="fragments/body :: js-container"></section>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			function getYear() {
+				let yearPlaceholder = $("#bookcentricYear");
+				var year = new Date().getFullYear();
+				if (yearPlaceholder) {
+					$(yearPlaceholder).text(year);
+				}
+			}
+
+			getYear();
+		});
+	</script>
 </body>
 </html>
