@@ -20,7 +20,8 @@ public class UserStatus {
 	// id = 1, status = Active
 	// id = 2, status = Break
 	// id = 3, status = Pending
-	// id = 4, status = Cancel
+	// id = 4, status = Canceled
+	// id = 5, status Deleted
 	
 
 }
