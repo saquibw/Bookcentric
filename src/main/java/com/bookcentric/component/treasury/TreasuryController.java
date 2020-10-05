@@ -1,9 +1,11 @@
 package com.bookcentric.component.treasury;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,23 +57,14 @@ public class TreasuryController {
 		} else if(Constants.TYPE_READING_CHALLENGE.equals(type)) {
 			books = bookService.getReadingChallengeBooks();
 		}
-
-		User user = userSecurityService.getLoggedInUser();
-
-		books.forEach(b -> {
-			BooksDTO book = mapper.map(b, BooksDTO.class);
-			if(user != null) {
-				if(user.getReadingQueue().contains(b)) {
-					book.setReadingQueue(true);				
-				}
-				if(user.getWishlist().contains(b)) {
-					book.setWishlist(true);				
-				}
-			}
-			bookList.add(book);
-		});
-
-
+		
+		if(books != null && books.size() > 0) {
+			bookList = books
+					.stream()
+					.sorted(Comparator.comparing(Books::getId).reversed())
+					.map(b -> mapper.map(b, BooksDTO.class))
+					.collect(Collectors.toList());
+		}
 
 		Response response = new Response();
 		response.setSuccess(true);
