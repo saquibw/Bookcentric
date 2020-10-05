@@ -1367,9 +1367,9 @@ a.bg-video-button-muted{
     opacity: .9;
 }
 .hs-line-12{
-    margin-top: 0;
+    margin-top: 100px;
     position: relative;
-    font-size: 100px; /*font-size: 80px;*/
+    font-size: 150px; /*font-size: 80px;*/
     font-weight: 600;
     line-height: 1.2;
     /* text-transform: uppercase;
