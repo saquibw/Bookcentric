@@ -40,7 +40,7 @@
 								<img th:src="@{'/user/me/image/' + ${user.id}}" height="100" width="100">
 							</div>
 							
-							<div class="col-md-10 left">
+							<div class="col-md-10 left margin-bottom-10px">
 								<div><label>Name: </label> <label th:text="${user.firstName} + ' ' + ${user.middleName} + ' ' + ${user.lastName}"></label></div>
 								<div><label>Membership No: </label> <label th:text="${user.membershipId}"></label></div>
 								<div><label>Subscription plan: </label> <label th:text="${user.subscription.category.name} + ' (' + ${user.subscription.subscriptionDuration.name} + ')'"></label></div>
