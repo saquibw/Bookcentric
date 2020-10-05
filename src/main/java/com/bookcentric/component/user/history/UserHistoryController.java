@@ -168,6 +168,8 @@ public class UserHistoryController {
 		reissueHistory.setUser(history.getUser());
 		userHistoryService.add(reissueHistory);
 		
+		userHistoryService.sendBookReissueEmail(reissueHistory);
+		
 		response.success = true;
 		return response;
 	}

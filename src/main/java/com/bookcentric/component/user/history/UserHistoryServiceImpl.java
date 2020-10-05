@@ -120,4 +120,34 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		return repository.getOne(id);
 	}
 	
+	@Override
+	public boolean sendBookReissueEmail(UserHistory userHistory) {
+		User user = userHistory.getUser();
+		String to = user.getEmail();
+		String subject = "Books have been re-issued to you";
+		
+		StringBuilder text = new StringBuilder();
+		text.append(String.format("Dear %s", user.getFullName()));
+		text.append("<br><br>");
+		text.append("Following book has been re-issued to you.");
+		text.append("<br><br>");
+		
+		text.append("<table border='1'><tr><th>Book name</th><th>Issue date</th><th>Due date</th></tr>");
+		
+		text.append(String.format("<tr><td>%s</td><td>%s</td><td>%s</td></tr>", 
+				userHistory.getBooks().getName(), 
+				userHistory.getIssueDate(), userHistory.getDueDate()));
+
+		
+		text.append("</table>");
+		
+		try {
+			emailService.sendHtmlEmail(to, subject, text.toString());
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+	
 }
