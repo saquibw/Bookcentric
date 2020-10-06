@@ -46,7 +46,36 @@ var HomeManager = (function() {
 			}
 
 		});
-	};
+	}
+	
+	function getTestimonials() {
+		var request = $.ajax({
+			type: "GET",
+			url: "/open/testimonials",
+			dataType: 'JSON'
+		});
+		
+		request.done(function(response) {
+			if(response.success) {
+				if(response.data && response.data.length > 0) {
+					const container = $(".testimonialContainer");
+					const tempContainer = $("#temp-testimonial-container");
+					const testimonialItemContainer = $("#testimonialItemContainerScript").html();
+					
+					tempContainer.html(testimonialItemContainer);
+					
+					for(let i=0; i<response.data.length; i++) {
+						const testimonial = response.data[i];
+						tempContainer.find("#testimonialDescription").text(testimonial.description);
+						tempContainer.find(".testimonial-author").text(testimonial.authorName);
+						
+						container.append(tempContainer.html());
+					}
+					tempContainer.empty();
+				}
+			}
+		});
+	}
 	
 	function initPageSliders(){
 	    (function($){
@@ -263,7 +292,7 @@ var HomeManager = (function() {
 	          
 	        var owl = $(".fullwidth-slideshow").data("owlCarousel");
 	        
-	        $(document.documentElement).keyup(function(event){
+	        /*$(document.documentElement).keyup(function(event){
 	            // handle cursor keys
 	            if (event.keyCode == 37) {
 	                owl.prev();
@@ -272,7 +301,7 @@ var HomeManager = (function() {
 	                if (event.keyCode == 39) {
 	                    owl.next();
 	                }
-	        });
+	        });*/
 	        
 	        if ($(".owl-carousel").length) {
 	            var owl = $(".owl-carousel").data('owlCarousel');
@@ -291,6 +320,7 @@ var HomeManager = (function() {
 	}
 	
 	(function() {
+		getTestimonials();
 		getSpecialBooks(TYPE_NEW_ARRIVAL);
 		getYear();
 	})();

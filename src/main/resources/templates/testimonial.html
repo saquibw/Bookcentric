@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body>
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<!-- Main body -->
+		<div class="container-fluid">
+
+			<div class="row justify-content-md-center top-space">
+
+				<div th:insert="fragments/body :: management-navbar"></div>
+
+				<div class="col-md-8 card management-card left">
+					<div class="card-body">
+						<h1>Testimonials</h1>
+
+						<!-- Form -->
+						<form th:action="@{/testimonials/add}" th:object="${testimonial}" method="post" autocomplete="off">
+
+							<div class="row">
+								<div class="form-group col">
+									<label>Author name*</label> <input type="text" class="form-control" th:field="*{authorName}" required>
+								</div>
+								
+								<div class="form-group col">
+  									<label><input type="checkbox" value="" th:field="*{published}">Published</label>
+								</div>
+								
+								<div class="hidden">
+									<input type="text" class="form-control" th:field="*{id}">
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col">
+									<label>Description*</label> 
+									<textarea class="form-control" rows="6" th:field="*{description}" required></textarea>
+								</div>
+							</div>
+
+							<button type="submit" class="btn btn-primary">Save</button>
+						</form>
+						
+						<label></label>
+						
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Author name</th>
+									<th>Published</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr th:each="t : ${testimonialList}">
+									<td th:text="${t.authorName}"></td>
+									<td th:text="${t.published}"></td>
+									<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/testimonials/edit/' + ${t.id}}"></a></td>
+									<td><a class="fa fa-trash delete-icon" th:href="@{'/testimonials/delete/' + ${t.id}}"></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+			</div>
+			<!--/row -->
+		</div>
+		<!--/container-->
+	</div>
+
+	<section th:insert="fragments/body :: js-container"></section>
+
+</body>
+</html>
