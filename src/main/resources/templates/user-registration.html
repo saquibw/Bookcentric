@@ -54,14 +54,26 @@
 	<section th:insert="fragments/body :: js-container"></section>
 	
 	<script>
-		var parentInfoContainer = $("#parentInfo");
-		$("#isMinor").click(function() {
-			var status = ($("#isMinor").prop("checked"));
-			if(status) {
-				parentInfoContainer.removeClass("hidden");
-			} else {
-				parentInfoContainer.addClass("hidden");
+		$(document).ready(function() {
+			var parentInfoContainer = $("#parentInfo");
+			$("#isMinor").click(function() {
+				var status = ($("#isMinor").prop("checked"));
+				if(status) {
+					parentInfoContainer.removeClass("hidden");
+				} else {
+					parentInfoContainer.addClass("hidden");
+				}
+			});
+			
+			function getYear() {
+				let yearPlaceholder = $("#bookcentricYear");
+				var year = new Date().getFullYear();
+				if(yearPlaceholder) {
+					$(yearPlaceholder).text(year);
+				}		
 			}
+			
+			getYear();
 		});
 	</script>
 	
