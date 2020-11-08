@@ -25,7 +25,7 @@ public class Constants {
 	
 	public static String URL_BASE = "http://bookcentricbd.com";
 	public static String URL_LOGIN = URL_BASE + "/login";
-	public static String URL_LOGO = URL_BASE + "/images/bc-logo.png";
+	public static String URL_LOGO = URL_BASE + "/images/bc-logo-small.png";
 	public static String URL_MANAGEMENT =  URL_BASE + "/management";
 	public static String URL_MANAGEMENT_USER = URL_MANAGEMENT + "/user";
 	public static String URL_TREASURY = URL_BASE + "/treasury";
@@ -34,6 +34,6 @@ public class Constants {
 	public static String URL_READING_CHALLENGES = URL_BASE + "/reading-challenge/all";
 	public static String URL_GIFT_SUBSCRIPTION = URL_BASE + "/gift-subscription";
 	public static String URL_DONATE_BOOKS = URL_BASE + "/donate-books";
-	public static String URL_WISH_FOR_A_BOOK = URL_BASE + "//wishlist";
+	public static String URL_WISH_FOR_A_BOOK = URL_BASE + "/wishlist";
 
 }
