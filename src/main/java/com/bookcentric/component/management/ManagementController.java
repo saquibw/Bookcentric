@@ -33,8 +33,6 @@ public class ManagementController {
 	public ModelAndView viewUserManagement(Model model, @RequestParam(required = false) String status) {
 		ModelAndView userView = new ModelAndView("user-management");
 		
-		System.out.println(status);
-		
 		List<User> userList = userService.getAll().stream()
 				.filter(user -> !user.getRole().equals(Constants.ROLE_ADMIN))
 				.sorted(Comparator.comparing(User::getCreatedAt).reversed())

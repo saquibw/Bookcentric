@@ -103,7 +103,7 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		
 		String dueDateInString = historyList.get(0).getDueDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
 		
-		text.append(String.format("Dear %s", user.getFullName()));
+		text.append(String.format("Dear %s,", user.getFullName()));
 		text.append("<br><br>");
 		text.append(String.format("This is a gentle reminder that following book(s) are due for return on %s. ", dueDateInString));
 		text.append("If you would like to re-issue the book(s), please let us know and we will do the needful. ");

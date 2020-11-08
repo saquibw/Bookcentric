@@ -30,7 +30,7 @@ public class EmailServiceImpl implements EmailService {
 
 		emailSender.send(m);
 		
-		log.debug("Email sending success with subject '{}' to {}", subject, to);
+		log.debug("Email sending successful with subject '{}' to {}", subject, to);
 	}
 
 	@Async
@@ -48,7 +48,7 @@ public class EmailServiceImpl implements EmailService {
 		
 		emailSender.send(msg);
 		
-		log.debug("Email sending success with subject '{}' to {}", subject, to);
+		log.debug("Email sending successful with subject '{}' to {}", subject, to);
 	}
 
 }
