@@ -21,7 +21,7 @@ public class AppUtil {
 		text.append("<br><br>");
 		text.append("Team Bookcentric.");
 		text.append("<br><br>");
-		text.append("<img src='http://bookcentricbd.com/images/bc-logo.png' alt='logo' width='100' height='100'></img>");
+		text.append("<img src='http://bookcentricbd.com/images/bc-logo-small.png' alt='logo' width='100' height='100'></img>");
 		text.append("<br><br>");
 		text.append("WhatsApp : +8801731374781\n");
 		text.append("<br>");
