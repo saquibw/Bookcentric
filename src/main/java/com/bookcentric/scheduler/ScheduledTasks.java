@@ -15,7 +15,7 @@ public class ScheduledTasks {
 	@Autowired UserService userService;
 	@Autowired UserHistoryService userHistoryService;
 	
-	@Scheduled(cron = "0 5 6 * * ?") //Everyday UTC 06:05:00 which means BST (Bangladeshi time) 00:05:00
+	@Scheduled(cron = "0 5 0 * * ?") //Everyday UTC 00:05:00 which means BST (Bangladeshi time) 06:05:00
 	public void scheduledTaskEveryDay() {
 		log.info("Scheduled tasks run");
 		userHistoryService.sendPlanExpiryEmail();
