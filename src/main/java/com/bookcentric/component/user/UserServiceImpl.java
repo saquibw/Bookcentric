@@ -58,10 +58,16 @@ public class UserServiceImpl implements UserService {
 		
 		StringBuilder text = new StringBuilder();
 		text.append(String.format("Dear %s", user.getFullName()));
-		text.append("\n\n");
-		text.append(String.format("Your account has been activated. Please use password: %s to login here: %s", user.getPassword(), "https://bookcentricbd.com/login"));
+		text.append("<br><br>");
+		text.append(String.format("Your account has been activated. Please use password: %s to login here: %s", user.getPassword(), Constants.URL_LOGIN));
+		text.append("<br><br>");
+		text.append(AppUtil.getEmailSignature());
 		
-		emailService.sendSimpleEmail(to, subject, text.toString());
+		try {
+			emailService.sendHtmlEmail(to, subject, text.toString());
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 		
 		return true;
 	}
@@ -73,10 +79,16 @@ public class UserServiceImpl implements UserService {
 		
 		StringBuilder text = new StringBuilder();
 		text.append(String.format("Dear %s", user.getFullName()));
-		text.append("\n\n");
+		text.append("<br><br>");
 		text.append(String.format("Your account status has been changed to : %s", user.getStatus().getName()));
+		text.append("<br><br>");
+		text.append(AppUtil.getEmailSignature());
 		
-		emailService.sendSimpleEmail(to, subject, text.toString());
+		try {
+			emailService.sendHtmlEmail(to, subject, text.toString());
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 		
 		return true;
 	}
@@ -89,7 +101,7 @@ public class UserServiceImpl implements UserService {
 		StringBuilder text = new StringBuilder();
 		text.append(String.format("User %s (%s) has completed registration. Please click below to check.", user.getFullName(), user.getEmail()));
 		text.append("\n\n");
-		text.append("http://bookcentricbd.com/management/user");
+		text.append(Constants.URL_MANAGEMENT_USER);
 		
 		emailService.sendSimpleEmail(to, subject, text.toString());
 		
@@ -164,10 +176,16 @@ public class UserServiceImpl implements UserService {
 		
 		StringBuilder text = new StringBuilder();
 		text.append(String.format("Dear %s", user.getFullName()));
-		text.append("\n\n");
-		text.append(String.format("Your password has been reset by admin. Please use password: %s to login here: %s", password, "https://bookcentricbd.com/login"));
+		text.append("<br><br>");
+		text.append(String.format("Your password has been reset by admin. Please use password: %s to login here: %s", password, Constants.URL_LOGIN));
+		text.append("<br><br>");
+		text.append(AppUtil.getEmailSignature());
 		
-		emailService.sendSimpleEmail(to, subject, text.toString());
+		try {
+			emailService.sendHtmlEmail(to, subject, text.toString());
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 		
 		return true;
 	}

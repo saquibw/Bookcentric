@@ -23,6 +23,12 @@ public class Constants {
 	public static String ROLE_ADMIN = "admin";
 	public static String ROLE_USER = "user";
 	
+	public static String URL_BASE = "http://bookcentricbd.com";
+	public static String URL_LOGIN = URL_BASE + "/login";
+	public static String URL_LOGO = URL_BASE + "/images/bc-logo-small.png";
+	public static String URL_MANAGEMENT =  URL_BASE + "/management";
+	public static String URL_MANAGEMENT_USER = URL_MANAGEMENT + "/user";
+	
 	
 
 }
