@@ -1,5 +1,7 @@
 package com.bookcentric.component.user.history;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.bookcentric.component.user.User;
 import com.bookcentric.component.utils.EmailService;
+import com.bookcentric.custom.util.AppUtil;
 import com.bookcentric.custom.util.Constants;
 
 @Service
@@ -79,7 +82,7 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 				}
 			});
 			
-			String subject = "Books due date will expire soon";
+			String subject = "Your borrowed book(s) due date will expire soon";
 			
 			historyMap.forEach((k, v) -> {
 				User receiver = v.stream().findFirst().get().getUser();
@@ -98,19 +101,27 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 	private String preparePlanExpiryText(User user, List<UserHistory> historyList) {
 		StringBuilder text = new StringBuilder();
 		
+		String dueDateInString = historyList.get(0).getDueDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+		
 		text.append(String.format("Dear %s", user.getFullName()));
 		text.append("<br><br>");
-		text.append("This is a gentle reminder that following book(s) are going to expire soon. ");
-		text.append("However, if you wish to keep them for another week, you may do so by paying only Tk.20 per week.");
+		text.append(String.format("This is a gentle reminder that following book(s) are due for return on %s. ", dueDateInString));
+		text.append("If you would like to re-issue the book(s), please let us know and we will do the needful. ");
+		text.append("However, if you have re-issued the book(s) and wish to keep it/those for another week, "
+				+ "you may do so by paying only Tk.20 per book per  week. ");
 		text.append("<br><br>");
 		
-		text.append("<table border='1'><tr><th>Book name</th><th>Issue date</th><th>Due date</th></tr>");
+		text.append("<table border='1'><tr><th>Book name</th><th>Issue date</th></tr>");
 		
 		historyList.forEach(u -> {
-			text.append(String.format("<tr><td>%s</td><td>%s</td><td>%s</td></tr>", u.getBooks().getName(), u.getIssueDate(), u.getDueDate()));
+			text.append(String.format("<tr><td>%s</td><td>%s</td></tr>", 
+					u.getBooks().getName(), 
+					u.getIssueDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
 		});
 		
 		text.append("</table>");
+		text.append("<br><br>");
+		text.append(AppUtil.getEmailSignature());
 		
 		return text.toString();
 	}

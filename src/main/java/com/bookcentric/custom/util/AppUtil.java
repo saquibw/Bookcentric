@@ -13,4 +13,25 @@ public class AppUtil {
 
 		return customDate.format(desiredFormat);
 	}
+	
+	public static String getEmailSignature() {
+		StringBuilder text = new StringBuilder();
+		
+		text.append("Thank you,");
+		text.append("<br><br>");
+		text.append("Team Bookcentric.");
+		text.append("<br><br>");
+		text.append("<img src='http://bookcentricbd.com/images/bc-logo.png' alt='logo' width='100' height='100'></img>");
+		text.append("<br><br>");
+		text.append("WhatsApp : +8801731374781\n");
+		text.append("<br>");
+		text.append("Email : bookcentricbd@gmail.com\n");
+		text.append("<br>");
+		text.append("Facebook: https://facebook.com/bookcentric");
+		text.append("<br>");
+		text.append("Instagram : https://instagram.com/bookcentricbd");
+		text.append("<br>");
+		
+		return text.toString();
+	}
 }
