@@ -34,3 +34,6 @@ logging:
 
 server:
   port: 50000
+  
+app:
+  email-recipient: ${BOOKCENTRIC_APP_EMAIL_RECIPIENT}

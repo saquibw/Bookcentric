@@ -1,6 +1,3 @@
 spring:
   thymeleaf:
     cache: false
-    
-app:
-  email-recipient: ${BOOKCENTRIC_APP_EMAIL_RECIPIENT}
