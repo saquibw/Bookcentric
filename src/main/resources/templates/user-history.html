@@ -16,31 +16,35 @@
 				<div class="col-md-8 card management-card">
 					<div class="card-body table-responsive">
 						<h1>User History</h1>
-						
-						<table class="table">
-							<thead>
-								<tr>
-									<th class="hidden">Id</th>
-									<th>Membership id</th>
-									<th>First name</th>
-									<th>Last name</th>
-									<th>Phone</th>
-									<th>Status</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="user : ${userList}">
-									<td class="hidden" th:text="${user.id}"></td>
-									<td th:text="${user.membershipId}"></td>
-									<td th:text="${user.firstName}"></td>
-									<td th:text="${user.lastName}"></td>
-									<td th:text="${user.phone}"></td>
-									<td th:text="${user.status.name}"></td>
-									<td><a class="btn btn-primary btn-sm" th:href="@{'/user/history/' + ${user.id}}">View history</a></td>
-								</tr>
-							</tbody>
-						</table>
+
+						<div class="overflow-auto max-height-500-px">
+							<table class="table">
+								<thead>
+									<tr>
+										<th class="hidden">Id</th>
+										<th>Membership id</th>
+										<th>First name</th>
+										<th>Last name</th>
+										<th>Phone</th>
+										<th>Status</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="user : ${userList}">
+										<td class="hidden" th:text="${user.id}"></td>
+										<td th:text="${user.membershipId}"></td>
+										<td th:text="${user.firstName}"></td>
+										<td th:text="${user.lastName}"></td>
+										<td th:text="${user.phone}"></td>
+										<td th:text="${user.status.name}"></td>
+										<td><a class="btn btn-primary btn-sm"
+											th:href="@{'/user/history/' + ${user.id}}">View history</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
 					</div>
 				</div>
 				
