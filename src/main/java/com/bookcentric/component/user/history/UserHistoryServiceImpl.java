@@ -1,5 +1,7 @@
 package com.bookcentric.component.user.history;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.Map;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +46,7 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		String subject = "Book(s) have been issued to you";
 		
 		StringBuilder text = new StringBuilder();
-		text.append(String.format("Dear %s", user.getFullName()));
+		text.append(String.format("Dear %s,", user.getFullName()));
 		text.append("<br><br>");
 		text.append("Following book(s) have been issued to you.");
 		text.append("<br><br>");
@@ -60,6 +63,17 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		
 		String message = text.toString();
 		Email email = new Email(to, subject, message);
+		
+		try {
+			File file = new ClassPathResource("/static/docs/Things_To_Remember.pdf").getFile();
+			System.out.println(file.length());
+			Map<String, File> attachment = new HashMap<>();
+			attachment.put("Things_To_Remember.pdf", file);
+			email.setAttachments(attachment);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
 		
 		try {
 			emailService.sendHtmlEmail(email);
@@ -143,7 +157,7 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		String subject = "Book has been re-issued to you";
 		
 		StringBuilder text = new StringBuilder();
-		text.append(String.format("Dear %s", user.getFullName()));
+		text.append(String.format("Dear %s,", user.getFullName()));
 		text.append("<br><br>");
 		text.append("Following book has been re-issued to you.");
 		text.append("<br><br>");

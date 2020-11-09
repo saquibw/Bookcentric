@@ -1,5 +1,8 @@
 package com.bookcentric.component.email;
 
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -40,12 +43,24 @@ public class EmailServiceImpl implements EmailService {
 		
 		MimeMessage msg = emailSender.createMimeMessage();
 		
-		MimeMessageHelper helper = new MimeMessageHelper(msg);
+		MimeMessageHelper helper = new MimeMessageHelper(msg, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
 		
 		helper.setTo(email.getTo());
 		helper.setSubject(email.getSubject());
 		helper.setText(email.getMessage(), true);
-		//helper.addat
+		
+		if(email.getCc() != null && email.getCc().length > 0) {
+			helper.setCc(email.getCc());
+		}
+		
+		if(email.getAttachments() != null && !email.getAttachments().isEmpty()){
+			for(String key : email.getAttachments().keySet()) {
+				File file = email.getAttachments().get(key);
+				if(file.exists()) {
+					helper.addAttachment(key, file);
+				}
+			}
+		}
 		
 		emailSender.send(msg);
 		
