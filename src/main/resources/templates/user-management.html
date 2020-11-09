@@ -17,7 +17,7 @@
 					<div class="card-body table-responsive">
 						<h1>User Management</h1>
 						
-						<div class="btn-group user-list-btn-grp" role="group">
+						<div class="btn-group user-list-btn-grp margin-bottom-10px" role="group">
   							<a type="button" href="/management/user" class="btn btn-secondary">All</a>
   							<a type="button" href="/management/user?status=Active" class="btn btn-secondary">Active</a>
   							<a type="button" href="/management/user?status=Break" class="btn btn-secondary">Break</a>
@@ -25,33 +25,38 @@
   							<a type="button" href="/management/user?status=Cancelled" class="btn btn-secondary">Cancelled</a>
   							<a type="button" href="/management/user?status=Deleted" class="btn btn-secondary">Deleted</a>
 						</div>
-						
-						<table class="table">
-							<thead>
-								<tr>
-									<th class="hidden">Id</th>
-									<th>Membership id</th>
-									<th>First name</th>
-									<th>Last name</th>
-									<th>Phone</th>
-									<th>Status</th>
-									<th></th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="user : ${userList}">
-									<td class="hidden" th:text="${user.id}"></td>
-									<td th:text="${user.membershipId}"></td>
-									<td th:text="${user.firstName}"></td>
-									<td th:text="${user.lastName}"></td>
-									<td th:text="${user.phone}"></td>
-									<td th:text="${user.status.name}"></td>
-									<td><a class="btn btn-primary btn-sm" th:href="@{'/user/get/' + ${user.id}}">Edit</a></td>
-									<td><a class="btn btn-secondary btn-sm reset-password" href="javascript:void(0)">Reset password</a></td>
-								</tr>
-							</tbody>
-						</table>
+
+						<div class="overflow-auto max-height-500-px">
+							<table class="table">
+								<thead>
+									<tr>
+										<th class="hidden">Id</th>
+										<th>Membership id</th>
+										<th>First name</th>
+										<th>Last name</th>
+										<th>Phone</th>
+										<th>Status</th>
+										<th></th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="user : ${userList}">
+										<td class="hidden" th:text="${user.id}"></td>
+										<td th:text="${user.membershipId}"></td>
+										<td th:text="${user.firstName}"></td>
+										<td th:text="${user.lastName}"></td>
+										<td th:text="${user.phone}"></td>
+										<td th:text="${user.status.name}"></td>
+										<td><a class="btn btn-primary btn-sm"
+											th:href="@{'/user/get/' + ${user.id}}">Edit</a></td>
+										<td><a class="btn btn-secondary btn-sm reset-password"
+											href="javascript:void(0)">Reset password</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
 					</div>
 				</div>
 				
