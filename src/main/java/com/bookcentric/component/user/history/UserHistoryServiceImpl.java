@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import com.bookcentric.component.email.Email;
 import com.bookcentric.component.email.EmailService;
 import com.bookcentric.component.user.User;
+import com.bookcentric.config.AppConfig;
 import com.bookcentric.custom.util.AppUtil;
 import com.bookcentric.custom.util.Constants;
 
@@ -28,6 +29,8 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 	@Autowired private UserHistoryRepository repository;
 	
 	@Autowired EmailService emailService;
+	
+	@Autowired AppConfig config;
 
 	@Override
 	public void add(UserHistory userHistory) {
@@ -107,6 +110,9 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 				String to = receiver.getEmail();
 				String message = preparePlanExpiryText(receiver, v);
 				Email email = new Email(to, subject, message);
+				
+				String[] cc = new String[] {config.getEmailRecipient()};
+				email.setCc(cc);
 				
 				try {
 					emailService.sendHtmlEmail(email);

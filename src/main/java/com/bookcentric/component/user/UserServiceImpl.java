@@ -174,6 +174,9 @@ public class UserServiceImpl implements UserService {
 				String message = text.toString();
 				Email email = new Email(to, subject, message);
 				
+				String[] cc = new String[] {config.getEmailRecipient()};
+				email.setCc(cc);
+				
 				try {
 					emailService.sendHtmlEmail(email);
 				} catch (MessagingException e) {
