@@ -65,16 +65,14 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		Email email = new Email(to, subject, message);
 		
 		try {
-			File file = new ClassPathResource("/static/docs/Things_To_Remember.pdf").getFile();
-			System.out.println(file.length());
+			File file = new ClassPathResource(Constants.URL_THINGS_TO_REMEMBER).getFile();
 			Map<String, File> attachment = new HashMap<>();
-			attachment.put("Things_To_Remember.pdf", file);
+			attachment.put(Constants.FILE_NAME_THINGS_TO_REMEMBER, file);
 			email.setAttachments(attachment);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
-		
+				
 		try {
 			emailService.sendHtmlEmail(email);
 		} catch (MessagingException e) {

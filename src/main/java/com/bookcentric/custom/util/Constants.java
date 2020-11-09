@@ -35,5 +35,8 @@ public class Constants {
 	public static String URL_GIFT_SUBSCRIPTION = URL_BASE + "/gift-subscription";
 	public static String URL_DONATE_BOOKS = URL_BASE + "/donate-books";
 	public static String URL_WISH_FOR_A_BOOK = URL_BASE + "/wishlist";
+	
+	public static String FILE_NAME_THINGS_TO_REMEMBER = "Things_To_Remember.pdf";
+	public static String URL_THINGS_TO_REMEMBER = "/static/docs/" + FILE_NAME_THINGS_TO_REMEMBER;
 
 }
