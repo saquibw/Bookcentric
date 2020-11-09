@@ -30,11 +30,16 @@
 								of age, please click here and provide parent/gurdian's
 								information</label>
 								
-								<div th:insert="fragments/forms :: parent-form"></div>
+							<div th:insert="fragments/forms :: parent-form"></div>
 								
-								<div th:insert="fragments/forms :: form-captcha"></div>
-
-							<button type="submit" class="btn btn-primary">Submit</button>
+							<div th:insert="fragments/forms :: form-captcha"></div>
+							
+							<div class="margin-bottom-10px">
+								<label>By clicking register, you agree to the 
+								<a href="#" onclick="window.open('/docs/Terms_And_Conditions.pdf', '_blank', 'fullscreen=yes'); return false;">Terms and Conditions</a></label>
+							</div>
+							
+							<button type="submit" class="btn btn-primary">Register</button>
 						</form>
 					</div>
 					
