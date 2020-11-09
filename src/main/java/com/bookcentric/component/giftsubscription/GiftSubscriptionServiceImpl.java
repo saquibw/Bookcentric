@@ -8,7 +8,8 @@ import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bookcentric.component.utils.EmailService;
+import com.bookcentric.component.email.Email;
+import com.bookcentric.component.email.EmailService;
 import com.bookcentric.config.AppConfig;
 
 @Service
@@ -39,7 +40,10 @@ public class GiftSubscriptionServiceImpl implements GiftSubscriptionService {
 		
 		text.append("</table>");
 		
-		emailService.sendHtmlEmail(to, subject, text.toString());
+		String message = text.toString();
+		Email email = new Email(to, subject, message);
+		
+		emailService.sendHtmlEmail(email);
 	}
 	
 	private String getFullDate(String date) {

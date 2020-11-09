@@ -14,7 +14,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bookcentric.component.utils.EmailService;
+import com.bookcentric.component.email.Email;
+import com.bookcentric.component.email.EmailService;
 import com.bookcentric.config.AppConfig;
 import com.bookcentric.custom.util.AppUtil;
 import com.bookcentric.custom.util.Constants;
@@ -95,8 +96,11 @@ public class UserServiceImpl implements UserService {
 		text.append("<br><br>");
 		text.append(AppUtil.getEmailSignature());
 		
+		String message = text.toString();
+		Email email = new Email(to, subject, message);
+		
 		try {
-			emailService.sendHtmlEmail(to, subject, text.toString());
+			emailService.sendHtmlEmail(email);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
@@ -116,8 +120,11 @@ public class UserServiceImpl implements UserService {
 		text.append("<br><br>");
 		text.append(AppUtil.getEmailSignature());
 		
+		String message = text.toString();
+		Email email = new Email(to, subject, message);
+		
 		try {
-			emailService.sendHtmlEmail(to, subject, text.toString());
+			emailService.sendHtmlEmail(email);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
@@ -164,8 +171,11 @@ public class UserServiceImpl implements UserService {
 				text.append("<br><br>");
 				text.append(AppUtil.getEmailSignature());
 				
+				String message = text.toString();
+				Email email = new Email(to, subject, message);
+				
 				try {
-					emailService.sendHtmlEmail(to, subject, text.toString());
+					emailService.sendHtmlEmail(email);
 				} catch (MessagingException e) {
 					e.printStackTrace();
 				}
@@ -214,8 +224,11 @@ public class UserServiceImpl implements UserService {
 		text.append("<br><br>");
 		text.append(AppUtil.getEmailSignature());
 		
+		String message = text.toString();
+		Email email = new Email(to, subject, message);
+		
 		try {
-			emailService.sendHtmlEmail(to, subject, text.toString());
+			emailService.sendHtmlEmail(email);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}

@@ -1,4 +1,4 @@
-package com.bookcentric.component.utils;
+package com.bookcentric.component.email;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -35,20 +35,21 @@ public class EmailServiceImpl implements EmailService {
 
 	@Async
 	@Override
-	public void sendHtmlEmail(String to, String subject, String message) throws MessagingException {
-		log.debug("Sending email with subject '{}' to {}", subject, to);
+	public void sendHtmlEmail(Email email) throws MessagingException {
+		log.debug("Sending email with subject '{}' to {}", email.getSubject(), email.getTo());
 		
 		MimeMessage msg = emailSender.createMimeMessage();
 		
 		MimeMessageHelper helper = new MimeMessageHelper(msg);
 		
-		helper.setTo(to);
-		helper.setSubject(subject);
-		helper.setText(message, true);
+		helper.setTo(email.getTo());
+		helper.setSubject(email.getSubject());
+		helper.setText(email.getMessage(), true);
+		//helper.addat
 		
 		emailSender.send(msg);
 		
-		log.debug("Email sending successful with subject '{}' to {}", subject, to);
+		log.debug("Email sending successful with subject '{}' to {}", email.getSubject(), email.getTo());
 	}
 
 }

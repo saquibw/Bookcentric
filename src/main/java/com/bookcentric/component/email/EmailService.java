@@ -1,4 +1,4 @@
-package com.bookcentric.component.utils;
+package com.bookcentric.component.email;
 
 import javax.mail.MessagingException;
 
@@ -6,5 +6,5 @@ public interface EmailService {
 	
 	public void sendSimpleEmail(String to, String subject, String message);
 	
-	public void sendHtmlEmail(String to, String subject, String message) throws MessagingException;
+	public void sendHtmlEmail(Email email) throws MessagingException;
 }

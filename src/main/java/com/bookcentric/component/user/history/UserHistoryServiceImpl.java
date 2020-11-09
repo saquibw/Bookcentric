@@ -13,8 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import com.bookcentric.component.email.Email;
+import com.bookcentric.component.email.EmailService;
 import com.bookcentric.component.user.User;
-import com.bookcentric.component.utils.EmailService;
 import com.bookcentric.custom.util.AppUtil;
 import com.bookcentric.custom.util.Constants;
 
@@ -57,8 +58,11 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		text.append("<br><br>");
 		text.append(AppUtil.getEmailSignature());
 		
+		String message = text.toString();
+		Email email = new Email(to, subject, message);
+		
 		try {
-			emailService.sendHtmlEmail(to, subject, text.toString());
+			emailService.sendHtmlEmail(email);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
@@ -89,10 +93,11 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 			historyMap.forEach((k, v) -> {
 				User receiver = v.stream().findFirst().get().getUser();
 				String to = receiver.getEmail();
-				String emailText = preparePlanExpiryText(receiver, v);
+				String message = preparePlanExpiryText(receiver, v);
+				Email email = new Email(to, subject, message);
 				
 				try {
-					emailService.sendHtmlEmail(to, subject, emailText);
+					emailService.sendHtmlEmail(email);
 				} catch (MessagingException e) {
 					e.printStackTrace();
 				}
@@ -125,13 +130,6 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		
 		return text.toString();
 	}
-	
-	private String getBookInfoText(UserHistory history) {
-		return String.format("<tr><td>%s</td><td>%s</td><td>%s</td></tr>", 
-				history.getBooks().getName(), 
-				history.getIssueDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
-				history.getDueDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
-	}
 
 	@Override
 	public UserHistory findBy(Integer id) {
@@ -158,13 +156,23 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		text.append("<br><br>");
 		text.append(AppUtil.getEmailSignature());
 		
+		String message = text.toString();
+		Email email = new Email(to, subject, message);
+		
 		try {
-			emailService.sendHtmlEmail(to, subject, text.toString());
+			emailService.sendHtmlEmail(email);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
 		
 		return true;
+	}
+	
+	private String getBookInfoText(UserHistory history) {
+		return String.format("<tr><td>%s</td><td>%s</td><td>%s</td></tr>", 
+				history.getBooks().getName(), 
+				history.getIssueDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
+				history.getDueDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 	}
 	
 }

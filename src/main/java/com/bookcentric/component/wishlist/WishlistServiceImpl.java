@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import com.bookcentric.component.utils.EmailService;
+import com.bookcentric.component.email.EmailService;
 import com.bookcentric.config.AppConfig;
 
 @Service
