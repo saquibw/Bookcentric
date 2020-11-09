@@ -181,6 +181,10 @@
 	overflow: auto;
 }
 
+.overflow-x-scroll {
+	overflow-x: scroll;
+}
+
 .margin-bottom-10px {
 	margin-bottom: 10px;
 }

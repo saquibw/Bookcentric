@@ -6523,7 +6523,7 @@ section:hover .small-item-carousel .owl-next{
     .multi-columns-row .col-lg-1:nth-child(12n + 13) { clear: left; }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 800px) {
 	.mobile-width-50 {
 		width: 50% !important;
 	}
@@ -6571,6 +6571,10 @@ section:hover .small-item-carousel .owl-next{
 	.mobile-font-size-15 {
 		font-size: 15px !important;
 	}
+	
+	.mobile-font-size-20 {
+		font-size: 20px !important;
+	}
    
    .management-navbar {
    		font-size: 10px !important;
@@ -6579,14 +6583,37 @@ section:hover .small-item-carousel .owl-next{
    }
    
    .testimonial-author {
-   	font-size: 1em;
+   		font-size: 1em;
    }
    
    .section-title {
-   	font-size: 3em !important;
+   		font-size: 3em !important;
    }
    
    .text-constant {
-   	font-size: 8em !important;
+   		font-size: 8em !important;
    }
+   
+   .sticky-table thead th {
+		white-space: nowrap;
+	}
+	.sticky-table tbody td {
+		white-space: nowrap;
+	}
+	
+	.sticky-scroller {
+		margin-left: 105px;
+		overflow-x: scroll;
+		padding-bottom: 5px;
+	}
+	
+	.sticky-table .sticky-col {
+		border-left: solid 1px #DDEFEF;
+		border-right: solid 1px #DDEFEF;
+		left: 20px;
+		position: absolute;
+		top: auto;
+		width: 120px;
+	}
+	
 }

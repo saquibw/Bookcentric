@@ -17,95 +17,106 @@
 
 				<div class="col-md-10 card management-card left">
 					<div class="card-body table-responsive">
-						<h1 class="margin-top-30px">Subscription Plans</h1>
-						
-						<table class="table" border="1">
-							<thead>
-								<tr>
-									<th>Subscription Plan</th>
-									<th>Books borrowed at a time</th>
-									<th>Limit per month</th>
-									<!-- <th>Duration</th> -->
-									<th>Security Deposit BDT (Refundable upon cancellation)</th>
-									<th>Monthly BDT</th>
-									<th>Half-Yearly BDT</th>
-									<th>Yearly BDT</th>
-								</tr>
-							</thead>
-							
-							<tbody>
-								<tr th:each="plan : ${plans}">
-									<td th:text="${plan.name}"></td>
-									<td th:text="${plan.limitEachTime} > 0 ? ${plan.limitEachTime} : 'Unlimited'"></td>
-									<td th:text="${plan.limitPerMonth} > 0 ? ${plan.limitPerMonth} : 'Unlimited'"></td>
-									<!-- <td th:text="${plan.duration}"></td> -->
-									<td th:text="${plan.securityAmount}"></td>
-									<td th:text="${plan.monthlyAmount}"></td>
-									<td th:text="${plan.halfYearlyAmount}"></td>
-									<td th:text="${plan.yearlyAmount}"></td>
-								</tr>
-							</tbody>
-						</table>
-						
-						<h1 class="margin-top-30px">Children's Subscription Plans</h1>
-						
-						<table class="table" border="1">
-							<thead>
-								<tr>
-									<th>Subscription Plan</th>
-									<th>Books borrowed at a time</th>
-									<th>Limit per month</th>
-									<!-- <th>Duration</th> -->
-									<th>Security Deposit BDT (Refundable upon cancellation)</th>
-									<th>Monthly BDT</th>
-									<th>Half-Yearly BDT</th>
-									<th>Yearly BDT</th>
-								</tr>
-							</thead>
-							
-							<tbody>
-								<tr th:each="plan : ${childrenPlans}">
-									<td th:text="${plan.name}"></td>
-									<td th:text="${plan.limitEachTime} > 0 ? ${plan.limitEachTime} : 'Unlimited'"></td>
-									<td th:text="${plan.limitPerMonth} > 0 ? ${plan.limitPerMonth} : 'Unlimited'"></td>
-									<!-- <td th:text="${plan.duration}"></td> -->
-									<td th:text="${plan.securityAmount}"></td>
-									<td th:text="${plan.monthlyAmount}"></td>
-									<td th:text="${plan.halfYearlyAmount}"></td>
-									<td th:text="${plan.yearlyAmount}"></td>
-								</tr>
-							</tbody>
-						</table>
-						
-						<h1 class="margin-top-30px">Family Subscription Plans</h1>
-						
-						<table class="table" border="1">
-							<thead>
-								<tr>
-									<th>Subscription Plan</th>
-									<th>Books borrowed at a time</th>
-									<th>Limit per month</th>
-									<!-- <th>Duration</th> -->
-									<th>Security Deposit BDT (Refundable upon cancellation)</th>
-									<th>Monthly BDT</th>
-									<th>Half-Yearly BDT</th>
-									<th>Yearly BDT</th>
-								</tr>
-							</thead>
-							
-							<tbody>
-								<tr th:each="plan : ${familyPlans}">
-									<td th:text="${plan.name}"></td>
-									<td th:text="${plan.limitEachTime} > 0 ? ${plan.limitEachTime} : 'Unlimited'"></td>
-									<td th:text="${plan.limitPerMonth} > 0 ? ${plan.limitPerMonth} : 'Unlimited'"></td>
-									<!-- <td th:text="${plan.duration}"></td> -->
-									<td th:text="${plan.securityAmount}"></td>
-									<td th:text="${plan.monthlyAmount}"></td>
-									<td th:text="${plan.halfYearlyAmount}"></td>
-									<td th:text="${plan.yearlyAmount}"></td>
-								</tr>
-							</tbody>
-						</table>
+						<h1 class="margin-top-30px mobile-font-size-20">Subscription Plans</h1>
+
+						<div class="sticky-scroller">
+							<table class="table mobile-font-size-11 sticky-table" border="1">
+								<thead>
+									<tr>
+										<th class="sticky-col">Subscription Plan</th>
+										<th>Books borrowed at a time</th>
+										<th>Limit per month</th>
+										<!-- <th>Duration</th> -->
+										<th>Security Deposit BDT (Refundable upon cancellation)</th>
+										<th>Monthly BDT</th>
+										<th>Half-Yearly BDT</th>
+										<th>Yearly BDT</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="plan : ${plans}">
+										<td th:text="${plan.name}" class="sticky-col"></td>
+										<td th:text="${plan.limitEachTime} > 0 ? ${plan.limitEachTime} : 'Unlimited'"></td>
+										<td th:text="${plan.limitPerMonth} > 0 ? ${plan.limitPerMonth} : 'Unlimited'"></td>
+										<!-- <td th:text="${plan.duration}"></td> -->
+										<td th:text="${plan.securityAmount}"></td>
+										<td th:text="${plan.monthlyAmount}"></td>
+										<td th:text="${plan.halfYearlyAmount}"></td>
+										<td th:text="${plan.yearlyAmount}"></td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+
+
+
+						<h1 class="margin-top-30px mobile-font-size-20">Children's Subscription Plans</h1>
+
+						<div class="sticky-scroller">
+							<table class="table mobile-font-size-11 sticky-table" border="1">
+								<thead>
+									<tr>
+										<th class="sticky-col">Subscription Plan</th>
+										<th>Books borrowed at a time</th>
+										<th>Limit per month</th>
+										<!-- <th>Duration</th> -->
+										<th>Security Deposit BDT (Refundable upon cancellation)</th>
+										<th>Monthly BDT</th>
+										<th>Half-Yearly BDT</th>
+										<th>Yearly BDT</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="plan : ${childrenPlans}">
+										<td th:text="${plan.name}" class="sticky-col"></td>
+										<td th:text="${plan.limitEachTime} > 0 ? ${plan.limitEachTime} : 'Unlimited'"></td>
+										<td th:text="${plan.limitPerMonth} > 0 ? ${plan.limitPerMonth} : 'Unlimited'"></td>
+										<!-- <td th:text="${plan.duration}"></td> -->
+										<td th:text="${plan.securityAmount}"></td>
+										<td th:text="${plan.monthlyAmount}"></td>
+										<td th:text="${plan.halfYearlyAmount}"></td>
+										<td th:text="${plan.yearlyAmount}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+
+						<h1 class="margin-top-30px mobile-font-size-20">Family Subscription Plans</h1>
+
+						<div class="sticky-scroller">
+							<table class="table mobile-font-size-11 sticky-table" border="1">
+								<thead>
+									<tr>
+										<th class="sticky-col">Subscription Plan</th>
+										<th>Books borrowed at a time</th>
+										<th>Limit per month</th>
+										<!-- <th>Duration</th> -->
+										<th>Security Deposit BDT (Refundable upon cancellation)</th>
+										<th>Monthly BDT</th>
+										<th>Half-Yearly BDT</th>
+										<th>Yearly BDT</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="plan : ${familyPlans}">
+										<td th:text="${plan.name}" class="sticky-col"></td>
+										<td th:text="${plan.limitEachTime} > 0 ? ${plan.limitEachTime} : 'Unlimited'"></td>
+										<td th:text="${plan.limitPerMonth} > 0 ? ${plan.limitPerMonth} : 'Unlimited'"></td>
+										<!-- <td th:text="${plan.duration}"></td> -->
+										<td th:text="${plan.securityAmount}"></td>
+										<td th:text="${plan.monthlyAmount}"></td>
+										<td th:text="${plan.halfYearlyAmount}"></td>
+										<td th:text="${plan.yearlyAmount}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
 					</div>
 				</div>
 				
