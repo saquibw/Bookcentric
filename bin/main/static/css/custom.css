@@ -280,6 +280,10 @@ textarea {
 	width: 30% !important;
 }
 
+.w-40 {
+	width: 40% !important;
+}
+
 .other-review-container {
 	overflow-y: auto;
     max-height: 300px;
@@ -335,4 +339,10 @@ textarea {
 
 .font-typewriter {
 	font-family: special_eliteregular;
+}
+
+.member-dashboard-background {
+	background-image: url('/images/books/member-dashboard-background.png'); 
+	background-repeat: no-repeat; 
+	background-size: cover;
 }
