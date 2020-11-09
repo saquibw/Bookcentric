@@ -13,4 +13,11 @@ public class WebpageServiceImpl implements WebpageService {
 		return homeView;
 	}
 
+	@Override
+	public ModelAndView viewFaqPage() {
+		ModelAndView faqView = new ModelAndView("faq");
+		
+		return faqView;
+	}
+
 }

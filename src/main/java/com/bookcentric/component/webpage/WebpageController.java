@@ -30,4 +30,9 @@ public class WebpageController {
 	public String comingSoon() {
 		return "coming-soon";
 	}
+	
+	@GetMapping("/faq")
+	public ModelAndView getFaq() {
+		return webpageService.viewFaqPage();
+	}
 }

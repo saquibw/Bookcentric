@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/head :: head"></head>
+
+<body class="appear-animate">
+
+	<div class="page">
+		<header th:insert="fragments/body :: header"></header>
+
+		<!-- Main body -->
+		<div class="container-fluid">
+
+			<div class="row justify-content-md-center top-space">
+
+				<div class="col-md-8 card management-card left">
+					<div class="card-body">
+						<h1>FAQ</h1>
+						
+						<ul class="font-20-px">							
+							<li>
+								<div class="row">
+									<div class="form-group col">
+										<a href="#" onclick="window.open('/docs/How_Bookcentric_Works.pdf', '_blank', 'fullscreen=yes'); return false;">How does Bookcentric work?</a>
+									</div>
+								</div>
+							</li>
+							
+							<li>
+								<div class="row">
+									<div class="form-group col">
+										<a href="#" onclick="window.open('/docs/Steps_For_Registration_And_Borrowing.pdf', '_blank', 'fullscreen=yes'); return false;">What are the steps for User Registration and Borrowings?</a>
+									</div>
+								</div>
+							</li>
+							
+							<li>
+								<div class="row">
+									<div class="form-group col">
+										<a href="#" onclick="window.open('/docs/Member_Dashboard .png', '_blank', 'fullscreen=yes'); return false;">How does the Member Dashboard work?</a>
+									</div>
+								</div>
+							</li>
+							
+							<li>
+								<div class="row">
+									<div class="form-group col">
+										<a href="#" onclick="window.open('/docs/Book_Details.png', '_blank', 'fullscreen=yes'); return false;">Some details about books?</a>
+									</div>
+								</div>
+							</li>
+							
+							<li>
+								<div class="row">
+									<div class="form-group col">
+										<a href="#" onclick="window.open('/docs/Change_Subscription_Plan.pdf', '_blank', 'fullscreen=yes'); return false;">How do I change my subscription plan?</a>
+									</div>
+								</div>
+							</li>
+							
+							<li>
+								<div class="row">
+									<div class="form-group col">
+										<a href="#" onclick="window.open('/docs/Pickup_And_Delivery.pdf', '_blank', 'fullscreen=yes'); return false;">What are the pick-up and delivery options?</a>
+									</div>
+								</div>
+							</li>
+							
+							<li>
+								<div class="row">
+									<div class="form-group col">
+										<a href="#" onclick="window.open('/docs/Payment_Options.png', '_blank', 'fullscreen=yes'); return false;">How do I pay?</a>
+									</div>
+								</div>
+							</li>
+							
+							<li>
+								<div class="row">
+									<div class="form-group col">
+										<a href="#" onclick="window.open('/docs/Reading_Challenge.png', '_blank', 'fullscreen=yes'); return false;">How does the Reading Challenge work?</a>
+									</div>
+								</div>
+							</li>
+							
+							<li>
+								<div class="row">
+									<div class="form-group col">
+										<a href="#" onclick="window.open('/docs/Glossary.png', '_blank', 'fullscreen=yes'); return false;">Glossary?</a></label>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="child-footer">
+						<footer th:insert="fragments/body :: footer"></footer>
+					</div>
+				</div>
+				
+			</div>
+			<!--/row -->
+		</div>
+		<!--/container-->
+	</div>
+
+	<section th:insert="fragments/body :: js-container"></section>
+	
+	<script>
+   		$(document).ready(function() {
+   			
+   			function getYear() {
+				let yearPlaceholder = $("#bookcentricYear");
+				var year = new Date().getFullYear();
+				if (yearPlaceholder) {
+					$(yearPlaceholder).text(year);
+				}
+			}
+
+			getYear();
+   		});
+	</script>
+
+</body>
+</html>
