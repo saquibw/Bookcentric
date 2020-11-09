@@ -39,21 +39,23 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 	@Override
 	public boolean sendBookIssueEmail(List<UserHistory> userHistoryList, User user) {
 		String to = user.getEmail();
-		String subject = "Books have been issued to you";
+		String subject = "Book(s) have been issued to you";
 		
 		StringBuilder text = new StringBuilder();
 		text.append(String.format("Dear %s", user.getFullName()));
 		text.append("<br><br>");
-		text.append("Following books have been issued to you.");
+		text.append("Following book(s) have been issued to you.");
 		text.append("<br><br>");
 		
-		text.append("<table border='1'><tr><th>Book name</th><th>Issue date</th><th>Due date</th></tr>");
+		text.append("<table border='1'><tr><th>Book Name</th><th>Issue Date</th><th>Due Date</th></tr>");
 		
 		userHistoryList.forEach(u -> {
-			text.append(String.format("<tr><td>%s</td><td>%s</td><td>%s</td></tr>", u.getBooks().getName(), u.getIssueDate(), u.getDueDate()));
+			text.append(getBookInfoText(u));
 		});
 		
 		text.append("</table>");
+		text.append("<br><br>");
+		text.append(AppUtil.getEmailSignature());
 		
 		try {
 			emailService.sendHtmlEmail(to, subject, text.toString());
@@ -114,10 +116,7 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		text.append("<table border='1'><tr><th>Book Name</th><th>Issue Date</th><th>Due Date</th></tr>");
 		
 		historyList.forEach(u -> {
-			text.append(String.format("<tr><td>%s</td><td>%s</td><td>%s</td></tr>", 
-					u.getBooks().getName(), 
-					u.getIssueDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
-					u.getDueDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
+			text.append(getBookInfoText(u));
 		});
 		
 		text.append("</table>");
@@ -125,6 +124,13 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		text.append(AppUtil.getEmailSignature());
 		
 		return text.toString();
+	}
+	
+	private String getBookInfoText(UserHistory history) {
+		return String.format("<tr><td>%s</td><td>%s</td><td>%s</td></tr>", 
+				history.getBooks().getName(), 
+				history.getIssueDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
+				history.getDueDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 	}
 
 	@Override
@@ -136,7 +142,7 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 	public boolean sendBookReissueEmail(UserHistory userHistory) {
 		User user = userHistory.getUser();
 		String to = user.getEmail();
-		String subject = "Books have been re-issued to you";
+		String subject = "Book has been re-issued to you";
 		
 		StringBuilder text = new StringBuilder();
 		text.append(String.format("Dear %s", user.getFullName()));
@@ -144,14 +150,13 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		text.append("Following book has been re-issued to you.");
 		text.append("<br><br>");
 		
-		text.append("<table border='1'><tr><th>Book name</th><th>Issue date</th><th>Due date</th></tr>");
+		text.append("<table border='1'><tr><th>Book Name</th><th>Issue Date</th><th>Due Date</th></tr>");
 		
-		text.append(String.format("<tr><td>%s</td><td>%s</td><td>%s</td></tr>", 
-				userHistory.getBooks().getName(), 
-				userHistory.getIssueDate(), userHistory.getDueDate()));
-
+		text.append(getBookInfoText(userHistory));
 		
 		text.append("</table>");
+		text.append("<br><br>");
+		text.append(AppUtil.getEmailSignature());
 		
 		try {
 			emailService.sendHtmlEmail(to, subject, text.toString());
