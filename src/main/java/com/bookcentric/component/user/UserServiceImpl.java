@@ -150,6 +150,7 @@ public class UserServiceImpl implements UserService {
 			userList.forEach(user -> {
 				String to = user.getEmail();
 				String subscriptionPlanName = user.getSubscription().getCategory().getName();
+				String subscriptionPlanDurationName = user.getSubscription().getSubscriptionDuration().getName().toLowerCase();
 				String expiryDate = user.getDateOfRenewal().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
 				
 				String subject = String.format("Your subscription (%s) will expire soon", subscriptionPlanName);
@@ -157,7 +158,7 @@ public class UserServiceImpl implements UserService {
 				StringBuilder text = new StringBuilder();
 				text.append(String.format("Dear %s,", user.getFullName()));
 				text.append("<br><br>");
-				text.append(String.format("This is a gentle reminder that your monthly subscription (%s) is due for renewal on the %s. ", subscriptionPlanName, expiryDate));
+				text.append(String.format("This is a gentle reminder that your %s subscription (%s) is due for renewal on the %s. ", subscriptionPlanDurationName, subscriptionPlanName, expiryDate));
 				text.append("Please let us know if you would like to renew your subscription so we can do the needful. ");
 				text.append("If you would like to change your subscription plan at the time of renewal, please let us know and we will make changes accordingly.");
 				text.append("<br><br>");

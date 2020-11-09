@@ -105,18 +105,19 @@ public class UserHistoryServiceImpl implements UserHistoryService {
 		
 		text.append(String.format("Dear %s,", user.getFullName()));
 		text.append("<br><br>");
-		text.append(String.format("This is a gentle reminder that following book(s) are due for return on %s. ", dueDateInString));
+		text.append(String.format("This is a gentle reminder that the following book(s) are due for return on %s. ", dueDateInString));
 		text.append("If you would like to re-issue the book(s), please let us know and we will do the needful. ");
-		text.append("However, if you have re-issued the book(s) and wish to keep it/those for another week, "
+		text.append("However, if you have re-issued the book(s) already and wish to keep it/those for another week, "
 				+ "you may do so by paying only Tk.20 per book per  week. ");
 		text.append("<br><br>");
 		
-		text.append("<table border='1'><tr><th>Book name</th><th>Issue date</th></tr>");
+		text.append("<table border='1'><tr><th>Book Name</th><th>Issue Date</th><th>Due Date</th></tr>");
 		
 		historyList.forEach(u -> {
-			text.append(String.format("<tr><td>%s</td><td>%s</td></tr>", 
+			text.append(String.format("<tr><td>%s</td><td>%s</td><td>%s</td></tr>", 
 					u.getBooks().getName(), 
-					u.getIssueDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
+					u.getIssueDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
+					u.getDueDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
 		});
 		
 		text.append("</table>");
