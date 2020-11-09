@@ -47,7 +47,7 @@ public class UserDashboardController {
 		
 		UserDTO userDto = mapper.map(user, UserDTO.class);
 		userDto.setUserHistory(historyList);
-		userDto.setDateOfRenewal(AppUtil.updateLocalDateFormat(userDto.getDateOfRenewal(), dateFormat));
+		userDto.setDateOfRenewal(userDto.getDateOfRenewal() != null ? AppUtil.updateLocalDateFormat(userDto.getDateOfRenewal(), dateFormat) : userDto.getDateOfRenewal());
 		
 		dashBoardView.addObject("pageTitle", "Member Dashboard");
 		dashBoardView.addObject("user", userDto);
