@@ -302,7 +302,7 @@ textarea {
 }
 
 .dashboard-background {
-	background-image: url('/images/books/library-card.jpg');
+	background-image: url('/images/books/library-card.png');
 }
 
 .readingChallengeList > tbody > tr:hover {
@@ -354,7 +354,7 @@ textarea {
 }
 
 .member-dashboard-background {
-	background-image: url('/images/books/member-dashboard-background.png'); 
+	background-color: #d6c28f;
 	background-repeat: no-repeat; 
 	background-size: cover;
 }
