@@ -358,3 +358,7 @@ textarea {
 	background-repeat: no-repeat; 
 	background-size: cover;
 }
+
+.library-card th, .library-card td {
+  border: 1px solid #d6c28f;
+}
