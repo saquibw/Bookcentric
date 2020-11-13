@@ -6598,23 +6598,22 @@ section:hover .small-item-carousel .owl-next{
 		white-space: nowrap;
 	}
 	
-	/* .sticky-table tbody td {
-		white-space: nowrap;
-	} */
-	
 	.sticky-scroller {
-		margin-left: 110px;
-		overflow-x: scroll;
-		padding-bottom: 5px;
+		/* overflow-x: scroll; */
+		position: relative;
+		overflow: auto;
 	}
 	
-	.sticky-table .sticky-col {
-		/* border-left: solid 1px #DDEFEF; */
-		/* border-right: solid 1px #DDEFEF; */
-		left: 20px;
-		position: absolute;
-		top: auto;
+	.sticky-col {
+		left: -2px;
+		position: -webkit-sticky;
+  		position: sticky;
 		width: 125px;
+		background-color: lightgray
+	}
+	
+	.left-60-px {
+		left: 60px !important;
 	}
 	
 }
