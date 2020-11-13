@@ -6597,23 +6597,24 @@ section:hover .small-item-carousel .owl-next{
    .sticky-table thead th {
 		white-space: nowrap;
 	}
-	.sticky-table tbody td {
+	
+	/* .sticky-table tbody td {
 		white-space: nowrap;
-	}
+	} */
 	
 	.sticky-scroller {
-		margin-left: 105px;
+		margin-left: 110px;
 		overflow-x: scroll;
 		padding-bottom: 5px;
 	}
 	
 	.sticky-table .sticky-col {
-		border-left: solid 1px #DDEFEF;
-		border-right: solid 1px #DDEFEF;
+		/* border-left: solid 1px #DDEFEF; */
+		/* border-right: solid 1px #DDEFEF; */
 		left: 20px;
 		position: absolute;
 		top: auto;
-		width: 120px;
+		width: 125px;
 	}
 	
 }
