@@ -31,8 +31,12 @@ logging:
   level: 
     com.bookcentric: DEBUG
   file: bookcentric.log
+  path: /var/log
 
 server:
+  servlet:
+    session:
+      timeout: 30m
   port: 50000
   
 app:
