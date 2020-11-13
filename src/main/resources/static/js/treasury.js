@@ -570,7 +570,7 @@ var TreasuryManager = (function() {
 	}
 	
 	function moveToPosition() {
-		window.scrollTo(0, 650);
+		window.scrollTo(0, 900);
 	}
 	
 	function getYear() {
