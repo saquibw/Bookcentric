@@ -45,7 +45,7 @@
 								<div><label>Membership No: </label> <label th:text="${user.membershipId}"></label></div>
 								<div><label>Subscription plan: </label> <label th:text="${user.subscription.category.name} + ' (' + ${user.subscription.subscriptionDuration.name} + ')'"></label></div>
 								<div><label>Date of renewal: </label> <label th:text="${user.dateOfRenewal}"></label></div>
-								<div><a href="#" onclick="window.open('/docs/Things_To_Remember.pdf', '_blank', 'fullscreen=yes'); return false;">A few things to remember !</a></div>
+								<div><a href="#" class="font-18-px font-bold" onclick="window.open('/docs/Things_To_Remember.pdf', '_blank', 'fullscreen=yes'); return false;">Things to remember !</a></div>
 							</div>							
 						</div>
 						

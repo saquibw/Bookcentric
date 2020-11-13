@@ -151,8 +151,16 @@
 	font-size: 20px !important;
 }
 
+.font-18-px {
+	font-size: 18px !important;
+}
+
 .font-12-pix {
 	font-size: 12px !important;
+}
+
+.font-bold {
+	font-weight: bold;
 }
 
 .border-rounded-all {
