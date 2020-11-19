@@ -143,6 +143,10 @@
 	color: orange;
 }
 
+.color-light-orange {
+	color: #d6c28f
+}
+
 .font-14-pix {
 	font-size: 14px !important;
 }
@@ -354,7 +358,7 @@ textarea {
 }
 
 .member-dashboard-background {
-	background-color: #d6c28f;
+	background-color: #1F1B20;
 	background-repeat: no-repeat; 
 	background-size: cover;
 }
