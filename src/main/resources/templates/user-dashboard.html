@@ -41,10 +41,10 @@
 							</div>
 							
 							<div class="col-md-10 left margin-bottom-10px color-light-orange">
-								<div><label>Name: </label> <label th:text="${user.firstName} + ' ' + ${user.middleName} + ' ' + ${user.lastName}"></label></div>
-								<div><label>Membership No: </label> <label th:text="${user.membershipId}"></label></div>
-								<div><label>Subscription plan: </label> <label th:text="${user.subscription.category.name} + ' (' + ${user.subscription.subscriptionDuration.name} + ')'"></label></div>
-								<div><label>Date of renewal: </label> <label th:text="${user.dateOfRenewal}"></label></div>
+								<div><strong><label class="color-beige">Name: </label></strong> <label th:text="${user.firstName} + ' ' + ${user.middleName} + ' ' + ${user.lastName}"></label></div>
+								<div><strong><label class="color-beige">Membership No: </label></strong> <label th:text="${user.membershipId}"></label></div>
+								<div><strong><label class="color-beige">Subscription plan: </label></strong> <label th:text="${user.subscription.category.name} + ' (' + ${user.subscription.subscriptionDuration.name} + ')'"></label></div>
+								<div><strong><label class="color-beige">Date of renewal: </label></strong> <label th:text="${user.dateOfRenewal}"></label></div>
 								<div><a href="#" class="font-18-px font-bold" onclick="window.open('/docs/Things_To_Remember.pdf', '_blank', 'fullscreen=yes'); return false;">Things to remember !</a></div>
 							</div>							
 						</div>
