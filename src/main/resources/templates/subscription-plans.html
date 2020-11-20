@@ -118,13 +118,21 @@
 						</div>
 
 					</div>
+					
+					<div class="child-footer">
+						<footer th:insert="fragments/body :: footer"></footer>
+					</div>
+					
 				</div>
 				
 			</div>
 			<!--/row -->
 		</div>
 		<!--/container-->
+		
 	</div>
+	
+	<section th:insert="fragments/body :: js-container"></section>
 	
 	<script>
 		(function() {
@@ -134,6 +142,18 @@
 			elem = document.querySelector('#fullscreen-menu');
 			elem.parentNode.removeChild(elem);
 		})();
+		
+		$(document).ready(function() {
+			function getYear() {
+				let yearPlaceholder = $("#bookcentricYear");
+				var year = new Date().getFullYear();
+				if (yearPlaceholder) {
+					$(yearPlaceholder).text(year);
+				}
+			}
+
+			getYear();
+		});
 	</script>
 
 </body>
