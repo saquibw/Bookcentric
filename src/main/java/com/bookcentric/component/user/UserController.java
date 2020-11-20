@@ -63,7 +63,7 @@ public class UserController {
 		return getUserRegModel();
 	}
 
-	@PostMapping(value="/user/add")
+	@PostMapping(value="/user/registration")
 	public ModelAndView addUser(User user) throws MySQLIntegrityConstraintViolationException {
 		ModelAndView mv = getUserRegModel();
 		
@@ -191,8 +191,6 @@ public class UserController {
 		
 
 		return editView;
-		
-		// return "redirect:/user/get/" + user.getId() + "/true";
 	}
 	
 	@PostMapping("/user/me/update")

@@ -18,11 +18,11 @@
 						<h1>Membership Form</h1>
 
 						<!-- Form -->
-						<form th:action="@{/user/add}" th:object="${user}" method="post"
+						<form th:action="@{/user/registration}" th:object="${user}" method="post"
 							autocomplete="off">
 							
 							<p th:if="${duplicateEmail}" class="error">Email already exists!</p>
-							<p th:if="${registrationSuccess}" class="success">Registration completed successfully!</p>
+							<p th:if="${registrationSuccess}" class="success registrationSuccess hidden">Registration completed successfully!</p>
 
 							<div th:insert="fragments/forms :: user-form"></div>
 
@@ -70,6 +70,16 @@
 				}
 			});
 			
+			function checkRegistrationSuccess() {
+				const tag = $(".registrationSuccess");
+				if(tag && tag.text() == "Registration completed successfully!") {
+					setTimeout(() => {
+						alert("Thank you for signing up with Bookcentric! You will receive an email within 24 hours with more information. Carpe Librum!");
+					}, 0);
+					
+				}
+			}
+			
 			function getYear() {
 				let yearPlaceholder = $("#bookcentricYear");
 				var year = new Date().getFullYear();
@@ -79,6 +89,7 @@
 			}
 			
 			getYear();
+			checkRegistrationSuccess();
 		});
 	</script>
 	
