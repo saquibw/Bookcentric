@@ -644,6 +644,10 @@ hr.black{
     color: rgba(0,0,0, .75);
 }
 
+.letter-spacing-2em {
+		letter-spacing: 0.2em !important;
+}
+
 
 
 /* ==============================
