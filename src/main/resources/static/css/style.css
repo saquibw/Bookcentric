@@ -6632,6 +6632,10 @@ section:hover .small-item-carousel .owl-next{
 	.mobile-margin-top-10-px {
 		margin-top: 10px !important;
 	}
+	
+	.mobile-no-letter-spacing {
+		letter-spacing: 0.1em !important;
+	}
 }
 
 @media only screen and (max-width: 380px) {
