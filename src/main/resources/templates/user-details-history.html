@@ -13,12 +13,12 @@
 
 				<div th:insert="fragments/body :: management-navbar"></div>
 
-				<div class="col-md-10 card management-card">
+				<div class="col-md-10 card management-card mobile-font-size-12">
 					<div class="card-body">
 
 						<div class="left full-width">
 							<div class="left">
-								<h1>User Details History</h1>
+								<h1 class="mobile-font-size-20">User Details History</h1>
 							</div>
 							<div class="left position-absolute right-ten-pix">
 								<div><label th:text="${user.firstName} + ' ' + ${user.middleName} + ' ' + ${user.lastName}"></label></div>
@@ -34,7 +34,7 @@
 									<caption class="table-caption">Reading Queue</caption>
 									<thead>
 										<tr>
-											<th>Book name</th>
+											<th>Book Name</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -46,20 +46,20 @@
 										</tr>
 									</tbody>
 								</table>
-								<button class="btn btn-primary btn-sm" id="issueButton">Issue</button>
-								<a class="btn btn-primary btn-sm" th:href="@{'/user/history/readingqueue/' + ${user.id}}">Edit</a>
+								<button class="btn btn-primary btn-sm mobile-font-size-12" id="issueButton">Issue</button>
+								<a class="btn btn-primary btn-sm mobile-font-size-12" th:href="@{'/user/history/readingqueue/' + ${user.id}}">Edit</a>
 							</div>
 
-							<div class="col-md-8 left">
+							<div class="col-md-8 left overflow-x-scroll">
 								<table class="table readingHistory">
 									<caption class="table-caption">History</caption>
 									<thead>
 										<tr>
 											<th class="hidden"></th>
-											<th>Book name</th>
-											<th>Issue date</th>
-											<th>Due date</th>
-											<th>Return date</th>
+											<th>Book<br>Name</th>
+											<th>Issue<br>Date</th>
+											<th>Due<br>Date</th>
+											<th>Return<br>Date</th>
 											<th></th>
 											<th></th>
 										</tr>
@@ -74,8 +74,8 @@
 											<td th:text="${history.issueDate}"></td>
 											<td th:text="${history.dueDate}"></td>
 											<td th:text="${history.returnDate}"></td>
-											<td><button class="btn btn-primary btn-sm returnButton">Receive</button></td>
-											<td><button class="btn btn-secondary btn-sm reissueButton">Reissue</button></td>
+											<td><button class="btn btn-primary btn-sm returnButton mobile-font-size-12">Receive</button></td>
+											<td><button class="btn btn-secondary btn-sm reissueButton mobile-font-size-12">Reissue</button></td>
 
 										</tr>
 

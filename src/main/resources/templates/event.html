@@ -13,23 +13,23 @@
 			
 				<div th:insert="fragments/body :: management-navbar"></div>
 				
-				<div class="col-md-10 card management-card">
+				<div class="col-md-10 card management-card mobile-font-size-12">
 					<div class="card-body">
-						<h1>Events</h1>
+						<h1 class="mobile-font-size-20">Events</h1>
 						
 							<form th:action="@{/events/me}" th:object="${event}" method="post" encType="multipart/form-data" autocomplete="off">
 
 							<div class="row">
 								<div class="form-group col">
 									<input type="text" class="hidden" th:field="*{id}">
-									<label>Event subject*</label> <input type="text" class="form-control" th:field="*{subject}" required>
+									<label>Event subject*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{subject}" required>
 								</div>
 							</div>
 							
 							<div class="row">
 								<div class="form-group col">
 									<label>Event description</label>
-									<div class="content-editor form-control" id="contentEditor" contenteditable="true" th:utext="*{content}"></div>
+									<div class="content-editor form-control mobile-font-size-12" id="contentEditor" contenteditable="true" th:utext="*{content}"></div>
 									<textarea rows="0" cols="0" class="hidden" th:field="*{content}"></textarea>
 								</div>
 							</div>
@@ -37,10 +37,10 @@
 							<div class="row">
 								<div class="form-group col">
 									<label>Upload image</label> 
-									<input type="file" class="form-control" name="file">					
+									<input type="file" class="form-control mobile-font-size-12" name="file">					
 								</div>
 							</div>
-							<button type="submit" class="btn btn-primary submit-blog">Publish event</button>
+							<button type="submit" class="btn btn-primary submit-blog mobile-font-size-12">Publish event</button>
 						</form>
 						
 					</div>

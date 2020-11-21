@@ -15,20 +15,20 @@
 
 				<div th:insert="fragments/body :: management-navbar"></div>
 
-				<div class="col-md-8 card management-card left">
+				<div class="col-md-8 card management-card left mobile-font-size-12">
 					<div class="card-body">
-						<h1>Borrow Limit</h1>
+						<h1 class="mobile-font-size-20">Borrow Limit</h1>
 
 						<!-- Form -->
 						<form th:action="@{/borrowlimit/add}" th:object="${borrowLimit}" method="post" autocomplete="off">
 
 							<div class="row">
 								<div class="form-group col">
-									<label>Borrow limit (each time)*</label> <input type="number" class="form-control" th:field="*{eachTime}" required>
+									<label>Borrow limit (each time)*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{eachTime}" required>
 								</div>
 								
 								<div class="form-group col">
-									<label>Borrow limit (Per month)*</label> <input type="number" class="form-control" th:field="*{perMonth}" required>
+									<label>Borrow limit (Per month)*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{perMonth}" required>
 								</div>
 								
 								<div class="form-group col hidden">
@@ -36,7 +36,7 @@
 								</div>
 							</div>
 
-							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="submit" class="btn btn-primary mobile-font-size-12">Save</button>
 						</form>
 						
 						<label></label>

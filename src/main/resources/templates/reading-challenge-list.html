@@ -34,11 +34,11 @@
             
         <div class="container-fluid">
 				<div class="row justify-content-md-center top-space">
-					<div class="col-md-6 card management-card">
+					<div class="col-md-6 card management-card mobile-font-size-12">
 						<div class="card-body">
 												
 							<div th:if="${rcs != null}">
-								<h1>List of reading challenges</h1>
+								<h1 class="mobile-font-size-20">List of reading challenges</h1>
 								<ul>
 									<li th:each="rc : ${rcs}">
 										<a th:text="${rc.month} + ' ' + ${rc.year} + ': ' + ${rc.subject}" th:href="@{'/reading-challenge/' + ${rc.id}}"></a>

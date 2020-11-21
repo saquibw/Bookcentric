@@ -15,16 +15,16 @@
 
 				<div th:insert="fragments/body :: management-navbar"></div>
 
-				<div class="col-md-8 card management-card left">
+				<div class="col-md-8 card management-card left mobile-font-size-12">
 					<div class="card-body">
-						<h1>Payment Mode</h1>
+						<h1 class="mobile-font-size-20">Payment Mode</h1>
 
 						<!-- Form -->
 						<form th:action="@{/paymentmode/add}" th:object="${paymentMode}" method="post" autocomplete="off">
 
 							<div class="row">
 								<div class="form-group col">
-									<label>Payment mode name*</label> <input type="text" class="form-control" th:field="*{name}" required>
+									<label>Payment mode name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{name}" required>
 								</div>
 								
 								<div class="form-group col hidden">
@@ -32,7 +32,7 @@
 								</div>
 							</div>
 
-							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="submit" class="btn btn-primary mobile-font-size-12">Save</button>
 						</form>
 						
 						<label></label>

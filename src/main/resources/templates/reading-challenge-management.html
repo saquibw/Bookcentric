@@ -14,13 +14,13 @@
 
 		<div th:insert="fragments/body :: management-navbar"></div>
         
-        <div class="col-md-12 card management-card">
+        <div class="col-md-12 card management-card mobile-font-size-12">
 			<div class="card-body">
 					
 				<div class="full-width margin-top-10px">
 				
 					<div class="col-md-6 left table-responsive">
-						<h4>Reading challenges</h4>
+						<h4 class="mobile-font-size-20">Reading challenges</h4>
 						
 						<table class="table readingChallengeList">
 							<thead>
@@ -49,21 +49,21 @@
 					</div>
 					
 					<div class="col-md-6 left">
-						<h4>Prepare reading challenge</h4>
+						<h4 class="mobile-font-size-20">Prepare reading challenge</h4>
 						
 						<form th:action="@{/reading-challenge/management}" th:object="${readingChallenge}" method="post" encType="multipart/form-data" autocomplete="off">
 							<div class="row">
 								<div class="form-group col">
-									<label>Subject*</label> <input type="text" class="form-control" th:field="*{subject}" required>
+									<label>Subject*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{subject}" required>
 								</div>
 								<div class="form-group col">
-									<label>Month name*</label> <input type="text" class="form-control" th:field="*{month}">
+									<label>Month name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{month}">
 								</div>
 							</div>
 							
 							<div class="row">
 								<div class="form-group col">
-									<label>Year*</label> <input type="number" class="form-control" th:field="*{year}" required>
+									<label>Year*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{year}" required>
 								</div>
 								<div class="form-group col">
 									<input type="checkbox" th:field="*{published}"><span>Published*</span>
@@ -72,7 +72,7 @@
 							
 							<div class="row">
 								<div class="form-group col">
-									<button class="btn btn-sm btn-success add-book">Add books</button>
+									<button class="btn btn-sm btn-success add-book mobile-font-size-12">Add books</button>
 									<a href="/reading-challenge/management/view">Clear</a>
 									<table class="table bookList">
 										<thead>
@@ -97,11 +97,11 @@
 								<input type="text" class="form-control hidden" th:field="*{id}">
 								<div class="form-group col">
 									<label>Upload image</label> 
-									<input type="file" class="form-control" name="file">					
+									<input type="file" class="form-control mobile-font-size-12" name="file">					
 								</div>
 							</div>
 							
-							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="submit" class="btn btn-primary mobile-font-size-12">Save</button>
 						
 						</form>
 					</div>

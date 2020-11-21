@@ -15,19 +15,19 @@
 
 				<div th:insert="fragments/body :: management-navbar"></div>
 
-				<div class="col-md-10 card management-card left">
+				<div class="col-md-10 card management-card left mobile-font-size-12">
 					<div class="card-body">
-						<h1>Category</h1>
+						<h1 class="mobile-font-size-20">Category</h1>
 
 						<!-- Form -->
 						<form th:action="@{/category/add}" th:object="${category}" method="post" autocomplete="off">
 
 							<div class="row">
 								<div class="form-group col">
-									<label>Category Name*</label> <input type="text" class="form-control" th:field="*{name}" required>
+									<label>Category Name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{name}" required>
 								</div>
 								<div class="form-group col">
-									<label>Security amount*</label> <input type="number" class="form-control" th:field="*{securityAmount}" required>
+									<label>Security amount*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{securityAmount}" required>
 								</div>
 								
 								<div class="form-group col hidden">
@@ -38,7 +38,7 @@
 							<div class="row">
 								<div class="form-group col">
 									<label>Borrow limit*</label> 
-									<select class="form-control" th:field=*{borrowLimit} required>
+									<select class="form-control mobile-font-size-12" th:field=*{borrowLimit} required>
 										<option th:each="borrowLimit : ${borrowLimitList}" th:value="${borrowLimit.id}" 
 										th:text="'Each time-' + ${borrowLimit.eachTime} + ', Per month-' + ${borrowLimit.perMonth}">
 									</select>
@@ -46,7 +46,7 @@
 								
 								<div class="form-group col">
 									<label>Plan duration*</label> 
-									<select class="form-control" th:field=*{planDuration} required>
+									<select class="form-control mobile-font-size-12" th:field=*{planDuration} required>
 										<option th:each="planDuration : ${planDurationList}" 
 										th:value="${planDuration.id}" th:text="${planDuration.name}">
 									</select>
@@ -63,38 +63,41 @@
 								</div>						
 							</div>
 
-							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="submit" class="btn btn-primary mobile-font-size-12">Save</button>
 						</form>
 						
 						<label></label>
 						
-						<table class="table">
-							<thead>
-								<tr>
-									<th>Category name</th>
-									<th>Borrow limit</th>
-									<th>Plan duration</th>
-									<th>Security amount</th>
-									<th>Under age</th>
-									<th>Family</th>
-									<th></th>
-									<th></th>
-								</tr>
-							</thead>
+						<div class="overflow-x-scroll">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Category name</th>
+										<th>Borrow limit</th>
+										<th>Plan duration</th>
+										<th>Security amount</th>
+										<th>Under age</th>
+										<th>Family</th>
+										<th></th>
+										<th></th>
+									</tr>
+								</thead>
 							
-							<tbody>
-								<tr th:each="category : ${categoryList}">
-									<td th:text="${category.name}"></td>
-									<td th:text="'Each time-' + ${category.borrowLimit.eachTime} + ', Per month-' + ${category.borrowLimit.perMonth}"></td>
-									<td th:text="${category.planDuration.name}"></td>
-									<td th:text="${category.securityAmount}"></td>
-									<td th:text="${category.underAge}"></td>
-									<td th:text="${category.family}"></td>
-									<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/category/edit/' + ${category.id}}"></a></td>
-									<td><a class="fa fa-trash delete-icon" th:href="@{'/category/delete/' + ${category.id}}"></a></td>
-								</tr>
-							</tbody>
-						</table>
+								<tbody>
+									<tr th:each="category : ${categoryList}">
+										<td th:text="${category.name}"></td>
+										<td th:text="'Each time-' + ${category.borrowLimit.eachTime} + ', Per month-' + ${category.borrowLimit.perMonth}"></td>
+										<td th:text="${category.planDuration.name}"></td>
+										<td th:text="${category.securityAmount}"></td>
+										<td th:text="${category.underAge}"></td>
+										<td th:text="${category.family}"></td>
+										<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/category/edit/' + ${category.id}}"></a></td>
+										<td><a class="fa fa-trash delete-icon" th:href="@{'/category/delete/' + ${category.id}}"></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						
 					</div>
 				</div>
 				

@@ -13,9 +13,9 @@
 			
 				<div th:insert="fragments/body :: management-navbar"></div>
 				
-				<div class="col-md-8 card management-card">
+				<div class="col-md-8 card management-card mobile-font-size-12">
 					<div class="card-body table-responsive">
-						<h1>User History</h1>
+						<h1 class="mobile-font-size-20">User History</h1>
 
 						<div class="overflow-auto max-height-500-px">
 							<table class="table">
@@ -38,7 +38,7 @@
 										<td th:text="${user.lastName}"></td>
 										<td th:text="${user.phone}"></td>
 										<td th:text="${user.status.name}"></td>
-										<td><a class="btn btn-primary btn-sm"
+										<td><a class="btn btn-primary btn-sm mobile-font-size-12"
 											th:href="@{'/user/history/' + ${user.id}}">View history</a></td>
 									</tr>
 								</tbody>

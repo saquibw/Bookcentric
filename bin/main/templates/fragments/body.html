@@ -20,7 +20,7 @@
 	</div>
 
 	<div th:fragment="menue">
-		<span sec:authorize="isAuthenticated()" class="greetings"> Welcome: <span sec:authentication="name"></span></span>
+		<span sec:authorize="isAuthenticated()" class="greetings"> Welcome: <span sec:authentication="name"></span> | <a href="/logout">Logout</a></span>
                 
 		<!-- Menu Button -->
 		<a href="#" class="fm-button"><span></span>Menu</a>

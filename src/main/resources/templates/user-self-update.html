@@ -15,9 +15,9 @@
 
 				<div th:insert="fragments/body :: management-navbar"></div>
 
-				<div class="col-md-8 card management-card">
+				<div class="col-md-8 card management-card mobile-font-size-12">
 					<div class="card-body">
-						<h1>Edit user</h1>
+						<h1 class="mobile-font-size-20">Edit user</h1>
 
 						<form th:action="@{/user/me/update}" th:object="${user}" encType="multipart/form-data"
 							method="post" autocomplete="off">
@@ -32,7 +32,7 @@
 							<div class="row">
 								<div class="form-group col">
 									<label>Upload image</label> 
-									<input type="file" class="form-control" name="file">					
+									<input type="file" class="form-control mobile-font-size-12" name="file">					
 								</div>
 							</div>
 
@@ -40,7 +40,7 @@
 
 							<div th:insert="fragments/forms :: parent-form"></div>
 
-							<button type="submit" class="btn btn-primary">Update</button>
+							<button type="submit" class="btn btn-primary mobile-font-size-12">Update</button>
 						</form>
 					</div>
 					

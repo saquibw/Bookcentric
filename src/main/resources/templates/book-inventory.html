@@ -13,16 +13,16 @@
 			
 				<div th:insert="fragments/body :: management-navbar"></div>
 				
-				<div class="col-md-8 card management-card">
+				<div class="col-md-8 card management-card mobile-font-size-12">
 					<div class="card-body table-responsive">
-						<h1>Book Inventory</h1>
+						<h1 class="mobile-font-size-20">Book Inventory</h1>
 						
-						<div class="left section-text mt-10">Showing <label class="pageBookCount"></label> of <label class="totalBookCount"></label>	results</div>
+						<div class="left section-text mt-10 mobile-font-size-11 mobile-width-25">Showing <label class="pageBookCount"></label> of <label class="totalBookCount"></label>	results</div>
 						
-						<div class="right">
+						<div class="right mobile-font-size-11 mobile-width-70">
 							<form class="form-inline">
-								<i class="fa fa-search" aria-hidden="true"></i> 
-								<input class="form-control ml-3 bookSearch" type="text" placeholder="Book, Author, Genre, Tag" aria-label="Search">
+								<!-- <i class="fa fa-search" aria-hidden="true"></i>  -->
+								<input class="form-control ml-3 bookSearch mobile-font-size-12" type="text" placeholder="Book, Author, Genre, Tag" aria-label="Search">
 							</form>
 						</div>
 						

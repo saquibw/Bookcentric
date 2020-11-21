@@ -11,12 +11,14 @@
 		<div class="container-fluid">
 			<div class="row justify-content-md-center top-space">
 				
-				<div class="col-md-10 card management-card">
+				<div th:insert="fragments/body :: management-navbar"></div>
+				
+				<div class="col-md-10 card management-card mobile-font-size-12">
 					<div class="card-body">	
 							
 							<div class="row">
 								<div class="col-md-10">
-									<h1 th:text="${event.subject}"></h1>
+									<h1 th:text="${event.subject}" class="mobile-font-size-20"></h1>
 								</div>
 								<div class="col-md-2" sec:authorize="hasRole('ROLE_ADMIN')">
 									<a class="fa fa-edit edit-icon color-green" th:href="@{'/events/me/' + ${event.id}}"></a>

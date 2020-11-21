@@ -15,9 +15,9 @@
 
 				<div th:insert="fragments/body :: management-navbar"></div>
 
-				<div class="col-md-8 card management-card left">
+				<div class="col-md-8 card management-card left mobile-font-size-12">
 					<div class="card-body">
-						<h1>Subscription</h1>
+						<h1 class="mobile-font-size-20">Subscription</h1>
 
 						<!-- Form -->
 						<form th:action="@{/subscription/add}" th:object="${subscription}" method="post" autocomplete="off">
@@ -25,7 +25,7 @@
 							<div class="row">
 								<div class="form-group col">
 									<label>Category*</label> 
-									<select class="form-control" th:field=*{category} required>
+									<select class="form-control mobile-font-size-12" th:field=*{category} required>
 										<option th:each="category : ${categoryList}" th:value="${category.id}" th:text="${category.name}">
 									</select>
 								</div>
@@ -40,7 +40,7 @@
 								
 								<div class="form-group col">
 									<label>Subscription duration*</label> 
-									<select class="form-control" th:field=*{subscriptionDuration} required>
+									<select class="form-control mobile-font-size-12" th:field=*{subscriptionDuration} required>
 										<option th:each="subscriptionDuration : ${subscriptionDurationList}" 
 										th:value="${subscriptionDuration.id}" th:text="${subscriptionDuration.name}">
 									</select>
@@ -71,7 +71,7 @@
 								</div> -->
 								
 								<div class="form-group col">
-									<label>Price*</label> <input type="number" class="form-control" th:field="*{price}" required>
+									<label>Price*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{price}" required>
 								</div>
 								
 								<div class="form-group col hidden">
@@ -91,40 +91,44 @@
 								</div>
 							</div> -->
 
-							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="submit" class="btn btn-primary mobile-font-size-12">Save</button>
 						</form>
 						
 						<label></label>
 						
-						<table class="table">
-							<thead>
-								<tr>
-									<th>Category</th>
-									<!-- <th>Borrow limit</th> -->
-									<!-- <th>Plan duration</th> -->
-									<th>Subscription duration</th>
-									<!-- <th>Security amount</th> -->
-									<th>Price</th>
-									<!-- <th>Cancellation policy</th> -->
-									<th></th>
-									<th></th>
-								</tr>
-							</thead>
+						<div class="overflow-x-scroll">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Category</th>
+										<!-- <th>Borrow limit</th> -->
+										<!-- <th>Plan duration</th> -->
+										<th>Subscription duration</th>
+										<!-- <th>Security amount</th> -->
+										<th>Price</th>
+										<!-- <th>Cancellation policy</th> -->
+										<th></th>
+										<th></th>
+									</tr>
+								</thead>
 							
-							<tbody>
-								<tr th:each="subscription : ${subscriptionList}">
-									<td th:text="${subscription.category.name}"></td>
-									<!-- <td th:text="'Each time-' + ${subscription.borrowLimit.eachTime} + ', Per month-' + ${subscription.borrowLimit.perMonth}"></td> -->
-									<!-- <td th:text="${subscription.planDuration.name}"></td> -->
-									<td th:text="${subscription.subscriptionDuration.name}"></td>
-									<!-- <td th:text="${subscription.securityAmount}"></td> -->
-									<td th:text="${subscription.price}"></td>
-									<!-- <td th:text="${subscription.cancellationPolicy}"></td> -->
-									<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/subscription/edit/' + ${subscription.id}}"></a></td>
-									<td><a class="fa fa-trash delete-icon" th:href="@{'/subscription/delete/' + ${subscription.id}}"></a></td>
-								</tr>
-							</tbody>
-						</table>
+								<tbody>
+									<tr th:each="subscription : ${subscriptionList}">
+										<td th:text="${subscription.category.name}"></td>
+										<!-- <td th:text="'Each time-' + ${subscription.borrowLimit.eachTime} + ', Per month-' + ${subscription.borrowLimit.perMonth}"></td> -->
+										<!-- <td th:text="${subscription.planDuration.name}"></td> -->
+										<td th:text="${subscription.subscriptionDuration.name}"></td>
+										<!-- <td th:text="${subscription.securityAmount}"></td> -->
+										<td th:text="${subscription.price}"></td>
+										<!-- <td th:text="${subscription.cancellationPolicy}"></td> -->
+										<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/subscription/edit/' + ${subscription.id}}"></a></td>
+										<td><a class="fa fa-trash delete-icon" th:href="@{'/subscription/delete/' + ${subscription.id}}"></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						
+						
 					</div>
 				</div>
 				

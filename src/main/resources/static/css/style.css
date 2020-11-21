@@ -2121,7 +2121,7 @@ a.logo:hover{
 .fm-button{
     display: block;
     position: fixed;
-    top: 30px;
+    top: 35px;
     right: 30px;
     width: 54px;
     height: 54px;
@@ -6458,8 +6458,12 @@ section:hover .small-item-carousel .owl-next{
     right: 30px;
     font-size: 15px;
     z-index: 1030;
-    font-style: italic;
-    color: cornsilk;
+    /* font-style: italic; */
+    color: darkgray;
+}
+
+.color-firebrick {
+	color: firebrick;
 }
 
 .mb-30 {
@@ -6570,6 +6574,10 @@ section:hover .small-item-carousel .owl-next{
 	
 	.mobile-font-size-12 {
 		font-size: 12px !important;
+	}
+	
+	.mobile-font-size-14 {
+		font-size: 14px !important;
 	}
 	
 	.mobile-font-size-15 {

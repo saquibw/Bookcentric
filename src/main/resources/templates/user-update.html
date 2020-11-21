@@ -15,9 +15,9 @@
 
 				<div th:insert="fragments/body :: management-navbar"></div>
 
-				<div class="col-md-8 card management-card">
+				<div class="col-md-8 card management-card mobile-font-size-12">
 					<div class="card-body">
-						<h1>Edit user</h1>
+						<h1 class="mobile-font-size-20">Edit user</h1>
 
 						<form th:action="@{/user/update}" th:object="${user}"
 							method="post" autocomplete="off">
@@ -33,7 +33,7 @@
 
 							<div th:insert="fragments/forms :: parent-form"></div>
 
-							<button type="submit" class="btn btn-primary">Update</button>
+							<button type="submit" class="btn btn-primary mobile-font-size-12">Update</button>
 						</form>
 					</div>
 				</div>

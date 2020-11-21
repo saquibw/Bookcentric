@@ -15,16 +15,16 @@
 
 				<div th:insert="fragments/body :: management-navbar"></div>
 
-				<div class="col-md-8 card management-card left">
+				<div class="col-md-8 card management-card left mobile-font-size-12">
 					<div class="card-body">
-						<h1>Publisher</h1>
+						<h1 class="mobile-font-size-20">Publisher</h1>
 
 						<!-- Form -->
 						<form th:action="@{/publisher/add}" th:object="${publisher}" method="post" autocomplete="off">
 
 							<div class="row">
 								<div class="form-group col">
-									<label>Publisher name*</label> <input type="text" class="form-control" th:field="*{name}" required>
+									<label>Publisher name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{name}" required>
 								</div>
 								
 								<div class="form-group col hidden">
@@ -32,15 +32,15 @@
 								</div>
 							</div>
 
-							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="submit" class="btn btn-primary mobile-font-size-12">Save</button>
 						</form>
 						
 						<label></label>
 						
 						<div class="right">
 							<form class="form-inline">
-								<i class="fa fa-search" aria-hidden="true"></i> 
-								<input class="form-control ml-3 publisherSearch" type="text" placeholder="Search by Publisher" aria-label="Search">
+								<!-- <i class="fa fa-search" aria-hidden="true"></i> --> 
+								<input class="form-control ml-3 publisherSearch mobile-font-size-12" type="text" placeholder="Search by Publisher" aria-label="Search">
 							</form>
 						</div>
 						

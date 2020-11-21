@@ -41,8 +41,8 @@
 				<div class="col-md-6 card management-card">
 					<div class="card-body">
 
-						<div class="col-md-12 left">
-							<h1>List of events</h1>
+						<div class="col-md-12 left mobile-font-size-12">
+							<h1 class="mobile-font-size-20">List of events</h1>
 							
 							<ul th:if="${events != null}">
 								<li th:each="e : ${events}"><a th:text="${e.subject}"
@@ -51,7 +51,7 @@
 							
 							
 							<div sec:authorize="hasRole('ROLE_ADMIN')" class="margin-top-10px">
-								<a class="btn btn-success" href="/events/me">Add new</a>
+								<a class="btn btn-success mobile-font-size-12" href="/events/me">Add new</a>
 							</div>
 
 						</div>

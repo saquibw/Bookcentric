@@ -11,17 +11,17 @@
 		<div class="container-fluid">
 			<div class="row justify-content-md-center top-space">
 				
-				<div class="col-md-10 card management-card">
+				<div class="col-md-10 card management-card mobile-font-size-12">
 					<div class="card-body">				
 							<div class="row col">
-								<h1 th:text="${blog.subject}"></h1>
+								<h1 class="mobile-font-size-20" th:text="${blog.subject}"></h1>
 							</div>
 							
 							<div class="row col">
-								<h6 th:text="${blog.userName}"></h6>								
+								<h6 class="mobile-font-size-15" th:text="${blog.userName}"></h6>								
 							</div>
 							<div class="row col">
-								<label class="ml-1 font-14-pix" th:text="${blog.createdAtText}"></label>
+								<label class="ml-1 font-14-pix mobile-font-size-12" th:text="${blog.createdAtText}"></label>
 							</div>
 							<hr>
 							<div class="row">
@@ -41,17 +41,17 @@
 						<div class="full-width self-rating-review-container" sec:authorize="isAuthenticated()">
 							<div class="row">
 								<div class="col-md-12 left">
-									<textarea class="form-control col-md-10 left self-comment-container"></textarea>
-									<button type="button" class="btn btn-success btn-sm margin-left-10px margin-top-10px hidden comment-edit-btn">Edit</button>
-									<button type="button" class="btn btn-success btn-sm margin-left-10px margin-top-10px comment-save-btn">Save</button>
-									<button type="button" class="btn btn-danger btn-sm margin-left-10px margin-top-10px hidden comment-delete-btn">Delete</button>
+									<textarea class="form-control col-md-10 left self-comment-container mobile-font-size-12"></textarea>
+									<button type="button" class="btn btn-success btn-sm margin-left-10px margin-top-10px hidden comment-edit-btn mobile-font-size-12">Edit</button>
+									<button type="button" class="btn btn-success btn-sm margin-left-10px margin-top-10px comment-save-btn mobile-font-size-12">Save</button>
+									<button type="button" class="btn btn-danger btn-sm margin-left-10px margin-top-10px hidden comment-delete-btn mobile-font-size-12">Delete</button>
 								</div>
 							</div>
 							<hr>
 						</div>	
 						
 						<div class="full-width font-14-pix">
-							<div class="col-md-12 left font-prata margin-top-20px other-comment-container"></div>
+							<div class="col-md-12 left font-prata margin-top-20px other-comment-container mobile-font-size-12"></div>
 						</div>
 											
 					</div>
