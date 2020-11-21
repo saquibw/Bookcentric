@@ -644,8 +644,8 @@ hr.black{
     color: rgba(0,0,0, .75);
 }
 
-.letter-spacing-2em {
-		letter-spacing: 0.2em !important;
+.letter-spacing-1em {
+		letter-spacing: 0.1em !important;
 }
 
 
@@ -6635,10 +6635,6 @@ section:hover .small-item-carousel .owl-next{
 	
 	.mobile-margin-top-10-px {
 		margin-top: 10px !important;
-	}
-	
-	.mobile-no-letter-spacing {
-		letter-spacing: 0.1em !important;
 	}
 }
 
