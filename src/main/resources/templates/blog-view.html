@@ -27,7 +27,10 @@
 							<div class="row">
 								<div class="form-group col">
 									<label class="hidden blogId" th:text="${blog.id}"></label>
-									<div class="content-editor" th:utext="${blog.content}"></div>
+									<div class="content-editor col-md-8 left" th:utext="${blog.content}"></div>
+									<div class="content-viewer col-md-4 left">
+										<img th:src="@{'/blogs/all/image/' + ${blog.id}}" alt="..."></img>
+									</div>
 								</div>
 							</div>
 							<hr>
