@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bookcentric.component.user.User;
 import com.bookcentric.component.user.security.UserSecurityService;
+import com.bookcentric.custom.util.Constants;
 import com.bookcentric.custom.util.Response;
 
 @Controller
@@ -161,35 +162,33 @@ public class BlogController {
 	
 	@ResponseBody
 	@PutMapping("/blogs/me/comments")
-	public Response updateSelfComment(@RequestParam Integer blogId, @RequestParam String comment) {
+	public Response updateSelfComment(@RequestParam Integer blogId, @RequestParam Integer commentId, @RequestParam String comment) {
 		Response response = new Response();
 		
 		Blog blog = repository.getOne(blogId);
 		User user = userSecurityService.getLoggedInUser();
-		BlogComments blogComment = commentRepository.findOneByBlogIdAndUserId(blogId, user.getId());
+		BlogComments blogComment = new BlogComments();
 		
-		if(blogComment == null) {
-			blogComment = new BlogComments();
+		if(commentId == null) {
 			blogComment.setBlog(blog);
 			blogComment.setUser(user);
+		} else {
+			blogComment = commentRepository.getOne(commentId);
 		}
 
 		blogComment.setComment(comment);
 		commentRepository.save(blogComment);
 		
 		response.success = true;
-		response.setData(blogComment);
 		
 		return response;
 	}
 	
 	@ResponseBody
-	@DeleteMapping("/blogs/me/comments/{blogId}")
-	public Response deleteReview(@PathVariable Integer blogId) {
-		Response response = new Response();
-		User user = userSecurityService.getLoggedInUser();
-		
-		BlogComments blogComment = commentRepository.findOneByBlogIdAndUserId(blogId, user.getId());
+	@DeleteMapping("/blogs/me/comments/{commentId}")
+	public Response deleteReview(@PathVariable Integer commentId) {
+		Response response = new Response();		
+		BlogComments blogComment = commentRepository.getOne(commentId);
 		
 		if(blogComment != null) {
 			commentRepository.delete(blogComment);
@@ -200,28 +199,20 @@ public class BlogController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/blogs/me/comments")
-	public Response getReviewListByBook(@RequestParam Integer blogId) {
-		Response response = new Response();	
-		
-		User user = userSecurityService.getLoggedInUser();
-
-		BlogComments blogComment = commentRepository.findOneByBlogIdAndUserId(blogId, user.getId());
-		response.success = true;
-		response.setData(blogComment);
-		
-		return response;
-	}
-	
-	@ResponseBody
 	@GetMapping("/blogs/all/comments")
 	public Response getOtherReviews(@RequestParam Integer blogId) {
 		Response response = new Response();
 		
-		List<BlogComments> list = commentRepository.findAllByBlogIdOrderByModifiedAtDesc(blogId);
+		List<BlogComments> list = commentRepository.findAllByBlogIdOrderByCreatedAtDesc(blogId);
 				
 		response.setSuccess(true);
 		response.setData(list);
+		
+		User user = userSecurityService.getLoggedInUser();
+		if(user != null) {
+			if(user.getId() != null) response.setLoggedinUserId(user.getId());
+			if(user.getRole() != null && !user.getRole().isEmpty() && user.getRole().equals(Constants.ROLE_ADMIN)) response.setAdmin(true);
+		}		
 		
 		return response;
 	}

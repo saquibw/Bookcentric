@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BlogCommentsRepository extends JpaRepository<BlogComments, Integer> {
 	public BlogComments findOneByBlogIdAndUserId(Integer blogId, Integer userId);
-	public List<BlogComments> findAllByBlogIdOrderByModifiedAtDesc(Integer id);
+	public List<BlogComments> findAllByBlogIdOrderByCreatedAtDesc(Integer id);
 }

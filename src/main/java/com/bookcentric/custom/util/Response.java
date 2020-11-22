@@ -9,4 +9,6 @@ public class Response{
 	public boolean success;
 	public Object data;
 	public Map<String, Object> dataMap;
+	public boolean admin;
+	public int loggedinUserId;
 }

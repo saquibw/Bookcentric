@@ -36,11 +36,15 @@ public class BlogComments {
 	private User user;
 	
 	public String getModifiedAtText() {
-		return modifiedAt.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+		return createdAt.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
 	}
 	
-	public String getUserName() {
+	public String getCommentUserName() {
 		return user.getFullName();
+	}
+	
+	public Integer getCommentUserId() {
+		return user.getId();
 	}
 
 }

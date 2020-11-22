@@ -27,6 +27,8 @@
 							<div class="row">
 								<div class="form-group col">
 									<label class="hidden blogId" th:text="${blog.id}"></label>
+									<label class="hidden blogUserId" th:text="${blog.userId}"></label>
+									
 									<div class="col-md-6">
 										<img th:src="@{'/blogs/all/image/' + ${blog.id}}" alt="..."></img>
 									</div>
@@ -41,10 +43,11 @@
 						<div class="full-width self-rating-review-container" sec:authorize="isAuthenticated()">
 							<div class="row">
 								<div class="col-md-12 left">
+									<label class="hidden editableCommentId"></label>
 									<textarea class="form-control col-md-10 left self-comment-container mobile-font-size-12"></textarea>
-									<button type="button" class="btn btn-success btn-sm margin-left-10px margin-top-10px hidden comment-edit-btn mobile-font-size-12">Edit</button>
 									<button type="button" class="btn btn-success btn-sm margin-left-10px margin-top-10px comment-save-btn mobile-font-size-12">Save</button>
-									<button type="button" class="btn btn-danger btn-sm margin-left-10px margin-top-10px hidden comment-delete-btn mobile-font-size-12">Delete</button>
+									<button type="button" class="btn btn-success btn-sm margin-left-10px margin-top-10px hidden comment-update-btn mobile-font-size-12">Update</button>
+									<button type="button" class="btn btn-danger btn-sm margin-left-10px margin-top-10px comment-cancel-btn mobile-font-size-12">Cancel</button>
 								</div>
 							</div>
 							<hr>
@@ -75,7 +78,11 @@
 				<div class="other-user-name"></div>
 				<div class="other-date font-italic text-secondary"></div>
 			</div>
-			<div class="col-md-10 left other-comment"></div>
+			<div class="col-md-8 left other-comment"></div>
+			<div class="col-md-2" sec:authorize="isAuthenticated()">
+				<a class='fa fa-edit edit-icon color-green margin-left-20px' href="javascript:void(0)"></a>
+				<a class='fa fa-trash delete-icon margin-left-20px' href='javascript:void(0)'></a>
+			</div>
 		</div>
 		<hr>
 	</script>

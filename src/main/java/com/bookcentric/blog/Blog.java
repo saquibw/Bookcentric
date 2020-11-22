@@ -45,4 +45,8 @@ public class Blog {
 	public String getCreatedAtText() {
 		return createdAt.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
 	}
+	
+	public Integer getUserId() {
+		return user.getId();
+	}
 }
