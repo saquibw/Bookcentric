@@ -383,7 +383,11 @@ textarea {
 	background-size: cover;
 }
 
-.library-card th, .library-card td {
+.library-card thead th, .library-card td {
+  border: 1px solid #d6c28f;
+}
+
+ .readingQueue thead th, .readingQueue td {
   border: 1px solid #d6c28f;
 }
 

@@ -97,6 +97,8 @@ var BlogViewManager = (function() {
 			
 			$(".comment-save-btn").addClass("hidden");
 			$(".comment-update-btn").removeClass("hidden");
+			
+			$(".self-comment-container").focus();
 		});
 	}
 	
