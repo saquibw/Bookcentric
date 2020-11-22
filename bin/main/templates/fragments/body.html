@@ -20,7 +20,7 @@
 	</div>
 
 	<div th:fragment="menue">
-		<span sec:authorize="isAuthenticated()" class="greetings"> Welcome: <span sec:authentication="name"></span> | <a href="/logout" class="greetings-logout">Logout</a></span>
+		<span sec:authorize="isAuthenticated()" class="greetings mobile-font-size-12"> Welcome: <span sec:authentication="name"></span> | <a href="/logout" class="greetings-logout">Logout</a></span>
                 
 		<!-- Menu Button -->
 		<a href="#" class="fm-button"><span></span>Menu</a>
@@ -162,17 +162,17 @@
 
 							<div class="col-sm-6 col-lg-4 pt-20 pb-20 pb-xs-0">
 								<div class="contact-item">
-									<div class="ci-icon left-60-px">
+									<div class="ci-icon left-60-px left-50-px">
 										<i class="fa fa-phone"></i>
 									</div>
 									<div class="ci-title font-alt">Call Us</div>
-									<div class="ci-text mb-20">+880 1731 374 781</div>
+									<div class="ci-text">+880 1731 374 781</div>
 								</div>
 							</div>
 
 							<div class="col-sm-6 col-lg-4 pt-20 pb-20 pb-xs-0">
 								<div class="contact-item">
-									<div class="ci-icon left-60-px">
+									<div class="ci-icon left-60-px left-50-px">
 										<i class="fa fa-map-marker"></i>
 									</div>
 									<div class="ci-title font-alt">Address</div>
@@ -182,7 +182,7 @@
 
 							<div class="col-sm-6 col-lg-4 pt-20 pb-20 pb-xs-0">
 								<div class="contact-item">
-									<div class="ci-icon left-60-px">
+									<div class="ci-icon left-60-px left-50-px">
 										<i class="fa fa-envelope"></i>
 									</div>
 									<div class="ci-title font-alt">Email</div>
@@ -196,7 +196,7 @@
 				</div>
 
 				<div class="footer-text">
-					<div class="footer-copy font-alt mobile-margin-top-10-px">
+					<div class="footer-copy font-alt margin-top-20px">
 						<a href="javascript:void(0)">&copy; BookCentric <label id="bookcentricYear"></label></a>.
 					</div>
 

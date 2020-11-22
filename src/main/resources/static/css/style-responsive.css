@@ -334,12 +334,14 @@ Primary use:    MultiPurpose Template
     }
     
     .fm-logo-wrap{
-        top: 35px;
-        left: 17px;
+        top: 20px;
+        left: 10px;
     }
     .fm-button{
-        top: 35px;
-        right: 17px;
+        top: 25px;
+        right: 15px;
+        width: 45px;
+    	height: 45px;
     }
 
 }
