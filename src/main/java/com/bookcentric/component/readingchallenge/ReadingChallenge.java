@@ -1,4 +1,4 @@
-package com.bookcentric.readingchallenge;
+package com.bookcentric.component.readingchallenge;
 
 import java.util.List;
 
@@ -22,6 +22,7 @@ public class ReadingChallenge {
 	private String month;
 	private Integer year;
 	private String subject;
+	private String description;
 	private boolean published;
 	
 	@OneToMany(mappedBy="readingChallenge", cascade = {CascadeType.PERSIST, CascadeType.MERGE})

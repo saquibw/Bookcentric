@@ -1,4 +1,4 @@
-package com.bookcentric.readingchallenge;
+package com.bookcentric.component.readingchallenge;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

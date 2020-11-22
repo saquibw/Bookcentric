@@ -1,4 +1,4 @@
-package com.bookcentric.readingchallenge;
+package com.bookcentric.component.readingchallenge;
 
 import java.io.IOException;
 import java.util.List;
