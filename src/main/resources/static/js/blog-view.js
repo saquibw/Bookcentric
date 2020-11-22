@@ -127,6 +127,14 @@ var BlogViewManager = (function() {
 		});
 	}
 	
+	function getYear() {
+		let yearPlaceholder = $("#bookcentricYear");
+		var year = new Date().getFullYear();
+		if (yearPlaceholder) {
+			$(yearPlaceholder).text(year);
+		}
+	}
+	
 	(function() {
 		$(".comment-save-btn").click(function(e) {
 			e.preventDefault();			
@@ -151,6 +159,7 @@ var BlogViewManager = (function() {
 		});
 		
 		getAllComments();
+		getYear();
 		
 	})();
 	
