@@ -54,7 +54,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 
-			$("#contentEditor").keyup(function(e) {
+			$("#contentEditor").on("input", function(e) {
 				e.preventDefault();
 				$("#content").text($("#contentEditor").html());
 			});
