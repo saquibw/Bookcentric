@@ -30,8 +30,6 @@ spring:
 logging:
   level: 
     com.bookcentric: DEBUG
-  file: bookcentric.log
-  path: /var/log
 
 server:
   servlet:
