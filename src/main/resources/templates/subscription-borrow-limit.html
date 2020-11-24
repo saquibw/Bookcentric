@@ -24,11 +24,11 @@
 
 							<div class="row">
 								<div class="form-group col">
-									<label>Borrow limit (each time)*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{eachTime}" required>
+									<label>Borrow Limit (each time)*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{eachTime}" min="0" max="200" required>
 								</div>
 								
 								<div class="form-group col">
-									<label>Borrow limit (Per month)*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{perMonth}" required>
+									<label>Borrow Limit (per month)*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{perMonth}" min="0" max="200" required>
 								</div>
 								
 								<div class="form-group col hidden">
@@ -44,8 +44,8 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th>Borrow limit (each time)</th>
-									<th>Borrow limit (Per month)</th>
+									<th>Borrow Limit (each time)</th>
+									<th>Borrow Limit (per month)</th>
 									<th></th>
 									<th></th>
 								</tr>

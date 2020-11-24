@@ -24,10 +24,10 @@
 
 							<div class="row">
 								<div class="form-group col">
-									<label>Category Name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{name}" required>
+									<label>Category Name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{name}" maxlength="255" required>
 								</div>
 								<div class="form-group col">
-									<label>Security amount*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{securityAmount}" required>
+									<label>Security Amount*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{securityAmount}" min="0" max="10000" required>
 								</div>
 								
 								<div class="form-group col hidden">
@@ -37,7 +37,7 @@
 							
 							<div class="row">
 								<div class="form-group col">
-									<label>Borrow limit*</label> 
+									<label>Borrow Limit*</label> 
 									<select class="form-control mobile-font-size-12" th:field=*{borrowLimit} required>
 										<option th:each="borrowLimit : ${borrowLimitList}" th:value="${borrowLimit.id}" 
 										th:text="'Each time-' + ${borrowLimit.eachTime} + ', Per month-' + ${borrowLimit.perMonth}">
@@ -45,7 +45,7 @@
 								</div>
 								
 								<div class="form-group col">
-									<label>Plan duration*</label> 
+									<label>Plan Duration*</label> 
 									<select class="form-control mobile-font-size-12" th:field=*{planDuration} required>
 										<option th:each="planDuration : ${planDurationList}" 
 										th:value="${planDuration.id}" th:text="${planDuration.name}">
@@ -72,11 +72,11 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<th>Category name</th>
-										<th>Borrow limit</th>
-										<th>Plan duration</th>
-										<th>Security amount</th>
-										<th>Under age</th>
+										<th>Category Name</th>
+										<th>Borrow Limit</th>
+										<th>Plan Duration</th>
+										<th>Security Amount</th>
+										<th>Under Age</th>
 										<th>Family</th>
 										<th></th>
 										<th></th>

@@ -24,7 +24,7 @@ public class GiftSubscriptionServiceImpl implements GiftSubscriptionService {
 		String subject = "Request to gift a subscription";
 		
 		StringBuilder text = new StringBuilder();
-		text.append("Someone has requested for a gift subscription. The details are as follows:");
+		text.append("Someone has requested to gift a subscription. The details are as follows:");
 		text.append("<br><br>");
 		
 		text.append("<table border='1'>");
@@ -32,11 +32,11 @@ public class GiftSubscriptionServiceImpl implements GiftSubscriptionService {
 		text.append(String.format("<tr><td>Name of recipient:</td><td> %s </td></tr>", giftSubscription.getRecipient()));
 		text.append(String.format("<tr><td>Email address:</td><td> %s </td></tr>", giftSubscription.getEmail()));
 		text.append(String.format("<tr><td>Phone number:</td><td> %s </td></tr>", giftSubscription.getPhone()));
-		text.append(String.format("<tr><td>Gift amount (BDT):</td><td> %d </td></tr>", giftSubscription.getAmount()));
+		text.append(String.format("<tr><td>Gift amount (BDT):</td><td> %.2f </td></tr>", giftSubscription.getAmount()));
 		text.append(String.format("<tr><td>Delivery address:</td><td> %s </td></tr>", giftSubscription.getAddress()));
 		text.append(String.format("<tr><td>Date of delivery:</td><td> %s </td></tr>", getFullDate(giftSubscription.getDeliveryDate())));
 		text.append(String.format("<tr><td>Certificate option chosen:</td><td> %d </td></tr>", giftSubscription.getCertificateDesign()));
-		text.append(String.format("<tr><td>Message option chosen:</td><td> %s </td></tr>", getOptionMessage(giftSubscription)));
+		text.append(String.format("<tr><td>Message:</td><td> %s </td></tr>", getOptionMessage(giftSubscription)));
 		
 		text.append("</table>");
 		

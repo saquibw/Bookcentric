@@ -24,7 +24,7 @@
 
 							<div class="row">
 								<div class="form-group col">
-									<label>Tag name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{name}" required>
+									<label>Tag Name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{name}" maxlength="100" required>
 								</div>
 								
 								<div class="form-group col hidden">
@@ -38,16 +38,18 @@
 						<label></label>
 						
 						<div class="right">
-							<form class="form-inline">
-								<!-- <i class="fa fa-search" aria-hidden="true"></i>  -->
 								<input class="form-control ml-3 tagSearch mobile-font-size-12" type="text" placeholder="Search by Tags" aria-label="Search">
-							</form>
 						</div>
 						
-						<table class="table">
+						<div class="tagSearchLoader hidden">
+							<div class="loader"></div>
+						</div>
+						
+						<div class="max-height-500-px overflow-auto full-width">
+							<table class="table">
 							<thead>
 								<tr>
-									<th>Tag name</th>
+									<th>Tag Name</th>
 									<th></th>
 									<th></th>
 								</tr>
@@ -60,7 +62,10 @@
 									<td><a class="fa fa-trash delete-icon" th:href="@{'/tag/delete/' + ${tag.id}}"></a></td>
 								</tr>
 							</tbody>
-						</table>
+							</table>
+						</div>
+						
+						
 					</div>
 				</div>
 				
@@ -83,6 +88,8 @@
 						"searchText": searchText
 				}
 				
+				$(".tagSearchLoader").removeClass("hidden");
+				
 				var request = $.ajax({
 					type: "GET",
 					url: "/tag/get",
@@ -91,12 +98,17 @@
 				});
 				
 				request.done(function(response) {
+					$(".tagSearchLoader").addClass("hidden");
+					
 					if(response && response.length > 0) {
 						render(response);
 					} else {
-						alert("Nothing found!");
-					}
-					
+						alert("No Tag Found!");
+					}					
+				});
+				
+				request.fail(function() {
+					$(".tagSearchLoader").addClass("hidden");
 				});
 			}
 			

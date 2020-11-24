@@ -20,7 +20,7 @@
 				<div class="full-width margin-top-10px">
 				
 					<div class="col-md-6 left table-responsive">
-						<h4 class="mobile-font-size-20">Reading challenges</h4>
+						<h4 class="mobile-font-size-20">Reading Challenges</h4>
 						
 						<table class="table readingChallengeList">
 							<thead>
@@ -49,21 +49,21 @@
 					</div>
 					
 					<div class="col-md-6 left">
-						<h4 class="mobile-font-size-20">Prepare reading challenge</h4>
+						<h4 class="mobile-font-size-20">Prepare Reading Challenge</h4>
 						
 						<form th:action="@{/reading-challenge/management}" th:object="${readingChallenge}" method="post" encType="multipart/form-data" autocomplete="off">
 							<div class="row">
 								<div class="form-group col">
-									<label>Subject*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{subject}" required>
+									<label>Subject*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{subject}" maxlength="500" required>
 								</div>
 								<div class="form-group col">
-									<label>Month name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{month}">
+									<label>Month Name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{month}" maxlength="9" required>
 								</div>
 							</div>
 							
 							<div class="row">
 								<div class="form-group col">
-									<label>Year*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{year}" required>
+									<label>Year*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{year}" maxlength="4" required>
 								</div>
 								<div class="form-group col">
 									<input type="checkbox" th:field="*{published}"><span>Published*</span>
@@ -83,15 +83,15 @@
 									<a href="/reading-challenge/management/view">Clear</a>
 									<table class="table bookList">
 										<thead>
-											<tr><th></th><th>Book name</th><th>Author</th><th>Url</th><th></th></tr>
+											<tr><th></th><th>Book Name</th><th>Author</th><th>Url</th><th></th></tr>
 										</thead>
 										<tbody>
 											<tr th:if="${readingChallenge.books.empty}" class="no-books-row"><td colspan="4"> No Books Available </td></tr>
 											<tr th:each="book, itemStat : *{books}">
 											<td><input type="text" class="form-control hidden" th:field="*{books[__${itemStat.index}__].id}" /></td>
-												<td><input type="text" class="form-control" required th:field="*{books[__${itemStat.index}__].name}" /></td>
-            									<td><input type="text" class="form-control" required th:field="*{books[__${itemStat.index}__].author}" /></td>
-            									<td><input type="text" class="form-control" th:field="*{books[__${itemStat.index}__].url}" /></td>
+												<td><input type="text" class="form-control" maxlength="200" required th:field="*{books[__${itemStat.index}__].name}" /></td>
+            									<td><input type="text" class="form-control" maxlength="200" required th:field="*{books[__${itemStat.index}__].author}" /></td>
+            									<td><input type="text" class="form-control" maxlength="200" th:field="*{books[__${itemStat.index}__].url}" /></td>
             									<td><a class='fa fa-trash book-delete-icon'></a></td>
         									</tr>
 										</tbody>
@@ -103,7 +103,7 @@
 							<div class="row">
 								<input type="text" class="form-control hidden" th:field="*{id}">
 								<div class="form-group col">
-									<label>Upload image</label> 
+									<label>Upload Image</label> 
 									<input type="file" class="form-control mobile-font-size-12" name="file">					
 								</div>
 							</div>
@@ -136,9 +136,9 @@
 
      			let row = "<tr>";
      			row += "<td><input type='text' class='form-control hidden' name='books[" + count + "].id'></td>";
-     			row += "<td><input type='text' class='form-control' required name='books[" + count + "].name'></td>";
-     			row += "<td><input type='text' class='form-control' required name='books[" + count + "].author'></td>";
-     			row += "<td><input type='text' class='form-control' name='books[" + count + "].url'></td>";
+     			row += "<td><input type='text' maxlength='200' class='form-control' required name='books[" + count + "].name'></td>";
+     			row += "<td><input type='text' maxlength='200' class='form-control' required name='books[" + count + "].author'></td>";
+     			row += "<td><input type='text' maxlength='200' class='form-control' name='books[" + count + "].url'></td>";
      			row += "<td><a class='fa fa-trash book-delete-icon'></a></td>";
      			row += "</row>"
      			$(tbody).append(row);

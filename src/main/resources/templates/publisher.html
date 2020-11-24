@@ -24,7 +24,7 @@
 
 							<div class="row">
 								<div class="form-group col">
-									<label>Publisher name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{name}" required>
+									<label>Publisher Name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{name}" maxlength="100" required>
 								</div>
 								
 								<div class="form-group col hidden">
@@ -37,17 +37,19 @@
 						
 						<label></label>
 						
-						<div class="right">
-							<form class="form-inline">
-								<!-- <i class="fa fa-search" aria-hidden="true"></i> --> 
-								<input class="form-control ml-3 publisherSearch mobile-font-size-12" type="text" placeholder="Search by Publisher" aria-label="Search">
-							</form>
+						<div class="right"> 
+							<input class="form-control ml-3 publisherSearch mobile-font-size-12" type="text" placeholder="Search by Publisher" aria-label="Search">
 						</div>
 						
-						<table class="table">
+						<div class="publisherSearchLoader hidden">
+							<div class="loader"></div>
+						</div>
+						
+						<div class="max-height-500-px overflow-auto full-width">
+							<table class="table">
 							<thead>
 								<tr>
-									<th>Publisher name</th>
+									<th>Publisher Name</th>
 									<th></th>
 									<th></th>
 								</tr>
@@ -60,7 +62,10 @@
 									<td><a class="fa fa-trash delete-icon" th:href="@{'/publisher/delete/' + ${publisher.id}}"></a></td>
 								</tr>
 							</tbody>
-						</table>
+							</table>
+						</div>
+						
+						
 					</div>
 				</div>
 				
@@ -83,6 +88,8 @@
 						"searchText": searchText
 				}
 				
+				$(".publisherSearchLoader").removeClass("hidden");
+				
 				var request = $.ajax({
 					type: "GET",
 					url: "/publisher/get",
@@ -91,11 +98,17 @@
 				});
 				
 				request.done(function(response) {
+					$(".publisherSearchLoader").addClass("hidden");
+					
 					if(response && response.length > 0) {
 						render(response);
 					} else {
-						alert("Nothing found!");
+						alert("No Publisher Found!");
 					}
+				});
+				
+				request.fail(function() {
+					$(".publisherSearchLoader").addClass("hidden");
 				});
 			}
 			

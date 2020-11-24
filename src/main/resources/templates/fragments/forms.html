@@ -10,18 +10,18 @@
 		<div class="row">
 			<div class="form-group col">
 				<label>First Name*</label> <input type="text" class="form-control mobile-font-size-12"
-					th:field="*{firstName}" required>
+					th:field="*{firstName}" maxlength="45" required>
 			</div>
 			<div class="form-group col">
 				<label>Middle Name</label> <input type="text" class="form-control mobile-font-size-12"
-					th:field="*{middleName}">
+					th:field="*{middleName}" maxlength="45">
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="form-group col">
 				<label>Last Name*</label> <input type="text" class="form-control mobile-font-size-12"
-					th:field="*{lastName}" required>
+					th:field="*{lastName}" maxlength="45" required>
 			</div>
 
 			<div class="form-group col">
@@ -39,23 +39,23 @@
 			<div class="form-group col">
 				<label>Address*</label>
 				<textarea rows="2" cols="50" class="form-control mobile-font-size-12"
-					th:field="*{address}" required></textarea>
+					th:field="*{address}" maxlength="100" required></textarea>
 			</div>
 			<div class="form-group col">
 				<label>Phone Number*</label> 
-				<input type="text" class="form-control mobile-font-size-12" th:field="*{phone}" required>
+				<input type="text" class="form-control mobile-font-size-12" th:field="*{phone}" maxlength="20" required>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="form-group col">
-				<label>Email address*</label> 
-				<input type="email" class="form-control mobile-font-size-12" th:field="*{email}" required>
+				<label>Email Address*</label> 
+				<input type="email" class="form-control mobile-font-size-12" th:field="*{email}" maxlength="100" required>
 			</div>
 
 			<div class="form-group col">
 				<label>Occupation*</label> 
-				<input type="text" class="form-control mobile-font-size-12" th:field="*{occupation}" required>
+				<input type="text" class="form-control mobile-font-size-12" th:field="*{occupation}" maxlength="45" required>
 			</div>
 
 		</div>
@@ -79,7 +79,7 @@
 
 		<div class="row">
 			<div class="form-group col">
-				<label>Preferred area of delivery*</label> 
+				<label>Preferred Area of Delivery*</label> 
 				<select class="form-control mobile-font-size-12" th:field=*{deliveryArea} required>
 					<option th:each="area : ${areaList}" th:value="${area.id}"
 						th:text="${area.name}">
@@ -97,18 +97,18 @@
 
 		<div class="row">
 			<div class="form-group col">
-				<label>List your favorite genres*</label> 
-				<input type="text" class="form-control mobile-font-size-12" th:field="*{genre}" required>
+				<label>List Your Favorite Genres*</label> 
+				<input type="text" class="form-control mobile-font-size-12" th:field="*{genre}" maxlength="200" required>
 			</div>
 			
 			<div class="form-group col">
-				<label>Special instructions</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{instruction}">
+				<label>Special Instructions</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{instruction}" maxlength="500">
 			</div>
 		</div>
 		
 		<div class="row">
 			<div class="form-group col hidden">
-				<label>Membership ID</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{membershipId}">
+				<label>Membership ID</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{membershipId}" maxlength="10">
 			</div>
 			
 			<div class="form-group col hidden">
@@ -127,12 +127,12 @@
 		<div class="row">
 			<div class="form-group col">
 				<label>First Name</label> <input type="text" class="form-control mobile-font-size-12"
-					th:field="*{parent.firstName}">
+					th:field="*{parent.firstName}" maxlength="45">
 			</div>
 
 			<div class="form-group col">
 				<label>Last Name</label> <input type="text" class="form-control mobile-font-size-12"
-					th:field="*{parent.lastName}">
+					th:field="*{parent.lastName}" maxlength="45">
 			</div>
 
 		</div>
@@ -140,12 +140,12 @@
 		<div class="row">
 			<div class="form-group col">
 				<label>Phone Number</label> <input type="text" class="form-control mobile-font-size-12"
-					th:field="*{parent.phone}">
+					th:field="*{parent.phone}" maxlength="45">
 			</div>
 
 			<div class="form-group col">
-				<label>Relationship to the member</label> <input type="text"
-					class="form-control mobile-font-size-12" th:field="*{parent.relation}">
+				<label>Relationship With The Member</label> <input type="text"
+					class="form-control mobile-font-size-12" th:field="*{parent.relation}" maxlength="45">
 			</div>
 
 		</div>
@@ -153,7 +153,7 @@
 		<div class="row">
 			<div class="form-group col">
 				<label>Occupation</label> <input type="text" class="form-control mobile-font-size-12"
-					th:field="*{parent.occupation}">
+					th:field="*{parent.occupation}" maxlength="45">
 			</div>
 
 			<div class="form-group col">
@@ -167,12 +167,12 @@
 	<div th:fragment="book-form">
 		<div class="row">
 			<div class="form-group col">
-				<label>Book name*</label> <input type="text" class="form-control mobile-font-size-12" required
+				<label>Book Name*</label> <input type="text" class="form-control mobile-font-size-12" maxlength="255" required
 					th:field="*{name}">
 			</div>
 
 			<div class="form-group col">
-				<label>Book code*</label> <input type="text" class="form-control mobile-font-size-12" required
+				<label>Book Code*</label> <input type="text" class="form-control mobile-font-size-12" maxlength="45" required
 					th:field="*{code}">
 			</div>
 		</div>
@@ -181,7 +181,7 @@
 			<div class="form-group col">
 				<label>Author*</label> 
 				<select class="form-control selectpicker" th:field=*{author} required multiple>
-					<option value="" disabled>Select author</option>
+					<option value="" disabled>Select Author</option>
 					<option th:each="author : ${authorList}"
 						th:value="${author.id}"
 						th:text="${author.name}">
@@ -191,7 +191,7 @@
 			<div class="form-group col">
 				<label>Publisher*</label> 
 				<select class="form-control selectpicker" th:field=*{publisher} required multiple>
-					<option value="" disabled>Select publisher</option>
+					<option value="" disabled>Select Publisher</option>
 					<option th:each="publisher : ${publisherList}"
 						th:value="${publisher.id}"
 						th:text="${publisher.name}">
@@ -203,7 +203,7 @@
 			<div class="form-group col">
 				<label>Genre*</label> 
 				<select class="form-control selectpicker" th:field=*{genre} required multiple>
-					<option value="" disabled>Select genre</option>
+					<option value="" disabled>Select Genre</option>
 					<option th:each="genre : ${genreList}"
 						th:value="${genre.id}"
 						th:text="${genre.name}">
@@ -213,7 +213,7 @@
 			<div class="form-group col">
 				<label>Tag*</label> 
 				<select class="form-control selectpicker" th:field=*{tag} required multiple>
-					<option value="" disabled>Select tag</option>
+					<option value="" disabled>Select Tag</option>
 					<option th:each="tag : ${tagList}"
 						th:value="${tag.id}"
 						th:text="${tag.name}">
@@ -223,13 +223,13 @@
 		
 		<div class="row">			
 			<div class="form-group col">
-				<label>No of pages</label> <input type="text" class="form-control mobile-font-size-12"
-					th:field="*{noOfPages}">
+				<label>No of Pages</label> <input type="number" class="form-control mobile-font-size-12"
+					th:field="*{noOfPages}" min="0" max="5000">
 			</div>
 			
 			<div class="form-group col">
-				<label>Publisher year</label> <input type="text" class="form-control mobile-font-size-12"
-					th:field="*{year}">
+				<label>Publisher Year</label> <input type="text" class="form-control mobile-font-size-12"
+					th:field="*{year}" maxlength="4">
 			</div>
 		</div>
 		
@@ -240,8 +240,8 @@
 			</div>
 		
 			<div class="form-group col">
-				<label>Goodreads link</label> <input type="text" class="form-control mobile-font-size-12"
-					th:field="*{goodreadsLink}">
+				<label>Goodreads Link</label> <input type="text" class="form-control mobile-font-size-12"
+					th:field="*{goodreadsLink}" maxlength="500">
 			</div>
 		</div>
 		
@@ -255,24 +255,24 @@
 			</div>
 			
 			<div class="form-group col">
-				<label>Total count*</label> 
+				<label>Total Count*</label> 
 				<input type="number" class="form-control mobile-font-size-12"
-					th:field="*{count}" required>
+					th:field="*{count}" min="0" max="5000" required>
 			</div>			
 		</div>
 		
 		<div class="row">
 			<div class="form-group col">
-				<div class="left margin-right-10px"><input type="checkbox" th:name="newArrival" th:value="newArrival" th:field=*{newArrival}><label>New arrival</label></div>
-				<div class="left margin-right-10px"><input type="checkbox" th:name="bestSeller" th:value="bestSeller" th:field=*{bestSeller}><label>Best seller</label></div>
+				<div class="left margin-right-10px"><input type="checkbox" th:name="newArrival" th:value="newArrival" th:field=*{newArrival}><label>New Arrival</label></div>
+				<div class="left margin-right-10px"><input type="checkbox" th:name="bestSeller" th:value="bestSeller" th:field=*{bestSeller}><label>Best Seller</label></div>
 				<div class="left margin-right-10px"><input type="checkbox" th:name="children" th:value="children" th:field=*{children}><label>Children's</label></div>
-				<div class="left margin-right-10px"><input type="checkbox" th:name="readingChallenge" th:value="readingChallenge" th:field=*{readingChallenge}><label>Bookcentric reading challenge</label></div>				
+				<div class="left margin-right-10px"><input type="checkbox" th:name="readingChallenge" th:value="readingChallenge" th:field=*{readingChallenge}><label>Bookcentric Reading Challenge</label></div>				
 			</div>
 		</div>
 		
 		<div class="row">
 			<div class="form-group col">
-				<label>Upload image</label> 
+				<label>Upload Image</label> 
 				<input type="file" class="form-control mobile-font-size-12" name="file">					
 			</div>
 		</div>
@@ -283,25 +283,25 @@
 		<div class="row">
 			<div class="form-group col">
 				<label>First Name*</label> <input type="text" class="form-control mobile-font-size-12"
-					th:field="*{firstName}" required>
+					th:field="*{firstName}" maxlength="45" required>
 			</div>
 			<div class="form-group col">
 				<label>Last Name</label> <input type="text" class="form-control mobile-font-size-12"
-					th:field="*{lastName}" required>
+					th:field="*{lastName}" maxlength="45" required>
 			</div>
 		</div>
 		
 		<div class="row">
 			<div class="form-group col">
 				<label>Membership Number*</label> <input type="text" class="form-control mobile-font-size-12"
-					th:field="*{membershipNo}" required>
+					th:field="*{membershipNo}" maxlength="10" required>
 			</div>
 		</div>
 		
 		<div class="row">
 			<div class="form-group col">
 				<label>Requests*</label> <textarea class="form-control mobile-font-size-12"
-					th:field="*{requests}" required></textarea>
+					th:field="*{requests}" maxlength="1000" required></textarea>
 			</div>
 		</div>
 	</div>
@@ -310,7 +310,8 @@
 		<div class="row">
 			<div class="form-group col">
 				<hr>
-				<label id="captchaValue"></label><input type="number" id="captchaAnswer" class="form-control mobile-font-size-12" placeholder="Answer" required>
+				<label id="captchaValue"></label>
+				<input type="number" id="captchaAnswer" class="form-control mobile-font-size-12" placeholder="Answer" min="0" max="200" required>
 				<p class="error" id="captchaError"></p>
 			</div>
 		</div>

@@ -13,12 +13,17 @@
 
 				<div th:insert="fragments/body :: management-navbar"></div>
 
-				<div class="col-md-10 card management-card">
+				<div class="col-md-10 card management-card mobile-font-size-12">
 					<div class="card-body">
 
 						<div class="left full-width">
 							<div class="left">
-								<h1>Update Reading Queue</h1>
+								<h1 class="mobile-font-size-20">Update Reading Queue</h1>
+							</div>
+							<div class="left position-absolute right-ten-pix">
+								<div><label th:text="${user.firstName} + ' ' + ${user.middleName} + ' ' + ${user.lastName}"></label></div>
+								<div><label th:text="${user.membershipId}"></label></div>
+								<label th:text="${user.id}" id="otherUserId" class="hidden"></label>
 							</div>
 						</div>
 
@@ -27,26 +32,30 @@
 							<div class="col-md-6 left">
 								<div class="row">
 									<div class="form-group col">
-										<label>Search books</label> <input type="text" id="searchBox" class="form-control">
-										<label class="hidden" id="otherUserId" th:text="${user.id}"></label>
+										<label>Search Books</label> <input type="text" id="searchBox" class="form-control" placeholder="Search">
 									</div>
 								</div>
 								
-								<table class="table search-queue">
-									<tbody>
+								<div class="max-height-500-px overflow-auto">
+									<table class="table search-queue">
+										<tbody>
 										
-									</tbody>
-								</table>
-
-
+										</tbody>
+									</table>
+								</div>
+								
+								<div class="bookSearchLoader hidden margin-top-100px">
+									<div class="loader"></div>
+								</div>
+								
 							</div>
 
-							<div class="col-md-6 left">
+							<div class="col-md-6 left max-height-500-px overflow-auto margin-top-30px">
 
 								<table class="table reading-queue">
 									<thead>
 										<tr>
-											<th>Book name</th>
+											<th>Book Name</th>
 											<th></th>
 											<th></th>
 										</tr>
@@ -91,6 +100,8 @@
 					tbody.empty();
 					if(!searchText) return;
 					
+					$(".bookSearchLoader").removeClass("hidden");
+					
 					var request = $.ajax({
 						type: "GET",
 						url: "/book/search/readingqueue",
@@ -99,13 +110,13 @@
 							"searchText": searchText
 						}
 					});
-					//<a title="Add to Reading Queue" class="fa fa-plus-circle add-icon color-green reading-queue-add" href="javascript:void(0)"></a>
+					
 					request.done(function(response) {
+						$(".bookSearchLoader").addClass("hidden");
 						if(response.success) {
 							let data = response.data;
 							if(data && data.length > 0) {
 								$.each(data, function(key, value) {
-									//const row = "<tr><td>" + value.name + "</td><td><button class='btn btn-primary btn-sm add-icon' data-id=" + value.id + ">Add</button></td></tr>";
 									const row = "<tr><td>" + value.name + "</td><td><a title='Add to Reading Queue' class='fa fa-plus-circle color-green add-icon' href='javascript:void(0)' data-id=" + value.id + "></a></td></tr>";
 									tbody.append(row);
 								});
@@ -114,8 +125,14 @@
 									e.preventDefault();
 									addToReadingQueue(this);
 								});
+							} else {
+								alert("No Book Found!");
 							}
 						}
+					});
+					
+					request.fail(function() {
+						$(".bookSearchLoader").addClass("hidden");
 					});
 
 				}, 1000);

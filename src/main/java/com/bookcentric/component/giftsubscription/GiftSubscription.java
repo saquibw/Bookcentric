@@ -8,8 +8,8 @@ public class GiftSubscription {
 	private String giver;
 	private String recipient;
 	private String email;
-	private Integer phone;
-	private Integer amount;
+	private String phone;
+	private Double amount;
 	private String address;
 	private String deliveryDate;
 	private Integer certificateDesign;

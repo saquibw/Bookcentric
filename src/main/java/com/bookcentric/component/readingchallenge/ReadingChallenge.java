@@ -20,7 +20,7 @@ public class ReadingChallenge {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String month;
-	private Integer year;
+	private String year;
 	private String subject;
 	private String description;
 	private boolean published;

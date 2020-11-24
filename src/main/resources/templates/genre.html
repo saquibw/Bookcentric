@@ -24,7 +24,7 @@
 
 							<div class="row">
 								<div class="form-group col">
-									<label>Genre name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{name}" required>
+									<label>Genre Name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{name}" maxlength="45" required>
 								</div>
 								
 								<div class="form-group col hidden">
@@ -38,16 +38,18 @@
 						<label></label>
 						
 						<div class="right">
-							<form class="form-inline">
-								<!-- <i class="fa fa-search" aria-hidden="true"></i> --> 
-								<input class="form-control ml-3 genreSearch mobile-font-size-12" type="text" placeholder="Search by Genre" aria-label="Search">
-							</form>
+							<input class="form-control ml-3 genreSearch mobile-font-size-12" type="text" placeholder="Search by Genre" aria-label="Search">
 						</div>
 						
-						<table class="table">
+						<div class="genreSearchLoader hidden">
+							<div class="loader"></div>
+						</div>
+						
+						<div class="max-height-500-px overflow-auto full-width">
+							<table class="table">
 							<thead>
 								<tr>
-									<th>Genre name</th>
+									<th>Genre Name</th>
 									<th></th>
 									<th></th>
 								</tr>
@@ -56,7 +58,10 @@
 							<tbody>
 								
 							</tbody>
-						</table>
+							</table>
+						</div>
+						
+						
 					</div>
 				</div>
 				
@@ -79,6 +84,8 @@
 						"searchText": searchText
 				}
 				
+				$(".genreSearchLoader").removeClass("hidden");
+				
 				var request = $.ajax({
 					type: "GET",
 					url: "/genre/get",
@@ -87,11 +94,17 @@
 				});
 				
 				request.done(function(response) {
+					$(".genreSearchLoader").addClass("hidden");
+					
 					if(response && response.length > 0) {
 						render(response);
 					} else {
-						alert("Nothing found!");
+						alert("No Genre Found!");
 					}
+				});
+				
+				request.fail(function() {
+					$(".genreSearchLoader").addClass("hidden");
 				});
 			}
 			

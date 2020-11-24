@@ -24,11 +24,11 @@
 
 							<div class="row">
 								<div class="form-group col">
-									<label>Duration name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{name}" required>
+									<label>Duration Name*</label> <input type="text" class="form-control mobile-font-size-12" th:field="*{name}" maxlength="45" required>
 								</div>
 								
 								<div class="form-group col">
-									<label>Duration (in days)*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{durationInDays}" required>
+									<label>Duration (in days)*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{durationInDays}" min="0" max="1000" required>
 								</div>
 								
 								<div class="form-group col hidden">
@@ -44,7 +44,7 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th>Duration name</th>
+									<th>Duration Name</th>
 									<th>Duration (in days)</th>
 									<th></th>
 									<th></th>

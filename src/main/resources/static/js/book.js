@@ -142,10 +142,12 @@ var BookManager = (function() {
 		});
 		
 		request.done(function(response) {
+			console.log(response);
 			if(response.success) {
 				const review = response.data;
 				if(review) {
 					renderSelfReviewSection(review);
+					getAllReviews();
 				}
 			}
 		});
@@ -270,6 +272,7 @@ var BookManager = (function() {
 	
 	function renderOtherReviewSection(reviewList) {
 		if(reviewList && reviewList.length > 0) {
+			$(".other-review-container").empty();
 			
 			reviewList.forEach(function(row, index) {
 				let template = $("#other-review-row").html();

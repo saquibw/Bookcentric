@@ -21,11 +21,11 @@
 
 						<!-- Form -->
 						<form th:action="@{/wishlist}" method="post" th:object="${wishlist}" autocomplete="off">
-
-							<div th:insert="fragments/forms :: wishlist-form"></div>
 							
 							<p th:if="${wishlistSuccess}" class="success">Wishlist shared successfully!</p>
 							<p th:if="${membershipFailure}" class="error">Could not find this member. Please check the membership number!</p>
+
+							<div th:insert="fragments/forms :: wishlist-form"></div>
 							
 							<div th:insert="fragments/forms :: form-captcha"></div>
 
