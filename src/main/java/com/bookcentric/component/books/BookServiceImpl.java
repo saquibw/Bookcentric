@@ -124,7 +124,8 @@ public class BookServiceImpl implements BookService {
 				.filter(b -> b.getName().toLowerCase().contains(searchText) 
 						|| b.getAuthorName().toLowerCase().contains(searchText) 
 						|| b.getGenreName().toLowerCase().contains(searchText)
-						|| b.getTagName().toLowerCase().contains(searchText))
+						|| b.getTagName().toLowerCase().contains(searchText)
+						|| b.getCode().toLowerCase().contains(searchText))
 				.collect(Collectors.toList());
 	}
 
