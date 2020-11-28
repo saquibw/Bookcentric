@@ -19,6 +19,14 @@ Project:    BookCentric
     font-family: 'special_eliteregular';
     src: url('../fonts/SpecialElite-Regular.ttf') format('truetype');
 }
+@font-face {
+    font-family: 'argent_regular';
+    src: url('../fonts/ArgentCF-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: "Habibi";
+    src: url("../fonts/Habibi-Regular.otf") format("opentype");
+}
 @import url('https://fonts.googleapis.com/css?family=Prata');
 
 /*@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400italic,700italic,400,300,700');
@@ -235,7 +243,7 @@ html, body{
 }
 .page{
     /* overflow: hidden; */
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
 .body-masked{
@@ -403,7 +411,7 @@ img:not([draggable]), embed, object, video{
 body{
     color: #111;
     font-size: 22px;
-    font-family: 'Prata', sans-serif;
+    font-family: 'Habibi', sans-serif;
     line-height: 1.6;    
     -webkit-font-smoothing: antialiased;
 }
@@ -427,7 +435,7 @@ h1{
     font-size: 32px;
 }
 h2{
-    font-size: 28px;
+    font-size: 30px;
 }
 h6{
     font-weight: 700;
@@ -440,7 +448,7 @@ ul, ol{
 }
 
 ol li {
-	margin: 0 0 1em 0;
+	margin: 0 0 .5em 0;
 }
 blockquote{
     margin: 3em 0 3em 0;
@@ -2274,7 +2282,7 @@ a.logo:hover{
     margin: 0;
     padding: 15px 20px;
     color: #999;
-    font-size: 17px;
+    font-size: 19px;
     letter-spacing: 2px;
     font-weight: 600;
     text-transform: uppercase;
@@ -3780,7 +3788,7 @@ a.logo:hover{
     background: none;
     border: none;
     text-align: center;
-    font-family: 'Prata', sans-serif;
+    font-family: 'Habibi', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -3793,7 +3801,7 @@ a.logo:hover{
 .testimonial-author{
     font-size: 2em;
     color: cadetblue;
-    font-family: 'Prata', sans-serif;
+    font-family: 'Habibi', sans-serif;
 }
 .testimonial-author:before{
     content: no-close-quote;
@@ -4844,7 +4852,7 @@ table.shopping-cart-table tr td{
     
 }
 .pricing-num sup{
-    font-family: 'Prata', sans-serif;
+    font-family: 'Habibi', sans-serif;
     font-size: 18px;
     font-weight: 600;
     position: relative;
@@ -6607,7 +6615,7 @@ section:hover .small-item-carousel .owl-next{
    }
    
    .text-constant {
-   		font-size: 8em !important;
+   		font-size: 4em !important;
    }
    
    .sticky-table thead th {

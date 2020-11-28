@@ -13,7 +13,7 @@
 				
 				<div th:insert="fragments/body :: management-navbar"></div>
 				
-				<div class="col-md-10 card management-card mobile-font-size-12">
+				<div class="col-md-10 card management-card mobile-font-size-14">
 					<div class="card-body">	
 							
 							<div class="row">
@@ -28,14 +28,13 @@
 							
 							
 							<hr>
+							<div class="row user-list-btn-grp">
+								<img class="w-60" th:src="@{'/events/all/image/' + ${event.id}}" alt="..."></img>
+							</div>
 							<div class="row">
 								<div class="form-group col">
 									<div class="content-viewer" th:utext="${event.content}"></div>
 								</div>
-							</div>
-							
-							<div class="row user-list-btn-grp">
-								<img class="w-50" th:src="@{'/events/all/image/' + ${event.id}}" alt="..."></img>
 							</div>																	
 					</div>	
 					

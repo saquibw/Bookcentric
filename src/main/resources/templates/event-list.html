@@ -38,11 +38,11 @@
 
 				<!-- <div th:insert="fragments/body :: management-navbar"></div> -->
 
-				<div class="col-md-6 card management-card">
+				<div class="col-md-8 card management-card">
 					<div class="card-body">
 
-						<div class="col-md-12 left mobile-font-size-12">
-							<h1 class="mobile-font-size-20">List of events</h1>
+						<div class="col-md-12 left mobile-font-size-14 font-20-px">
+							<!-- <h1 class="mobile-font-size-20">List of events</h1> -->
 							
 							<ul th:if="${events != null}">
 								<li th:each="e : ${events}"><a th:text="${e.subject}"
