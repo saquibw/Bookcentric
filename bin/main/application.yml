@@ -28,6 +28,7 @@ spring:
           starttls:
             enable: true
 logging:
+  file: /var/log/bookcentric.log
   level: 
     com.bookcentric: DEBUG
 
