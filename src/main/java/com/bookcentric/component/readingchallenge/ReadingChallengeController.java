@@ -45,7 +45,7 @@ public class ReadingChallengeController {
 		
 		view.addObject("readingChallenge", rc);
 		view.addObject("readingChallenges", readingChallengeService.getAll());
-		view.addObject("pageTitle", "BookCentric - Reading challenge management");
+		view.addObject("pageTitle", "BookCentric - Reading Challenge");
 		return view;
 	}
 	
@@ -104,7 +104,7 @@ public class ReadingChallengeController {
 		}
 
 		view.addObject("rc", rc);
-		view.addObject("pageTitle", "BookCentric - Reading challenge");
+		view.addObject("pageTitle", "BookCentric - Reading Challenge");
 		
 		return view;
 	}
@@ -130,7 +130,7 @@ public class ReadingChallengeController {
 		List<ReadingChallenge> rcs = readingChallengeService.getAllPublished();
 		
 		mv.addObject("rcs", rcs);
-		mv.addObject("pageTitle", "BookCentric - Reading challenge list");
+		mv.addObject("pageTitle", "BookCentric - Reading Challenge");
 		
 		return mv;
 	}

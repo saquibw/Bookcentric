@@ -1,4 +1,4 @@
-package com.bookcentric.blog;
+package com.bookcentric.component.blog;
 
 import java.util.List;
 

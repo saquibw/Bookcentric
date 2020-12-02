@@ -27,7 +27,7 @@ public class SubscriptionDurationController {
 		
 		view.addObject("subscriptionDuration", subscriptionDuration);
 		view.addObject("subscriptionDurationList", subscriptionDurationList);
-		view.addObject("pageTitle", "BookCentric - subscription Duration");
+		view.addObject("pageTitle", "BookCentric - Subscription Duration");
 		
 		return view;
 	}

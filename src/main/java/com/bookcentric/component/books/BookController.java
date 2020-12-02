@@ -62,7 +62,7 @@ public class BookController {
 		List<Genre> genreList = getSortedGenreList();
 		List<Tag> tagList = getSortedTagList();
 
-		bookView.addObject("pageTitle", "BookCentric - Book entry");
+		bookView.addObject("pageTitle", "BookCentric - Book Entry");
 		bookView.addObject("book", book);
 		bookView.addObject("authorList", authorList);
 		bookView.addObject("publisherList", publisherList);
@@ -87,7 +87,7 @@ public class BookController {
 	public ModelAndView getInventoryView() {
 		ModelAndView bookView = new ModelAndView("book-inventory");
 
-		bookView.addObject("pageTitle", "BookCentric - Book inventory");
+		bookView.addObject("pageTitle", "BookCentric - Book Inventory");
 
 		return bookView;
 	}
@@ -102,7 +102,7 @@ public class BookController {
 		List<Genre> genreList = getSortedGenreList();
 		List<Tag> tagList = getSortedTagList();
 
-		bookView.addObject("pageTitle", "BookCentric - Book update");
+		bookView.addObject("pageTitle", "BookCentric - Book Update");
 		bookView.addObject("book", book);
 		bookView.addObject("authorList", authorList);
 		bookView.addObject("publisherList", publisherList);

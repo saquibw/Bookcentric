@@ -76,6 +76,7 @@ public class SubscriptionController {
 		view.addObject("plans", plans);
 		view.addObject("childrenPlans", childrenPlans);
 		view.addObject("familyPlans", familyPlans);
+		view.addObject("pageTitle", "BookCentric - Subscription Plans");
 		
 		return view;
 	}

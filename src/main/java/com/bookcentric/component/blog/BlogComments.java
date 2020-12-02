@@ -1,14 +1,14 @@
-package com.bookcentric.blog;
+package com.bookcentric.component.blog;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.List;
 
 import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 import com.bookcentric.component.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,14 +16,12 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="blog")
-public class Blog {
+@Table(name="blog_comment")
+public class BlogComments {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String subject;
-	private String content;
-	private boolean published;
+	private String comment;
 	
 	@CreationTimestamp
 	private LocalDateTime createdAt;
@@ -31,22 +29,22 @@ public class Blog {
 	@UpdateTimestamp
 	private LocalDateTime modifiedAt;
 	
-	@JsonIgnore
-	@ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="userId")
+	@ManyToOne @JoinColumn(name="blogId") @JsonIgnore
+	private Blog blog;
+	
+	@ManyToOne @JoinColumn(name="userId") @JsonIgnore
 	private User user;
 	
-	@OneToMany(mappedBy="blog")
-	private List<BlogComments> comments;
-	
-	public String getUserName() {
-		return user.getFullName();
-	}
-	
-	public String getCreatedAtText() {
+	public String getModifiedAtText() {
 		return createdAt.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
 	}
 	
-	public Integer getUserId() {
+	public String getCommentUserName() {
+		return user.getFullName();
+	}
+	
+	public Integer getCommentUserId() {
 		return user.getId();
 	}
+
 }

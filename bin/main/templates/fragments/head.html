@@ -7,7 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
 <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.min.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}">
@@ -19,7 +18,7 @@
 <link rel="shortcut icon" th:href="@{/images/favicon.png}">
 <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Prata}">
 
-<title th:text="${pageTitle}"></title>
+<title th:text="${pageTitle} ? ${pageTitle} : 'Bookcentric'"></title>
 
 </head>
 

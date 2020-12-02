@@ -1,4 +1,4 @@
-package com.bookcentric.blog;
+package com.bookcentric.component.blog;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -53,7 +53,7 @@ public class BlogController {
 		}
 
 		mv.addObject("blog", blog);
-		mv.addObject("pageTitle", "BookCentric - Blog");
+		mv.addObject("pageTitle", "BookCentric - Thoughts & Musings");
 
 		return mv;
 	}
@@ -100,6 +100,7 @@ public class BlogController {
 	@GetMapping("/blogs/all/view")
 	public ModelAndView viewBlogList() {
 		ModelAndView mv = new ModelAndView("blog-list");
+		mv.addObject("pageTitle", "BookCentric - Thoughts & Musings");
 
 		return mv;
 	}
@@ -110,6 +111,7 @@ public class BlogController {
 
 		ModelAndView mv = new ModelAndView("blog-view");
 		mv.addObject("blog", blog);
+		mv.addObject("pageTitle", "BookCentric - Thoughts & Musings");
 
 		return mv;
 	}

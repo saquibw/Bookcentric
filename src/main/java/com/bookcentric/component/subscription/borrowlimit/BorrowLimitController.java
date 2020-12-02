@@ -27,7 +27,7 @@ public class BorrowLimitController {
 		
 		view.addObject("borrowLimit", borrowLimit);
 		view.addObject("borrowLimitList", borrowLimitList);
-		view.addObject("pageTitle", "BookCentric - BorrowLimit");
+		view.addObject("pageTitle", "BookCentric - Borrow Limit");
 		
 		return view;
 	}

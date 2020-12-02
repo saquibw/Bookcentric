@@ -101,7 +101,7 @@ public class UserController {
 		List<PaymentMode> paymentModeList = paymentModeService.findAll();
 		List<UserStatus> userStatusList = userStatusService.findAll();
 
-		regView.addObject("pageTitle", "Registration page");
+		regView.addObject("pageTitle", "BookCentric - User Registration");
 		regView.addObject("user", new User());
 		regView.addObject("subscriptionList", subscriptionList);
 		regView.addObject("areaList", deliveryAreaList);
@@ -135,6 +135,7 @@ public class UserController {
 		editView.addObject("areaList", deliveryAreaList);
 		editView.addObject("paymentModeList", paymentModeList);
 		editView.addObject("userStatusList", userStatusList);
+		editView.addObject("pageTitle", "BookCentric - Update User");
 		
 
 		return editView;
@@ -188,6 +189,7 @@ public class UserController {
 		editView.addObject("areaList", deliveryAreaList);
 		editView.addObject("paymentModeList", paymentModeList);
 		editView.addObject("userStatusList", userStatusList);
+		editView.addObject("pageTitle", "BookCentric - Update User");
 		
 
 		return editView;

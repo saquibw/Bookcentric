@@ -1,4 +1,4 @@
-package com.bookcentric.events;
+package com.bookcentric.component.events;
 
 import java.util.List;
 

@@ -44,7 +44,7 @@ public class ManagementController {
 					.collect(Collectors.toList());
 		}
 		
-		model.addAttribute("pageTitle", "BookCentric - User management");
+		model.addAttribute("pageTitle", "BookCentric - User Management");
 		model.addAttribute("userList", userList);
 		
 		return userView;
@@ -59,7 +59,7 @@ public class ManagementController {
 				.sorted(Comparator.comparing(User::getFirstName))
 				.collect(Collectors.toList());
 		
-		userView.addObject("pageTitle", "BookCentric - User history");
+		userView.addObject("pageTitle", "BookCentric - User History");
 		userView.addObject("userList", activeUserList);
 		
 		return userView;

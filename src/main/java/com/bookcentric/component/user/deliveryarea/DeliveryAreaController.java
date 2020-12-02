@@ -27,7 +27,7 @@ public class DeliveryAreaController {
 		
 		view.addObject("deliveryArea", deliveryArea);
 		view.addObject("deliveryAreaList", deliveryAreaList);
-		view.addObject("pageTitle", "BookCentric - DeliveryArea");
+		view.addObject("pageTitle", "BookCentric - Delivery Area");
 		
 		return view;
 	}

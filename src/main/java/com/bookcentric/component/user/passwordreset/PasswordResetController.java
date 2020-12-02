@@ -33,6 +33,7 @@ public class PasswordResetController {
 			pw.setUserId(user.getId());
 		}
 		mv.addObject("passwordReset", pw);
+		mv.addObject("pageTitle", "BookCentric - Reset Password");
 		
 		return mv;
 	}

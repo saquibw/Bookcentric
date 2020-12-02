@@ -27,7 +27,7 @@ public class PaymentModeController {
 		
 		view.addObject("paymentMode", paymentMode);
 		view.addObject("paymentModeList", paymentModeList);
-		view.addObject("pageTitle", "BookCentric - PaymentMode");
+		view.addObject("pageTitle", "BookCentric - Payment Mode");
 		
 		return view;
 	}

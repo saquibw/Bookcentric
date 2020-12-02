@@ -69,7 +69,8 @@ public class UserHistoryController {
 		UserDTO userDto = mapper.map(user, UserDTO.class);
 		userDto.setUserHistory(historyList);
 				
-		model.addObject("user", userDto);		
+		model.addObject("user", userDto);
+		model.addObject("pageTitle", "BookCentric - User History");
 		
 		return model;
 	}
@@ -126,6 +127,7 @@ public class UserHistoryController {
 		UserDTO userDto = mapper.map(user, UserDTO.class);
 		
 		view.addObject("user", userDto);
+		view.addObject("pageTitle", "BookCentric - Reading Queue");
 		
 		return view;
 	}

@@ -1,4 +1,4 @@
-package com.bookcentric.events;
+package com.bookcentric.component.events;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -34,7 +34,7 @@ public class EventController {
 			event = repository.getOne(id);
 		}
 		view.addObject("event", event);
-		view.addObject("pageTitle", "BookCentric - Blog");
+		view.addObject("pageTitle", "BookCentric - Event");
 		
 		return view;
 	}
@@ -68,6 +68,7 @@ public class EventController {
 	public ModelAndView showEventList() {
 		ModelAndView view = new ModelAndView("event-list");
 		view.addObject("events", repository.findAllByOrderByCreatedAtDesc());
+		view.addObject("pageTitle", "BookCentric - Event");
 		
 		return view;
 	}
@@ -78,6 +79,7 @@ public class EventController {
 		Event event = repository.getOne(id);
 		
 		view.addObject("event", event);
+		view.addObject("pageTitle", "BookCentric - Event");
 		
 		return view;
 	}

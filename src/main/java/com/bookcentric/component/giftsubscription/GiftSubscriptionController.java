@@ -15,8 +15,8 @@ public class GiftSubscriptionController {
 	public ModelAndView viewGiftSubscription() {
 		ModelAndView mv = new ModelAndView("gift-subscription");
 		
-		mv.addObject("pageTitle", "BookCentric - Gift a subscription");
 		mv.addObject("giftSubscription", new GiftSubscription());
+		mv.addObject("pageTitle", "BookCentric - Gift Subscription");
 		
 		return mv;
 	}
@@ -34,6 +34,7 @@ public class GiftSubscriptionController {
 		}
 				
 		mv.addObject("giftSubscription", new GiftSubscription());
+		mv.addObject("pageTitle", "BookCentric - Gift Subscription");
 		
 		return mv;
 	}
