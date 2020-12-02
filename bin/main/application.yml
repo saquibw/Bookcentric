@@ -27,6 +27,14 @@ spring:
           auth: true
           starttls:
             enable: true
+  resources:
+    cache:
+      cachecontrol:
+        max-age: 43200
+        must-revalidate: true
+          
+          
+
 logging:
   file: /var/log/bookcentric.log
   level: 
