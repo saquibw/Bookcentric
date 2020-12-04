@@ -100,33 +100,45 @@
 		
 		$("#issueButton").click(function() {
 			var bookList = [];
+			var bookNameList = [];
 			var userId = $(".userId").text();
 
 			$(".readingQueue > tbody > tr").each(function(index, row) {
 				var checkBox = $(row).find("input");
 				if(checkBox.prop('checked')) {
 					var id = $(row).find("td:eq(0)").text();
+					var name = $(row).find("td:eq(1)").text();
 					bookList.push(id);
+					bookNameList.push(name);
 				}
 			});
 			
 			if(bookList.length > 0) {
+				let text = "Are you sure you want to issue the following book(s) to this user?\n\n";
+				for(i=1; i<= bookNameList.length; i++) {
+					text += i + ': ' + bookNameList[i-1] + '\n'
+				}
+				var confirmation = confirm(text);
 				
-				var request = $.ajax({
-					type: "POST",
-					url: "/user/history/issue",
-					dataType: 'JSON',
-					data: {
-						"bookList": JSON.stringify(bookList),
-						"userId": userId
-					}
-				});
+				if (confirmation == true) {
+					var request = $.ajax({
+						type: "POST",
+						url: "/user/history/issue",
+						dataType: 'JSON',
+						data: {
+							"bookList": JSON.stringify(bookList),
+							"userId": userId
+						}
+					});
+					
+					request.done(function(response){
+						if(response.success) {
+							location.reload();
+						}
+					});
+				}
 				
-				request.done(function(response){
-					if(response.success) {
-						location.reload();
-					}
-				});
+				
 				
 			} else {
 				alert("Please select atleast one book.");
