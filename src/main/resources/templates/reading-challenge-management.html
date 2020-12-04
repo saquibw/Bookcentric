@@ -159,9 +159,13 @@
      		
      		$(".delete-icon").click(function(e) {
      			e.preventDefault();
-     			var currentRow = $(this).closest('tr');
-				var id = currentRow.find("td:eq(0)").text();
-				location.href = '/reading-challenge/management/delete/' + id;
+     			
+				var confirmation = confirm("Are you sure you want to delete this reading challenge?");
+     			if (confirmation == true) {
+     				var currentRow = $(this).closest('tr');
+    				var id = currentRow.find("td:eq(0)").text();
+    				location.href = '/reading-challenge/management/delete/' + id;
+     			}
      		});
      		
      		function deleteBook(self) {

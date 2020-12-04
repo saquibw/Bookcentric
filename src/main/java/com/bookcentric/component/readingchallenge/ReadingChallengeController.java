@@ -46,6 +46,7 @@ public class ReadingChallengeController {
 		view.addObject("readingChallenge", rc);
 		view.addObject("readingChallenges", readingChallengeService.getAll());
 		view.addObject("pageTitle", "BookCentric - Reading Challenge");
+		
 		return view;
 	}
 	
