@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bookcentric.component.user.security.UserSecurityService;
+import com.bookcentric.custom.util.Response;
 
 @Controller
 public class AuthorController {
@@ -42,12 +42,16 @@ public class AuthorController {
 		return "redirect:/author/view";
 	}
 	
-	@GetMapping("/author/delete/{id}")
-	public String deleteAuthor(@PathVariable(name="id") Integer id) {
+	@ResponseBody
+	@PostMapping("/author/delete")
+	public Response deleteAuthor(@RequestParam("id") Integer id) {
 		Author author = authorService.findBy(id);
 		authorService.delete(author);
 		
-		return "redirect:/author/view";
+		Response response = new Response();
+		response.setSuccess(true);
+
+		return response;
 	}
 	
 	private List<Author> sortByName(List<Author> list) {

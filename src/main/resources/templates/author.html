@@ -49,6 +49,7 @@
 							<table class="table">
 							<thead>
 								<tr>
+									<th class="hidden">Id</th>
 									<th>Author Name</th>
 									<th></th>
 									<th></th>
@@ -100,6 +101,7 @@
 					
 					if(response && response.length > 0) {
 						render(response);
+						attachDeleteListener();
 					} else {
 						alert("No Author Found!");
 					}
@@ -113,9 +115,10 @@
 			
 			function getTableRow(author) {
 				var tr = "<tr>";
+				tr += "<td class='hidden'>" + author.id + "</td>";
 				tr += "<td>" + author.name + "</td>";
 				tr += "<td><a class='fa fa-edit edit-icon color-green' href=/author/edit/" + author.id + "></a></td>";
-				tr += "<td><a class='fa fa-trash delete-icon' href=/author/delete/" + author.id + "></a></td>";
+				tr += "<td><a class='fa fa-trash delete-icon' href='javascript:void(0)'" + author.id + "></a></td>";
 				tr += "</tr>";
 				
 				return tr;
@@ -145,6 +148,34 @@
 					getAllAuthors(text);
 				}, 1000);
 			});
+			
+			function attachDeleteListener() {
+				$(".table tbody").find(".delete-icon").click(function(e) {
+					var confirmation = confirm("Are you sure you want to delete this author?");
+					
+					if (confirmation == true) {
+						var currentRow = $(this).closest('tr');
+						var id = currentRow.find("td:eq(0)").text();
+						
+						var request = $.ajax({
+							type: "POST",
+							url: "/author/delete",
+							dataType: 'JSON',
+							data: {
+								"id": id
+							}
+						});
+						
+						request.done(function(response) {
+							if(response.success) {
+								$(currentRow).remove();
+							} else {
+								alert("Author deletion failed. Please try again.");
+							}
+						});
+					}
+				});
+			}
 			
 			(function() {
 				getAllAuthors("");
