@@ -157,28 +157,32 @@
 				$(".table tbody").find(".delete-icon").click(function(e) {
 					e.preventDefault();
 					
-					var currentRow = $(this).closest('tr');
-					var id = currentRow.find("td:eq(0)").text();
+					var confirmation = confirm("Are you sure you want to delete this book?");
 					
-					var request = $.ajax({
-						type: "POST",
-						url: "/book/delete",
-						dataType: 'JSON',
-						data: {
-							"id": id
-						}
-					});
-					
-					request.done(function(response) {
-						if(response.success) {
-							$(currentRow).remove();
-							
-							$(".totalBookCount").text(--totalBookCount);
-							$(".pageBookCount").text(firstBookNumber + "-" + (--lastBookNumber));
-						} else {
-							alert("Book deletion failed. Please try again.");
-						}
-					});
+					if (confirmation == true) {
+						var currentRow = $(this).closest('tr');
+						var id = currentRow.find("td:eq(0)").text();
+						
+						var request = $.ajax({
+							type: "POST",
+							url: "/book/delete",
+							dataType: 'JSON',
+							data: {
+								"id": id
+							}
+						});
+						
+						request.done(function(response) {
+							if(response.success) {
+								$(currentRow).remove();
+								
+								$(".totalBookCount").text(--totalBookCount);
+								$(".pageBookCount").text(firstBookNumber + "-" + (--lastBookNumber));
+							} else {
+								alert("Book deletion failed. Please try again.");
+							}
+						});
+					}
 				});
 			}			
 			
