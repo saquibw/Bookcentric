@@ -11,4 +11,6 @@ public interface PublisherService {
 	public List<Publisher> findAll();
 	
 	public void delete(Publisher publisher);
+	
+	public void deleteBy(Integer id);
 }

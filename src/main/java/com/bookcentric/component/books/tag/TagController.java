@@ -28,10 +28,8 @@ public class TagController {
 		if(id != null && id > 0) {
 			tag = tagService.findBy(id);
 		}
-		List<Tag> tagList = tagService.findAll();
 		
 		view.addObject("tag", tag);
-		view.addObject("tagList", tagList);
 		view.addObject("pageTitle", "BookCentric - Tag");
 		
 		return view;

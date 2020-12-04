@@ -31,4 +31,9 @@ public class PublisherServiceImpl implements PublisherService{
 		repository.delete(publisher);
 	}
 
+	@Override
+	public void deleteBy(Integer id) {
+		repository.deleteById(id);
+	}
+
 }

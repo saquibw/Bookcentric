@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bookcentric.custom.util.Response;
+
 @Controller
 public class PublisherController {
 	@Autowired PublisherService publisherService;
@@ -40,12 +42,15 @@ public class PublisherController {
 		return "redirect:/publisher/view";
 	}
 	
-	@GetMapping("/publisher/delete/{id}")
-	public String deletePublisher(@PathVariable(name="id") Integer id) {
-		Publisher publisher = publisherService.findBy(id);
-		publisherService.delete(publisher);
+	@ResponseBody
+	@PostMapping("/publisher/delete")
+	public Response deletePublisher(@RequestParam("id") Integer id) {
+		publisherService.deleteBy(id);
 		
-		return "redirect:/publisher/view";
+		Response response = new Response();
+		response.setSuccess(true);
+
+		return response;
 	}
 	
 	private List<Publisher> sortByName(List<Publisher> list) {
