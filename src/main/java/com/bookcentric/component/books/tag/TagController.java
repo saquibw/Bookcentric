@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bookcentric.custom.util.Response;
+
 @Controller
 public class TagController {
 @Autowired TagService tagService;
@@ -42,12 +44,15 @@ public class TagController {
 		return "redirect:/tag/view";
 	}
 	
-	@GetMapping("/tag/delete/{id}")
-	public String deleteTag(@PathVariable(name="id") Integer id) {
-		Tag tag = tagService.findBy(id);
-		tagService.delete(tag);
+	@ResponseBody
+	@PostMapping("/tag/delete")
+	public Response deleteTag(@RequestParam("id") Integer id) {
+		tagService.deleteBy(id);
 		
-		return "redirect:/tag/view";
+		Response response = new Response();
+		response.setSuccess(true);
+
+		return response;
 	}
 	
 	private List<Tag> sortByName(List<Tag> list) {

@@ -29,4 +29,9 @@ public class TagServiceImpl implements TagService {
 		repository.delete(tag);
 	}
 
+	@Override
+	public void deleteBy(Integer id) {
+		repository.deleteById(id);
+	}
+
 }

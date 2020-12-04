@@ -11,4 +11,6 @@ public interface TagService {
 	public List<Tag> findAll();
 	
 	public void delete(Tag tag);
+	
+	public void deleteBy(Integer id);
 }
