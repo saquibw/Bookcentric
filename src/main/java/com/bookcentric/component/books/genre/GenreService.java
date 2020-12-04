@@ -10,5 +10,7 @@ public interface GenreService {
 	public List<Genre> findAll();
 	
 	public void delete(Genre genre);
+	
+	public void deleteBy(Integer id);
 
 }

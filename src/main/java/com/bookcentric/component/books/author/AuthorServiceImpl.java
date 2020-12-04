@@ -33,4 +33,9 @@ public class AuthorServiceImpl implements AuthorService {
 		
 	}
 
+	@Override
+	public void deleteBy(Integer id) {
+		repository.deleteById(id);		
+	}
+
 }

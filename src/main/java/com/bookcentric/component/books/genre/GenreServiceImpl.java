@@ -30,4 +30,9 @@ public class GenreServiceImpl implements GenreService {
 		repository.delete(genre);
 	}
 
+	@Override
+	public void deleteBy(Integer id) {
+		repository.deleteById(id);		
+	}
+
 }

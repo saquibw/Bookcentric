@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bookcentric.custom.util.Response;
+
 @Controller
 public class GenreController {
 	@Autowired GenreService genreService;
@@ -40,12 +42,15 @@ public class GenreController {
 		return "redirect:/genre/view";
 	}
 	
-	@GetMapping("/genre/delete/{id}")
-	public String deleteGenre(@PathVariable(name="id") Integer id) {
-		Genre genre = genreService.findBy(id);
-		genreService.delete(genre);
+	@ResponseBody
+	@PostMapping("/genre/delete")
+	public Response deleteGenre(@RequestParam("id") Integer id) {
+		genreService.deleteBy(id);
 		
-		return "redirect:/genre/view";
+		Response response = new Response();
+		response.setSuccess(true);
+
+		return response;
 	}
 	
 	private List<Genre> sortByName(List<Genre> list) {

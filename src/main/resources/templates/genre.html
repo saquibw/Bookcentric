@@ -49,6 +49,7 @@
 							<table class="table">
 							<thead>
 								<tr>
+									<th class="hidden">Id</th>
 									<th>Genre Name</th>
 									<th></th>
 									<th></th>
@@ -98,6 +99,7 @@
 					
 					if(response && response.length > 0) {
 						render(response);
+						attachDeleteListener();
 					} else {
 						alert("No Genre Found!");
 					}
@@ -110,9 +112,10 @@
 			
 			function getTableRow(genre) {
 				var tr = "<tr>";
+				tr += "<td class='hidden'>" + genre.id + "</td>";
 				tr += "<td>" + genre.name + "</td>";
 				tr += "<td><a class='fa fa-edit edit-icon color-green' href=/genre/edit/" + genre.id + "></a></td>";
-				tr += "<td><a class='fa fa-trash delete-icon' href=/genre/delete/" + genre.id + "></a></td>";
+				tr += "<td><a class='fa fa-trash delete-icon' href='javascript:void(0)'" + "></a></td>";
 				tr += "</tr>";
 				
 				return tr;
@@ -142,6 +145,34 @@
 					getAllGenres(text);
 				}, 1000);
 			});
+			
+			function attachDeleteListener() {
+				$(".table tbody").find(".delete-icon").click(function(e) {
+					var confirmation = confirm("Are you sure you want to delete this genre?");
+					
+					if (confirmation == true) {
+						var currentRow = $(this).closest('tr');
+						var id = currentRow.find("td:eq(0)").text();
+						
+						var request = $.ajax({
+							type: "POST",
+							url: "/genre/delete",
+							dataType: 'JSON',
+							data: {
+								"id": id
+							}
+						});
+						
+						request.done(function(response) {
+							if(response.success) {
+								$(currentRow).remove();
+							} else {
+								alert("Genre deletion failed. Please try again.");
+							}
+						});
+					}
+				});
+			}
 			
 			(function() {
 				getAllGenres("");

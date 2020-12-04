@@ -11,4 +11,6 @@ public interface AuthorService {
 	public List<Author> findAll();
 	
 	public void delete(Author author);
+	
+	public void deleteBy(Integer id);
 }

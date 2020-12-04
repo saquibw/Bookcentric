@@ -45,8 +45,7 @@ public class AuthorController {
 	@ResponseBody
 	@PostMapping("/author/delete")
 	public Response deleteAuthor(@RequestParam("id") Integer id) {
-		Author author = authorService.findBy(id);
-		authorService.delete(author);
+		authorService.deleteBy(id);
 		
 		Response response = new Response();
 		response.setSuccess(true);
