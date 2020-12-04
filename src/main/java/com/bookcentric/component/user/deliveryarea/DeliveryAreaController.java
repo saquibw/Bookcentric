@@ -7,7 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.bookcentric.custom.util.Response;
 
 @Controller
 public class DeliveryAreaController {
@@ -39,11 +43,14 @@ public class DeliveryAreaController {
 		return "redirect:/deliveryarea/view";
 	}
 	
-	@GetMapping("/deliveryarea/delete/{id}")
-	public String deleteDeliveryArea(@PathVariable(name="id") Integer id) {
-		DeliveryArea deliveryArea = deliveryAreaService.findBy(id);
-		deliveryAreaService.delete(deliveryArea);
+	@ResponseBody
+	@PostMapping("/deliveryarea/delete")
+	public Response deleteDeliveryArea(@RequestParam("id") Integer id) {
+		deliveryAreaService.deleteBy(id);
 		
-		return "redirect:/deliveryarea/view";
+		Response response = new Response();
+		response.setSuccess(true);
+
+		return response;
 	}
 }

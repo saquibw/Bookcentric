@@ -10,5 +10,7 @@ public interface DeliveryAreaService {
 	public void save(DeliveryArea borrowLimit);
 	
 	public void delete(DeliveryArea borrowLimit);
+	
+	public void deleteBy(Integer id);
 
 }

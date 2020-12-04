@@ -30,4 +30,9 @@ public class DeliveryAreaServiceImpl implements DeliveryAreaService {
 		repo.delete(deliveryArea);
 	}
 
+	@Override
+	public void deleteBy(Integer id) {
+		repo.deleteById(id);
+	}
+
 }
