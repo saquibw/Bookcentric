@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bookcentric.component.user.security.UserSecurityService;
+import com.bookcentric.custom.util.Response;
 
 @Controller
 public class EventController {
@@ -58,10 +59,15 @@ public class EventController {
 		return "redirect:/events/all";
 	}
 	
-	@GetMapping("/events/me/delete/{id}")
-	public String deleteEvent(@PathVariable(name="id") Integer id) {
+	@ResponseBody
+	@PostMapping("/events/me/delete")
+	public Response deleteEvent(@RequestParam("id") Integer id) {
 		repository.deleteById(id);
-		return "redirect:/events/all";
+		
+		Response response = new Response();
+		response.setSuccess(true);
+
+		return response;
 	}
 	
 	@GetMapping("/events/all")
