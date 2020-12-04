@@ -7,7 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.bookcentric.custom.util.Response;
 
 @Controller
 public class PaymentModeController {
@@ -39,11 +43,14 @@ public class PaymentModeController {
 		return "redirect:/paymentmode/view";
 	}
 	
-	@GetMapping("/paymentmode/delete/{id}")
-	public String deletePaymentMode(@PathVariable(name="id") Integer id) {
-		PaymentMode paymentMode = paymentModeaService.findBy(id);
-		paymentModeaService.delete(paymentMode);
+	@ResponseBody
+	@PostMapping("/paymentmode/delete")
+	public Response deletePaymentMode(@RequestParam("id") Integer id) {
+		paymentModeaService.deleteBy(id);
 		
-		return "redirect:/paymentmode/view";
+		Response response = new Response();
+		response.setSuccess(true);
+
+		return response;
 	}
 }

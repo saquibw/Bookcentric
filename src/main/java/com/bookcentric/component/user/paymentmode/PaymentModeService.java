@@ -11,4 +11,6 @@ public interface PaymentModeService {
 	public void save(PaymentMode paymentMode);
 	
 	public void delete(PaymentMode paymentMode);
+	
+	public void deleteBy(Integer id);
 }

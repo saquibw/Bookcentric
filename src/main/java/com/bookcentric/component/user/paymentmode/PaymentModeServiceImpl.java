@@ -30,4 +30,9 @@ public class PaymentModeServiceImpl implements PaymentModeService {
 		repo.delete(paymentMode);
 	}
 
+	@Override
+	public void deleteBy(Integer id) {
+		repo.deleteById(id);
+	}
+
 }
