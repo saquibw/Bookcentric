@@ -11,4 +11,6 @@ public interface TestimonialService {
 	public void save(Testimonial testimonial);
 	
 	public void delete(Testimonial testimonial);
+	
+	public void deleteBy(Integer id);
 }

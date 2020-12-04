@@ -30,4 +30,9 @@ public class TestimonialServiceImpl implements TestimonialService {
 		repo.delete(testimonial);
 	}
 
+	@Override
+	public void deleteBy(Integer id) {
+		repo.deleteById(id);
+	}
+
 }

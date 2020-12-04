@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,12 +45,15 @@ public class TestimonialController {
 		return "redirect:/testimonials/view";
 	}
 	
-	@GetMapping("/testimonials/delete/{id}")
-	public String deleteTestimonial(@PathVariable(name="id") Integer id) {
-		Testimonial testimonial = testimonialService.findBy(id);
-		testimonialService.delete(testimonial);
+	@ResponseBody
+	@PostMapping("/testimonials/delete")
+	public Response deleteTestimonial(@RequestParam("id") Integer id) {
+		testimonialService.deleteBy(id);
 		
-		return "redirect:/testimonials/view";
+		Response response = new Response();
+		response.setSuccess(true);
+
+		return response;
 	}
 	
 	@ResponseBody
