@@ -7,7 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.bookcentric.custom.util.Response;
 
 @Controller
 public class BorrowLimitController {
@@ -39,11 +43,14 @@ public class BorrowLimitController {
 		return "redirect:/borrowlimit/view";
 	}
 	
-	@GetMapping("/borrowlimit/delete/{id}")
-	public String deleteBorrowLimit(@PathVariable(name="id") Integer id) {
-		BorrowLimit borrowLimit = borrowLimitService.findBy(id);
-		borrowLimitService.delete(borrowLimit);
+	@ResponseBody
+	@PostMapping("/borrowlimit/delete")
+	public Response deleteBorrowLimit(@RequestParam("id") Integer id) {
+		borrowLimitService.deleteBy(id);
 		
-		return "redirect:/borrowlimit/view";
+		Response response = new Response();
+		response.setSuccess(true);
+
+		return response;
 	}
 }

@@ -11,4 +11,6 @@ public interface BorrowLimitService {
 	public List<BorrowLimit> findAll();
 	
 	public void delete(BorrowLimit borrowLimit);
+	
+	public void deleteBy(Integer id);
 }

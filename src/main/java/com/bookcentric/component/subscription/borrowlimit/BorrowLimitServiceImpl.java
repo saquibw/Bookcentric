@@ -30,4 +30,9 @@ public class BorrowLimitServiceImpl implements BorrowLimitService {
 		repository.delete(borrowLimit);
 	}
 
+	@Override
+	public void deleteBy(Integer id) {
+		repository.deleteById(id);
+	}
+
 }
