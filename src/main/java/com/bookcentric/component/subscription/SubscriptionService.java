@@ -14,6 +14,8 @@ public interface SubscriptionService {
 	
 	public void delete(Subscription subscription);
 	
+	public void deleteBy(Integer id);
+	
 	public List<SubscriptionResponse> getSubscriptionPlansData(List<Subscription> subscriptionList, List<Category> categoryList);
 	
 	public List<SubscriptionResponse> getSubscriptionChildrenPlansData(List<Subscription> subscriptionList, List<Category> categoryList);

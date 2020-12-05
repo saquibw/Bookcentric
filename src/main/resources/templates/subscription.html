@@ -29,14 +29,6 @@
 										<option th:each="category : ${categoryList}" th:value="${category.id}" th:text="${category.name}">
 									</select>
 								</div>
-
-								<!-- <div class="form-group col">
-									<label>Borrow limit*</label> 
-									<select class="form-control" th:field=*{borrowLimit} required>
-										<option th:each="borrowLimit : ${borrowLimitList}" th:value="${borrowLimit.id}" 
-										th:text="'Each time-' + ${borrowLimit.eachTime} + ', Per month-' + ${borrowLimit.perMonth}">
-									</select>
-								</div> -->
 								
 								<div class="form-group col">
 									<label>Subscription Duration*</label> 
@@ -47,28 +39,7 @@
 								</div>
 							</div>
 							
-							<!-- <div class="row">
-								<div class="form-group col">
-									<label>Plan duration*</label> 
-									<select class="form-control" th:field=*{planDuration} required>
-										<option th:each="planDuration : ${planDurationList}" 
-										th:value="${planDuration.id}" th:text="${planDuration.name}">
-									</select>
-								</div>
-								
-								<div class="form-group col">
-									<label>Subscription duration*</label> 
-									<select class="form-control" th:field=*{subscriptionDuration} required>
-										<option th:each="subscriptionDuration : ${subscriptionDurationList}" 
-										th:value="${subscriptionDuration.id}" th:text="${subscriptionDuration.name}">
-									</select>
-								</div>
-							</div> -->
-							
 							<div class="row">
-								<!-- <div class="form-group col">
-									<label>Security amount*</label> <input type="number" class="form-control" th:field="*{securityAmount}" required>
-								</div> -->
 								
 								<div class="form-group col">
 									<label>Price*</label> <input type="number" class="form-control mobile-font-size-12" th:field="*{price}" min="0" max="100000" required>
@@ -78,18 +49,6 @@
 									<input type="text" class="form-control" th:field="*{id}">
 								</div>
 							</div>
-							
-							<!-- <div class="row">
-								<div class="form-group col">
-									<input type="checkbox" th:name="cancellationPolicy" 
-									th:value="cancellationPolicy" th:field="*{cancellationPolicy}">
-									<label>Please check if cancellation policy is applicable</label>
-								</div>
-								
-								<div class="form-group col hidden">
-									<input type="text" class="form-control" th:field="*{id}">
-								</div>
-							</div> -->
 
 							<button type="submit" class="btn btn-primary mobile-font-size-12">Save</button>
 						</form>
@@ -100,13 +59,10 @@
 							<table class="table">
 								<thead>
 									<tr>
+										<th class="hidden">Id</th>
 										<th>Category</th>
-										<!-- <th>Borrow limit</th> -->
-										<!-- <th>Plan duration</th> -->
 										<th>Subscription Duration</th>
-										<!-- <th>Security amount</th> -->
 										<th>Price</th>
-										<!-- <th>Cancellation policy</th> -->
 										<th></th>
 										<th></th>
 									</tr>
@@ -114,20 +70,16 @@
 							
 								<tbody>
 									<tr th:each="subscription : ${subscriptionList}">
+										<td class='hidden' th:text="${subscription.id}"></td>
 										<td th:text="${subscription.category.name}"></td>
-										<!-- <td th:text="'Each time-' + ${subscription.borrowLimit.eachTime} + ', Per month-' + ${subscription.borrowLimit.perMonth}"></td> -->
-										<!-- <td th:text="${subscription.planDuration.name}"></td> -->
 										<td th:text="${subscription.subscriptionDuration.name}"></td>
-										<!-- <td th:text="${subscription.securityAmount}"></td> -->
 										<td th:text="${subscription.price}"></td>
-										<!-- <td th:text="${subscription.cancellationPolicy}"></td> -->
 										<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/subscription/edit/' + ${subscription.id}}"></a></td>
-										<td><a class="fa fa-trash delete-icon" th:href="@{'/subscription/delete/' + ${subscription.id}}"></a></td>
+										<td><a class="fa fa-trash delete-icon" href="javascript:void(0)"></a></td>
 									</tr>
 								</tbody>
 							</table>
-						</div>
-						
+						</div>						
 						
 					</div>
 				</div>
@@ -139,6 +91,44 @@
 	</div>
 
 	<section th:insert="fragments/body :: js-container"></section>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+		
+		function attachDeleteListener() {
+			$(".table tbody").find(".delete-icon").click(function(e) {
+				var confirmation = confirm("Are you sure you want to delete this subscription?");
+				
+				if (confirmation == true) {
+					var currentRow = $(this).closest('tr');
+					var id = currentRow.find("td:eq(0)").text();
+					
+					var request = $.ajax({
+						type: "POST",
+						url: "/subscription/delete",
+						dataType: 'JSON',
+						data: {
+							"id": id
+						}
+					});
+					
+					request.done(function(response) {
+						if(response.success) {
+							$(currentRow).remove();
+						} else {
+							alert("Subscription deletion failed. Please try again.");
+						}
+					});
+				}
+			});
+		}
+		
+		(function() {
+			attachDeleteListener();
+		})();
+		
+	});
+	</script>
 
 </body>
 </html>

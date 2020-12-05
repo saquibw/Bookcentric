@@ -96,4 +96,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		return plans;
 	}
 
+	@Override
+	public void deleteBy(Integer id) {
+		repository.deleteById(id);
+	}
+
 }
