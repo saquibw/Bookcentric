@@ -7,12 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bookcentric.component.subscription.borrowlimit.BorrowLimit;
 import com.bookcentric.component.subscription.borrowlimit.BorrowLimitService;
 import com.bookcentric.component.subscription.planduration.PlanDuration;
 import com.bookcentric.component.subscription.planduration.PlanDurationService;
+import com.bookcentric.custom.util.Response;
 
 @Controller
 public class CategoryController {
@@ -50,11 +53,14 @@ public class CategoryController {
 		return "redirect:/category/view";
 	}
 	
-	@GetMapping("/category/delete/{id}")
-	public String deleteCategory(@PathVariable(name="id") Integer id) {
-		Category category = categoryService.findBy(id);
-		categoryService.delete(category);
+	@ResponseBody
+	@PostMapping("/category/delete")
+	public Response deleteCategory(@RequestParam("id") Integer id) {
+		categoryService.deleteBy(id);
 		
-		return "redirect:/category/view";
+		Response response = new Response();
+		response.setSuccess(true);
+
+		return response;
 	}
 }

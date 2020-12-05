@@ -11,4 +11,6 @@ public interface CategoryService {
 	public List<Category> findAll();
 	
 	public void delete(Category category);
+	
+	public void deleteBy(Integer id);
 }

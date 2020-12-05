@@ -32,4 +32,9 @@ public class CategoryServiceImpl implements CategoryService {
 		
 	}
 
+	@Override
+	public void deleteBy(Integer id) {
+		repository.deleteById(id);
+	}
+
 }
