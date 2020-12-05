@@ -44,6 +44,7 @@
 						<table class="table">
 							<thead>
 								<tr>
+									<th class="hidden">Id</th>
 									<th>Duration Name</th>
 									<th>Duration (in days)</th>
 									<th></th>
@@ -53,10 +54,11 @@
 							
 							<tbody>
 								<tr th:each="p : ${subscriptionDurationList}">
+									<td class='hidden' th:text="${p.id}"></td>
 									<td th:text="${p.name}"></td>
 									<td th:text="${p.durationInDays}"></td>
 									<td><a class="fa fa-edit edit-icon color-green" th:href="@{'/subscriptionduration/edit/' + ${p.id}}"></a></td>
-									<td><a class="fa fa-trash delete-icon" th:href="@{'/subscriptionduration/delete/' + ${p.id}}"></a></td>
+									<td><a class="fa fa-trash delete-icon" href="javascript:void(0)"></a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -70,6 +72,44 @@
 	</div>
 
 	<section th:insert="fragments/body :: js-container"></section>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+		
+		function attachDeleteListener() {
+			$(".table tbody").find(".delete-icon").click(function(e) {
+				var confirmation = confirm("Are you sure you want to delete this subscription duration?");
+				
+				if (confirmation == true) {
+					var currentRow = $(this).closest('tr');
+					var id = currentRow.find("td:eq(0)").text();
+					
+					var request = $.ajax({
+						type: "POST",
+						url: "/subscriptionduration/delete",
+						dataType: 'JSON',
+						data: {
+							"id": id
+						}
+					});
+					
+					request.done(function(response) {
+						if(response.success) {
+							$(currentRow).remove();
+						} else {
+							alert("Subscription duration deletion failed. Please try again.");
+						}
+					});
+				}
+			});
+		}
+		
+		(function() {
+			attachDeleteListener();
+		})();
+		
+	});
+	</script>
 
 </body>
 </html>

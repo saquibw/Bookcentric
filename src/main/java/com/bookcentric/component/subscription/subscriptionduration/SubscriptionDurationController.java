@@ -7,7 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.bookcentric.custom.util.Response;
 
 @Controller
 public class SubscriptionDurationController {
@@ -39,11 +43,14 @@ public class SubscriptionDurationController {
 		return "redirect:/subscriptionduration/view";
 	}
 	
-	@GetMapping("/subscriptionduration/delete/{id}")
-	public String deleteSubscriptionDuration(@PathVariable(name="id") Integer id) {
-		SubscriptionDuration subscriptionDuration = subscriptionDurationService.findBy(id);
-		subscriptionDurationService.delete(subscriptionDuration);
+	@ResponseBody
+	@PostMapping("/subscriptionduration/delete")
+	public Response deleteSubscriptionDuration(@RequestParam("id") Integer id) {
+		subscriptionDurationService.deleteBy(id);
 		
-		return "redirect:/subscriptionduration/view";
+		Response response = new Response();
+		response.setSuccess(true);
+
+		return response;
 	}
 }

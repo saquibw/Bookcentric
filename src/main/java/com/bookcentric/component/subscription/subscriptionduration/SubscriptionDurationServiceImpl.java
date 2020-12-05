@@ -30,4 +30,9 @@ public class SubscriptionDurationServiceImpl implements SubscriptionDurationServ
 		repository.delete(subscriptionDuration);
 	}
 
+	@Override
+	public void deleteBy(Integer id) {
+		repository.deleteById(id);
+	}
+
 }

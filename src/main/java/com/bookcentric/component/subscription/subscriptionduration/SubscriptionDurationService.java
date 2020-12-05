@@ -11,4 +11,6 @@ public interface SubscriptionDurationService {
 	public List<SubscriptionDuration> findAll();
 	
 	public void delete(SubscriptionDuration subscriptionDuration);
+	
+	public void deleteBy(Integer id);
 }
