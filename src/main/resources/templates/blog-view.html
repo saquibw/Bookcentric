@@ -29,8 +29,8 @@
 									<label class="hidden blogId" th:text="${blog.id}"></label>
 									<label class="hidden blogUserId" th:text="${blog.userId}"></label>
 									
-									<div class="col-md-6">
-										<img th:src="@{'/blogs/all/image/' + ${blog.id}}" alt="..."></img>
+									<div class="col-md-12">
+										<img th:src="@{'/blogs/all/image/' + ${blog.id}}" alt="..." height="600"></img>
 									</div>
 									<div class="margin-top-20px" th:utext="${blog.content}"></div>									
 								</div>
